@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Leopardo Efficiency — Tools</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0f0e;
+    --surface: #131715;
+    --surface2: #191d1a;
+    --border: #1f2421;
+    --border-hover: rgba(74,177,107,0.25);
+    --green: #4ab16b;
+    --green-dim: rgba(74,177,107,0.08);
+    --green-mid: rgba(74,177,107,0.15);
+    --cream: #e8ebe6;
+    --muted: #4a5248;
+    --muted2: #2e332c;
+    --text-dim: #7a8578;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 36px 28px 60px;
+    font-size: 14px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo-block {}
+
+  .logo-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .logo {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: -0.01em;
+  }
+
+  .logo span { color: var(--green); }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .beta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-dim);
+    border: 1px solid rgba(74,177,107,0.2);
+    border-radius: 3px;
+    padding: 5px 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  .beta-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .header-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── INTRO STRIP ── */
+  .intro-strip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green);
+    padding: 14px 18px;
+    margin-bottom: 28px;
+    border-radius: 0 4px 4px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .intro-text {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .intro-text strong { color: var(--cream); font-weight: 500; }
+
+  .intro-stat {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .intro-stat .num {
+    font-family: 'DM Mono', monospace;
+    font-size: 22px;
+    color: var(--green);
+    display: block;
+    line-height: 1;
+  }
+
+  .intro-stat .lbl {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION ── */
+  section { margin-bottom: 24px; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .section-label span {
+    color: var(--muted2);
+    font-size: 9px;
+  }
+
+  /* ── TOOL CARD ── */
+  .tool {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.12s, background 0.12s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tool.live { cursor: pointer; }
+  .tool.live:hover { border-color: var(--border-hover); background: var(--surface2); }
+  .tool.live:hover .tool-arrow { opacity: 1; }
+  .tool.live:hover::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--green);
+    border-radius: 5px 0 0 5px;
+  }
+
+  .tool.inprogress { cursor: default; opacity: 0.55; }
+
+  .tool-left { display: flex; align-items: center; gap: 14px; }
+
+  .tool-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+  }
+
+  .tool.live .tool-icon {
+    background: var(--green-dim);
+    border-color: rgba(74,177,107,0.2);
+  }
+
+  .tool-info {}
+  .tool-name { font-size: 13px; font-weight: 500; color: var(--cream); display: flex; align-items: center; gap: 8px; }
+  .tool-desc { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 3px; }
+
+  .live-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    color: var(--green);
+    background: var(--green-dim);
+    border: 1px solid rgba(74,177,107,0.2);
+    border-radius: 3px;
+    padding: 1px 6px;
+  }
+
+  .progress-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1px 6px;
+  }
+
+  .tool-right { display: flex; align-items: center; gap: 10px; }
+
+  .tool-arrow {
+    color: var(--green);
+    font-size: 13px;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.12s;
+  }
+
+  .progress-bar-wrap {
+    width: 60px;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--muted) 0%, var(--muted2) 100%);
+    border-radius: 2px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  /* ── ADMIN GRID ── */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .footer-right {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--muted2);
+    text-align: right;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-vdo {
+    color: var(--muted);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-block">
+    <div class="logo-eyebrow">Content Operations Platform</div>
+    <div class="logo">Leopardo <span>Efficiency</span></div>
+  </div>
+  <div class="header-right">
+    <div class="beta-badge"><div class="beta-dot"></div> Beta — April 2025</div>
+    <div class="header-meta">
+      Produced by VDO Aigency<br>
+      thevdoaigency.com
+    </div>
+  </div>
+</header>
+
+<div class="intro-strip">
+  <div class="intro-text">
+    A dedicated tool suite for the <strong>Leopardo Efficiency content pipeline</strong> — from case study intake to social deployment. Built to scale across the Leopardo portfolio.
+  </div>
+  <div style="display:flex;gap:24px;">
+    <div class="intro-stat">
+      <span class="num">59</span>
+      <span class="lbl">Projects</span>
+    </div>
+    <div class="intro-stat">
+      <span class="num">2</span>
+      <span class="lbl">Cities Live</span>
+    </div>
+    <div class="intro-stat">
+      <span class="num">40</span>
+      <span class="lbl">Posts Queued</span>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="section-label">
+    Content Tools
+    <span>1 of 5 live</span>
+  </div>
+
+  <a class="tool live" href="https://vdo-aigency-api-production.up.railway.app/leopardo-builder" target="_blank">
+    <div class="tool-left">
+      <div class="tool-icon">🎨</div>
+      <div class="tool-info">
+        <div class="tool-name">Graphic Builder <span class="live-badge">LIVE</span></div>
+        <div class="tool-desc">Leopardo-branded social graphic generator → PNG export</div>
+      </div>
+    </div>
+    <div class="tool-right">
+      <div class="tool-arrow">↗</div>
+    </div>
+  </a>
+
+  <div class="tool inprogress">
+    <div class="tool-left">
+      <div class="tool-icon">📋</div>
+      <div class="tool-info">
+        <div class="tool-name">Case Study Intake Agent <span class="progress-badge">IN PROGRESS</span></div>
+        <div class="tool-desc">Paste transcripts → structured asset map + VO scripts + post plan</div>
+      </div>
+    </div>
+    <div class="tool-right">
+      <div class="progress-bar-wrap"><div class="progress-bar" style="width:55%"></div></div>
+    </div>
+  </div>
+
+  <div class="tool inprogress">
+    <div class="tool-left">
+      <div class="tool-icon">✍️</div>
+      <div class="tool-info">
+        <div class="tool-name">LinkedIn Post Writer <span class="progress-badge">IN PROGRESS</span></div>
+        <div class="tool-desc">Asset + week + type → 3 hook variations + full post body</div>
+      </div>
+    </div>
+    <div class="tool-right">
+      <div class="progress-bar-wrap"><div class="progress-bar" style="width:30%"></div></div>
+    </div>
+  </div>
+
+  <div class="tool inprogress">
+    <div class="tool-left">
+      <div class="tool-icon">🎙️</div>
+      <div class="tool-info">
+        <div class="tool-name">VO Script Generator <span class="progress-badge">IN PROGRESS</span></div>
+        <div class="tool-desc">Asset ID + narrative role → calibrated ElevenLabs-ready script</div>
+      </div>
+    </div>
+    <div class="tool-right">
+      <div class="progress-bar-wrap"><div class="progress-bar" style="width:20%"></div></div>
+    </div>
+  </div>
+
+  <div class="tool inprogress">
+    <div class="tool-left">
+      <div class="tool-icon">🏙️</div>
+      <div class="tool-info">
+        <div class="tool-name">City Prospecting Brief <span class="progress-badge">IN PROGRESS</span></div>
+        <div class="tool-desc">City name → one-page pre-sales brief with building + budget data</div>
+      </div>
+    </div>
+    <div class="tool-right">
+      <div class="progress-bar-wrap"><div class="progress-bar" style="width:15%"></div></div>
+    </div>
+  </div>
+
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="section-label">Admin</div>
+  <div class="grid">
+    <a class="tool live" href="https://leopardoefficiency.com" target="_blank">
+      <div class="tool-left">
+        <div class="tool-info">
+          <div class="tool-name">leopardoefficiency.com</div>
+          <div class="tool-desc">Live site</div>
+        </div>
+      </div>
+      <div class="tool-arrow" style="opacity:0.4;">↗</div>
+    </a>
+    <a class="tool live" href="https://thevdoaigency.monday.com" target="_blank">
+      <div class="tool-left">
+        <div class="tool-info">
+          <div class="tool-name">Monday.com</div>
+          <div class="tool-desc">Campaign board + approvals</div>
+        </div>
+      </div>
+      <div class="tool-arrow" style="opacity:0.4;">↗</div>
+    </a>
+    <a class="tool live" href="https://buffer.com" target="_blank">
+      <div class="tool-left">
+        <div class="tool-info">
+          <div class="tool-name">Buffer</div>
+          <div class="tool-desc">Scheduled post queue</div>
+        </div>
+      </div>
+      <div class="tool-arrow" style="opacity:0.4;">↗</div>
+    </a>
+    <div class="tool inprogress">
+      <div class="tool-left">
+        <div class="tool-info">
+          <div class="tool-name">Performance Dashboard <span class="progress-badge">IN PROGRESS</span></div>
+          <div class="tool-desc">LinkedIn + IG engagement metrics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  <div class="footer-left">
+    Leopardo Efficiency Content Operations<br>
+    <span class="footer-vdo">Built by VDO Aigency</span> · thevdoaigency.com
+  </div>
+  <div class="footer-right">
+    BETA v0.1 · APRIL 2025<br>
+    FOR INTERNAL USE
+  </div>
+</div>
+
+<script>
+  // Make live tool hover arrows visible on hover properly
+  document.querySelectorAll('.tool.live').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      const arrow = el.querySelector('.tool-arrow');
+      if (arrow) arrow.style.opacity = '1';
+    });
+    el.addEventListener('mouseleave', () => {
+      const arrow = el.querySelector('.tool-arrow');
+      if (arrow) arrow.style.opacity = el.closest('.grid') ? '0.4' : '0';
+    });
+  });
+</script>
+
+</body>
+</html>
