@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leopardo Efficiency — 60-Day Asset Map</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #e8b84b;
+  --gold-dim: rgba(232,184,75,0.12);
+  --black: #0b0b0b;
+  --surface: #141414;
+  --surface2: #1c1c1c;
+  --surface3: #222222;
+  --cream: #ede9e3;
+  --muted: #6a6560;
+  --border: rgba(255,255,255,0.06);
+
+  --ready: #2a7a4b;
+  --ready-bg: rgba(42,122,75,0.12);
+  --ready-text: #5cba88;
+
+  --graphic: #7a5a1a;
+  --graphic-bg: rgba(232,184,75,0.1);
+  --graphic-text: #e8b84b;
+
+  --vo: #1a4a7a;
+  --vo-bg: rgba(80,140,220,0.1);
+  --vo-text: #7aadee;
+
+  --clone: #5a1a7a;
+  --clone-bg: rgba(160,80,220,0.1);
+  --clone-text: #bb88ee;
+
+  --scratch: #7a2a1a;
+  --scratch-bg: rgba(220,100,80,0.1);
+  --scratch-text: #ee9988;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 32px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--cream);
+}
+
+.header-title span { color: var(--gold); }
+
+.header-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* ── STATS BAR ── */
+.stats-bar {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+
+.stat-pill {
+  background: var(--surface2);
+  padding: 8px 14px;
+  flex: 1;
+  text-align: center;
+}
+
+.stat-pill .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+}
+
+.stat-pill .lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── LEGEND ── */
+.legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ── FILTERS ── */
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.filter-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-right: 2px;
+}
+
+.filter-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.15s;
+  letter-spacing: 0.05em;
+}
+
+.filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+.filter-btn.active { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); }
+
+/* ── MAIN TABLE AREA ── */
+.main {
+  padding: 0 32px 48px;
+}
+
+/* ── WEEK BLOCK ── */
+.week-block {
+  margin-top: 32px;
+}
+
+.week-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 12px 0 10px;
+  border-bottom: 1px solid rgba(232,184,75,0.2);
+  margin-bottom: 2px;
+  position: sticky;
+  top: 220px;
+  background: var(--black);
+  z-index: 10;
+}
+
+.week-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--gold);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.week-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.week-phase {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.week-count {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* ── POST ROW ── */
+.post-row {
+  display: grid;
+  grid-template-columns: 48px 90px 110px 120px 90px 1fr 140px 100px;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  min-height: 52px;
+  transition: background 0.1s;
+}
+
+.post-row:hover { background: var(--surface2); }
+.post-row.hidden { display: none; }
+
+.post-row .cell {
+  padding: 10px 12px;
+  display: flex;
+  align-items: flex-start;
+  border-right: 1px solid var(--border);
+}
+
+.post-row .cell:last-child { border-right: none; }
+
+/* Column header row */
+.col-headers {
+  display: grid;
+  grid-template-columns: 48px 90px 110px 120px 90px 1fr 140px 100px;
+  gap: 0;
+  background: var(--surface2);
+  border-bottom: 2px solid rgba(232,184,75,0.2);
+  position: sticky;
+  top: 180px;
+  z-index: 9;
+}
+
+.col-header {
+  padding: 8px 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-right: 1px solid var(--border);
+}
+
+.col-header:last-child { border-right: none; }
+
+/* Cell contents */
+.post-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.day-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--cream);
+}
+
+/* Platform badges */
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 2px;
+  border: 1px solid;
+}
+
+.p-li-company { color: #70a0ff; border-color: rgba(112,160,255,0.25); background: rgba(112,160,255,0.07); }
+.p-li-curtis  { color: #ff9f70; border-color: rgba(255,159,112,0.25); background: rgba(255,159,112,0.07); }
+.p-li-rob     { color: #70d0ff; border-color: rgba(112,208,255,0.25); background: rgba(112,208,255,0.07); }
+.p-ig         { color: #ff70c8; border-color: rgba(255,112,200,0.25); background: rgba(255,112,200,0.07); }
+.p-yt         { color: #ff7070; border-color: rgba(255,112,112,0.25); background: rgba(255,112,112,0.07); }
+
+/* Type badges */
+.type-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 2px 7px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.t-result    { color: #5cba88; background: rgba(42,122,75,0.15); }
+.t-mechanism { color: #7aadee; background: rgba(80,140,220,0.12); }
+.t-pov       { color: #e8b84b; background: rgba(232,184,75,0.1); }
+.t-education { color: #bb88ee; background: rgba(160,80,220,0.1); }
+.t-clip      { color: #ee9988; background: rgba(220,100,80,0.1); }
+
+/* Asset ID */
+.asset-id {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Post content */
+.post-content {}
+
+.post-hook {
+  font-size: 12px;
+  color: var(--cream);
+  line-height: 1.45;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+
+.post-note {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* Production status */
+.prod-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  border: 1px solid;
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.s-ready    { color: var(--ready-text);  background: var(--ready-bg);  border-color: rgba(42,122,75,0.3); }
+.s-graphic  { color: var(--graphic-text); background: var(--graphic-bg); border-color: rgba(232,184,75,0.25); }
+.s-vo       { color: var(--vo-text);     background: var(--vo-bg);     border-color: rgba(80,140,220,0.25); }
+.s-clone    { color: var(--clone-text);  background: var(--clone-bg);  border-color: rgba(160,80,220,0.25); }
+.s-scratch  { color: var(--scratch-text); background: var(--scratch-bg); border-color: rgba(220,100,80,0.25); }
+
+/* Monday status */
+.monday-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 3px 8px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* ── NO RESULTS ── */
+.no-results {
+  text-align: center;
+  padding: 60px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  display: none;
+}
+
+/* ── MONDAY COLUMN REF ── */
+.monday-ref {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 28px 32px;
+  margin-top: 40px;
+}
+
+.monday-ref h3 {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.monday-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+.monday-col {
+  background: var(--surface2);
+  padding: 14px 16px;
+}
+
+.mcol-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.mcol-type {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="header-title">Leopardo Efficiency — <span>60-Day Asset Map</span></div>
+    </div>
+    <div class="header-meta">
+      40 posts &nbsp;·&nbsp; 8 weeks &nbsp;·&nbsp; 5 channels<br>
+      South Euclid + Speedway, Indiana<br>
+      VDO Aigency &nbsp;·&nbsp; April 2025
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-pill"><span class="num" id="cnt-total">40</span><span class="lbl">Total Posts</span></div>
+    <div class="stat-pill"><span class="num ready-count">12</span><span class="lbl">Ready</span></div>
+    <div class="stat-pill"><span class="num graphic-count">10</span><span class="lbl">Graphic Upgrade</span></div>
+    <div class="stat-pill"><span class="num vo-count">9</span><span class="lbl">VO Rewrite</span></div>
+    <div class="stat-pill"><span class="num clone-count">4</span><span class="lbl">Voice Clone</span></div>
+    <div class="stat-pill"><span class="num scratch-count">5</span><span class="lbl">Write From Scratch</span></div>
+  </div>
+
+  <div class="legend" style="margin-bottom:12px;">
+    <div class="legend-item"><div class="legend-dot" style="background:#5cba88"></div> Ready</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e8b84b"></div> Graphic Upgrade</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#7aadee"></div> VO Rewrite</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#bb88ee"></div> Voice Clone</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ee9988"></div> Write From Scratch</div>
+    <div style="flex:1"></div>
+    <div class="legend-item" style="margin-left:auto;"><span style="color:var(--gold);font-family:'DM Mono',monospace;font-size:10px;">LI-CO</span> = Company &nbsp; <span style="color:#ff9f70;font-family:'DM Mono',monospace;font-size:10px;">LI-CL</span> = Curtis &nbsp; <span style="color:#70d0ff;font-family:'DM Mono',monospace;font-size:10px;">LI-RO</span> = Rob &nbsp; <span style="color:#ff70c8;font-family:'DM Mono',monospace;font-size:10px;">IG</span> = Instagram &nbsp; <span style="color:#ff7070;font-family:'DM Mono',monospace;font-size:10px;">YT</span> = YouTube</div>
+  </div>
+
+  <div class="filters">
+    <span class="filter-label">Week</span>
+    <div class="filter-group" id="filter-week">
+      <button class="filter-btn active" data-filter="week" data-val="all">ALL</button>
+      <button class="filter-btn" data-filter="week" data-val="1">1</button>
+      <button class="filter-btn" data-filter="week" data-val="2">2</button>
+      <button class="filter-btn" data-filter="week" data-val="3">3</button>
+      <button class="filter-btn" data-filter="week" data-val="4">4</button>
+      <button class="filter-btn" data-filter="week" data-val="5">5</button>
+      <button class="filter-btn" data-filter="week" data-val="6">6</button>
+      <button class="filter-btn" data-filter="week" data-val="7">7</button>
+      <button class="filter-btn" data-filter="week" data-val="8">8</button>
+    </div>
+    <span class="filter-label" style="margin-left:12px;">Channel</span>
+    <div class="filter-group" id="filter-channel">
+      <button class="filter-btn active" data-filter="channel" data-val="all">ALL</button>
+      <button class="filter-btn" data-filter="channel" data-val="li-co">LI-CO</button>
+      <button class="filter-btn" data-filter="channel" data-val="li-cl">LI-CL</button>
+      <button class="filter-btn" data-filter="channel" data-val="li-ro">LI-RO</button>
+      <button class="filter-btn" data-filter="channel" data-val="ig">IG</button>
+      <button class="filter-btn" data-filter="channel" data-val="yt">YT</button>
+    </div>
+    <span class="filter-label" style="margin-left:12px;">Status</span>
+    <div class="filter-group" id="filter-status">
+      <button class="filter-btn active" data-filter="status" data-val="all">ALL</button>
+      <button class="filter-btn" data-filter="status" data-val="ready">READY</button>
+      <button class="filter-btn" data-filter="status" data-val="graphic">GRAPHIC</button>
+      <button class="filter-btn" data-filter="status" data-val="vo">VO REWRITE</button>
+      <button class="filter-btn" data-filter="status" data-val="clone">VOICE CLONE</button>
+      <button class="filter-btn" data-filter="status" data-val="scratch">FROM SCRATCH</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="col-headers">
+    <div class="col-header">#</div>
+    <div class="col-header">Day</div>
+    <div class="col-header">Channel</div>
+    <div class="col-header">Type</div>
+    <div class="col-header">Asset</div>
+    <div class="col-header">Hook / Description</div>
+    <div class="col-header">Production</div>
+    <div class="col-header">Monday Status</div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 1 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="1">
+    <div class="week-header">
+      <div class="week-num">01</div>
+      <div class="week-title">Week 1</div>
+      <div class="week-phase">— The Problem / Lead with Speedway</div>
+      <div class="week-count">5 posts</div>
+    </div>
+
+    <div class="post-row" data-week="1" data-channel="li-co" data-status="ready">
+      <div class="cell"><span class="post-num">01</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-result">Result</span></div>
+      <div class="cell"><span class="asset-id">Speedway_002</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">"$200,000 a year in savings — and sewer bills stay flat." Wastewater Super delivers the cleanest number in the campaign. Lead strong.</div>
+          <div class="post-note">Existing graphic: "$200,000 a year in savings" ✓ — deploy as-is.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-ready">READY</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="1" data-channel="li-co" data-status="scratch">
+      <div class="cell"><span class="post-num">02</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">"What is an ESPC — and why cities are quietly using them to fix buildings they couldn't afford to touch."</div>
+          <div class="post-note">Written post, no video. ~200 words. Sets up the model before we explain it in Week 2.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="1" data-channel="li-co" data-status="graphic">
+      <div class="cell"><span class="post-num">03</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-result">Result</span></div>
+      <div class="cell"><span class="asset-id">Speedway_004</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Town Manager: three goals — cost savings, lower environmental impact, capturing the methane they were just burning off.</div>
+          <div class="post-note">Existing graphic is serviceable. Upgrade to add a second card: "Three goals. All three delivered."</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="1" data-channel="li-cl" data-status="scratch">
+      <div class="cell"><span class="post-num">04</span></div>
+      <div class="cell"><span class="day-badge">Mid-wk</span></div>
+      <div class="cell"><span class="platform-badge p-li-curtis">LI-CL</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">"Most cities are sitting on energy they're wasting every day. Not because they don't know it. Because they think fixing it costs money they don't have."</div>
+          <div class="post-note">Curtis personal LinkedIn. Written post, no video. ~150 words. Establishes his POV voice for the campaign.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="1" data-channel="ig" data-status="vo">
+      <div class="cell"><span class="post-num">05</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-ig">IG</span></div>
+      <div class="cell"><span class="type-badge t-result">Result</span></div>
+      <div class="cell"><span class="asset-id">Speedway_010</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">VO REWRITE → "Speedway was burning money every day. They just didn't know it yet. Methane they were flaring off for nothing now powers the facility."</div>
+          <div class="post-note">Replace Kristin VO. More provocative open. Sharpen closing stat. Keep b-roll.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-vo">VO REWRITE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 2 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="2">
+    <div class="week-header">
+      <div class="week-num">02</div>
+      <div class="week-title">Week 2</div>
+      <div class="week-phase">— The Model / Speedway Mechanism</div>
+      <div class="week-count">5 posts</div>
+    </div>
+
+    <div class="post-row" data-week="2" data-channel="li-co" data-status="ready">
+      <div class="cell"><span class="post-num">06</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-mechanism">Mechanism</span></div>
+      <div class="cell"><span class="asset-id">Speedway_003</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">"They were flaring methane into the atmosphere. Now it runs a generator. That's the whole idea."</div>
+          <div class="post-note">Existing graphics strong: "Turned wastewater into energy" + "From flare off to power source." Deploy as-is.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-ready">READY</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="2" data-channel="li-co" data-status="scratch">
+      <div class="cell"><span class="post-num">07</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">"How cities fund $6 million in infrastructure without raising taxes, issuing bonds, or touching the general fund."</div>
+          <div class="post-note">Written post. The mechanism explained plainly for a city manager audience. Sets up SE rollout in Week 3.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="2" data-channel="li-co" data-status="graphic">
+      <div class="cell"><span class="post-num">08</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-result">Result</span></div>
+      <div class="cell"><span class="asset-id">Speedway_009</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Town Manager: "Cautious optimism turned into real savings. All municipalities with water or wastewater plants should look at this."</div>
+          <div class="post-note">Upgrade existing "Speedway is proof of concept" graphic. Add savings figure card at close.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="2" data-channel="li-ro" data-status="clone">
+      <div class="cell"><span class="post-num">09</span></div>
+      <div class="cell"><span class="day-badge">Mid-wk</span></div>
+      <div class="cell"><span class="platform-badge p-li-rob">LI-RO</span></div>
+      <div class="cell"><span class="type-badge t-mechanism">Mechanism</span></div>
+      <div class="cell"><span class="asset-id">SE_004 base<br>→ Rob clone</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Rob — tighter version of financing model: "We financed 100% of the project. The savings paid the debt service. The city wrote zero checks."</div>
+          <div class="post-note">Clone Rob's voice on b-roll. 20-25 seconds. Pulls the sharpest line from SE_004 and tightens it for LinkedIn.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-clone">VOICE CLONE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="2" data-channel="yt" data-status="graphic">
+      <div class="cell"><span class="post-num">10</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-yt">YT</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">Speedway_011</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Full 1:00 Speedway story. Town Manager + Wastewater Super + PM. The complete proof-of-concept case study.</div>
+          <div class="post-note">Needs proper title card sequence throughout. Add chapter-style cards: Problem → Solution → Results.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 3 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="3">
+    <div class="week-header">
+      <div class="week-num">03</div>
+      <div class="week-title">Week 3</div>
+      <div class="week-phase">— Transition / South Euclid Intro</div>
+      <div class="week-count">5 posts</div>
+    </div>
+
+    <div class="post-row" data-week="3" data-channel="li-co" data-status="graphic">
+      <div class="cell"><span class="post-num">11</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-result">Result</span></div>
+      <div class="cell"><span class="asset-id">SE_011</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">"$6.2 million in repairs. Zero cost to the taxpayer." Council Member + Leopardo CEO. The single most powerful line in either case study.</div>
+          <div class="post-note">No current graphics. Add: "$6.2M in upgrades" opener card + "Zero cost to the taxpayer" closer card.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="3" data-channel="li-co" data-status="vo">
+      <div class="cell"><span class="post-num">12</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">SE_VO_015<br>rewrite</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">VO REWRITE → "$6.2 million in upgrades. South Euclid didn't push that cost onto taxpayers. Here's the model that made it work."</div>
+          <div class="post-note">Reframe as the mechanism explainer before SE interview clips land. New script, new render. B-roll stays.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-vo">VO REWRITE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="3" data-channel="li-co" data-status="ready">
+      <div class="cell"><span class="post-num">13</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-mechanism">Mechanism</span></div>
+      <div class="cell"><span class="asset-id">SE_004</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Rob on camera: financing model, savings covering debt service, the goal of achieving greater efficiency when budgets are strained.</div>
+          <div class="post-note">Cleanest mechanism clip in either doc. No graphics currently — add one stat card. Otherwise deploy.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-ready">READY</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="3" data-channel="li-cl" data-status="scratch">
+      <div class="cell"><span class="post-num">14</span></div>
+      <div class="cell"><span class="day-badge">Mid-wk</span></div>
+      <div class="cell"><span class="platform-badge p-li-curtis">LI-CL</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">"Deferred maintenance isn't a maintenance problem. It's a financial trap. Every year you wait, the cost compounds — and the window to fix it on your terms gets smaller."</div>
+          <div class="post-note">Curtis POV post. Written, no video. ~150 words. Speaks directly to city managers' lived reality.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="3" data-channel="ig" data-status="vo">
+      <div class="cell"><span class="post-num">15</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-ig">IG</span></div>
+      <div class="cell"><span class="type-badge t-mechanism">Mechanism</span></div>
+      <div class="cell"><span class="asset-id">SE_VO_014<br>rewrite</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">VO REWRITE → "Some of South Euclid's buildings were from 1955. The roof leaked. The windows failed. Every city manager has a version of this story."</div>
+          <div class="post-note">Opens the SE narrative arc on IG. Reframe as universal problem recognition, not just SE history.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-vo">VO REWRITE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 4 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="4">
+    <div class="week-header">
+      <div class="week-num">04</div>
+      <div class="week-title">Week 4</div>
+      <div class="week-phase">— South Euclid Proof</div>
+      <div class="week-count">5 posts</div>
+    </div>
+
+    <div class="post-row" data-week="4" data-channel="li-co" data-status="ready">
+      <div class="cell"><span class="post-num">16</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-result">Result</span></div>
+      <div class="cell"><span class="asset-id">SE_007</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Leopardo CEO + President: "This was not just an energy savings project. It was an economic stimulus project. $300,000 in additional income to the city."</div>
+          <div class="post-note">Strong standalone. Existing script is clean. Add a graphic card for the $300K figure.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-ready">READY</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="4" data-channel="li-co" data-status="vo">
+      <div class="cell"><span class="post-num">17</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">SE_VO_016<br>rewrite</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">VO REWRITE → "Most cities don't have extra capital sitting around. That's not a failure — it's the reality. Leopardo financed 100% and structured the savings to cover the debt service."</div>
+          <div class="post-note">The skeptic-killer post. New script removes redundancy with VO_015. Focus: 100% financing + how debt service works.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-vo">VO REWRITE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="4" data-channel="li-co" data-status="graphic">
+      <div class="cell"><span class="post-num">18</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">SE_005</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Mayor on the partnership: open, transparent, local union labor, adding things they didn't think were possible. "Buildings good for another 40 years."</div>
+          <div class="post-note">No current graphics. Add opening ID card (Mayor name/title) + closing quote card.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="4" data-channel="li-ro" data-status="scratch">
+      <div class="cell"><span class="post-num">19</span></div>
+      <div class="cell"><span class="day-badge">Mid-wk</span></div>
+      <div class="cell"><span class="platform-badge p-li-rob">LI-RO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">"We have never missed a savings guarantee. Not once. In 59 projects. Here's why that matters more than any other number we could give you."</div>
+          <div class="post-note">Rob's credibility post. Written, no video. ~180 words. His strongest authority angle.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="4" data-channel="ig" data-status="vo">
+      <div class="cell"><span class="post-num">20</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-ig">IG</span></div>
+      <div class="cell"><span class="type-badge t-result">Result</span></div>
+      <div class="cell"><span class="asset-id">SE_VO_017<br>rewrite</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">VO REWRITE → "This was not just an energy project. By keeping the trade work local, Leopardo generated an additional $300K in income to the city. Better buildings, local jobs, stronger return."</div>
+          <div class="post-note">Economic stimulus angle for IG. Rewrite to be punchy and visual. Add stat graphic.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-vo">VO REWRITE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 5 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="5">
+    <div class="week-header">
+      <div class="week-num">05</div>
+      <div class="week-title">Week 5</div>
+      <div class="week-phase">— South Euclid Depth</div>
+      <div class="week-count">5 posts</div>
+    </div>
+
+    <div class="post-row" data-week="5" data-channel="li-co" data-status="graphic">
+      <div class="cell"><span class="post-num">21</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-mechanism">Mechanism</span></div>
+      <div class="cell"><span class="asset-id">SE_003</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">City Officials on scope: buildings from 1955 and 1977, all new windows, facade, bricks. "No more Band-Aids. No more fingers in the dike."</div>
+          <div class="post-note">No graphics. Add city/year context card at open + "Deferred for years. Fixed now." closer card.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="5" data-channel="li-co" data-status="vo">
+      <div class="cell"><span class="post-num">22</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">SE_VO_018<br>rewrite</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">VO REWRITE → "Five buildings. City Hall, police, fire, service center, community center. This was not cosmetic work. It was core infrastructure — the facilities a city uses every day."</div>
+          <div class="post-note">Scope explainer. New script communicates project scale before audience sees the full SE case study posts.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-vo">VO REWRITE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="5" data-channel="li-co" data-status="graphic">
+      <div class="cell"><span class="post-num">23</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-mechanism">Mechanism</span></div>
+      <div class="cell"><span class="asset-id">SE_006</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Development Director: "Years in the making. Absolutely necessary. Getting our facilities through many years to come."</div>
+          <div class="post-note">No graphics. Add speaker ID card + duration context card. Clean and brief — good Friday deployment.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="5" data-channel="li-cl" data-status="clone">
+      <div class="cell"><span class="post-num">24</span></div>
+      <div class="cell"><span class="day-badge">Mid-wk</span></div>
+      <div class="cell"><span class="platform-badge p-li-curtis">LI-CL</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">SE_VO_019<br>Curtis clone</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Curtis VO clone → "Cities hear plenty of promises. What they actually want is a partner they can see clearly. South Euclid called us open and transparent. That's not an accident — it's how we operate."</div>
+          <div class="post-note">Clone Curtis on b-roll. Trust/transparency angle. His voice on the partner differentiation message.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-clone">VOICE CLONE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="5" data-channel="yt" data-status="vo">
+      <div class="cell"><span class="post-num">25</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-yt">YT</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">SE_VO_020<br>rewrite</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">VO REWRITE → "South Euclid didn't just get the project they expected. They got a better one. Leopardo helped add pieces they didn't think were possible. That's the difference between a vendor and a problem solver."</div>
+          <div class="post-note">YouTube upload. Rewrite VO for this differentiator angle. Add title card + stats at open.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-vo">VO REWRITE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 6 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="6">
+    <div class="week-header">
+      <div class="week-num">06</div>
+      <div class="week-title">Week 6</div>
+      <div class="week-phase">— Trust + Partnership</div>
+      <div class="week-count">5 posts</div>
+    </div>
+
+    <div class="post-row" data-week="6" data-channel="li-co" data-status="graphic">
+      <div class="cell"><span class="post-num">26</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">SE_005<br>(alt cut)</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Mayor — union labor angle: "All work done locally. Money recycled in the community. Working with skilled trades people saved us money."</div>
+          <div class="post-note">Use the union/community section of SE_005. Different editorial focus than post #18. Add community impact card.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="6" data-channel="li-co" data-status="scratch">
+      <div class="cell"><span class="post-num">27</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">"Budget neutral. It's a term that gets used a lot. Here's what it actually means — and what it takes to guarantee it."</div>
+          <div class="post-note">Written education post. Demystifies the language city managers hear but don't fully trust yet.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="6" data-channel="li-co" data-status="graphic">
+      <div class="cell"><span class="post-num">28</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-result">Result</span></div>
+      <div class="cell"><span class="asset-id">SE_009</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Council Member: "$6 million. We can't write a check for that. We had to look for creative ways. Leopardo gave us that way."</div>
+          <div class="post-note">No graphics. Add $6M figure card at open. Strong closer for the trust arc week.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="6" data-channel="li-ro" data-status="clone">
+      <div class="cell"><span class="post-num">29</span></div>
+      <div class="cell"><span class="day-badge">Mid-wk</span></div>
+      <div class="cell"><span class="platform-badge p-li-rob">LI-RO</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">SE_VO_021<br>Rob clone</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Rob VO clone → "We kept the work local. The trade dollars stayed local. The savings stayed local. Our goal isn't just to fix buildings — it's to be a community partner."</div>
+          <div class="post-note">Rob's voice on the community partner message. His strongest identity statement for his personal LinkedIn.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-clone">VOICE CLONE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="6" data-channel="ig" data-status="graphic">
+      <div class="cell"><span class="post-num">30</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-ig">IG</span></div>
+      <div class="cell"><span class="type-badge t-mechanism">Mechanism</span></div>
+      <div class="cell"><span class="asset-id">SE_008</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Council President: "This is a momentous occasion. South Euclid City Council invested wisely. We provide an environment for residents to conduct business."</div>
+          <div class="post-note">No current graphics. Add "City of South Euclid" location card + "Momentous" quote card for IG impact.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 7 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="7">
+    <div class="week-header">
+      <div class="week-num">07</div>
+      <div class="week-title">Week 7</div>
+      <div class="week-phase">— Results Stack</div>
+      <div class="week-count">5 posts</div>
+    </div>
+
+    <div class="post-row" data-week="7" data-channel="li-co" data-status="ready">
+      <div class="cell"><span class="post-num">31</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-result">Result</span></div>
+      <div class="cell"><span class="asset-id">SE_012</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Rob: "Win win for everyone. Financially responsible. Environmentally friendly. Local job creation. Three boxes — checked."</div>
+          <div class="post-note">Perfect standalone. The summary clip for the entire SE narrative. Deploy as-is — add one graphic card if needed.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-ready">READY</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="7" data-channel="li-co" data-status="scratch">
+      <div class="cell"><span class="post-num">32</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">"Which municipalities actually qualify for an ESPC project — and which ones don't. A plain-language breakdown."</div>
+          <div class="post-note">Written post. Targets the decision-maker who's been following for weeks and is now wondering if they qualify.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="7" data-channel="li-co" data-status="ready">
+      <div class="cell"><span class="post-num">33</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-result">Result</span></div>
+      <div class="cell"><span class="asset-id">Speedway_007</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Town Manager: "Residents will see the benefit. Rates won't increase as significantly because the savings stave off some of that pressure."</div>
+          <div class="post-note">Existing graphic: "Savings that stave off rate increases." Strong resident-impact close for Week 7. Deploy ready.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-ready">READY</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="7" data-channel="li-cl" data-status="scratch">
+      <div class="cell"><span class="post-num">34</span></div>
+      <div class="cell"><span class="day-badge">Mid-wk</span></div>
+      <div class="cell"><span class="platform-badge p-li-curtis">LI-CL</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">"Cities that keep delaying modernization aren't saving money. They're paying for it in a different column — emergency repairs, failed systems, and residents who notice."</div>
+          <div class="post-note">Curtis pressure POV. Written, ~150 words. Sets up the Week 8 CTA pivot without being salesy.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="7" data-channel="ig" data-status="graphic">
+      <div class="cell"><span class="post-num">35</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-ig">IG</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">SE_013</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Council President: "Today is a celebration. Thank you. Thank you. Thank you, Leopardo. Because of you, we can come together and thrive."</div>
+          <div class="post-note">Emotional close for IG. Add "City of South Euclid" card. Let the gratitude land without over-producing it.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 8 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="8">
+    <div class="week-header">
+      <div class="week-num">08</div>
+      <div class="week-title">Week 8</div>
+      <div class="week-phase">— The Invitation</div>
+      <div class="week-count">5 posts</div>
+    </div>
+
+    <div class="post-row" data-week="8" data-channel="li-co" data-status="graphic">
+      <div class="cell"><span class="post-num">36</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-result">Result</span></div>
+      <div class="cell"><span class="asset-id">SE_001 +<br>SE_002 combo</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">City Officials: the roof has leaked for years. Now it's fixed — and the project pays for itself. "We're really going to be saving money."</div>
+          <div class="post-note">Combine SE_001 + SE_002 into a single clean edit. Opens the Week 8 recap arc with the most relatable pain point.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="8" data-channel="li-co" data-status="vo">
+      <div class="cell"><span class="post-num">37</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-mechanism">Mechanism</span></div>
+      <div class="cell"><span class="asset-id">SE_VO_022<br>rewrite</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">VO REWRITE → "Safer buildings. Better function. Stronger public facilities. This is what it looks like when a city stops patching and starts solving. If your city has buildings like South Euclid did — let's talk."</div>
+          <div class="post-note">CTA bridge. New script ends with a soft, direct invitation. The pivot from campaign content to conversation.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-vo">VO REWRITE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="8" data-channel="li-co" data-status="ready">
+      <div class="cell"><span class="post-num">38</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">Speedway_009<br>(alt focus)</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Town Manager: "I think all municipalities should look at this — particularly those with water or wastewater treatment plants."</div>
+          <div class="post-note">Pulls the universal recommendation line. Edit to lead with this quote. Upgrade graphic to close on Leopardo CTA.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-ready">READY</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="8" data-channel="li-cl" data-status="scratch">
+      <div class="cell"><span class="post-num">39</span></div>
+      <div class="cell"><span class="day-badge">Mid-wk</span></div>
+      <div class="cell"><span class="platform-badge p-li-curtis">LI-CL</span></div>
+      <div class="cell"><span class="type-badge t-clip">CTA</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">"If you lead a municipality and you're dealing with aging facilities, deferred maintenance, or rate pressure — I'd like to have a conversation. Not a pitch. A conversation."</div>
+          <div class="post-note">Curtis CTA post. Written, ~120 words. Warm, direct, no hard sell. The closer the whole campaign has been building toward.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="8" data-channel="yt" data-status="clone">
+      <div class="cell"><span class="post-num">40</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-yt">YT</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">Rob clone<br>direct CTA</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Rob VO clone → "59 projects. Zero missed guarantees. If your city is dealing with what South Euclid or Speedway were dealing with — we've done this before. Reach out. We'll show you exactly how it works."</div>
+          <div class="post-note">Rob's voice on b-roll montage of both cities. Campaign close. Warm, earned, direct.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-clone">VOICE CLONE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <div class="no-results" id="no-results">No posts match the selected filters.</div>
+
+  <!-- MONDAY.COM COLUMN REFERENCE -->
+  <div class="monday-ref">
+    <h3>Monday.com Board — Column Reference</h3>
+    <div class="monday-cols">
+      <div class="monday-col"><div class="mcol-name">Item Name</div><div class="mcol-type">Text — Post title / hook line</div></div>
+      <div class="monday-col"><div class="mcol-name">Asset ID</div><div class="mcol-type">Text — e.g. Speedway_002</div></div>
+      <div class="monday-col"><div class="mcol-name">Week</div><div class="mcol-type">Number — 1 through 8</div></div>
+      <div class="monday-col"><div class="mcol-name">Post Date</div><div class="mcol-type">Date — scheduled publish</div></div>
+      <div class="monday-col"><div class="mcol-name">Channel</div><div class="mcol-type">Dropdown — LI-CO / LI-CL / LI-RO / IG / YT</div></div>
+      <div class="monday-col"><div class="mcol-name">Content Type</div><div class="mcol-type">Dropdown — Result / Mechanism / POV / Education / CTA</div></div>
+      <div class="monday-col"><div class="mcol-name">Production Status</div><div class="mcol-type">Dropdown — Ready / Graphic / VO Rewrite / Clone / Scratch</div></div>
+      <div class="monday-col"><div class="mcol-name">Approval Status</div><div class="mcol-type">Dropdown — Not Started / Sent / Approved / Changes Requested</div></div>
+      <div class="monday-col"><div class="mcol-name">Copy Hook</div><div class="mcol-type">Long Text — Opening 2 lines of LinkedIn post</div></div>
+      <div class="monday-col"><div class="mcol-name">Production Notes</div><div class="mcol-type">Long Text — What needs to be done</div></div>
+      <div class="monday-col"><div class="mcol-name">Buffer Status</div><div class="mcol-type">Dropdown — Not Scheduled / Scheduled / Posted</div></div>
+      <div class="monday-col"><div class="mcol-name">Owner</div><div class="mcol-type">Person — VDO Aigency Team</div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const filters = { week: 'all', channel: 'all', status: 'all' };
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filterType = btn.dataset.filter;
+      document.querySelectorAll(`[data-filter="${filterType}"]`).forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filters[filterType] = btn.dataset.val;
+      applyFilters();
+    });
+  });
+
+  function applyFilters() {
+    let visible = 0;
+    document.querySelectorAll('.post-row').forEach(row => {
+      const weekMatch = filters.week === 'all' || row.dataset.week === filters.week;
+      const channelMatch = filters.channel === 'all' || row.dataset.channel === filters.channel;
+      const statusMatch = filters.status === 'all' || row.dataset.status === filters.status;
+      const show = weekMatch && channelMatch && statusMatch;
+      row.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+
+    // Show/hide week blocks based on whether they have visible rows
+    document.querySelectorAll('.week-block').forEach(block => {
+      const hasVisible = block.querySelectorAll('.post-row:not(.hidden)').length > 0;
+      block.style.display = hasVisible ? '' : 'none';
+    });
+
+    document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+    document.getElementById('cnt-total').textContent = visible;
+  }
+</script>
+</body>
+</html>
