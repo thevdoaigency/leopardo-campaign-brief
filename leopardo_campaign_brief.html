@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leopardo Efficiency — 60-Day Campaign Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #e8b84b;
+    --black: #0b0b0b;
+    --surface: #141414;
+    --surface2: #1c1c1c;
+    --cream: #ede9e3;
+    --muted: #7a7570;
+    --border: rgba(232,184,75,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 48px;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .header-left {}
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.1;
+  }
+
+  h1 span {
+    color: var(--gold);
+  }
+
+  .header-meta {
+    text-align: right;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* SITUATION BLOCK */
+  .situation {
+    background: var(--surface);
+    border-left: 3px solid var(--gold);
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .situation p {
+    font-size: 15px;
+    color: var(--cream);
+    line-height: 1.7;
+  }
+
+  .situation strong {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* SECTION HEADERS */
+  h2 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  /* GRID STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-bottom: 40px;
+  }
+
+  .stat {
+    background: var(--surface);
+    padding: 20px 18px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--gold);
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* TWO COL */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .col-block {
+    background: var(--surface);
+    padding: 24px;
+    border-radius: 2px;
+  }
+
+  .col-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .col-block ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .col-block ul li {
+    font-size: 13px;
+    color: var(--cream);
+    padding: 6px 0;
+    padding-left: 14px;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .col-block ul li:last-child { border-bottom: none; }
+
+  .col-block ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 11px;
+  }
+
+  /* NARRATIVE ARC */
+  .arc {
+    margin-bottom: 40px;
+  }
+
+  .arc-phases {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  .phase {
+    background: var(--surface);
+    padding: 18px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .phase::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--surface2);
+  }
+
+  .phase.active::after {
+    background: var(--gold);
+  }
+
+  .phase-weeks {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .phase-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .phase-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* WHAT WE NEED */
+  .needs {
+    background: var(--surface);
+    padding: 28px;
+    margin-bottom: 40px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+  }
+
+  .needs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 16px;
+  }
+
+  .need-item {}
+
+  .need-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--gold);
+    opacity: 0.4;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .need-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .need-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    margin-bottom: 40px;
+  }
+
+  .timeline-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .timeline-row:last-child { border-bottom: none; }
+
+  .timeline-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    min-width: 100px;
+    padding-top: 2px;
+  }
+
+  .timeline-text {
+    font-size: 13px;
+    color: var(--cream);
+    line-height: 1.5;
+  }
+
+  .timeline-text span {
+    color: var(--muted);
+    display: block;
+    font-size: 12px;
+    margin-top: 2px;
+  }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .footer-left strong {
+    color: var(--cream);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .footer-right {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-align: right;
+    letter-spacing: 0.1em;
+  }
+
+  .tag {
+    display: inline-block;
+    background: rgba(232,184,75,0.1);
+    border: 1px solid rgba(232,184,75,0.2);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-right: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">Campaign Brief — Prepared by VDO Aigency</div>
+      <h1>60 Days.<br>Two Cities.<br><span>One Conversation.</span></h1>
+    </div>
+    <div class="header-meta">
+      Leopardo Efficiency<br>
+      LinkedIn + Instagram + YouTube<br>
+      April – June 2025<br>
+      <br>
+      Prepared for<br>
+      Curtis Leopardo / Rob Vollrath
+    </div>
+  </div>
+
+  <!-- SITUATION -->
+  <div class="situation">
+    <p>You have <strong>34 finished video assets</strong> across two proven case studies — South Euclid and Speedway, Indiana. The goal isn't more content. The goal is <strong>controlled deployment that builds a narrative</strong> compelling enough to generate inbound messages from municipal decision-makers on LinkedIn. This brief outlines exactly how we get there.</p>
+  </div>
+
+  <!-- STATS -->
+  <div style="margin-bottom: 12px;"><h2>The ammunition</h2></div>
+  <div class="stats-grid" style="margin-bottom: 40px;">
+    <div class="stat">
+      <span class="stat-num">34</span>
+      <div class="stat-label">Finished video assets</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num">2</span>
+      <div class="stat-label">City case studies</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num">5</span>
+      <div class="stat-label">Channels deployed</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num">40</span>
+      <div class="stat-label">Scheduled posts</div>
+    </div>
+  </div>
+
+  <!-- NARRATIVE ARC -->
+  <div class="arc">
+    <h2>8-Week Narrative Arc</h2>
+    <div class="arc-phases">
+      <div class="phase active">
+        <div class="phase-weeks">WK 1–2</div>
+        <div class="phase-title">The Problem</div>
+        <div class="phase-desc">Every city manager recognizes this. Aging buildings, no capital, deferred maintenance compounding.</div>
+      </div>
+      <div class="phase active">
+        <div class="phase-weeks">WK 3–4</div>
+        <div class="phase-title">The Model</div>
+        <div class="phase-desc">Self-funding projects. Guaranteed savings. Zero new taxes. Speedway is the proof of concept.</div>
+      </div>
+      <div class="phase active">
+        <div class="phase-weeks">WK 5–6</div>
+        <div class="phase-title">The Proof</div>
+        <div class="phase-desc">South Euclid goes deep. Real officials, real numbers, $6.2M in upgrades, zero taxpayer cost.</div>
+      </div>
+      <div class="phase active">
+        <div class="phase-weeks">WK 7–8</div>
+        <div class="phase-title">The Invitation</div>
+        <div class="phase-desc">Results stacked. Curtis and Rob speak directly. Soft CTA that feels like a conversation, not a pitch.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TWO COL -->
+  <div class="two-col">
+    <div class="col-block">
+      <h3>Weekly post structure</h3>
+      <ul>
+        <li>3 posts — Leopardo Efficiency LinkedIn</li>
+        <li>1 post — Curtis personal LinkedIn</li>
+        <li>1 post — Rob personal LinkedIn</li>
+        <li>1 post — Instagram or YouTube</li>
+        <li>Every week: case study + education + POV + clip</li>
+      </ul>
+    </div>
+    <div class="col-block">
+      <h3>What we're reworking</h3>
+      <ul>
+        <li>9 VO scripts rewritten — new narrative, not repetition</li>
+        <li>Graphics added to clips missing title cards</li>
+        <li>Existing graphics sharpened for LinkedIn</li>
+        <li>Select Curtis + Rob clips tightened via voice clone</li>
+        <li>Production: 1–2 day turnaround, VDO Aigency Team</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- WHAT WE NEED FROM CURTIS -->
+  <div class="needs">
+    <h2>What we need from you</h2>
+    <div class="needs-grid">
+      <div class="need-item">
+        <div class="need-num">01</div>
+        <div class="need-title">Voice sample — Curtis</div>
+        <div class="need-desc">3–5 minutes of clean audio for voice clone. Used on select VO clips to put your voice on the narrative.</div>
+      </div>
+      <div class="need-item">
+        <div class="need-num">02</div>
+        <div class="need-title">Voice sample — Rob</div>
+        <div class="need-desc">Same. Rob's strongest asset is explaining the financing model — his clone anchors the Week 2–4 education posts.</div>
+      </div>
+      <div class="need-item">
+        <div class="need-num">03</div>
+        <div class="need-title">Approvals</div>
+        <div class="need-desc">Each week you'll receive a client report email with copy, clip, and platform for every post. One reply to approve the week. That's it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+    <h2>This week's sequence</h2>
+    <div class="timeline-row">
+      <div class="timeline-date">TODAY</div>
+      <div class="timeline-text">This brief delivered. Week 1–2 post slate and VO scripts drafted.
+        <span>Curtis reviews overnight or Monday morning.</span>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-date">MON–TUE</div>
+      <div class="timeline-text">Monday.com board populated. All 40 deliverables loaded with copy, clip reference, platform, and type.
+        <span>Voice samples recorded. VDO Aigency Team begins production on reworked assets.</span>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-date">WED–THU</div>
+      <div class="timeline-text">Curtis + Rob receive approval email for Week 1 posts — copy, clip, platform, posting day all included.
+        <span>One reply to approve. Final clips locked.</span>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-date">FRIDAY</div>
+      <div class="timeline-text">Week 1 fully scheduled in Buffer. Posts go live on cadence starting Monday.
+        <span>No manual posting. No scrambling. Just control.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      <strong>Produced by VDO Aigency</strong>
+      Executive Producer: Brando Quilicio &nbsp;·&nbsp; thevdoaigency.com
+    </div>
+    <div class="footer-right">
+      <span class="tag">CONFIDENTIAL</span><br><br>
+      LEOPARDO EFFICIENCY<br>
+      60-DAY CAMPAIGN BRIEF<br>
+      V1 — APRIL 2025
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
