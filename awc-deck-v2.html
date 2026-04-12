@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Leopardo Portfolio — Content Infrastructure Proposal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0b0b0b;
+  --surface: #141414;
+  --surface2: #1a1a1a;
+  --border: #222222;
+  --border-hover: rgba(232,184,75,0.2);
+  --gold: #e8b84b;
+  --gold-dim: rgba(232,184,75,0.07);
+  --cream: #ede9e3;
+  --muted: #7a7570;
+  --muted2: #2e2e2e;
+  --text-dim: #9a9490;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  background: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--cream);
+  overflow: hidden;
+}
+
+.deck {
+  width: 100%; height: 100%;
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 64px 80px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed;
+  bottom: 28px;
+  z-index: 100;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: color 0.15s;
+  user-select: none;
+}
+.nav:hover { color: var(--gold); }
+.nav.prev { left: 40px; }
+.nav.next { right: 40px; }
+
+/* ── DOTS ── */
+.counter {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+}
+.dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--muted2);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.dot.active { background: var(--gold); }
+
+/* ── CORNER ── */
+.corner-mark {
+  position: fixed;
+  top: 28px; right: 36px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  z-index: 100;
+}
+.corner-mark span { color: var(--gold); }
+
+/* ── SHARED COMPONENTS ── */
+.eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.display {
+  font-family: Georgia, serif;
+  font-size: clamp(34px, 4.5vw, 58px);
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.display em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.rule {
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  margin: 26px 0;
+}
+
+.body {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-weight: 300;
+  max-width: 620px;
+}
+.body strong { color: var(--cream); font-weight: 500; }
+
+/* ── SLIDE 1 — COVER ── */
+.cover-logo {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 60px;
+}
+
+.cover-kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.cover-title {
+  font-family: Georgia, serif;
+  font-size: clamp(44px, 6vw, 70px);
+  line-height: 1.05;
+  font-weight: 400;
+  color: var(--cream);
+}
+.cover-title em { font-style: italic; color: var(--gold); }
+
+.cover-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--text-dim);
+  margin-top: 18px;
+  margin-bottom: 52px;
+  max-width: 520px;
+  line-height: 1.65;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 40px;
+}
+.cover-meta-item {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  line-height: 1.9;
+}
+.cover-meta-item strong {
+  display: block;
+  color: var(--text-dim);
+  font-weight: 500;
+  font-size: 11px;
+}
+
+/* ── SLIDE 2 — SITUATION ── */
+.before-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 32px;
+  max-width: 740px;
+}
+.before-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--muted2);
+  padding: 14px 18px;
+}
+.bi-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.bi-text {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+
+/* ── SLIDE 3 — SYSTEM ── */
+.layer-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 32px;
+  max-width: 660px;
+}
+.layer {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--gold);
+  padding: 18px 22px;
+}
+.layer-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 20px;
+  color: var(--muted2);
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.layer-title {
+  font-family: Georgia, serif;
+  font-size: 15px;
+  color: var(--cream);
+  margin-bottom: 5px;
+}
+.layer-desc {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ── SLIDE 4 — PLATFORM ── */
+.platform-preview {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 22px 26px;
+  margin-top: 28px;
+  max-width: 740px;
+}
+.platform-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+}
+.platform-logo {
+  font-family: Georgia, serif;
+  font-size: 14px;
+  color: var(--cream);
+}
+.platform-logo span { color: var(--gold); font-style: italic; }
+.platform-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  border: 1px solid rgba(232,184,75,0.25);
+  padding: 3px 10px;
+}
+.platform-stats {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 18px;
+}
+.pstat .num {
+  font-family: Georgia, serif;
+  font-size: 30px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.pstat .lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.tool-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+.tool-row-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.live-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--gold);
+  border: 1px solid rgba(232,184,75,0.25);
+  padding: 1px 6px;
+  letter-spacing: 0.06em;
+}
+.prog-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  letter-spacing: 0.06em;
+}
+
+/* ── SLIDE 5 — RESULTS ── */
+.deliverable-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 24px;
+}
+.d-chip {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  letter-spacing: 0.04em;
+}
+.result-pull {
+  margin-top: 24px;
+  padding: 22px 26px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--gold);
+  max-width: 620px;
+}
+.pull-quote {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+.pull-attr {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+/* ── SLIDE 6 — SCOPE ── */
+.scope-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 32px;
+  max-width: 740px;
+}
+.scope-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 20px;
+}
+.sc-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.sc-title {
+  font-family: Georgia, serif;
+  font-size: 15px;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+.sc-desc {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ── SLIDE 7 — TEAM ── */
+.team-table {
+  margin-top: 32px;
+  max-width: 680px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.team-row {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.team-row:last-child { border-bottom: none; }
+.team-row.header { background: var(--surface2); }
+.team-cell {
+  padding: 13px 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  border-right: 1px solid var(--border);
+  line-height: 1.55;
+}
+.team-cell:last-child { border-right: none; }
+.team-row.header .team-cell {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 9px 18px;
+}
+.team-cell strong { color: var(--cream); font-weight: 500; }
+.team-cell .gold { color: var(--gold); }
+
+/* ── SLIDE 8 — ASK ── */
+.ask-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--gold);
+  padding: 26px 30px;
+  margin-top: 28px;
+  max-width: 600px;
+}
+.ask-line {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.75;
+  margin-bottom: 8px;
+}
+.ask-line strong { color: var(--cream); font-weight: 500; }
+.ask-line .gold { color: var(--gold); }
+.ask-number {
+  font-family: Georgia, serif;
+  font-size: 52px;
+  color: var(--gold);
+  margin-top: 24px;
+  line-height: 1;
+}
+.ask-number-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+.contact-block {
+  margin-top: 32px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 2;
+}
+.contact-block span { color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- S1 COVER -->
+  <div class="slide active" id="s1">
+    <div class="cover-logo">Alexander West Capital · Leopardo Portfolio</div>
+    <div class="cover-kicker">Content Infrastructure Proposal</div>
+    <div class="cover-title">The content<br><em>already<br>exists.</em></div>
+    <div class="cover-sub">A proposal to fund and formalize the content operations system built for the Leopardo portfolio — and scale it across every company in the family.</div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <strong>Presented by</strong>
+        Curtis Leopardo<br>
+        Brandon David Cole
+      </div>
+      <div class="cover-meta-item">
+        <strong>System Built by</strong>
+        The VDO Aigency<br>
+        thevdoaigency.com
+      </div>
+      <div class="cover-meta-item">
+        <strong>Date</strong>
+        April 2026
+      </div>
+    </div>
+  </div>
+
+  <!-- S2 SITUATION -->
+  <div class="slide" id="s2">
+    <div class="eyebrow">01 — The Situation</div>
+    <div class="display">Ten cities.<br><em>No one knew<br>it existed.</em></div>
+    <div class="rule"></div>
+    <div class="body">Leopardo Efficiency has completed major infrastructure projects across the Midwest. Every one was documented. City officials on camera. Real savings. Real testimony.<br><br><strong>None of it was reaching the market.</strong></div>
+    <div class="before-grid">
+      <div class="before-item">
+        <div class="bi-label">Media Storage</div>
+        <div class="bi-text">Footage on a cinematographer's hard drives in Ohio</div>
+      </div>
+      <div class="before-item">
+        <div class="bi-label">File Transfer</div>
+        <div class="bi-text">Editors receiving raw files via WhatsApp and FedEx</div>
+      </div>
+      <div class="before-item">
+        <div class="bi-label">Workflow</div>
+        <div class="bi-text">"Nothing was standardized. No workflow." — Raj Brahmbhatt</div>
+      </div>
+      <div class="before-item">
+        <div class="bi-label">Distribution</div>
+        <div class="bi-text">Completed projects sitting idle. No posting cadence. No system.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3 SYSTEM -->
+  <div class="slide" id="s3">
+    <div class="eyebrow">02 — The System</div>
+    <div class="display">We didn't hire<br>a marketing team.<br><em>We built infrastructure.</em></div>
+    <div class="rule"></div>
+    <div class="layer-stack">
+      <div class="layer">
+        <div class="layer-num">01</div>
+        <div class="layer-content">
+          <div class="layer-title">The Pipeline</div>
+          <div class="layer-desc">AI-assisted post-production. Raw media to finished, multi-format deliverables.<br>LucidLink ingest · Premiere + AI paper cuts · ElevenLabs VO · Multi-format output</div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-num">02</div>
+        <div class="layer-content">
+          <div class="layer-title">The Tooling</div>
+          <div class="layer-desc">Custom web applications built for Leopardo specifically.<br>Graphic automation · Case study intake · LinkedIn post writer · VO script generator · City prospecting briefs</div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-num">03</div>
+        <div class="layer-content">
+          <div class="layer-title">The Distribution System</div>
+          <div class="layer-desc">Monday.com campaign board · Buffer scheduled queue · Approval workflows<br>Content ships on cadence. Without anyone managing it manually.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4 PLATFORM -->
+  <div class="slide" id="s4">
+    <div class="eyebrow">03 — The Platform</div>
+    <div class="display">Built for Leopardo.<br><em>Running now.</em></div>
+    <div class="platform-preview">
+      <div class="platform-header">
+        <div class="platform-logo">Leopardo <span>Efficiency</span> — Content Operations</div>
+        <div class="platform-badge">● LIVE · APRIL 2026</div>
+      </div>
+      <div class="platform-stats">
+        <div class="pstat"><div class="num">59</div><div class="lbl">Projects</div></div>
+        <div class="pstat"><div class="num">2</div><div class="lbl">Cities Live</div></div>
+        <div class="pstat"><div class="num">40</div><div class="lbl">Posts Queued</div></div>
+        <div class="pstat"><div class="num">5</div><div class="lbl">Tools in Suite</div></div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-row-left"><span>🎨</span> Graphic Builder</div>
+        <div class="live-tag">LIVE</div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-row-left"><span>📋</span> Case Study Intake Agent</div>
+        <div class="prog-tag">IN PROGRESS</div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-row-left"><span>✍️</span> LinkedIn Post Writer</div>
+        <div class="prog-tag">IN PROGRESS</div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-row-left"><span>🎙️</span> VO Script Generator</div>
+        <div class="prog-tag">IN PROGRESS</div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-row-left"><span>🏙️</span> City Prospecting Brief</div>
+        <div class="prog-tag">IN PROGRESS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S5 RESULTS -->
+  <div class="slide" id="s5">
+    <div class="eyebrow">04 — Proof of Concept</div>
+    <div class="display">One project.<br><em>Five weeks of<br>content.</em></div>
+    <div class="rule"></div>
+    <div class="body">From a single dormant Speedway project — footage sitting on a hard drive in Ohio — the system produced a complete multi-platform campaign.</div>
+    <div class="deliverable-row">
+      <div class="d-chip">:90 Hero</div>
+      <div class="d-chip">:60 Full Story</div>
+      <div class="d-chip">:30 Money Cut</div>
+      <div class="d-chip">:15 Constituent Cut</div>
+      <div class="d-chip">Pull Quote Graphics</div>
+      <div class="d-chip">LinkedIn Campaign</div>
+      <div class="d-chip">Instagram Campaign</div>
+    </div>
+    <div class="result-pull">
+      <div class="pull-quote">"We've made this stuff. Nobody's seen it. It's evergreen content."</div>
+      <div class="pull-attr">— Curtis Leopardo, CEO, Leopardo Efficiency</div>
+    </div>
+  </div>
+
+  <!-- S6 SCOPE -->
+  <div class="slide" id="s6">
+    <div class="eyebrow">05 — The Opportunity</div>
+    <div class="display">One system.<br><em>Every company<br>in the portfolio.</em></div>
+    <div class="rule"></div>
+    <div class="body">What was built for Leopardo Efficiency is not a one-off. It is replicable infrastructure. <strong>Every company in the Leopardo family has the same problem</strong> — completed work, documented results, and no operational system to extract and deploy the content.</div>
+    <div class="scope-grid">
+      <div class="scope-card">
+        <div class="sc-label">Layer 01</div>
+        <div class="sc-title">Existing Archive</div>
+        <div class="sc-desc">Years of project footage, testimonials, and case material that has never been deployed</div>
+      </div>
+      <div class="scope-card">
+        <div class="sc-label">Layer 02</div>
+        <div class="sc-title">Active Pipeline</div>
+        <div class="sc-desc">Every new project completion generates content assets processed through the system immediately</div>
+      </div>
+      <div class="scope-card">
+        <div class="sc-label">Layer 03</div>
+        <div class="sc-title">Unified Distribution</div>
+        <div class="sc-desc">One content operations team. One platform. Consistent presence across LinkedIn, web, and sales channels</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S7 TEAM -->
+  <div class="slide" id="s7">
+    <div class="eyebrow">06 — The Engagement Model</div>
+    <div class="display">The cost of<br><em>one hire.</em><br>The output of a department.</div>
+    <div class="rule"></div>
+    <div class="team-table">
+      <div class="team-row header">
+        <div class="team-cell">Role</div>
+        <div class="team-cell">Function</div>
+        <div class="team-cell">Model</div>
+      </div>
+      <div class="team-row">
+        <div class="team-cell"><strong>VDO Aigency</strong></div>
+        <div class="team-cell">System architecture, AI pipeline, custom tooling, editorial team</div>
+        <div class="team-cell"><span class="gold">Retainer</span></div>
+      </div>
+      <div class="team-row">
+        <div class="team-cell"><strong>Media Manager</strong><br>Raj Brahmbhatt</div>
+        <div class="team-cell">Media intake, traffic, approval coordination, Monday board</div>
+        <div class="team-cell"><span class="gold">On-Staff</span></div>
+      </div>
+      <div class="team-row">
+        <div class="team-cell"><strong>Remote Editorial</strong></div>
+        <div class="team-cell">Post-production execution, color, graphics, delivery</div>
+        <div class="team-cell"><span class="gold">Contracted</span></div>
+      </div>
+      <div class="team-row">
+        <div class="team-cell"><strong>Distribution</strong></div>
+        <div class="team-cell">Buffer scheduling, platform management, performance reporting</div>
+        <div class="team-cell"><span class="gold">Managed</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S8 ASK -->
+  <div class="slide" id="s8">
+    <div class="eyebrow">07 — The Ask</div>
+    <div class="display">Fund what<br><em>already works.</em></div>
+    <div class="rule"></div>
+    <div class="ask-block">
+      <div class="ask-line"><strong>What exists:</strong> A live content operations platform, a proven pipeline, a working team model.</div>
+      <div class="ask-line"><strong>What this funds:</strong> Completion of the tool suite, full-portfolio rollout, dedicated media manager headcount, and a 12-month distribution commitment.</div>
+      <div class="ask-line"><strong>The alternative:</strong> A VP of Content + agency vendors + software stack. <span class="gold">$800K–$1.2M annually.</span> No system. No IP. No carry-over.</div>
+      <div class="ask-number">[$ TBD]</div>
+      <div class="ask-number-sub">Annual retainer · Leopardo portfolio · VDO Aigency</div>
+    </div>
+    <div class="contact-block">
+      Brandon David Cole · The VDO Aigency<br>
+      <span>brandon@thevdoaigency.com · thevdoaigency.com</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="nav prev" onclick="go(-1)">← PREV</div>
+<div class="nav next" onclick="go(1)">NEXT →</div>
+<div class="counter" id="counter"></div>
+<div class="corner-mark">Leopardo Portfolio · <span>AWC</span> · 2026</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  let current = 0;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => go(i - current);
+    counter.appendChild(d);
+  });
+
+  function go(dir) {
+    const next = Math.max(0, Math.min(slides.length - 1, current + dir));
+    if (next === current) return;
+    slides[current].classList.remove('active');
+    document.querySelectorAll('.dot')[current].classList.remove('active');
+    current = next;
+    slides[current].classList.add('active');
+    document.querySelectorAll('.dot')[current].classList.add('active');
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') go(-1);
+  });
+</script>
+</body>
+</html>
