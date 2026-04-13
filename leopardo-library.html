@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Leopardo Library — Clip Database</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0b0b0b;
+  --surface: #141414;
+  --surface2: #1a1a1a;
+  --surface3: #1f1f1f;
+  --border: #222;
+  --gold: #e8b84b;
+  --gold-dim: rgba(232,184,75,0.08);
+  --gold-mid: rgba(232,184,75,0.18);
+  --cream: #ede9e3;
+  --muted: #7a7570;
+  --muted2: #333;
+  --text-dim: #9a9490;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  font-size: 14px;
+}
+
+/* ── HEADER ── */
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 24px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: rgba(11,11,11,0.96);
+  backdrop-filter: blur(8px);
+  z-index: 50;
+}
+
+.wordmark {
+  font-family: Georgia, serif;
+  font-size: 15px;
+  color: var(--cream);
+  letter-spacing: 0.01em;
+}
+.wordmark em { font-style: italic; color: var(--gold); }
+
+.header-center {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.clip-count {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.clip-count span {
+  color: var(--gold);
+  font-size: 13px;
+}
+
+/* ── SEARCH BAR ── */
+.search-bar {
+  padding: 20px 36px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 420px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+input[type="text"] {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--cream);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  padding: 10px 14px 10px 36px;
+  outline: none;
+  transition: border-color 0.15s;
+  letter-spacing: 0.04em;
+}
+
+input[type="text"]::placeholder { color: var(--muted); }
+input[type="text"]:focus { border-color: rgba(232,184,75,0.35); }
+
+.clear-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.15s, border-color 0.15s;
+}
+.clear-btn:hover { color: var(--gold); border-color: var(--gold-mid); }
+
+/* ── FILTER RAIL ── */
+.filter-rail {
+  padding: 14px 36px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.filter-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+
+.filter-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+  margin: 0 8px;
+  flex-shrink: 0;
+}
+
+.tag-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.12s;
+  user-select: none;
+}
+
+.tag-btn:hover { color: var(--text-dim); border-color: var(--muted2); }
+
+.tag-btn.active {
+  color: var(--gold);
+  background: var(--gold-dim);
+  border-color: var(--gold-mid);
+}
+
+/* ── RESULTS BAR ── */
+.results-bar {
+  padding: 12px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+
+.results-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.results-label span { color: var(--gold); }
+
+.view-toggle {
+  display: flex;
+  gap: 4px;
+}
+
+.view-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+
+.view-btn.active { color: var(--gold); border-color: var(--gold-mid); background: var(--gold-dim); }
+
+/* ── GRID ── */
+.grid-view {
+  padding: 24px 36px 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+.grid-view.list-mode {
+  grid-template-columns: 1fr;
+  gap: 5px;
+}
+
+/* ── CLIP CARD ── */
+.clip-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.15s, background 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.clip-card:hover {
+  border-color: rgba(232,184,75,0.2);
+  background: var(--surface2);
+}
+
+.clip-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.clip-thumb-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  opacity: 0.25;
+}
+
+.clip-type-stripe {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+}
+
+.play-btn {
+  position: absolute;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(232,184,75,0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.15s;
+  background: rgba(11,11,11,0.6);
+  text-decoration: none;
+}
+
+.clip-card:hover .play-btn { opacity: 1; }
+
+.clip-body {
+  padding: 12px 14px;
+}
+
+.clip-id {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  margin-bottom: 6px;
+}
+
+.clip-desc {
+  font-size: 13px;
+  color: var(--cream);
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.clip-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.clip-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.1s;
+  text-transform: lowercase;
+}
+
+.clip-tag:hover {
+  color: var(--gold);
+  border-color: var(--gold-mid);
+  background: var(--gold-dim);
+}
+
+.clip-tag.city { border-color: rgba(100,160,232,0.2); color: rgba(100,160,232,0.7); }
+.clip-tag.type { border-color: rgba(232,184,75,0.2); color: rgba(232,184,75,0.6); }
+.clip-tag.angle { border-color: rgba(160,232,100,0.2); color: rgba(160,232,100,0.6); }
+.clip-tag.date { color: var(--muted); }
+
+.clip-link {
+  display: block;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: opacity 0.12s;
+}
+
+.clip-link:hover { opacity: 0.7; }
+
+/* ── LIST MODE ── */
+.list-mode .clip-card {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+}
+
+.list-mode .clip-thumb {
+  aspect-ratio: unset;
+  height: 100%;
+  border-bottom: none;
+  border-right: 1px solid var(--border);
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.empty-state .es-icon { font-size: 32px; margin-bottom: 16px; opacity: 0.2; }
+.empty-state .es-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* ── FOOTER ── */
+footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  border-top: 1px solid var(--border);
+  background: rgba(11,11,11,0.96);
+  backdrop-filter: blur(8px);
+  padding: 10px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+}
+
+.footer-left {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.footer-right {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted2);
+  letter-spacing: 0.08em;
+}
+
+/* ── TYPE COLORS ── */
+.stripe-hvac { background: #e8b84b; }
+.stripe-electrical { background: #4b8ce8; }
+.stripe-drone { background: #4be8a0; }
+.stripe-install { background: #e84b4b; }
+.stripe-interview { background: #c44be8; }
+.stripe-broll { background: #e8844b; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wordmark">VDO <em>Aigency</em></div>
+  <div class="header-center">Leopardo Library — Clip Database</div>
+  <div class="header-right">
+    <div class="clip-count">Showing <span id="showing-count">—</span> clips</div>
+  </div>
+</header>
+
+<div class="search-bar">
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input type="text" id="search-input" placeholder="Search by city, type, description..." />
+  </div>
+  <button class="clear-btn" onclick="clearAll()">Clear</button>
+</div>
+
+<div class="filter-rail" id="filter-rail">
+  <span class="filter-label">City</span>
+  <div class="filter-group" id="fg-city"></div>
+  <div class="filter-divider"></div>
+  <span class="filter-label">Type</span>
+  <div class="filter-group" id="fg-type"></div>
+  <div class="filter-divider"></div>
+  <span class="filter-label">Angle</span>
+  <div class="filter-group" id="fg-angle"></div>
+</div>
+
+<div class="results-bar">
+  <div class="results-label" id="results-label">— clips</div>
+  <div class="view-toggle">
+    <button class="view-btn active" id="btn-grid" onclick="setView('grid')" title="Grid">⊞</button>
+    <button class="view-btn" id="btn-list" onclick="setView('list')" title="List">≡</button>
+  </div>
+</div>
+
+<div class="grid-view" id="grid"></div>
+
+<footer>
+  <div class="footer-left">Leopardo Efficiency · Media Library · Internal Use Only</div>
+  <div class="footer-right">Built by VDO Aigency · thevdoaigency.com · 2026</div>
+</footer>
+
+<script>
+// ── CLIP DATA ── Add your clips here. Copy the pattern.
+const CLIPS = [
+  {
+    id: "LE-CLE-001",
+    city: "cleveland",
+    date: "260412",
+    type: "install",
+    angle: "closeup",
+    desc: "Drill work, handheld close-up",
+    link: "https://drive.google.com/file/d/1Pp8XqRMRZmYoKbv32_JUodvYBpfq56RD/view?usp=drive_link",
+    icon: "🔧"
+  },
+  {
+    id: "LE-CLE-002",
+    city: "cleveland",
+    date: "260412",
+    type: "broll",
+    angle: "gimbal",
+    desc: "Police station exterior, gimbal",
+    link: "https://drive.google.com/file/d/1IJrXalCC4A9en4Sdzw8aiMOaVEFjSPvB/view?usp=drive_link",
+    icon: "🏛️"
+  },
+  {
+    id: "LE-CLE-003",
+    city: "cleveland",
+    date: "260412",
+    type: "install",
+    angle: "handheld",
+    desc: "Demo, handheld — job site walkthrough",
+    link: "https://drive.google.com/file/d/1CkZofnMb9EHHTqt057kRsrySJI-KWfkl/view?usp=drive_link",
+    icon: "🔧"
+  },
+  {
+    id: "LE-CLE-004",
+    city: "cleveland",
+    date: "260412",
+    type: "hvac",
+    angle: "drone",
+    desc: "HVAC install, scissor lift aerial",
+    link: "https://drive.google.com/file/d/1fwt5zlyJgQ89fvw2Pl63HOXNYUOgEdQy/view?usp=drive_link",
+    icon: "🚁"
+  }
+];
+
+// ── STATE ──
+let activeFilters = { city: null, type: null, angle: null };
+let currentView = 'grid';
+let searchQuery = '';
+
+// ── BUILD FILTER BUTTONS ──
+function buildFilters() {
+  const cities = [...new Set(CLIPS.map(c => c.city))].sort();
+  const types  = [...new Set(CLIPS.map(c => c.type))].sort();
+  const angles = [...new Set(CLIPS.map(c => c.angle))].sort();
+
+  const make = (val, group) => {
+    const btn = document.createElement('button');
+    btn.className = 'tag-btn';
+    btn.textContent = val;
+    btn.dataset.val = val;
+    btn.dataset.group = group;
+    btn.onclick = () => toggleFilter(group, val, btn);
+    return btn;
+  };
+
+  cities.forEach(v => document.getElementById('fg-city').appendChild(make(v, 'city')));
+  types.forEach(v  => document.getElementById('fg-type').appendChild(make(v, 'type')));
+  angles.forEach(v => document.getElementById('fg-angle').appendChild(make(v, 'angle')));
+}
+
+function toggleFilter(group, val, btn) {
+  if (activeFilters[group] === val) {
+    activeFilters[group] = null;
+    btn.classList.remove('active');
+  } else {
+    // deactivate previous in group
+    document.querySelectorAll(`[data-group="${group}"]`).forEach(b => b.classList.remove('active'));
+    activeFilters[group] = val;
+    btn.classList.add('active');
+  }
+  render();
+}
+
+// ── SEARCH ──
+document.getElementById('search-input').addEventListener('input', e => {
+  searchQuery = e.target.value.toLowerCase().trim();
+  render();
+});
+
+function clearAll() {
+  activeFilters = { city: null, type: null, angle: null };
+  searchQuery = '';
+  document.getElementById('search-input').value = '';
+  document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+  render();
+}
+
+// ── FILTER LOGIC ──
+function getFiltered() {
+  return CLIPS.filter(c => {
+    if (activeFilters.city && c.city !== activeFilters.city) return false;
+    if (activeFilters.type && c.type !== activeFilters.type) return false;
+    if (activeFilters.angle && c.angle !== activeFilters.angle) return false;
+    if (searchQuery) {
+      const hay = [c.city, c.type, c.angle, c.desc, c.id, c.date].join(' ').toLowerCase();
+      if (!hay.includes(searchQuery)) return false;
+    }
+    return true;
+  });
+}
+
+// ── RENDER ──
+function render() {
+  const filtered = getFiltered();
+  const grid = document.getElementById('grid');
+  const label = document.getElementById('results-label');
+  const showing = document.getElementById('showing-count');
+
+  label.innerHTML = `<span>${filtered.length}</span> of ${CLIPS.length} clips`;
+  showing.innerHTML = `<span>${filtered.length}</span>`;
+
+  grid.innerHTML = '';
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="empty-state"><div class="es-icon">◻</div><div class="es-text">No clips match current filters</div></div>`;
+    return;
+  }
+
+  filtered.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'clip-card';
+
+    const linkAttr = c.link && c.link !== '#' ? `href="${c.link}" target="_blank"` : 'href="#"';
+    const linkLabel = c.link && c.link !== '#' ? '↗ Open in Drive' : '— Link pending';
+
+    card.innerHTML = `
+      <div class="clip-thumb">
+        <div class="clip-thumb-inner">${c.icon}</div>
+        <div class="clip-type-stripe stripe-${c.type}"></div>
+        <a class="play-btn" ${linkAttr}>▶</a>
+      </div>
+      <div class="clip-body">
+        <div class="clip-id">${c.id} · ${c.date}</div>
+        <div class="clip-desc">${c.desc}</div>
+        <div class="clip-tags">
+          <span class="clip-tag city" onclick="quickFilter('city','${c.city}')">${c.city}</span>
+          <span class="clip-tag type" onclick="quickFilter('type','${c.type}')">${c.type}</span>
+          <span class="clip-tag angle" onclick="quickFilter('angle','${c.angle}')">${c.angle}</span>
+        </div>
+        <a class="clip-link" ${linkAttr}>${linkLabel}</a>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function quickFilter(group, val) {
+  document.querySelectorAll(`[data-group="${group}"]`).forEach(b => {
+    b.classList.toggle('active', b.dataset.val === val);
+  });
+  activeFilters[group] = activeFilters[group] === val ? null : val;
+  // if we just set it, ensure active
+  if (activeFilters[group] === null) {
+    // toggled off — clear
+  } else {
+    activeFilters[group] = val;
+  }
+  render();
+}
+
+function setView(mode) {
+  currentView = mode;
+  const grid = document.getElementById('grid');
+  grid.classList.toggle('list-mode', mode === 'list');
+  document.getElementById('btn-grid').classList.toggle('active', mode === 'grid');
+  document.getElementById('btn-list').classList.toggle('active', mode === 'list');
+}
+
+// ── INIT ──
+buildFilters();
+render();
+</script>
+</body>
+</html>
