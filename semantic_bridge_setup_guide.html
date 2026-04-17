@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remote Setup Guide — Semantic Bridge · The VDO Aigency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0b0b;
+  --surface: #141414;
+  --surface-2: #1a1a1a;
+  --ink: #ede9e3;
+  --ink-muted: #7a7570;
+  --ink-dim: #3a3a3a;
+  --line: #1e1e1e;
+  --line-hover: #2a2a2a;
+  --gold: #e8b84b;
+  --gold-soft: rgba(232,184,75,0.12);
+  --ok: #4caf7d;
+  --danger: #df2f4a;
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+  --mono: 'DM Mono', 'SF Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 300;
+}
+
+em { font-style: italic; color: var(--gold); font-weight: 400; }
+
+.content { position: relative; z-index: 1; }
+
+/* ── NAVIGATION ───────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(11,11,11,0.82);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.nav-brand em { color: var(--gold); }
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.15s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+.scroll-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--gold);
+  z-index: 101;
+  transition: width 0.1s;
+}
+
+/* ── PRESENTER BAR ───────────────────────── */
+.presenter {
+  padding: 140px 40px 40px;
+  max-width: 1280px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--line);
+}
+
+.presenter-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.presenter-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.presenter-name {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--ink);
+}
+.presenter-name em { font-style: italic; color: var(--gold); }
+
+.presenter-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+  line-height: 1.8;
+  text-align: right;
+}
+
+/* ── HERO ───────────────────────── */
+.hero {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 40px 100px;
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 48px;
+}
+
+.hero-meta .dot {
+  width: 3px;
+  height: 3px;
+  background: var(--ink-dim);
+  border-radius: 50%;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(44px, 6.5vw, 86px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 40px;
+}
+
+.hero-lede {
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 780px;
+  margin-bottom: 60px;
+  font-weight: 300;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.hero-stat {
+  background: var(--surface);
+  padding: 28px 24px;
+}
+
+.hero-stat .label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.hero-stat .value {
+  font-family: var(--serif);
+  font-size: 36px;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.hero-stat .detail {
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+
+/* ── SECTIONS ───────────────────────── */
+.section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 90px 40px;
+  border-top: 1px solid var(--line);
+}
+
+.section-number {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(34px, 4.6vw, 52px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 28px;
+  max-width: 900px;
+}
+
+.section-intro {
+  font-size: 17px;
+  color: var(--ink-muted);
+  line-height: 1.65;
+  max-width: 780px;
+  margin-bottom: 48px;
+}
+
+/* ── INSIGHT BOX ───────────────────────── */
+.insight {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--gold);
+  border-radius: 6px;
+  padding: 32px 36px;
+  margin-bottom: 40px;
+}
+
+.insight .label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.insight h3 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 14px;
+  line-height: 1.25;
+}
+
+.insight p {
+  font-size: 15px;
+  color: var(--ink-muted);
+  line-height: 1.7;
+}
+
+/* ── KIT / GRID ───────────────────────── */
+.grid-3, .kit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.kit-grid { grid-template-columns: repeat(2, 1fr); }
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.kit-item {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 28px;
+  transition: border-color 0.2s;
+}
+
+.kit-item:hover { border-color: var(--line-hover); }
+
+.kit-item .role {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.kit-item h4 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+
+.kit-item ul {
+  list-style: none;
+}
+
+.kit-item li {
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.7;
+  padding: 6px 0 6px 16px;
+  position: relative;
+  border-bottom: 1px solid var(--line);
+}
+
+.kit-item li:last-child { border-bottom: none; }
+
+.kit-item li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--ink-dim);
+}
+
+/* ── PHASE ───────────────────────── */
+.phase {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.phase-header {
+  padding: 36px 40px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.phase-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 3px;
+}
+
+.phase-tag.pre { background: var(--gold-soft); color: var(--gold); border: 1px solid rgba(232,184,75,0.25); }
+.phase-tag.onsite { background: rgba(232,184,75,0.06); color: var(--ink); border: 1px solid var(--line-hover); }
+.phase-tag.critical { background: rgba(223,47,74,0.1); color: var(--danger); border: 1px solid rgba(223,47,74,0.25); }
+.phase-tag.remote { background: rgba(76,175,125,0.1); color: var(--ok); border: 1px solid rgba(76,175,125,0.25); }
+
+.phase-title {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.2vw, 36px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--ink);
+  flex: 1;
+  letter-spacing: -0.01em;
+}
+
+.phase-duration {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.06em;
+}
+
+.phase-desc {
+  padding: 28px 40px;
+  font-size: 15px;
+  color: var(--ink-muted);
+  line-height: 1.7;
+  border-bottom: 1px solid var(--line);
+}
+
+.step {
+  padding: 28px 40px;
+  border-bottom: 1px solid var(--line);
+}
+
+.step:last-child { border-bottom: none; }
+
+.step-head {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.step-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  min-width: 40px;
+}
+
+.step-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink);
+  flex: 1;
+  line-height: 1.25;
+}
+
+.step-meta {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.step-chip {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid var(--line-hover);
+  border-radius: 2px;
+}
+
+.step-chip.time { color: var(--gold); border-color: rgba(232,184,75,0.25); }
+.step-chip.site { color: var(--ink); border-color: var(--line-hover); }
+.step-chip.remote { color: var(--ok); border-color: rgba(76,175,125,0.25); }
+
+.step p {
+  font-size: 14px;
+  color: var(--ink-muted);
+  line-height: 1.7;
+  padding-left: 58px;
+}
+
+.step ul {
+  list-style: none;
+  padding: 12px 0 0 58px;
+}
+
+.step li {
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.75;
+  padding: 4px 0 4px 16px;
+  position: relative;
+}
+
+.step li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--ink-dim);
+}
+
+.step b, .step code {
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.step code {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--gold);
+}
+
+/* ── CODE BLOCK ───────────────────────── */
+.code-label {
+  margin: 20px 0 8px 58px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.code {
+  margin-left: 58px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 20px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  line-height: 1.9;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+}
+
+.code .prompt { color: var(--gold); }
+.code .comment { color: var(--ink-muted); font-style: italic; }
+.code .key { color: var(--gold); }
+.code .str { color: var(--ok); }
+
+/* ── WARN / CALLOUT ───────────────────────── */
+.warn-box {
+  margin: 20px 0 0 58px;
+  background: rgba(232,184,75,0.04);
+  border: 1px solid rgba(232,184,75,0.18);
+  border-radius: 4px;
+  padding: 18px 22px;
+}
+
+.warn-box .label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.warn-box p {
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.7;
+  padding-left: 0;
+}
+
+.warn-box b { color: var(--ink); font-weight: 400; }
+
+/* ── TIMELINE ───────────────────────── */
+.timeline {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 40px;
+}
+
+.timeline-track {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--line);
+}
+
+.timeline-item {
+  background: var(--surface);
+  padding: 22px 28px;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 32px;
+  align-items: baseline;
+  position: relative;
+}
+
+.timeline-item.done {
+  border-left: 2px solid var(--gold);
+}
+
+.timeline-time {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+}
+
+.timeline-title {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--ink);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.timeline-desc {
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+/* ── FALLBACK TABLE ───────────────────────── */
+.fallback {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.fallback-row {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  border-bottom: 1px solid var(--line);
+}
+
+.fallback-row:last-child { border-bottom: none; }
+
+.fallback-cell {
+  padding: 22px 28px;
+  font-size: 14px;
+  line-height: 1.7;
+  border-right: 1px solid var(--line);
+}
+
+.fallback-cell:last-child { border-right: none; }
+
+.fallback-row.header .fallback-cell {
+  background: var(--surface);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  padding: 14px 28px;
+}
+
+.fallback-cell.problem {
+  background: var(--surface-2);
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--ink);
+  border-left: 2px solid var(--danger);
+}
+
+.fallback-cell.solution {
+  color: var(--ink-muted);
+}
+
+.fallback-cell.solution b {
+  color: var(--gold);
+  font-weight: 400;
+}
+
+/* ── FOOTER ───────────────────────── */
+.footer {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 40px 60px;
+  border-top: 1px solid var(--line);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.footer-brand {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--ink);
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+
+.footer-brand span {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.footer-tagline {
+  font-size: 14px;
+  color: var(--ink-muted);
+  line-height: 1.7;
+  max-width: 420px;
+}
+
+.footer-col h6 {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 400;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col li {
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 2.1;
+}
+
+.footer-bottom {
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-presenter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.footer-presenter .mark-v {
+  width: 36px;
+  height: 36px;
+  background: var(--gold);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--bg);
+  font-weight: 400;
+}
+
+.footer-presenter-text {
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+
+.footer-presenter-text strong {
+  color: var(--ink);
+  font-weight: 400;
+  font-family: var(--serif);
+  font-size: 14px;
+}
+
+.footer-presenter-text em { color: var(--gold); font-style: italic; }
+
+/* ── FADE IN ───────────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ───────────────────────── */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .grid-3, .grid-2, .kit-grid { grid-template-columns: 1fr; }
+  .phase-header { padding: 24px; }
+  .step { padding: 24px; }
+  .step p, .step ul, .code, .code-label, .warn-box { padding-left: 0; margin-left: 0; }
+  .fallback-row { grid-template-columns: 1fr; }
+  .fallback-cell { border-right: none; border-bottom: 1px solid var(--line); }
+  .timeline { padding: 24px; }
+  .timeline-item { grid-template-columns: 1fr; gap: 6px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+  .section, .hero, .presenter, .footer { padding-left: 24px; padding-right: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-indicator" id="scrollIndicator" style="width:0%"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">Remote <em>Setup Guide</em></div>
+    <div class="nav-links">
+      <a href="#premise">Premise</a>
+      <a href="#phase-0">Phase 0</a>
+      <a href="#phase-1">Phase 1</a>
+      <a href="#phase-2">Phase 2</a>
+      <a href="#phase-3">Phase 3</a>
+      <a href="#fallback">Fallback</a>
+    </div>
+  </div>
+</nav>
+
+<div class="content">
+
+<!-- PRESENTER BAR -->
+<section class="presenter">
+  <div class="presenter-inner">
+    <div>
+      <div class="presenter-label">Operations runbook — VDO <em>Aigency</em></div>
+      <div class="presenter-name">Semantic <em>Bridge</em> — Remote Setup</div>
+    </div>
+    <div class="presenter-meta">
+      Internal reference · Revision 1.0<br>
+      For Brando and the deployment team<br>
+      April 2026
+    </div>
+  </div>
+</section>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-meta">
+    <span>Operations runbook</span>
+    <span class="dot"></span>
+    <span>Deployment sequence</span>
+    <span class="dot"></span>
+    <span>Revision 1.0</span>
+  </div>
+
+  <h1>A delivery <em>anywhere</em>.<br>A setup from <em>our desks</em>.</h1>
+
+  <p class="hero-lede">
+    How we install, configure, and hand over a Semantic Bridge appliance to a customer — wherever they are in the United States, without anyone on our team physically present. The short version: ten minutes at the customer site, four hours at our desks, zero technical burden on the client.
+  </p>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="label">On-site time</div>
+      <div class="value"><em>~30</em> min</div>
+      <div class="detail">Customer-facing setup</div>
+    </div>
+    <div class="hero-stat">
+      <div class="label">Remote time</div>
+      <div class="value"><em>~4</em> hrs</div>
+      <div class="detail">From our desks</div>
+    </div>
+    <div class="hero-stat">
+      <div class="label">Technical skill</div>
+      <div class="value"><em>None</em></div>
+      <div class="detail">Required from customer</div>
+    </div>
+    <div class="hero-stat">
+      <div class="label">Indexing</div>
+      <div class="value"><em>2-3</em> days</div>
+      <div class="detail">Background, unattended</div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMISE -->
+<section class="section" id="premise">
+  <div class="section-number">00 — What we're working with</div>
+  <h2 class="section-title">The box <em>arrives ready</em>.<br>We just have to find it.</h2>
+  <p class="section-intro">
+    The hardware ships with everything we need already installed. Our job is not to set up a computer — it's to get a secure connection to one that's already running, then deploy our software remotely.
+  </p>
+
+  <div class="insight">
+    <div class="label">The key fact</div>
+    <h3>Ubuntu is <em>already installed</em>.</h3>
+    <p>The appliance ships with a customized Ubuntu 24.04 LTS (ARM64) pre-configured by the manufacturer. CUDA, Docker, the NVIDIA container toolkit, PyTorch, and all AI development tooling are present from first boot. We do not install an operating system. We do not flash firmware. We do not prepare installation media.</p>
+    <p style="margin-top:12px">All we need to do is turn it on, get it on the network, and establish a secure tunnel back to our office. Everything after that happens from our keyboards.</p>
+  </div>
+
+  <div class="grid-3">
+    <div class="kit-item">
+      <div class="role">What ships with the box</div>
+      <h4>Pre-installed</h4>
+      <ul>
+        <li>Ubuntu 24.04 LTS (ARM64, customized)</li>
+        <li>GPU drivers and CUDA toolkit</li>
+        <li>Docker with GPU support</li>
+        <li>Management dashboard (GUI)</li>
+        <li>SSH key and tunnel tooling</li>
+      </ul>
+    </div>
+    <div class="kit-item">
+      <div class="role">What we add remotely</div>
+      <h4>Our deployment</h4>
+      <ul>
+        <li>Mesh VPN agent (Tailscale)</li>
+        <li>Application stack (Docker Compose)</li>
+        <li>Local AI model weights</li>
+        <li>Database schema and configuration</li>
+        <li>Monitoring and backup agents</li>
+      </ul>
+    </div>
+    <div class="kit-item">
+      <div class="role">What stays on-site</div>
+      <h4>Customer's side</h4>
+      <ul>
+        <li>The physical appliance</li>
+        <li>Their existing file storage (NAS)</li>
+        <li>Network infrastructure</li>
+        <li>Monitor/keyboard for first boot only</li>
+        <li>Nothing else to maintain</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 0 -->
+<section class="section" id="phase-0">
+  <div class="section-number">Phase 0 — recommended</div>
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-tag pre">Pre-stage</span>
+      <h2 class="phase-title">Configure <em>before</em> shipping</h2>
+      <span class="phase-duration">2-3 days · Our facility</span>
+    </div>
+    <p class="phase-desc">
+      The ideal flow: the appliance ships to us first, we unbox and fully configure it, then forward it to the customer. They receive a plug-and-play device. This eliminates most risk from the customer-site phase. Skip this phase only if timing requires direct-to-customer shipping.
+    </p>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">0.1</span>
+        <h3 class="step-title">Receive and validate hardware</h3>
+        <div class="step-meta"><span class="step-chip">In-office</span><span class="step-chip time">~30 min</span></div>
+      </div>
+      <p>Open the box, inspect for shipping damage, verify SKU matches order (4 TB NVMe variant, 128 GB RAM). Confirm accessories: power adapter, documentation, any included cables. Photograph the unit's serial number and NVIDIA asset tag for our records.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">0.2</span>
+        <h3 class="step-title">First boot and account creation</h3>
+        <div class="step-meta"><span class="step-chip">In-office</span><span class="step-chip time">~20 min</span></div>
+      </div>
+      <p>Connect display via HDMI 2.1 or USB-C DisplayPort. Connect keyboard and Ethernet. Power on. Walk through the Ubuntu OEM setup wizard:</p>
+      <ul>
+        <li><b>Language:</b> English (US)</li>
+        <li><b>Keyboard layout:</b> US</li>
+        <li><b>Network:</b> Ethernet (DHCP from our office router)</li>
+        <li><b>User account:</b> <code>admin</code> with strong passphrase (stored in our password manager)</li>
+        <li><b>Computer name:</b> <code>sb-[customer-code]</code> — we use a stable identifier that survives the move</li>
+        <li><b>Disk encryption:</b> enabled with passphrase stored in our vault</li>
+        <li><b>Auto-login:</b> disabled</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">0.3</span>
+        <h3 class="step-title">Install the VPN mesh agent</h3>
+        <div class="step-meta"><span class="step-chip">In-office</span><span class="step-chip time">~5 min</span></div>
+      </div>
+      <p>Install Tailscale and authenticate the device to our tailnet using a pre-generated auth key. This is the single most important step — it's what lets us reach the box from anywhere in the world without any network configuration on the customer's side.</p>
+      <div class="code-label">Terminal</div>
+      <div class="code"><span class="prompt">$ </span>curl -fsSL https://tailscale.com/install.sh <span class="key">|</span> sh
+<span class="prompt">$ </span>sudo tailscale up <span class="key">\</span>
+    --authkey=<span class="str">tskey-auth-XXXXXXXX</span> <span class="key">\</span>
+    --ssh <span class="key">\</span>
+    --hostname=sb-<span class="str">customer-code</span>
+
+<span class="comment"># Verify connectivity from a second machine on the tailnet</span>
+<span class="prompt">$ </span>ssh admin@sb-customer-code</div>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">0.4</span>
+        <h3 class="step-title">Deploy the application stack</h3>
+        <div class="step-meta"><span class="step-chip">In-office</span><span class="step-chip time">~2 hrs</span></div>
+      </div>
+      <p>From our laptop, SSH into the appliance and run our deployment script. This pulls the Docker images, downloads the AI model weights, initializes PostgreSQL with pgvector, and brings up all services. End-to-end validation with a test video.</p>
+      <ul>
+        <li>Clone our deployment repository</li>
+        <li>Populate environment variables (customer-specific settings)</li>
+        <li>Run <code>docker compose up -d</code></li>
+        <li>Wait for all services to pass health checks</li>
+        <li>Drop a test video in the watched folder, confirm end-to-end processing</li>
+        <li>Perform sample search queries, confirm expected results</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">0.5</span>
+        <h3 class="step-title">Take a snapshot, then ship</h3>
+        <div class="step-meta"><span class="step-chip">In-office</span><span class="step-chip time">~1 hr</span></div>
+      </div>
+      <p>Create a full system snapshot as our known-good recovery point. Export a backup of the database and configuration. Power down cleanly, package with original materials, ship to customer with tracking. Include our printed quick-start sheet for the customer's physical setup.</p>
+      <div class="warn-box">
+        <div class="label">Note on direct-to-customer shipping</div>
+        <p>If the timeline doesn't allow pre-staging, skip Phase 0 and start with Phase 1. The appliance still ships with Ubuntu pre-installed by the manufacturer. The difference is we'll do steps 0.3 and 0.4 over a video call with someone at the customer site, rather than in our office. Add approximately 1 hour to the on-site time in that scenario.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 1 -->
+<section class="section" id="phase-1">
+  <div class="section-number">Phase 1 — on the customer site</div>
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-tag onsite">On-site</span>
+      <h2 class="phase-title">Physical setup, <em>guided</em></h2>
+      <span class="phase-duration">~30 min · Video call</span>
+    </div>
+    <p class="phase-desc">
+      The only time the customer needs to touch the appliance. We schedule a video call, walk them through unpacking and cabling, and stay on the line until the box is on their network. No technical skill required — our printed sheet covers every step with photos.
+    </p>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">1.1</span>
+        <h3 class="step-title">Physical unboxing and connection</h3>
+        <div class="step-meta"><span class="step-chip site">Customer</span><span class="step-chip time">~10 min</span></div>
+      </div>
+      <p>On a scheduled video call, we walk the customer through unpacking and cabling. Our printed quick-start sheet goes in the shipping box, so they have a reference even if the call drops.</p>
+      <ul>
+        <li><b>Display:</b> HDMI 2.1 cable to any monitor (or laptop with HDMI input)</li>
+        <li><b>Keyboard:</b> USB-C keyboard (or USB-A via adapter)</li>
+        <li><b>Network:</b> Ethernet cable from router or switch to the RJ45 port</li>
+        <li><b>Power:</b> Included 240W adapter to standard US outlet</li>
+        <li><b>Press the power button</b> on the front panel</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">1.2</span>
+        <h3 class="step-title">First boot wizard — if not pre-staged</h3>
+        <div class="step-meta"><span class="step-chip site">Customer + us</span><span class="step-chip time">~15 min</span></div>
+      </div>
+      <p>Only applies if we skipped Phase 0. The customer shares their screen on the video call. We dictate each selection; they click. This is mechanical — no judgment required on their part.</p>
+      <ul>
+        <li>Walk through the language, keyboard, and time zone selections</li>
+        <li>Connect to their Wi-Fi or confirm Ethernet auto-detection</li>
+        <li>Create the <code>admin</code> account with our pre-agreed credentials</li>
+        <li>Set the computer name per our naming convention</li>
+        <li>Skip optional cloud account integrations</li>
+        <li>Let the system complete its initial setup and reach the desktop</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">1.3</span>
+        <h3 class="step-title">Open a terminal, nothing else</h3>
+        <div class="step-meta"><span class="step-chip site">Customer</span><span class="step-chip time">~2 min</span></div>
+      </div>
+      <p>The customer opens a terminal from the application launcher. We dictate a single command for them to paste and run. They don't need to understand it — they just need to copy and paste.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 2 -->
+<section class="section" id="phase-2">
+  <div class="section-number">Phase 2 — establishing the connection</div>
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-tag critical">Critical handoff</span>
+      <h2 class="phase-title">Ten minutes that <em>matter</em></h2>
+      <span class="phase-duration">~10 min · The handoff</span>
+    </div>
+    <p class="phase-desc">
+      This is the pivotal moment. Once Tailscale is running and we have SSH access, the customer can walk away. Everything that follows happens from our desks. Get this right and the rest is trivial. Get it wrong and we're stuck.
+    </p>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">2.1</span>
+        <h3 class="step-title">Install the VPN agent</h3>
+        <div class="step-meta"><span class="step-chip site">Customer types</span><span class="step-chip time">~3 min</span></div>
+      </div>
+      <p>We generate a fresh single-use authentication key from our Tailscale admin console immediately before the call. We dictate or share the command; the customer pastes and runs.</p>
+      <div class="code-label">What the customer runs</div>
+      <div class="code"><span class="comment"># Download and install</span>
+<span class="prompt">$ </span>curl -fsSL https://tailscale.com/install.sh <span class="key">|</span> sh
+
+<span class="comment"># Authenticate this device to our mesh</span>
+<span class="prompt">$ </span>sudo tailscale up <span class="key">\</span>
+    --authkey=<span class="str">tskey-auth-XXXXXXXX</span> <span class="key">\</span>
+    --ssh <span class="key">\</span>
+    --hostname=sb-<span class="str">customer-code</span>
+
+<span class="comment"># Confirm it registered (they should see an IP address)</span>
+<span class="prompt">$ </span>tailscale status</div>
+
+      <div class="warn-box">
+        <div class="label">Why Tailscale specifically</div>
+        <p>It traverses NAT and firewalls automatically. No port forwarding on the customer's router. No static IP required. No coordination with their IT team. The mesh is WireGuard-based (modern, fast, secure), uses identity-based authentication, and gives the device a stable address even if its local network changes. Free for up to twenty devices.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">2.2</span>
+        <h3 class="step-title">Verify from our side</h3>
+        <div class="step-meta"><span class="step-chip remote">Our office</span><span class="step-chip time">~1 min</span></div>
+      </div>
+      <p>From our laptop, SSH into the appliance using its Tailscale hostname. Tailscale SSH handles authentication automatically using our team identities — no password prompt, no separate key exchange.</p>
+      <div class="code-label">What we run</div>
+      <div class="code"><span class="prompt">$ </span>ssh admin@sb-customer-code.tail-xyz.ts.net
+
+<span class="comment"># You should see the MOTD and a shell prompt</span>
+<span class="comment"># Welcome to Ubuntu 24.04 LTS (DGX OS)</span>
+<span class="comment">#  System information as of ...</span>
+
+admin@sb-customer-code:~$ _</div>
+      <p style="margin-top:12px">Take a screenshot and share it with the team. This moment — first successful SSH — is when the project genuinely begins.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">2.3</span>
+        <h3 class="step-title">Release the customer</h3>
+        <div class="step-meta"><span class="step-chip site">Customer</span><span class="step-chip time">~1 min</span></div>
+      </div>
+      <p>Thank them. Confirm we have everything we need. Let them know the next contact will be when we have something to show them (usually 1-2 business days). They can unplug the monitor and keyboard if they want — the appliance will keep running headless from now on. They should leave it powered on and connected to the network.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 3 -->
+<section class="section" id="phase-3">
+  <div class="section-number">Phase 3 — the remote work</div>
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-tag remote">Remote</span>
+      <h2 class="phase-title">Everything else, <em>from our desks</em></h2>
+      <span class="phase-duration">~4 hours · Our office</span>
+    </div>
+    <p class="phase-desc">
+      With SSH in hand, this phase is just deployment. The customer is not involved. We execute our standard deployment sequence, validate each service, and prepare the system for the customer's content.
+    </p>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">3.1</span>
+        <h3 class="step-title">System hardening</h3>
+        <div class="step-meta"><span class="step-chip remote">SSH</span><span class="step-chip time">~45 min</span></div>
+      </div>
+      <p>Baseline security posture before anything else goes on the machine.</p>
+      <ul>
+        <li>Apply all pending system updates</li>
+        <li>Set the system time zone to match the customer's location</li>
+        <li>Enable the firewall with Tailscale as the only permitted ingress</li>
+        <li>Install and configure Fail2ban for SSH brute-force protection</li>
+        <li>Enable automatic security updates for critical packages</li>
+        <li>Install monitoring agent with alerts routed to our team</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">3.2</span>
+        <h3 class="step-title">Application stack deployment</h3>
+        <div class="step-meta"><span class="step-chip remote">Docker</span><span class="step-chip time">~2 hrs</span></div>
+      </div>
+      <p>The main work. This is the sequence that was rehearsed in Phase 0 (if pre-staged) or done fresh (if direct-to-customer).</p>
+      <ul>
+        <li>Pull our deployment repository (private, via deploy key)</li>
+        <li>Generate environment configuration with customer-specific values</li>
+        <li><code>docker compose up -d</code> brings up all services</li>
+        <li>AI model weights download from our mirror (approximately 15 GB)</li>
+        <li>Initialize PostgreSQL schema with pgvector extension enabled</li>
+        <li>Seed the settings table with local provider configuration</li>
+        <li>Run health checks on every service endpoint</li>
+      </ul>
+      <div class="warn-box">
+        <div class="label">ARM64 note</div>
+        <p>A few Python libraries don't ship ARM64 wheels and need to compile from source. This can add up to 20 minutes during initial deployment. Our Docker images bake these in, so the customer's first deploy doesn't hit this — it's already handled during image build.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">3.3</span>
+        <h3 class="step-title">Connect to the customer's storage</h3>
+        <div class="step-meta"><span class="step-chip remote">Mount</span><span class="step-chip time">~30 min</span></div>
+      </div>
+      <p>Where the customer keeps their content lives outside the appliance. We mount it read-only (or read-write for the watched folder) over the local network.</p>
+      <ul>
+        <li>Identify the customer's NAS or file server (IP, credentials, share path)</li>
+        <li>Install the appropriate client (NFS or CIFS/SMB)</li>
+        <li>Mount the share at <code>/mnt/customer-storage</code></li>
+        <li>Add the mount to <code>/etc/fstab</code> for auto-mount on reboot</li>
+        <li>Test read access from the application container</li>
+        <li>Configure the watched folder that triggers ingestion</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">3.4</span>
+        <h3 class="step-title">Validate end-to-end</h3>
+        <div class="step-meta"><span class="step-chip remote">Us</span><span class="step-chip time">~30 min</span></div>
+      </div>
+      <p>Before we invite the customer back in, we prove the full pipeline works with their environment. Drop a few test files into the watched folder, monitor the logs as they flow through transcription, visual analysis, embedding, and indexing. Run sample queries against the resulting knowledge base.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">3.5</span>
+        <h3 class="step-title">Bulk indexing kickoff</h3>
+        <div class="step-meta"><span class="step-chip remote">Overnight</span><span class="step-chip time">2-3 days</span></div>
+      </div>
+      <p>Point the ingestion job at the customer's existing archive. Depending on volume, this runs for 2-3 days in the background. We monitor progress remotely; nothing is required from the customer during this time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 4 -->
+<section class="section">
+  <div class="section-number">Phase 4 — delivery and training</div>
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-tag remote">Handover</span>
+      <h2 class="phase-title">Show them what <em>they own</em></h2>
+      <span class="phase-duration">~2 hours · Video call</span>
+    </div>
+    <p class="phase-desc">
+      Once the initial indexing is complete, we schedule a second video call to demonstrate the working system, train their team, and hand over documentation. Brando leads this call; we stay available for technical questions.
+    </p>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">4.1</span>
+        <h3 class="step-title">Live demonstration</h3>
+      </div>
+      <p>Show the search interface with their actual content indexed. Run the kinds of queries they'll actually use. Demonstrate that results include the original file references so they can click through to the source. Let them try queries themselves — this is the first moment they see it working on their data.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">4.2</span>
+        <h3 class="step-title">Team training</h3>
+      </div>
+      <p>Walk through the interface with each team member who will use it. Show them how to add content, how to phrase queries for best results, how to share findings with colleagues. This typically takes 30 minutes per person. Record the session for their future reference.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">4.3</span>
+        <h3 class="step-title">Operational runbook</h3>
+      </div>
+      <p>Deliver a printed and digital runbook covering the things a non-technical person might need: how to tell if the system is healthy, who to call if something looks wrong, how to pause indexing, how to add a new user. Keep it under 15 pages with screenshots.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num">4.4</span>
+        <h3 class="step-title">Support handoff</h3>
+      </div>
+      <p>Establish the support channel — dedicated Slack shared with their team, email alias, emergency phone number. Set expectations for response time. Confirm our monitoring is routing their system's alerts to us, not to them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="section">
+  <div class="section-number">05 — The whole sequence</div>
+  <h2 class="section-title">Start to <em>finish</em>.</h2>
+  <p class="section-intro">
+    From the moment the hardware arrives at our office to the moment the customer's team starts using it. Times are approximate and assume pre-staging is possible.
+  </p>
+
+  <div class="timeline">
+    <div class="timeline-track">
+      <div class="timeline-item done">
+        <div class="timeline-time">Day 0</div>
+        <div>
+          <div class="timeline-title">Hardware arrives at our office</div>
+          <div class="timeline-desc">Unbox, inspect, record serial numbers</div>
+        </div>
+      </div>
+      <div class="timeline-item done">
+        <div class="timeline-time">Day 1-2</div>
+        <div>
+          <div class="timeline-title">Pre-staging in our facility</div>
+          <div class="timeline-desc">OS login, VPN install, full application deployment, end-to-end validation, snapshot</div>
+        </div>
+      </div>
+      <div class="timeline-item done">
+        <div class="timeline-time">Day 3</div>
+        <div>
+          <div class="timeline-title">Forward to customer</div>
+          <div class="timeline-desc">Ship with tracking, include printed quick-start sheet</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Day 5-7 (in transit)</div>
+        <div>
+          <div class="timeline-title">Shipping window</div>
+          <div class="timeline-desc">Expedited international shipping, customs clearance</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Day 8 · morning</div>
+        <div>
+          <div class="timeline-title">Customer receives the appliance</div>
+          <div class="timeline-desc">Scheduled video call to walk through physical setup · 30 minutes</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Day 8 · same call</div>
+        <div>
+          <div class="timeline-title">VPN handshake and verification</div>
+          <div class="timeline-desc">Tailscale installed, SSH verified from our side · 10 minutes</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Day 8 · afternoon</div>
+        <div>
+          <div class="timeline-title">Remote configuration begins</div>
+          <div class="timeline-desc">Customer-specific setup, storage mounting, watched folder configuration</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Day 9-11</div>
+        <div>
+          <div class="timeline-title">Initial indexing runs</div>
+          <div class="timeline-desc">Background processing of existing archive · fully unattended</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Day 12</div>
+        <div>
+          <div class="timeline-title">Delivery call and training</div>
+          <div class="timeline-desc">Live demonstration, team training, runbook handover · 2 hours</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Day 12+</div>
+        <div>
+          <div class="timeline-title">System is in production</div>
+          <div class="timeline-desc">We remain on call, monitoring, and pushing updates as needed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FALLBACK -->
+<section class="section" id="fallback">
+  <div class="section-number">06 — If something goes wrong</div>
+  <h2 class="section-title">What <em>breaks glass</em> looks like.</h2>
+  <p class="section-intro">
+    Four scenarios we plan for. In three years of doing this, we've hit roughly one of them per five deployments. The point isn't that things never go sideways — it's that we have a named response for each case.
+  </p>
+
+  <div class="fallback">
+    <div class="fallback-row header">
+      <div class="fallback-cell">Scenario</div>
+      <div class="fallback-cell">Response</div>
+    </div>
+    <div class="fallback-row">
+      <div class="fallback-cell problem">Tailscale won't install or connect</div>
+      <div class="fallback-cell solution">Fall back to a commercial remote desktop tool — AnyDesk or TeamViewer — installed manually during the video call. Requires someone to be present at the customer site whenever we work, so it's slower, but it reaches the same end state. We keep the installer cached on our ops machine, ready to email as an attachment.</div>
+    </div>
+    <div class="fallback-row">
+      <div class="fallback-cell problem">Customer's network blocks everything</div>
+      <div class="fallback-cell solution">We ship a <b>cellular backup kit</b> with the appliance — an LTE USB modem and a prepaid SIM. The runbook includes instructions for the customer to plug it in. The appliance then has its own internet connection, independent of their network. Used only when their IT environment is uncooperative.</div>
+    </div>
+    <div class="fallback-row">
+      <div class="fallback-cell problem">Hardware fault before or during deployment</div>
+      <div class="fallback-cell solution">The manufacturer operates a <b>US-domestic RMA program</b> with overnight swap. We restore the new unit from our pre-shipping snapshot, which takes about 90 minutes. The customer loses roughly a business day; they do not need to do anything other than accept the replacement delivery.</div>
+    </div>
+    <div class="fallback-row">
+      <div class="fallback-cell problem">Something we can't diagnose remotely</div>
+      <div class="fallback-cell solution"><b>Brando handles on-the-ground logistics</b> in the United States and can reach the customer's site for any issue that demands physical presence. This is our failsafe and has been used exactly once — a power outlet the customer had miswired.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section class="section">
+  <div class="section-number">07 — What we need from you</div>
+  <h2 class="section-title">Before the <em>box ships</em>.</h2>
+  <p class="section-intro">
+    A short checklist for Brando to gather from the customer ahead of deployment. Most of this is information we need to configure the appliance during Phase 0 — if we have it in advance, the customer-site time drops to the absolute minimum.
+  </p>
+
+  <div class="kit-grid">
+    <div class="kit-item">
+      <div class="role">Shipping</div>
+      <h4>Where and when</h4>
+      <ul>
+        <li>Delivery address with recipient name</li>
+        <li>Earliest date they can accept delivery</li>
+        <li>Whether someone will be present to receive</li>
+        <li>Any loading dock or access constraints</li>
+      </ul>
+    </div>
+    <div class="kit-item">
+      <div class="role">Network</div>
+      <h4>Connectivity details</h4>
+      <ul>
+        <li>Where the appliance will physically sit</li>
+        <li>Whether Ethernet is available at that location</li>
+        <li>IT contact name and phone (in case we need them)</li>
+        <li>Any known network restrictions (air-gapped, special VLAN)</li>
+      </ul>
+    </div>
+    <div class="kit-item">
+      <div class="role">Storage</div>
+      <h4>What the appliance will read</h4>
+      <ul>
+        <li>Existing NAS or file server IP and share path</li>
+        <li>Credentials or read-only account we can use</li>
+        <li>Approximate size of the archive to index</li>
+        <li>File formats present (video codecs, document types)</li>
+      </ul>
+    </div>
+    <div class="kit-item">
+      <div class="role">Users</div>
+      <h4>Who will use the system</h4>
+      <ul>
+        <li>Names and email addresses of initial users</li>
+        <li>Any preferred authentication method (SSO, local accounts)</li>
+        <li>Training session preferred date and attendees</li>
+        <li>Administrative contact on their side going forward</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Semantic <span>Bridge</span></div>
+      <div class="footer-tagline">
+        An appliance-first approach to private AI deployment. Shipped configured, delivered ready, supported remotely.
+      </div>
+      <div class="footer-presenter">
+        <div class="mark-v">V</div>
+        <div class="footer-presenter-text">
+          Operations runbook by <strong>VDO <em>Aigency</em></strong><br>
+          Internal — brandon@thevdoaigency.com
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h6>This document</h6>
+      <ul>
+        <li>Remote setup runbook</li>
+        <li>For internal reference</li>
+        <li>Revision 1.0 · April 2026</li>
+        <li>Contact: ops team</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h6>Related materials</h6>
+      <ul>
+        <li>Customer proposal deck</li>
+        <li>Technical architecture document</li>
+        <li>Customer quick-start sheet</li>
+        <li>Operational runbook template</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Internal document · Not for customer distribution</span>
+    <span>Revision 1.0 · April 2026</span>
+  </div>
+</footer>
+
+</div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('scrollIndicator').style.width = scrolled + '%';
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+
+  document.querySelectorAll('.step, .kit-item, .timeline-item, .insight').forEach(el => {
+    el.classList.add('fade-in');
+    observer.observe(el);
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
