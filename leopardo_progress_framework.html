@@ -1,587 +1,755 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JTC3 Designs - Art Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leopardo Efficiency — Progress Framework</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #e8b84b;
+  --black: #0b0b0b;
+  --cream: #ede9e3;
+  --muted: #7a7570;
+  --surface: #141414;
+  --hairline: #1f1f1f;
+}
 
-        :root {
-            --primary: #e8b84b;
-            --dark: #0b0b0b;
-            --cream: #ede9e3;
-            --light-gray: #f5f5f5;
-            --text: #1a1a1a;
-            --text-secondary: #666;
-        }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-        html, body {
-            height: 100%;
-        }
+html { scroll-behavior: smooth; }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-            color: var(--text);
-            line-height: 1.6;
-            background: #fff;
-        }
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-        header {
-            background: var(--dark);
-            color: #fff;
-            padding: 2rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 56px 40px 96px;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+/* Top bar */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 80px;
+}
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 2rem;
-        }
+.mark {
+  width: 40px;
+  height: 40px;
+  background: var(--gold);
+  border-radius: 6px;
+  color: var(--black);
+  font-family: Georgia, serif;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  flex-shrink: 0;
+}
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
+.wordmark {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  letter-spacing: 0.3px;
+}
 
-        nav {
-            display: flex;
-            gap: 2rem;
-        }
+.wordmark em { font-style: italic; }
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.2s;
-            position: relative;
-        }
+.crumb {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
 
-        nav a:hover {
-            color: var(--primary);
-        }
+/* Hero */
+.hero { margin-bottom: 110px; }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.2s;
-        }
+.kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 28px;
+}
 
-        nav a:hover::after {
-            width: 100%;
-        }
+h1 {
+  font-family: Georgia, serif;
+  font-size: 52px;
+  line-height: 1.18;
+  font-weight: 400;
+  margin-bottom: 32px;
+  max-width: 920px;
+  letter-spacing: -0.5px;
+}
 
-        .hero {
-            background: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%);
-            color: #fff;
-            padding: 6rem 0;
-            text-align: center;
-        }
+h1 .accent { color: var(--gold); }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-        }
+.lead {
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 680px;
+  line-height: 1.65;
+}
 
-        .hero p {
-            font-size: 1.1rem;
-            color: #ccc;
-            margin-bottom: 2rem;
-        }
+/* Section */
+section { margin-bottom: 96px; }
 
-        .accent {
-            color: var(--primary);
-        }
+.section-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
 
-        section {
-            padding: 4rem 0;
-        }
+h2 {
+  font-family: Georgia, serif;
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 40px;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  max-width: 760px;
+}
 
-        .section-title {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
+/* Delta */
+.delta {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 56px;
+}
 
-        .section-subtitle {
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            font-size: 1rem;
-        }
+.delta-col h3 {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--hairline);
+}
 
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
+.delta-col.right h3 {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
 
-        .artwork-card {
-            background: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.2, 0, 0.2, 1);
-            cursor: pointer;
-        }
+.delta-col ul { list-style: none; }
 
-        .artwork-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
-            border-color: var(--primary);
-        }
+.delta-col li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--cream);
+}
 
-        .artwork-image {
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
-            background: var(--light-gray);
-            display: block;
-        }
+.delta-col li:last-child { border-bottom: none; }
 
-        .artwork-info {
-            padding: 1.5rem;
-        }
+.delta-col strong {
+  font-weight: 600;
+  color: var(--cream);
+}
 
-        .artwork-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
+/* Numbers */
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--hairline);
+  padding: 36px 0;
+}
 
-        .artwork-desc {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
+.num-block { display: flex; flex-direction: column; }
 
-        .about-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
+.num-block .num {
+  font-family: Georgia, serif;
+  font-size: 64px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 14px;
+  letter-spacing: -1px;
+}
 
-        .about-text {
-            font-size: 1rem;
-            line-height: 1.8;
-        }
+.num-block .label {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.45;
+}
 
-        .about-text p {
-            margin-bottom: 1rem;
-        }
+/* Arc */
+.arc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 28px;
+}
 
-        .cta-button {
-            display: inline-block;
-            background: var(--primary);
-            color: var(--dark);
-            padding: 0.75rem 2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 1.5rem;
-            transition: all 0.2s;
-            border: 2px solid var(--primary);
-        }
+.arc-step {
+  padding: 11px 16px;
+  border: 1px solid var(--hairline);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--cream);
+  white-space: nowrap;
+}
 
-        .cta-button:hover {
-            background: transparent;
-            color: var(--primary);
-        }
+.arc-step.cta {
+  border-color: var(--gold);
+  color: var(--gold);
+}
 
-        .about-image {
-            width: 100%;
-            aspect-ratio: 4/5;
-            object-fit: cover;
-            border-radius: 8px;
-            background: var(--light-gray);
-        }
+.arc-arrow {
+  color: var(--muted);
+  font-size: 14px;
+}
 
-        footer {
-            background: var(--dark);
-            color: #fff;
-            padding: 3rem 0;
-            margin-top: 4rem;
-        }
+.arc-note {
+  color: var(--muted);
+  max-width: 720px;
+  line-height: 1.65;
+  font-size: 15px;
+}
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
+/* In flight */
+.flight {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
 
-        .footer-col h3 {
-            margin-bottom: 1rem;
-            font-size: 1rem;
-        }
+.flight-block {
+  padding: 28px 30px;
+  background: var(--surface);
+  border-left: 2px solid var(--gold);
+}
 
-        .footer-col ul {
-            list-style: none;
-        }
+.flight-block.placeholder {
+  border-left-color: var(--hairline);
+}
 
-        .footer-col li {
-            margin-bottom: 0.75rem;
-        }
+.flight-block h4 {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 14px;
+  color: var(--cream);
+}
 
-        .footer-col a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
+.flight-block p {
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
 
-        .footer-col a:hover {
-            color: var(--primary);
-        }
+.flight-block.placeholder p {
+  font-style: italic;
+}
 
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
+/* The Question */
+.question p {
+  font-size: 17px;
+  color: var(--cream);
+  max-width: 760px;
+  line-height: 1.7;
+}
 
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            transition: all 0.2s;
-            color: #fff;
-        }
+.question p + p { margin-top: 18px; color: var(--muted); }
 
-        .social-links a:hover {
-            background: var(--primary);
-            color: var(--dark);
-        }
+/* Next Build */
+.next-intro {
+  font-size: 17px;
+  color: var(--cream);
+  max-width: 760px;
+  line-height: 1.65;
+  margin-bottom: 36px;
+}
 
-        .social-links svg {
-            width: 20px;
-            height: 20px;
-        }
+.next-intro em { color: var(--gold); font-style: italic; }
 
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.next-status {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 26px 30px;
+  background: var(--surface);
+  border-left: 2px solid var(--gold);
+  margin-bottom: 36px;
+}
 
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 15px;
+  color: var(--cream);
+}
 
-            .hero h1 {
-                font-size: 2rem;
-            }
+.status-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: 96px;
+  text-align: center;
+}
 
-            nav {
-                gap: 1.5rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+.next-body {
+  font-size: 15.5px;
+  max-width: 720px;
+  line-height: 1.7;
+  margin-bottom: 18px;
+  color: var(--muted);
+}
 
-            .about-section {
-                grid-template-columns: 1fr;
-            }
+.next-body.bright { color: var(--cream); margin-bottom: 0; }
 
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
+.proposal-link {
+  display: inline-block;
+  margin-top: 32px;
+  font-size: 14px;
+  color: var(--cream);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 2px;
+  transition: color 0.2s;
+}
 
-            .footer-bottom {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
+.proposal-link:hover { color: var(--gold); }
 
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-        }
+/* Pricing tiers */
+.tiers {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--gold);
+  margin-top: 8px;
+  margin-bottom: 36px;
+}
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 1rem;
-            }
+.tier {
+  padding: 32px 0 28px;
+  border-bottom: 1px solid var(--hairline);
+}
 
-            .hero {
-                padding: 3rem 0;
-            }
+.tier:last-child { border-bottom: 1px solid var(--gold); }
 
-            .hero h1 {
-                font-size: 1.5rem;
-            }
+.tier-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 22px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
 
-            .section-title {
-                font-size: 1.5rem;
-            }
+.tier-meta { flex: 1; min-width: 240px; }
 
-            section {
-                padding: 2rem 0;
-            }
-        }
-    </style>
+.tier-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.tier-name {
+  font-family: Georgia, serif;
+  font-size: 26px;
+  color: var(--cream);
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+}
+
+.tier-price {
+  font-family: Georgia, serif;
+  font-size: 34px;
+  color: var(--cream);
+  line-height: 1;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+.tier-price span {
+  font-size: 13px;
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0;
+  margin-left: 4px;
+  font-weight: 400;
+}
+
+.tier-multiple {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  margin-top: 6px;
+  text-align: right;
+}
+
+.tier-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tier-list li {
+  padding: 5px 0 5px 22px;
+  position: relative;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--cream);
+}
+
+.tier-list li::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-family: 'DM Mono', monospace;
+  font-weight: 500;
+}
+
+.terms {
+  font-size: 12.5px;
+  color: var(--muted);
+  max-width: 760px;
+  line-height: 1.7;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.3px;
+  margin-top: 4px;
+}
+
+/* Footer */
+footer {
+  margin-top: 110px;
+  padding-top: 40px;
+  border-top: 1px solid var(--hairline);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+footer .links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+footer .links-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+
+footer a {
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 13.5px;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 2px;
+  width: fit-content;
+  transition: color 0.2s;
+}
+
+footer a:hover { color: var(--gold); }
+
+footer .meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-align: right;
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .wrap { padding: 36px 24px 64px; }
+  .topbar { margin-bottom: 56px; }
+  .hero { margin-bottom: 72px; }
+  section { margin-bottom: 64px; }
+  h1 { font-size: 34px; }
+  h2 { font-size: 24px; margin-bottom: 28px; }
+  .delta { grid-template-columns: 1fr; gap: 40px; }
+  .numbers { grid-template-columns: repeat(2, 1fr); gap: 28px; padding: 28px 0; }
+  .num-block .num { font-size: 44px; }
+  .flight { grid-template-columns: 1fr; }
+  .tier-head { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .tier-price { font-size: 28px; }
+  .tier-name { font-size: 20px; }
+  .tier-multiple { text-align: left; }
+  .topbar .crumb { display: none; }
+  footer { flex-direction: column; }
+  footer .meta { text-align: left; }
+}
+</style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">James Cillizza</div>
-                <nav>
-                    <a href="#work">Work</a>
-                    <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
-                </nav>
-            </div>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="mark">V</div>
+    <div class="wordmark">VDO <em>Aigency</em></div>
+    <div class="crumb">Leopardo Efficiency · Progress Framework</div>
+  </div>
+
+  <div class="hero">
+    <div class="kicker">Progress Framework — May 2026</div>
+    <h1>We promised videos.<br>We delivered videos — <span class="accent">plus the list, the campaign, and the system to work it.</span></h1>
+    <p class="lead">For Curtis Leopardo, Leopardo Construction leadership, and Alexander West Capital. A working frame for what was contracted, what was delivered, and what comes next. Becomes the month-3 case study when the metrics catch up.</p>
+  </div>
+
+  <section>
+    <div class="section-num">01 · The Delta</div>
+    <h2>What was contracted. What was built.</h2>
+    <div class="delta">
+      <div class="delta-col">
+        <h3>Contract — $3,000 / month</h3>
+        <ul>
+          <li><strong>1 hero video</strong> per month, 2 minutes, polished.</li>
+          <li><strong>5 cutdowns</strong> per month — LinkedIn landscape and Instagram vertical, captioned.</li>
+          <li><strong>Pipeline management</strong> — Monday.com organization, LucidLink hosting, distributed editing team.</li>
+        </ul>
+      </div>
+      <div class="delta-col right">
+        <h3>Delivered</h3>
+        <ul>
+          <li><strong>Everything in the contract.</strong> Hero videos, cutdowns, pipeline.</li>
+          <li><strong>199 researched city decision-makers.</strong> Ohio mayors, city managers, finance directors. A Florida list staged behind the Ohio wave.</li>
+          <li><strong>40-post 8-week campaign architecture</strong> across 5 channels — LinkedIn Company, Curtis personal, Rob personal, Instagram, YouTube.</li>
+          <li><strong>LinkedIn profile work for Curtis and Rob</strong> — repositioned to anchor the campaign narrative.</li>
+          <li><strong>Voice-clone production system</strong> — Curtis and Rob VOs deployable on b-roll without scheduling either of them on camera.</li>
+          <li><strong>Custom graphic builder.</strong> A team tool that produces brand-locked title cards, stat cards, and quote graphics on demand — every asset matches the documented visual spec without round-tripping through design.</li>
+          <li><strong>Automated client reporting.</strong> Curtis gets a clean weekly email — what was delivered, what's coming, direct links to every video asset. No status meetings required.</li>
+          <li><strong>Outreach engine</strong> — connection-request workflow, status tracking, LinkedIn-to-Monday pipeline.</li>
+          <li><strong>Brand-locked production system</strong> — every asset built to a documented visual and voice spec.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-num">02 · The Build, in Numbers</div>
+    <h2>What $3,000 a month actually produced.</h2>
+    <div class="numbers">
+      <div class="num-block">
+        <div class="num">199</div>
+        <div class="label">City decision-makers researched and loaded into the outreach pipeline</div>
+      </div>
+      <div class="num-block">
+        <div class="num">40</div>
+        <div class="label">Posts architected across an 8-week campaign arc</div>
+      </div>
+      <div class="num-block">
+        <div class="num">5</div>
+        <div class="label">Channels integrated into a single coordinated narrative</div>
+      </div>
+      <div class="num-block">
+        <div class="num">2</div>
+        <div class="label">Executive voice profiles cloned and production-ready</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-num">03 · The Architecture</div>
+    <h2>The campaign isn't a calendar. It's a buying-cycle map.</h2>
+    <div class="arc">
+      <div class="arc-step">Problem</div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-step">Mechanism</div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-step">Proof</div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-step">Depth</div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-step">Trust</div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-step">Results</div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-step cta">Invitation</div>
+    </div>
+    <p class="arc-note">Each week serves one purpose in a city manager's decision cycle. Posts aren't scheduled around a calendar — they're sequenced around how a buyer actually moves from "we have a problem" to "we want a conversation."</p>
+  </section>
+
+  <section>
+    <div class="section-num">04 · In Flight</div>
+    <h2>What's being built between now and the metrics panel.</h2>
+    <div class="flight">
+      <div class="flight-block">
+        <h4>Outreach expansion</h4>
+        <p>Researched list expanding from 199 to 500+ qualified decision-makers across active and adjacent markets. Florida wave staged behind Ohio.</p>
+      </div>
+      <div class="flight-block">
+        <h4>Connection layer</h4>
+        <p>Half of the expanded list connected to Curtis and Rob via warm outreach over the next four weeks. Each connection logged in the outreach board with status, source, and handoff signal.</p>
+      </div>
+      <div class="flight-block">
+        <h4>First conversations</h4>
+        <p>Active hustle for the first qualified LinkedIn conversation handed to Curtis or Rob. Target window: weeks 6–8.</p>
+      </div>
+      <div class="flight-block placeholder">
+        <h4>The metrics panel</h4>
+        <p>Populates when outreach data and content reach support a credible momentum claim. Premature numbers undermine the case study. Honest timing builds the credibility AWC funds.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-num">05 · The Next Build</div>
+    <h2>The next build is already on Curtis's network.</h2>
+    <p class="next-intro">
+      <strong>Semantic Bridge.</strong> A private AI appliance that reads Leopardo's archive — every video, every recorded meeting, every document — and makes all of it searchable in plain English. <em>"Find the meeting where we discussed the Q3 efficiency report."</em> Returns the exact clip in under a second.
+    </p>
+    <div class="next-status">
+      <div class="status-row">
+        <span class="status-tag">Installed</span>
+        <span>ASUS GX10 on Curtis's network</span>
+      </div>
+      <div class="status-row">
+        <span class="status-tag">Deployed</span>
+        <span>Local AI models running over Tailscale</span>
+      </div>
+      <div class="status-row">
+        <span class="status-tag">In motion</span>
+        <span>Phase 1 — multimodal foundation</span>
+      </div>
+    </div>
+    <p class="next-body">
+      Why it matters for Leopardo specifically: zero data leaves the building. No cloud AI, no third-party uploads, no vendor risk. For a company dealing with municipal contracts, sensitive RFPs, and confidential client information, that's not a feature — it's a prerequisite.
+    </p>
+    <p class="next-body bright">
+      A campaign ends. The appliance keeps working — every meeting, every site visit, every document indexed and searchable for as long as Leopardo wants to use it.
+    </p>
+    <a href="https://thevdoaigency.github.io/leopardo-campaign-brief/semantic_bridge_proposal.html" class="proposal-link" target="_blank" rel="noopener">Read the full Semantic Bridge proposal →</a>
+  </section>
+
+  <section class="question">
+    <div class="section-num">06 · The Question on the Table</div>
+    <h2>What's the scope for the next 90 days?</h2>
+    <p>$3,000 a month was an editor's rate. The work has been a marketing department's. Pricing aligns to actual scope going forward.</p>
+    <p>The question isn't whether the rate goes up. It's which version of the work AWC wants to fund.</p>
+
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-head">
+          <div class="tier-meta">
+            <div class="tier-label">Tier 1</div>
+            <div class="tier-name">Campaign Continuation</div>
+          </div>
+          <div>
+            <div class="tier-price">$8,500<span>/month</span></div>
+            <div class="tier-multiple">2.8× current rate</div>
+          </div>
         </div>
-    </header>
+        <ul class="tier-list">
+          <li>Quarterly 40-post campaign across 5 channels</li>
+          <li>Outreach engine — list expansion to 500+, connection management, status tracking</li>
+          <li>1–2 hero videos per month plus cutdowns and brand-spec graphics</li>
+          <li>Profile maintenance for Curtis and Rob</li>
+          <li>Monthly progress reports and Graphic Builder upkeep</li>
+        </ul>
+      </div>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Art & Design</h1>
-            <p>Visual storytelling through color, form, and composition</p>
+      <div class="tier">
+        <div class="tier-head">
+          <div class="tier-meta">
+            <div class="tier-label">Tier 2</div>
+            <div class="tier-name">Campaign + Appliance</div>
+          </div>
+          <div>
+            <div class="tier-price">$15,000<span>/month</span></div>
+            <div class="tier-multiple">5× current rate</div>
+          </div>
         </div>
-    </section>
+        <ul class="tier-list">
+          <li>Everything in Tier 1</li>
+          <li>Semantic Bridge Phase 1 — full deployment and archive indexing on Curtis's GX10</li>
+          <li>Team training, integration with current production tools</li>
+          <li>Ongoing appliance maintenance, model updates, support</li>
+        </ul>
+      </div>
 
-    <section id="work">
-        <div class="container">
-            <h2 class="section-title">Featured Work</h2>
-            <p class="section-subtitle">A selection of recent projects and explorations</p>
-            
-            <div class="gallery">
-                <div class="artwork-card">
-                    <img src="Screenshot_2026-05-08_at_5_16_32_AM.png" alt="Monopoly Dreams" class="artwork-image">
-                    <div class="artwork-info">
-                        <h3 class="artwork-title">Monopoly Dreams</h3>
-                        <p class="artwork-desc">The ultimate satire—capitalism's cheerful patriarch surrounded by his own delusion, colorful and unapologetic</p>
-                    </div>
-                </div>
-
-                <div class="artwork-card">
-                    <img src="Screenshot_2026-05-08_at_5_16_41_AM.png" alt="Geometric Paradox I" class="artwork-image">
-                    <div class="artwork-info">
-                        <h3 class="artwork-title">Geometric Paradox I</h3>
-                        <p class="artwork-desc">Precision and randomness locked in eternal tension—the beautiful illogic of existence</p>
-                    </div>
-                </div>
-
-                <div class="artwork-card">
-                    <img src="Screenshot_2026-05-08_at_5_16_54_AM.png" alt="Hero Stack: Pop Art Collision" class="artwork-image">
-                    <div class="artwork-info">
-                        <h3 class="artwork-title">Hero Stack: Pop Art Collision</h3>
-                        <p class="artwork-desc">Comic book mythos layered with geometric abstraction—superheroes deconstructed</p>
-                    </div>
-                </div>
-
-                <div class="artwork-card">
-                    <img src="Screenshot_2026-05-08_at_5_17_05_AM.png" alt="Organic Mayhem" class="artwork-image">
-                    <div class="artwork-info">
-                        <h3 class="artwork-title">Organic Mayhem</h3>
-                        <p class="artwork-desc">Forms emerging and dissolving—capturing the fluid, ever-shifting nature of reality</p>
-                    </div>
-                </div>
-
-                <div class="artwork-card">
-                    <img src="Screenshot_2026-05-08_at_5_17_18_AM.png" alt="Vertical Descent" class="artwork-image">
-                    <div class="artwork-info">
-                        <h3 class="artwork-title">Vertical Descent</h3>
-                        <p class="artwork-desc">Rhythmic chaos—stacked contradictions in motion, questioning linear progression</p>
-                    </div>
-                </div>
-
-                <div class="artwork-card">
-                    <img src="Screenshot_2026-05-08_at_5_17_28_AM.png" alt="Geometric Paradox II" class="artwork-image">
-                    <div class="artwork-info">
-                        <h3 class="artwork-title">Geometric Paradox II</h3>
-                        <p class="artwork-desc">Complex layering of color and line—visual representation of overthinking the absurd</p>
-                    </div>
-                </div>
-
-                <div class="artwork-card">
-                    <img src="Screenshot_2026-05-08_at_5_17_42_AM.png" alt="Birch Grove Rebellion" class="artwork-image">
-                    <div class="artwork-info">
-                        <h3 class="artwork-title">Birch Grove Rebellion</h3>
-                        <p class="artwork-desc">Nature through a fever lens—structured chaos where order and wildness become indistinguishable</p>
-                    </div>
-                </div>
-
-                <div class="artwork-card">
-                    <img src="Screenshot_2026-05-08_at_5_17_58_AM.png" alt="Winter Meditation" class="artwork-image">
-                    <div class="artwork-info">
-                        <h3 class="artwork-title">Winter Meditation</h3>
-                        <p class="artwork-desc">Hope embedded in darkness—a single red beacon among the silent, frozen absurdity of the season</p>
-                    </div>
-                </div>
-
-                <div class="artwork-card">
-                    <img src="Screenshot_2026-05-08_at_5_18_10_AM.png" alt="Mickey's LV Fever Dream" class="artwork-image">
-                    <div class="artwork-info">
-                        <h3 class="artwork-title">Mickey's LV Fever Dream</h3>
-                        <p class="artwork-desc">Collision of innocence and consumerism—pop culture icons drowning in designer logos</p>
-                    </div>
-                </div>
-
-                <div class="artwork-card">
-                    <img src="Screenshot_2026-05-08_at_5_18_26_AM.png" alt="Earthen Abstractions" class="artwork-image">
-                    <div class="artwork-info">
-                        <h3 class="artwork-title">Earthen Abstractions</h3>
-                        <p class="artwork-desc">Layered textures exploring the chaotic beauty of material decay and transformation</p>
-                    </div>
-                </div>
-
-                <div class="artwork-card">
-                    <img src="Screenshot_2026-05-08_at_5_18_46_AM.png" alt="Installation: Chromatic Monument" class="artwork-image">
-                    <div class="artwork-info">
-                        <h3 class="artwork-title">Installation: Chromatic Monument</h3>
-                        <p class="artwork-desc">An immersive statement on the overwhelming visual noise of modern existence</p>
-                    </div>
-                </div>
-
-                <div class="artwork-card">
-                    <img src="Screenshot_2026-05-08_at_5_18_58_AM.png" alt="Chromatic Overflow" class="artwork-image">
-                    <div class="artwork-info">
-                        <h3 class="artwork-title">Chromatic Overflow</h3>
-                        <p class="artwork-desc">Uninhibited color collision—life's emotional complexity splattered across the canvas</p>
-                    </div>
-                </div>
-            </div>
+      <div class="tier">
+        <div class="tier-head">
+          <div class="tier-meta">
+            <div class="tier-label">Tier 3</div>
+            <div class="tier-name">Infrastructure Play</div>
+          </div>
+          <div>
+            <div class="tier-price">$25,000<span>/month</span></div>
+            <div class="tier-multiple">8.3× current rate</div>
+          </div>
         </div>
-    </section>
+        <ul class="tier-list">
+          <li>Everything in Tier 2</li>
+          <li>Semantic Bridge Phase 2 — operational intelligence, live monitoring</li>
+          <li>Campaign architecture replicated for adjacent AWC portfolio companies</li>
+          <li>Custom tooling roadmap — extend Graphic Builder, build new tools as needed</li>
+          <li>Strategic content operations seat across the AWC ecosystem</li>
+        </ul>
+      </div>
+    </div>
 
-    <section id="about" style="background: var(--light-gray);">
-        <div class="container">
-            <h2 class="section-title">About</h2>
-            
-            <div class="about-section">
-                <div class="about-text">
-                    <p>I'm <strong>James Cillizza</strong>, a mixed-media artist and designer exploring the chaos, contradiction, and absurdity embedded in everyday life. My work is a visual manifestation of organized chaos—where precision collides with spontaneity, where pop culture icons dissolve into abstraction, and where meaning dissolves into pure emotional expression.</p>
-                    
-                    <p>Through abstract expressionism, geometric layering, pop art subversion, and textural experimentation, I investigate the gap between how we perceive order and the fundamental randomness beneath. My practice pulls from street art, fine art, design, and the visual noise of contemporary culture—nothing is sacred, everything is material for reexamination.</p>
-                    
-                    <p>Each piece asks: What if we stopped trying to make sense of it all? What if the contradiction itself is the point? My work doesn't resolve these questions—it amplifies them, inviting viewers into the beautiful mess of being alive in an inherently absurd world.</p>
-                    
-                    <a href="https://instagram.com/jtc3designs" target="_blank" class="cta-button">Follow on Instagram</a>
-                </div>
-                
-                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px;"></div>
-            </div>
-        </div>
-    </section>
+    <p class="terms">90-day commitment per tier · billed monthly · 30 days written notice for changes · production overages and Semantic Bridge Phase 2/3 priced separately at scope</p>
+  </section>
 
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">Get in Touch</h2>
-            <p class="section-subtitle">Let's collaborate or just say hello</p>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-                <div style="text-align: center;">
-                    <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Instagram</h3>
-                    <a href="https://instagram.com/jtc3designs" target="_blank" style="color: var(--primary); text-decoration: none;">@jtc3designs</a>
-                </div>
-                
-                <div style="text-align: center;">
-                    <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Inquiries</h3>
-                    <p style="color: var(--text-secondary);">Available for commissions & collaborations</p>
-                </div>
-                
-                <div style="text-align: center;">
-                    <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Work</h3>
-                    <p style="color: var(--text-secondary);">Mixed media, installation, design</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <footer>
+    <div class="links">
+      <div class="links-label">Live Assets</div>
+      <a href="https://thevdoaigency.github.io/leopardo-campaign-brief/leopardo_asset_map.html" target="_blank" rel="noopener">60-Day Asset Map</a>
+      <a href="https://thevdoaigency.monday.com/boards/18408183965" target="_blank" rel="noopener">Production Board · 60-Day Social</a>
+      <a href="https://thevdoaigency.monday.com/boards/18408776751" target="_blank" rel="noopener">Outreach Board · Leopardo Targets</a>
+      <a href="https://www.linkedin.com/in/curtis-l-33b8423a/" target="_blank" rel="noopener">Curtis Leopardo · LinkedIn</a>
+    </div>
+    <div class="links">
+      <div class="links-label">Internal Tools · Team Access</div>
+      <a href="https://vdo-aigency-api-production.up.railway.app/leopardo-builder" target="_blank" rel="noopener">Leopardo Graphic Builder</a>
+      <a href="https://vdo-aigency-api-production.up.railway.app/reports" target="_blank" rel="noopener">Client Reporting Tool</a>
+    </div>
+    <div class="meta">
+      The VDO Aigency<br>
+      May 2026
+    </div>
+  </footer>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-col">
-                    <h3>James Cillizza</h3>
-                    <p style="color: #ccc; font-size: 0.9rem;">Exploring the chaos, contradiction, and absurdity of existence through color, form, and collision.</p>
-                    <div class="social-links">
-                        <a href="https://instagram.com/jtc3designs" target="_blank" title="Instagram">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                <circle cx="17.5" cy="6.5" r="1.5"></circle>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Links</h3>
-                    <ul>
-                        <li><a href="#work">Work</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Services</h3>
-                    <ul>
-                        <li><a href="#">Custom Commissions</a></li>
-                        <li><a href="#">Installation Works</a></li>
-                        <li><a href="#">Consulting</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p style="font-size: 0.9rem; color: #999;">© 2026 James Cillizza. All works reserved.</p>
-                <p style="font-size: 0.9rem; color: #999;">Organized chaos by design</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Simple image loading animation
-        document.querySelectorAll('img').forEach(img => {
-            img.addEventListener('load', function() {
-                this.style.opacity = '1';
-            });
-        });
-    </script>
+</div>
 </body>
 </html>
