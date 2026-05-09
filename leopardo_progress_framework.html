@@ -1,482 +1,587 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leopardo Efficiency — Progress Framework</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --gold: #e8b84b;
-  --black: #0b0b0b;
-  --cream: #ede9e3;
-  --muted: #7a7570;
-  --surface: #141414;
-  --hairline: #1f1f1f;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JTC3 Designs - Art Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --primary: #e8b84b;
+            --dark: #0b0b0b;
+            --cream: #ede9e3;
+            --light-gray: #f5f5f5;
+            --text: #1a1a1a;
+            --text-secondary: #666;
+        }
 
-html { scroll-behavior: smooth; }
+        html, body {
+            height: 100%;
+        }
 
-body {
-  background: var(--black);
-  color: var(--cream);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: #fff;
+        }
 
-.wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 56px 40px 96px;
-}
+        header {
+            background: var(--dark);
+            color: #fff;
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
 
-/* Top bar */
-.topbar {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding-bottom: 28px;
-  border-bottom: 1px solid var(--hairline);
-  margin-bottom: 80px;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-.mark {
-  width: 40px;
-  height: 40px;
-  background: var(--gold);
-  border-radius: 6px;
-  color: var(--black);
-  font-family: Georgia, serif;
-  font-size: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  flex-shrink: 0;
-}
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
 
-.wordmark {
-  font-family: Georgia, serif;
-  font-size: 18px;
-  letter-spacing: 0.3px;
-}
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
 
-.wordmark em { font-style: italic; }
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
 
-.crumb {
-  margin-left: auto;
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-}
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            position: relative;
+        }
 
-/* Hero */
-.hero { margin-bottom: 110px; }
+        nav a:hover {
+            color: var(--primary);
+        }
 
-.kicker {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 28px;
-}
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.2s;
+        }
 
-h1 {
-  font-family: Georgia, serif;
-  font-size: 52px;
-  line-height: 1.18;
-  font-weight: 400;
-  margin-bottom: 32px;
-  max-width: 920px;
-  letter-spacing: -0.5px;
-}
+        nav a:hover::after {
+            width: 100%;
+        }
 
-h1 .accent { color: var(--gold); }
+        .hero {
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%);
+            color: #fff;
+            padding: 6rem 0;
+            text-align: center;
+        }
 
-.lead {
-  font-size: 17px;
-  color: var(--muted);
-  max-width: 680px;
-  line-height: 1.65;
-}
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
 
-/* Section */
-section { margin-bottom: 96px; }
+        .hero p {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
 
-.section-num {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--gold);
-  letter-spacing: 2px;
-  margin-bottom: 12px;
-}
+        .accent {
+            color: var(--primary);
+        }
 
-h2 {
-  font-family: Georgia, serif;
-  font-size: 32px;
-  font-weight: 400;
-  margin-bottom: 40px;
-  line-height: 1.25;
-  letter-spacing: -0.3px;
-  max-width: 760px;
-}
+        section {
+            padding: 4rem 0;
+        }
 
-/* Delta */
-.delta {
-  display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: 56px;
-}
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
 
-.delta-col h3 {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 4px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--hairline);
-}
+        .section-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-size: 1rem;
+        }
 
-.delta-col.right h3 {
-  color: var(--gold);
-  border-bottom-color: var(--gold);
-}
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
 
-.delta-col ul { list-style: none; }
+        .artwork-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+            cursor: pointer;
+        }
 
-.delta-col li {
-  padding: 14px 0;
-  border-bottom: 1px solid var(--hairline);
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--cream);
-}
+        .artwork-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+            border-color: var(--primary);
+        }
 
-.delta-col li:last-child { border-bottom: none; }
+        .artwork-image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            background: var(--light-gray);
+            display: block;
+        }
 
-.delta-col strong {
-  font-weight: 600;
-  color: var(--cream);
-}
+        .artwork-info {
+            padding: 1.5rem;
+        }
 
-/* Numbers */
-.numbers {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
-  border-top: 1px solid var(--gold);
-  border-bottom: 1px solid var(--hairline);
-  padding: 36px 0;
-}
+        .artwork-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
 
-.num-block { display: flex; flex-direction: column; }
+        .artwork-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
 
-.num-block .num {
-  font-family: Georgia, serif;
-  font-size: 64px;
-  color: var(--gold);
-  line-height: 1;
-  margin-bottom: 14px;
-  letter-spacing: -1px;
-}
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
 
-.num-block .label {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.45;
-}
+        .about-text {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
 
-/* Arc */
-.arc {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  margin-bottom: 28px;
-}
+        .about-text p {
+            margin-bottom: 1rem;
+        }
 
-.arc-step {
-  padding: 11px 16px;
-  border: 1px solid var(--hairline);
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--cream);
-  white-space: nowrap;
-}
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: all 0.2s;
+            border: 2px solid var(--primary);
+        }
 
-.arc-step.cta {
-  border-color: var(--gold);
-  color: var(--gold);
-}
+        .cta-button:hover {
+            background: transparent;
+            color: var(--primary);
+        }
 
-.arc-arrow {
-  color: var(--muted);
-  font-size: 14px;
-}
+        .about-image {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            border-radius: 8px;
+            background: var(--light-gray);
+        }
 
-.arc-note {
-  color: var(--muted);
-  max-width: 720px;
-  line-height: 1.65;
-  font-size: 15px;
-}
+        footer {
+            background: var(--dark);
+            color: #fff;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
 
-/* In flight */
-.flight {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
 
-.flight-block {
-  padding: 28px 30px;
-  background: var(--surface);
-  border-left: 2px solid var(--gold);
-}
+        .footer-col h3 {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
 
-.flight-block.placeholder {
-  border-left-color: var(--hairline);
-}
+        .footer-col ul {
+            list-style: none;
+        }
 
-.flight-block h4 {
-  font-family: Georgia, serif;
-  font-size: 20px;
-  font-weight: 400;
-  margin-bottom: 14px;
-  color: var(--cream);
-}
+        .footer-col li {
+            margin-bottom: 0.75rem;
+        }
 
-.flight-block p {
-  font-size: 14.5px;
-  color: var(--muted);
-  line-height: 1.6;
-}
+        .footer-col a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
 
-.flight-block.placeholder p {
-  font-style: italic;
-}
+        .footer-col a:hover {
+            color: var(--primary);
+        }
 
-/* The Question */
-.question p {
-  font-size: 17px;
-  color: var(--cream);
-  max-width: 760px;
-  line-height: 1.7;
-}
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
 
-.question p + p { margin-top: 18px; color: var(--muted); }
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.2s;
+            color: #fff;
+        }
 
-/* Footer */
-footer {
-  margin-top: 110px;
-  padding-top: 40px;
-  border-top: 1px solid var(--hairline);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-  justify-content: space-between;
-  align-items: flex-start;
-}
+        .social-links a:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
 
-footer .links {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+        .social-links svg {
+            width: 20px;
+            height: 20px;
+        }
 
-footer .links-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 6px;
-}
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-footer a {
-  color: var(--cream);
-  text-decoration: none;
-  font-size: 13.5px;
-  border-bottom: 1px solid var(--gold);
-  padding-bottom: 2px;
-  width: fit-content;
-  transition: color 0.2s;
-}
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
 
-footer a:hover { color: var(--gold); }
+            .hero h1 {
+                font-size: 2rem;
+            }
 
-footer .meta {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  text-align: right;
-  line-height: 1.7;
-}
+            nav {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .wrap { padding: 36px 24px 64px; }
-  .topbar { margin-bottom: 56px; }
-  .hero { margin-bottom: 72px; }
-  section { margin-bottom: 64px; }
-  h1 { font-size: 34px; }
-  h2 { font-size: 24px; margin-bottom: 28px; }
-  .delta { grid-template-columns: 1fr; gap: 40px; }
-  .numbers { grid-template-columns: repeat(2, 1fr); gap: 28px; padding: 28px 0; }
-  .num-block .num { font-size: 44px; }
-  .flight { grid-template-columns: 1fr; }
-  .topbar .crumb { display: none; }
-  footer { flex-direction: column; }
-  footer .meta { text-align: left; }
-}
-</style>
+            .about-section {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            section {
+                padding: 2rem 0;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="wrap">
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">James Cillizza</div>
+                <nav>
+                    <a href="#work">Work</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-  <div class="topbar">
-    <div class="mark">V</div>
-    <div class="wordmark">VDO <em>Aigency</em></div>
-    <div class="crumb">Leopardo Efficiency · Progress Framework</div>
-  </div>
+    <section class="hero">
+        <div class="container">
+            <h1>Art & Design</h1>
+            <p>Visual storytelling through color, form, and composition</p>
+        </div>
+    </section>
 
-  <div class="hero">
-    <div class="kicker">Progress Framework — May 2026</div>
-    <h1>We promised videos.<br>We delivered videos — <span class="accent">plus the list, the campaign, and the system to work it.</span></h1>
-    <p class="lead">For Curtis Leopardo, Leopardo Construction leadership, and Alexander West Capital. A working frame for what was contracted, what was delivered, and what comes next. Becomes the month-3 case study when the metrics catch up.</p>
-  </div>
+    <section id="work">
+        <div class="container">
+            <h2 class="section-title">Featured Work</h2>
+            <p class="section-subtitle">A selection of recent projects and explorations</p>
+            
+            <div class="gallery">
+                <div class="artwork-card">
+                    <img src="Screenshot_2026-05-08_at_5_16_32_AM.png" alt="Monopoly Dreams" class="artwork-image">
+                    <div class="artwork-info">
+                        <h3 class="artwork-title">Monopoly Dreams</h3>
+                        <p class="artwork-desc">The ultimate satire—capitalism's cheerful patriarch surrounded by his own delusion, colorful and unapologetic</p>
+                    </div>
+                </div>
 
-  <section>
-    <div class="section-num">01 · The Delta</div>
-    <h2>What was contracted. What was built.</h2>
-    <div class="delta">
-      <div class="delta-col">
-        <h3>Contract — $3,000 / month</h3>
-        <ul>
-          <li><strong>1 hero video</strong> per month, 2 minutes, polished.</li>
-          <li><strong>5 cutdowns</strong> per month — LinkedIn landscape and Instagram vertical, captioned.</li>
-          <li><strong>Pipeline management</strong> — Monday.com organization, LucidLink hosting, distributed editing team.</li>
-        </ul>
-      </div>
-      <div class="delta-col right">
-        <h3>Delivered</h3>
-        <ul>
-          <li><strong>Everything in the contract.</strong> Hero videos, cutdowns, pipeline.</li>
-          <li><strong>199 researched city decision-makers.</strong> Ohio mayors, city managers, finance directors. A Florida list staged behind the Ohio wave.</li>
-          <li><strong>40-post 8-week campaign architecture</strong> across 5 channels — LinkedIn Company, Curtis personal, Rob personal, Instagram, YouTube.</li>
-          <li><strong>LinkedIn profile work for Curtis and Rob</strong> — repositioned to anchor the campaign narrative.</li>
-          <li><strong>Voice-clone production system</strong> — Curtis and Rob VOs deployable on b-roll without scheduling either of them on camera.</li>
-          <li><strong>Outreach engine</strong> — connection-request workflow, status tracking, LinkedIn-to-Monday pipeline.</li>
-          <li><strong>Brand-locked production system</strong> — every asset built to a documented visual and voice spec.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+                <div class="artwork-card">
+                    <img src="Screenshot_2026-05-08_at_5_16_41_AM.png" alt="Geometric Paradox I" class="artwork-image">
+                    <div class="artwork-info">
+                        <h3 class="artwork-title">Geometric Paradox I</h3>
+                        <p class="artwork-desc">Precision and randomness locked in eternal tension—the beautiful illogic of existence</p>
+                    </div>
+                </div>
 
-  <section>
-    <div class="section-num">02 · The Build, in Numbers</div>
-    <h2>What $3,000 a month actually produced.</h2>
-    <div class="numbers">
-      <div class="num-block">
-        <div class="num">199</div>
-        <div class="label">City decision-makers researched and loaded into the outreach pipeline</div>
-      </div>
-      <div class="num-block">
-        <div class="num">40</div>
-        <div class="label">Posts architected across an 8-week campaign arc</div>
-      </div>
-      <div class="num-block">
-        <div class="num">5</div>
-        <div class="label">Channels integrated into a single coordinated narrative</div>
-      </div>
-      <div class="num-block">
-        <div class="num">2</div>
-        <div class="label">Executive voice profiles cloned and production-ready</div>
-      </div>
-    </div>
-  </section>
+                <div class="artwork-card">
+                    <img src="Screenshot_2026-05-08_at_5_16_54_AM.png" alt="Hero Stack: Pop Art Collision" class="artwork-image">
+                    <div class="artwork-info">
+                        <h3 class="artwork-title">Hero Stack: Pop Art Collision</h3>
+                        <p class="artwork-desc">Comic book mythos layered with geometric abstraction—superheroes deconstructed</p>
+                    </div>
+                </div>
 
-  <section>
-    <div class="section-num">03 · The Architecture</div>
-    <h2>The campaign isn't a calendar. It's a buying-cycle map.</h2>
-    <div class="arc">
-      <div class="arc-step">Problem</div>
-      <div class="arc-arrow">→</div>
-      <div class="arc-step">Mechanism</div>
-      <div class="arc-arrow">→</div>
-      <div class="arc-step">Proof</div>
-      <div class="arc-arrow">→</div>
-      <div class="arc-step">Depth</div>
-      <div class="arc-arrow">→</div>
-      <div class="arc-step">Trust</div>
-      <div class="arc-arrow">→</div>
-      <div class="arc-step">Results</div>
-      <div class="arc-arrow">→</div>
-      <div class="arc-step cta">Invitation</div>
-    </div>
-    <p class="arc-note">Each week serves one purpose in a city manager's decision cycle. Posts aren't scheduled around a calendar — they're sequenced around how a buyer actually moves from "we have a problem" to "we want a conversation."</p>
-  </section>
+                <div class="artwork-card">
+                    <img src="Screenshot_2026-05-08_at_5_17_05_AM.png" alt="Organic Mayhem" class="artwork-image">
+                    <div class="artwork-info">
+                        <h3 class="artwork-title">Organic Mayhem</h3>
+                        <p class="artwork-desc">Forms emerging and dissolving—capturing the fluid, ever-shifting nature of reality</p>
+                    </div>
+                </div>
 
-  <section>
-    <div class="section-num">04 · In Flight</div>
-    <h2>What's being built between now and the metrics panel.</h2>
-    <div class="flight">
-      <div class="flight-block">
-        <h4>Outreach expansion</h4>
-        <p>Researched list expanding from 199 to 500+ qualified decision-makers across active and adjacent markets. Florida wave staged behind Ohio.</p>
-      </div>
-      <div class="flight-block">
-        <h4>Connection layer</h4>
-        <p>Half of the expanded list connected to Curtis and Rob via warm outreach over the next four weeks. Each connection logged in the outreach board with status, source, and handoff signal.</p>
-      </div>
-      <div class="flight-block">
-        <h4>First conversations</h4>
-        <p>Active hustle for the first qualified LinkedIn conversation handed to Curtis or Rob. Target window: weeks 6–8.</p>
-      </div>
-      <div class="flight-block placeholder">
-        <h4>The metrics panel</h4>
-        <p>Populates when outreach data and content reach support a credible momentum claim. Premature numbers undermine the case study. Honest timing builds the credibility AWC funds.</p>
-      </div>
-    </div>
-  </section>
+                <div class="artwork-card">
+                    <img src="Screenshot_2026-05-08_at_5_17_18_AM.png" alt="Vertical Descent" class="artwork-image">
+                    <div class="artwork-info">
+                        <h3 class="artwork-title">Vertical Descent</h3>
+                        <p class="artwork-desc">Rhythmic chaos—stacked contradictions in motion, questioning linear progression</p>
+                    </div>
+                </div>
 
-  <section class="question">
-    <div class="section-num">05 · The Question on the Table</div>
-    <h2>What's the right scope for the next 90 days?</h2>
-    <p>$3,000 a month produced the system above. The next phase isn't more of the same — it's converting that infrastructure into actual conversations, and eventually, signed deals.</p>
-    <p>The decision in front of AWC: keep the engagement at this rate, or fund it at the scope it's actually doing.</p>
-  </section>
+                <div class="artwork-card">
+                    <img src="Screenshot_2026-05-08_at_5_17_28_AM.png" alt="Geometric Paradox II" class="artwork-image">
+                    <div class="artwork-info">
+                        <h3 class="artwork-title">Geometric Paradox II</h3>
+                        <p class="artwork-desc">Complex layering of color and line—visual representation of overthinking the absurd</p>
+                    </div>
+                </div>
 
-  <footer>
-    <div class="links">
-      <div class="links-label">Live Assets</div>
-      <a href="https://thevdoaigency.github.io/leopardo-campaign-brief/leopardo_asset_map.html" target="_blank" rel="noopener">60-Day Asset Map</a>
-      <a href="https://thevdoaigency.monday.com/boards/18408183965" target="_blank" rel="noopener">Production Board · 60-Day Social</a>
-      <a href="https://thevdoaigency.monday.com/boards/18408776751" target="_blank" rel="noopener">Outreach Board · Leopardo Targets</a>
-      <a href="https://www.linkedin.com/in/curtis-l-33b8423a/" target="_blank" rel="noopener">Curtis Leopardo · LinkedIn</a>
-    </div>
-    <div class="meta">
-      The VDO Aigency<br>
-      May 2026
-    </div>
-  </footer>
+                <div class="artwork-card">
+                    <img src="Screenshot_2026-05-08_at_5_17_42_AM.png" alt="Birch Grove Rebellion" class="artwork-image">
+                    <div class="artwork-info">
+                        <h3 class="artwork-title">Birch Grove Rebellion</h3>
+                        <p class="artwork-desc">Nature through a fever lens—structured chaos where order and wildness become indistinguishable</p>
+                    </div>
+                </div>
 
-</div>
+                <div class="artwork-card">
+                    <img src="Screenshot_2026-05-08_at_5_17_58_AM.png" alt="Winter Meditation" class="artwork-image">
+                    <div class="artwork-info">
+                        <h3 class="artwork-title">Winter Meditation</h3>
+                        <p class="artwork-desc">Hope embedded in darkness—a single red beacon among the silent, frozen absurdity of the season</p>
+                    </div>
+                </div>
+
+                <div class="artwork-card">
+                    <img src="Screenshot_2026-05-08_at_5_18_10_AM.png" alt="Mickey's LV Fever Dream" class="artwork-image">
+                    <div class="artwork-info">
+                        <h3 class="artwork-title">Mickey's LV Fever Dream</h3>
+                        <p class="artwork-desc">Collision of innocence and consumerism—pop culture icons drowning in designer logos</p>
+                    </div>
+                </div>
+
+                <div class="artwork-card">
+                    <img src="Screenshot_2026-05-08_at_5_18_26_AM.png" alt="Earthen Abstractions" class="artwork-image">
+                    <div class="artwork-info">
+                        <h3 class="artwork-title">Earthen Abstractions</h3>
+                        <p class="artwork-desc">Layered textures exploring the chaotic beauty of material decay and transformation</p>
+                    </div>
+                </div>
+
+                <div class="artwork-card">
+                    <img src="Screenshot_2026-05-08_at_5_18_46_AM.png" alt="Installation: Chromatic Monument" class="artwork-image">
+                    <div class="artwork-info">
+                        <h3 class="artwork-title">Installation: Chromatic Monument</h3>
+                        <p class="artwork-desc">An immersive statement on the overwhelming visual noise of modern existence</p>
+                    </div>
+                </div>
+
+                <div class="artwork-card">
+                    <img src="Screenshot_2026-05-08_at_5_18_58_AM.png" alt="Chromatic Overflow" class="artwork-image">
+                    <div class="artwork-info">
+                        <h3 class="artwork-title">Chromatic Overflow</h3>
+                        <p class="artwork-desc">Uninhibited color collision—life's emotional complexity splattered across the canvas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" style="background: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            
+            <div class="about-section">
+                <div class="about-text">
+                    <p>I'm <strong>James Cillizza</strong>, a mixed-media artist and designer exploring the chaos, contradiction, and absurdity embedded in everyday life. My work is a visual manifestation of organized chaos—where precision collides with spontaneity, where pop culture icons dissolve into abstraction, and where meaning dissolves into pure emotional expression.</p>
+                    
+                    <p>Through abstract expressionism, geometric layering, pop art subversion, and textural experimentation, I investigate the gap between how we perceive order and the fundamental randomness beneath. My practice pulls from street art, fine art, design, and the visual noise of contemporary culture—nothing is sacred, everything is material for reexamination.</p>
+                    
+                    <p>Each piece asks: What if we stopped trying to make sense of it all? What if the contradiction itself is the point? My work doesn't resolve these questions—it amplifies them, inviting viewers into the beautiful mess of being alive in an inherently absurd world.</p>
+                    
+                    <a href="https://instagram.com/jtc3designs" target="_blank" class="cta-button">Follow on Instagram</a>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="section-subtitle">Let's collaborate or just say hello</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                <div style="text-align: center;">
+                    <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Instagram</h3>
+                    <a href="https://instagram.com/jtc3designs" target="_blank" style="color: var(--primary); text-decoration: none;">@jtc3designs</a>
+                </div>
+                
+                <div style="text-align: center;">
+                    <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Inquiries</h3>
+                    <p style="color: var(--text-secondary);">Available for commissions & collaborations</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <h3 style="font-weight: 600; margin-bottom: 0.5rem;">Work</h3>
+                    <p style="color: var(--text-secondary);">Mixed media, installation, design</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>James Cillizza</h3>
+                    <p style="color: #ccc; font-size: 0.9rem;">Exploring the chaos, contradiction, and absurdity of existence through color, form, and collision.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/jtc3designs" target="_blank" title="Instagram">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <circle cx="17.5" cy="6.5" r="1.5"></circle>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Links</h3>
+                    <ul>
+                        <li><a href="#work">Work</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Custom Commissions</a></li>
+                        <li><a href="#">Installation Works</a></li>
+                        <li><a href="#">Consulting</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p style="font-size: 0.9rem; color: #999;">© 2026 James Cillizza. All works reserved.</p>
+                <p style="font-size: 0.9rem; color: #999;">Organized chaos by design</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Simple image loading animation
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('load', function() {
+                this.style.opacity = '1';
+            });
+        });
+    </script>
 </body>
 </html>
