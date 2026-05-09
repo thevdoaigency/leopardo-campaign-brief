@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leopardo Efficiency — Progress Framework</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #e8b84b;
+  --black: #0b0b0b;
+  --cream: #ede9e3;
+  --muted: #7a7570;
+  --surface: #141414;
+  --hairline: #1f1f1f;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 56px 40px 96px;
+}
+
+/* Top bar */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 80px;
+}
+
+.mark {
+  width: 40px;
+  height: 40px;
+  background: var(--gold);
+  border-radius: 6px;
+  color: var(--black);
+  font-family: Georgia, serif;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.wordmark {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  letter-spacing: 0.3px;
+}
+
+.wordmark em { font-style: italic; }
+
+.crumb {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Hero */
+.hero { margin-bottom: 110px; }
+
+.kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 28px;
+}
+
+h1 {
+  font-family: Georgia, serif;
+  font-size: 52px;
+  line-height: 1.18;
+  font-weight: 400;
+  margin-bottom: 32px;
+  max-width: 920px;
+  letter-spacing: -0.5px;
+}
+
+h1 .accent { color: var(--gold); }
+
+.lead {
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 680px;
+  line-height: 1.65;
+}
+
+/* Section */
+section { margin-bottom: 96px; }
+
+.section-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-family: Georgia, serif;
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 40px;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  max-width: 760px;
+}
+
+/* Delta */
+.delta {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 56px;
+}
+
+.delta-col h3 {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.delta-col.right h3 {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+.delta-col ul { list-style: none; }
+
+.delta-col li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--cream);
+}
+
+.delta-col li:last-child { border-bottom: none; }
+
+.delta-col strong {
+  font-weight: 600;
+  color: var(--cream);
+}
+
+/* Numbers */
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--hairline);
+  padding: 36px 0;
+}
+
+.num-block { display: flex; flex-direction: column; }
+
+.num-block .num {
+  font-family: Georgia, serif;
+  font-size: 64px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 14px;
+  letter-spacing: -1px;
+}
+
+.num-block .label {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+/* Arc */
+.arc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.arc-step {
+  padding: 11px 16px;
+  border: 1px solid var(--hairline);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--cream);
+  white-space: nowrap;
+}
+
+.arc-step.cta {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.arc-arrow {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.arc-note {
+  color: var(--muted);
+  max-width: 720px;
+  line-height: 1.65;
+  font-size: 15px;
+}
+
+/* In flight */
+.flight {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.flight-block {
+  padding: 28px 30px;
+  background: var(--surface);
+  border-left: 2px solid var(--gold);
+}
+
+.flight-block.placeholder {
+  border-left-color: var(--hairline);
+}
+
+.flight-block h4 {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 14px;
+  color: var(--cream);
+}
+
+.flight-block p {
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.flight-block.placeholder p {
+  font-style: italic;
+}
+
+/* The Question */
+.question p {
+  font-size: 17px;
+  color: var(--cream);
+  max-width: 760px;
+  line-height: 1.7;
+}
+
+.question p + p { margin-top: 18px; color: var(--muted); }
+
+/* Footer */
+footer {
+  margin-top: 110px;
+  padding-top: 40px;
+  border-top: 1px solid var(--hairline);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+footer .links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+footer .links-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+
+footer a {
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 13.5px;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 2px;
+  width: fit-content;
+  transition: color 0.2s;
+}
+
+footer a:hover { color: var(--gold); }
+
+footer .meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-align: right;
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .wrap { padding: 36px 24px 64px; }
+  .topbar { margin-bottom: 56px; }
+  .hero { margin-bottom: 72px; }
+  section { margin-bottom: 64px; }
+  h1 { font-size: 34px; }
+  h2 { font-size: 24px; margin-bottom: 28px; }
+  .delta { grid-template-columns: 1fr; gap: 40px; }
+  .numbers { grid-template-columns: repeat(2, 1fr); gap: 28px; padding: 28px 0; }
+  .num-block .num { font-size: 44px; }
+  .flight { grid-template-columns: 1fr; }
+  .topbar .crumb { display: none; }
+  footer { flex-direction: column; }
+  footer .meta { text-align: left; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="mark">V</div>
+    <div class="wordmark">VDO <em>Aigency</em></div>
+    <div class="crumb">Leopardo Efficiency · Progress Framework</div>
+  </div>
+
+  <div class="hero">
+    <div class="kicker">Progress Framework — May 2026</div>
+    <h1>We promised videos.<br>We delivered videos — <span class="accent">plus the list, the campaign, and the system to work it.</span></h1>
+    <p class="lead">For Curtis Leopardo, Leopardo Construction leadership, and Alexander West Capital. A working frame for what was contracted, what was delivered, and what comes next. Becomes the month-3 case study when the metrics catch up.</p>
+  </div>
+
+  <section>
+    <div class="section-num">01 · The Delta</div>
+    <h2>What was contracted. What was built.</h2>
+    <div class="delta">
+      <div class="delta-col">
+        <h3>Contract — $3,000 / month</h3>
+        <ul>
+          <li><strong>1 hero video</strong> per month, 2 minutes, polished.</li>
+          <li><strong>5 cutdowns</strong> per month — LinkedIn landscape and Instagram vertical, captioned.</li>
+          <li><strong>Pipeline management</strong> — Monday.com organization, LucidLink hosting, distributed editing team.</li>
+        </ul>
+      </div>
+      <div class="delta-col right">
+        <h3>Delivered</h3>
+        <ul>
+          <li><strong>Everything in the contract.</strong> Hero videos, cutdowns, pipeline.</li>
+          <li><strong>199 researched city decision-makers.</strong> Ohio mayors, city managers, finance directors. A Florida list staged behind the Ohio wave.</li>
+          <li><strong>40-post 8-week campaign architecture</strong> across 5 channels — LinkedIn Company, Curtis personal, Rob personal, Instagram, YouTube.</li>
+          <li><strong>LinkedIn profile work for Curtis and Rob</strong> — repositioned to anchor the campaign narrative.</li>
+          <li><strong>Voice-clone production system</strong> — Curtis and Rob VOs deployable on b-roll without scheduling either of them on camera.</li>
+          <li><strong>Outreach engine</strong> — connection-request workflow, status tracking, LinkedIn-to-Monday pipeline.</li>
+          <li><strong>Brand-locked production system</strong> — every asset built to a documented visual and voice spec.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-num">02 · The Build, in Numbers</div>
+    <h2>What $3,000 a month actually produced.</h2>
+    <div class="numbers">
+      <div class="num-block">
+        <div class="num">199</div>
+        <div class="label">City decision-makers researched and loaded into the outreach pipeline</div>
+      </div>
+      <div class="num-block">
+        <div class="num">40</div>
+        <div class="label">Posts architected across an 8-week campaign arc</div>
+      </div>
+      <div class="num-block">
+        <div class="num">5</div>
+        <div class="label">Channels integrated into a single coordinated narrative</div>
+      </div>
+      <div class="num-block">
+        <div class="num">2</div>
+        <div class="label">Executive voice profiles cloned and production-ready</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-num">03 · The Architecture</div>
+    <h2>The campaign isn't a calendar. It's a buying-cycle map.</h2>
+    <div class="arc">
+      <div class="arc-step">Problem</div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-step">Mechanism</div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-step">Proof</div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-step">Depth</div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-step">Trust</div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-step">Results</div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-step cta">Invitation</div>
+    </div>
+    <p class="arc-note">Each week serves one purpose in a city manager's decision cycle. Posts aren't scheduled around a calendar — they're sequenced around how a buyer actually moves from "we have a problem" to "we want a conversation."</p>
+  </section>
+
+  <section>
+    <div class="section-num">04 · In Flight</div>
+    <h2>What's being built between now and the metrics panel.</h2>
+    <div class="flight">
+      <div class="flight-block">
+        <h4>Outreach expansion</h4>
+        <p>Researched list expanding from 199 to 500+ qualified decision-makers across active and adjacent markets. Florida wave staged behind Ohio.</p>
+      </div>
+      <div class="flight-block">
+        <h4>Connection layer</h4>
+        <p>Half of the expanded list connected to Curtis and Rob via warm outreach over the next four weeks. Each connection logged in the outreach board with status, source, and handoff signal.</p>
+      </div>
+      <div class="flight-block">
+        <h4>First conversations</h4>
+        <p>Active hustle for the first qualified LinkedIn conversation handed to Curtis or Rob. Target window: weeks 6–8.</p>
+      </div>
+      <div class="flight-block placeholder">
+        <h4>The metrics panel</h4>
+        <p>Populates when outreach data and content reach support a credible momentum claim. Premature numbers undermine the case study. Honest timing builds the credibility AWC funds.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="question">
+    <div class="section-num">05 · The Question on the Table</div>
+    <h2>What's the right scope for the next 90 days?</h2>
+    <p>$3,000 a month produced the system above. The next phase isn't more of the same — it's converting that infrastructure into actual conversations, and eventually, signed deals.</p>
+    <p>The decision in front of AWC: keep the engagement at this rate, or fund it at the scope it's actually doing.</p>
+  </section>
+
+  <footer>
+    <div class="links">
+      <div class="links-label">Live Assets</div>
+      <a href="https://thevdoaigency.github.io/leopardo-campaign-brief/leopardo_asset_map.html" target="_blank" rel="noopener">60-Day Asset Map</a>
+      <a href="https://thevdoaigency.monday.com/boards/18408183965" target="_blank" rel="noopener">Production Board · 60-Day Social</a>
+      <a href="https://thevdoaigency.monday.com/boards/18408776751" target="_blank" rel="noopener">Outreach Board · Leopardo Targets</a>
+      <a href="https://www.linkedin.com/in/curtis-l-33b8423a/" target="_blank" rel="noopener">Curtis Leopardo · LinkedIn</a>
+    </div>
+    <div class="meta">
+      The VDO Aigency<br>
+      Phnom Penh · May 2026
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
