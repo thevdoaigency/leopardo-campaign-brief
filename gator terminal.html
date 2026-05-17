@@ -3,277 +3,653 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GATOR · Live Terminal · Brand System</title>
+<title>GATOR TERMINAL · Municipal Procurement · Live</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 
-/* ═══════════════════════════════════════════════════════
-   GATOR · LIVE TERMINAL
-   Brand identity rendered as a working procurement monitor.
-   The brand book IS the product.
-   ═══════════════════════════════════════════════════════ */
+/* ───────────────────────────────────────────────────────
+   GATOR TERMINAL
+   A closing tool. Live Bloomberg-style.
+   For laptop pitch, mayor on the other side of the desk.
+   ─────────────────────────────────────────────────────── */
 
 :root {
-  /* Terminal foundation — GATOR family colors, terminal-recoded */
-  --term-bg:        #0a0d0c;       /* deep terminal black-green */
-  --term-bg-2:      #0f1413;       /* panel surface */
-  --term-bg-3:      #131a18;       /* elevated surface */
-  --term-line:      #1f2a26;       /* grid line */
-  --term-line-2:    #2a3833;       /* hover line */
+  /* terminal palette */
+  --bg:           #0A0E0D;
+  --bg-2:         #0F1413;
+  --bg-3:         #141A19;
+  --bg-panel:     #11181700;
+  --bg-elevated:  #1A2120;
 
-  --term-fg:        #e4ede8;       /* primary text — 14.2:1 on bg, AAA */
-  --term-fg-2:      #b8c7c0;       /* secondary text — 9.4:1, AAA */
-  --term-fg-3:      #7d918a;       /* labels — 4.8:1, AA */
-  --term-fg-4:      #4a5b56;       /* dim — 2.6:1, decorative only */
+  --border:       #1F2826;
+  --border-lit:   #2A3633;
+  --border-bright:#3D4F4B;
 
-  /* Active signals — derived from GATOR family but tuned for dark */
-  --signal-green:   #5fc295;       /* GATOR green, terminal-shifted — 7.8:1, AAA */
-  --signal-green-d: #2e6b58;       /* original GATOR Green */
-  --signal-blue:    #6b9ad9;       /* Leopardo Blue, terminal-shifted — 6.4:1, AA */
-  --signal-yellow:  #ffe600;       /* Leopardo Yellow — 14.1:1, AAA */
-  --signal-amber:   #ffb84a;       /* warning state — 10.2:1, AAA */
-  --signal-red:     #ff6b5e;       /* rare alert — 5.8:1, AA */
+  --fg:           #E8EDE8;
+  --fg-2:         #C5CDC8;
+  --fg-3:         #8B968F;
+  --fg-mute:      #5A6661;
+  --fg-faint:     #3D4541;
 
-  /* Family original palette — preserved for spec display */
-  --leopardo-blue:    #1A3868;
-  --gator-green:      #2E6B58;
-  --leopardo-yellow:  #FFE600;
-  --paper:            #FFFFFF;
-  --ink:              #1A1A1A;
+  --green:        #2EE89F;        /* terminal green — alive */
+  --green-2:      #1FAB76;        /* steady green */
+  --green-dim:    #1F4F40;        /* muted green */
+  --green-soft:   #2EE89F12;
 
-  --mono:    'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
-  --display: 'Jost', -apple-system, sans-serif;
+  --blue:         #5BB0FF;        /* leopardo-derived, brightened for screen */
+  --blue-dim:     #1A3868;
+  --amber:        #FFB84A;        /* yellow → amber for visibility */
+  --red:          #FF5252;        /* alerts only */
+  --gator-gold:   #FFE600;
+
+  --mono:  'IBM Plex Mono', 'SF Mono', Menlo, monospace;
+  --sans:  'IBM Plex Sans', -apple-system, sans-serif;
+  --cond:  'IBM Plex Sans Condensed', sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { font-size: 14px; }
+html { scroll-behavior: smooth; }
+
 body {
-  background: var(--term-bg);
-  color: var(--term-fg);
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--mono);
   font-size: 13px;
-  line-height: 1.55;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  position: relative;
+  min-height: 100vh;
 }
 
-/* CRT scanline texture — barely visible */
+/* faint grid background — terminal feel */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0px,
-      transparent 2px,
-      rgba(95, 194, 149, 0.012) 2px,
-      rgba(95, 194, 149, 0.012) 3px
-    );
+  background-image:
+    linear-gradient(rgba(46, 232, 159, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 232, 159, 0.018) 1px, transparent 1px);
+  background-size: 40px 40px;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
 }
 
-/* Subtle vignette */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(ellipse 1400px 900px at center, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
-  pointer-events: none;
+::selection { background: var(--green); color: var(--bg); }
+
+/* ─── HEADER STRIP ─── */
+
+.term-head {
+  position: relative;
   z-index: 2;
-}
-
-::selection { background: var(--signal-green); color: var(--term-bg); }
-
-/* ═══════ STATUS BAR (top) ═══════ */
-
-.status-bar {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: var(--term-bg-2);
-  border-bottom: 1px solid var(--term-line);
-  padding: 10px 24px;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 500;
   gap: 24px;
-  flex-wrap: wrap;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-2);
+  font-family: var(--mono);
 }
 
-.status-left, .status-right { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-
-.status-brand {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.04em;
-  color: var(--signal-green);
+.term-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
-.status-brand::before {
-  content: '▰';
-  color: var(--signal-green);
-  animation: pulse 2s infinite;
+.term-brand .mark {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--green);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.term-brand .endorse {
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  line-height: 1.2;
+  border-left: 1px solid var(--border-lit);
+  padding-left: 12px;
+}
+
+.term-clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.term-clock .pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: pulse 1.6s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
 }
 
-.status-item {
-  color: var(--term-fg-3);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.status-item .val {
-  color: var(--term-fg);
+.term-clock .live {
+  color: var(--green);
   font-weight: 600;
+  letter-spacing: 0.18em;
 }
 
-.status-item .live {
-  color: var(--signal-green);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+.term-clock .time {
+  color: var(--fg-2);
+  font-variant-numeric: tabular-nums;
 }
 
-.status-item .live::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  background: var(--signal-green);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--signal-green);
-  animation: pulse 2s infinite;
-}
-
-.status-clock {
-  color: var(--term-fg);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-}
-
-/* ═══════ COMMAND BAR ═══════ */
-
-.command-bar {
-  background: var(--term-bg);
-  border-bottom: 1px solid var(--term-line);
-  padding: 14px 24px;
-  display: flex;
-  align-items: center;
-  gap: 0;
-  overflow-x: auto;
-  position: sticky;
-  top: 41px;
-  z-index: 49;
-}
-
-.command-prompt {
-  color: var(--signal-green);
-  margin-right: 14px;
-  font-weight: 600;
-}
-
-.command-tab {
-  background: transparent;
-  border: none;
-  color: var(--term-fg-3);
-  font-family: var(--mono);
-  font-size: 11.5px;
-  font-weight: 500;
+.term-clock .session {
+  color: var(--fg-3);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 8px 18px;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: all 0.15s;
-  white-space: nowrap;
+  font-size: 10px;
 }
 
-.command-tab:hover {
-  color: var(--term-fg);
-}
-
-.command-tab.active {
-  color: var(--signal-green);
-  border-bottom-color: var(--signal-green);
-}
-
-.command-tab .key {
-  color: var(--term-fg-4);
-  font-weight: 400;
-  margin-right: 6px;
-}
-
-.command-tab.active .key {
-  color: var(--signal-green);
-}
-
-/* ═══════ MAIN GRID ═══════ */
-
-.terminal {
-  position: relative;
-  z-index: 3;
-  display: grid;
-  grid-template-columns: 320px 1fr 280px;
-  min-height: calc(100vh - 90px);
-  gap: 1px;
-  background: var(--term-line);
-}
-
-.terminal > * {
-  background: var(--term-bg);
-}
-
-/* ═══════ LEFT PANEL — LIVE FEED ═══════ */
-
-.feed-panel {
-  padding: 0;
-  border-right: 1px solid var(--term-line);
+.term-meta {
   display: flex;
-  flex-direction: column;
-  height: calc(100vh - 90px);
-  position: sticky;
-  top: 90px;
+  gap: 14px;
+  align-items: center;
+  font-size: 10px;
+  color: var(--fg-3);
+  letter-spacing: 0.1em;
+}
+
+.term-meta .item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.term-meta .item .k { color: var(--fg-mute); }
+.term-meta .item .v { color: var(--fg); font-weight: 600; }
+
+/* ─── TICKER ─── */
+
+.ticker {
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-2);
   overflow: hidden;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.ticker-label {
+  flex-shrink: 0;
+  padding: 0 14px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: var(--green);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.ticker-track {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+
+.ticker-content {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  height: 100%;
+  white-space: nowrap;
+  animation: tickerScroll 60s linear infinite;
+  padding-left: 24px;
+}
+
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.tick-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--fg-2);
+  letter-spacing: 0.02em;
+}
+
+.tick-item .sym {
+  color: var(--green);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.tick-item .val {
+  color: var(--fg);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.tick-item .delta {
+  color: var(--green);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.tick-item .delta.down { color: var(--red); }
+
+.tick-item .sep {
+  color: var(--fg-faint);
+  margin-left: 12px;
+}
+
+/* ─── MAIN GRID ─── */
+
+.term-body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1px;
+  background: var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.col {
+  background: var(--bg);
+  padding: 0;
+}
+
+/* ─── HERO KPIs ─── */
+
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.kpi {
+  background: var(--bg);
+  padding: 22px 24px;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.kpi:hover { background: var(--bg-2); }
+
+.kpi-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-bottom: 14px;
+}
+
+.kpi-label .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.kpi-value {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  color: var(--fg);
+  margin-bottom: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi-value.green { color: var(--green); }
+.kpi-value.amber { color: var(--amber); }
+
+.kpi-delta {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.kpi-delta .change {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.kpi-delta .vs {
+  color: var(--fg-mute);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.kpi-sparkline {
+  position: absolute;
+  bottom: 14px;
+  right: 18px;
+  width: 60px;
+  height: 18px;
+  opacity: 0.85;
+}
+
+/* ─── PRIMARY ROW ─── */
+
+.primary-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.panel {
+  background: var(--bg);
+  padding: 20px 24px;
+  position: relative;
 }
 
 .panel-head {
-  padding: 18px 20px 14px;
-  border-bottom: 1px solid var(--term-line);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-lit);
+}
+
+.panel-title {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.panel-head .label {
-  font-size: 10px;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--term-fg-3);
+  color: var(--fg);
+}
+
+.panel-title .badge {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  padding: 2px 6px;
+  background: var(--green-soft);
+  color: var(--green);
+  border-radius: 2px;
+}
+
+.panel-meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--fg-mute);
+  letter-spacing: 0.08em;
+}
+
+.panel-meta .v { color: var(--fg-2); }
+
+/* ─── BAR CHART ─── */
+
+.bar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 70px 70px;
+  gap: 14px;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  cursor: default;
+  transition: background 0.15s;
+  padding: 4px 0;
+}
+
+.bar-row .city {
+  font-weight: 500;
+  color: var(--fg);
+  letter-spacing: 0.01em;
+}
+
+.bar-row .city .state {
+  display: block;
+  color: var(--fg-mute);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+.bar-track {
+  position: relative;
+  height: 18px;
+  background: var(--bg-3);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green-2), var(--green));
+  position: relative;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bar-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+}
+
+.bar-pct {
+  text-align: right;
+  color: var(--green);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+}
+
+.bar-val {
+  text-align: right;
+  color: var(--fg);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  font-size: 11.5px;
+}
+
+.bar-row.total {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-lit);
+}
+
+.bar-row.total .city {
+  color: var(--fg-3);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.bar-row.total .bar-val {
+  color: var(--green);
+  font-size: 14px;
   font-weight: 600;
 }
 
-.panel-head .count {
-  font-size: 11px;
-  color: var(--signal-green);
+/* ─── DIAL ─── */
+
+.dial-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0 12px;
+}
+
+.dial-svg {
+  width: 200px;
+  height: 200px;
+}
+
+.dial-svg .track {
+  fill: none;
+  stroke: var(--bg-3);
+  stroke-width: 14;
+}
+
+.dial-svg .fill {
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 14;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 8px rgba(46, 232, 159, 0.4));
+  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dial-center {
+  font-family: var(--sans);
   font-weight: 600;
+  font-size: 48px;
+  fill: var(--fg);
+  letter-spacing: -0.04em;
+}
+
+.dial-center-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  fill: var(--fg-3);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.dial-detail {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--fg-3);
   letter-spacing: 0.08em;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.dial-detail .v {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.dial-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-lit);
+  width: 100%;
+}
+
+.dial-stat .label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  margin-bottom: 4px;
+}
+
+.dial-stat .value {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--fg);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── CLOSINGS FEED (right rail) ─── */
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.feed-head {
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feed-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.feed-title .live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.feed-count {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--fg-mute);
+  letter-spacing: 0.1em;
 }
 
 .feed-list {
@@ -282,2597 +658,698 @@ body::after {
   padding: 8px 0;
 }
 
-.feed-list::-webkit-scrollbar { width: 6px; }
-.feed-list::-webkit-scrollbar-track { background: var(--term-bg); }
-.feed-list::-webkit-scrollbar-thumb { background: var(--term-line-2); border-radius: 3px; }
-
 .feed-item {
   padding: 14px 20px;
-  border-bottom: 1px solid var(--term-line);
-  cursor: pointer;
-  transition: background 0.12s;
-  position: relative;
-}
-
-.feed-item:hover {
-  background: var(--term-bg-2);
-}
-
-.feed-item.closed::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--signal-green);
-}
-
-.feed-item.pending::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--signal-amber);
-}
-
-.feed-item.live::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--signal-yellow);
-  animation: pulse 1.5s infinite;
-}
-
-.feed-item .city {
-  font-size: 12.5px;
-  color: var(--term-fg);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.feed-item .city .ts {
-  font-size: 9.5px;
-  color: var(--term-fg-4);
-  font-weight: 400;
-  letter-spacing: 0.12em;
-}
-
-.feed-item .contract {
-  font-size: 10px;
-  color: var(--term-fg-3);
-  margin-bottom: 8px;
-  letter-spacing: 0.06em;
-}
-
-.feed-item .value-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.feed-item .value {
-  font-family: var(--display);
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--term-fg);
-  letter-spacing: -0.01em;
-}
-
-.feed-item .savings {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-
-.feed-item.closed .savings { color: var(--signal-green); }
-.feed-item.pending .savings { color: var(--signal-amber); }
-.feed-item.live .savings { color: var(--signal-yellow); }
-
-.feed-item .status-tag {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 2px 8px;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 600;
-  border-radius: 1px;
-}
-
-.feed-item.closed .status-tag { background: rgba(95, 194, 149, 0.15); color: var(--signal-green); }
-.feed-item.pending .status-tag { background: rgba(255, 184, 74, 0.15); color: var(--signal-amber); }
-.feed-item.live .status-tag { background: rgba(255, 230, 0, 0.15); color: var(--signal-yellow); }
-
-/* Feed footer */
-.feed-foot {
-  padding: 14px 20px;
-  border-top: 1px solid var(--term-line);
-  background: var(--term-bg-2);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  color: var(--term-fg-3);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.feed-foot .total {
-  color: var(--signal-green);
-  font-weight: 600;
-}
-
-/* ═══════ CENTER PANEL — BRAND CANVAS ═══════ */
-
-.canvas-panel {
-  padding: 0;
-  overflow: hidden;
-}
-
-.canvas-head {
-  padding: 20px 32px;
-  border-bottom: 1px solid var(--term-line);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.canvas-head .breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--term-fg-3);
-}
-
-.canvas-head .breadcrumb .crumb {
-  color: var(--term-fg-3);
-}
-
-.canvas-head .breadcrumb .crumb.active {
-  color: var(--signal-green);
-  font-weight: 600;
-}
-
-.canvas-head .breadcrumb .sep {
-  color: var(--term-fg-4);
-}
-
-.canvas-head .actions {
-  display: flex;
-  gap: 8px;
-}
-
-.canvas-action {
-  background: transparent;
-  border: 1px solid var(--term-line-2);
-  color: var(--term-fg-3);
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 6px 12px;
-  cursor: pointer;
-  transition: all 0.12s;
-}
-
-.canvas-action:hover {
-  border-color: var(--signal-green);
-  color: var(--signal-green);
-}
-
-.canvas-content {
-  padding: 40px 48px 80px;
-}
-
-/* Tab content */
-.tab { display: none; }
-.tab.active { display: block; animation: tabIn 0.3s ease; }
-
-@keyframes tabIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ─── Section heading inside canvas ─── */
-.canvas-section + .canvas-section { margin-top: 64px; padding-top: 64px; border-top: 1px solid var(--term-line); }
-
-.canvas-section-head {
-  margin-bottom: 32px;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.canvas-section-num {
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  color: var(--signal-green);
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-
-.canvas-section-title {
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: 36px;
-  letter-spacing: -0.025em;
-  color: var(--term-fg);
-  line-height: 1.05;
-}
-
-.canvas-section-title .accent { color: var(--signal-green); }
-
-.canvas-section-meta {
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  color: var(--term-fg-3);
-  text-align: right;
-}
-
-/* ═══════ TAB · OVERVIEW (the live dashboard) ═══════ */
-
-.overview-hero {
-  padding: 40px 0 56px;
-  border-bottom: 1px solid var(--term-line);
-  margin-bottom: 48px;
-}
-
-.overview-hero .stamp {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 12px;
-  border: 1px solid var(--signal-green);
-  color: var(--signal-green);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 28px;
-}
-
-.overview-hero .stamp::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  background: var(--signal-green);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-
-.overview-hero h1 {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: clamp(56px, 9vw, 124px);
-  letter-spacing: -0.045em;
-  line-height: 0.92;
-  color: var(--term-fg);
-  margin-bottom: 24px;
-}
-
-.overview-hero h1 .accent { color: var(--signal-green); }
-
-.overview-hero .lede {
-  font-family: var(--mono);
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--term-fg-2);
-  max-width: 720px;
-  font-weight: 400;
-}
-
-.overview-hero .lede .hl { color: var(--signal-yellow); font-weight: 600; }
-
-/* Metric strip */
-.metric-strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--term-line);
-  margin: 48px 0;
-  border: 1px solid var(--term-line);
-}
-
-.metric {
-  background: var(--term-bg);
-  padding: 24px 20px;
-}
-
-.metric .label {
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--term-fg-3);
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.metric .label::before {
-  content: '';
-  width: 4px;
-  height: 4px;
-  background: var(--signal-green);
-  border-radius: 50%;
-}
-
-.metric .value {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 40px;
-  letter-spacing: -0.03em;
-  line-height: 1;
-  color: var(--term-fg);
-  margin-bottom: 8px;
-}
-
-.metric .value.accent { color: var(--signal-green); }
-.metric .value.alert { color: var(--signal-yellow); }
-
-.metric .delta {
-  font-size: 11px;
-  color: var(--term-fg-3);
-  letter-spacing: 0.08em;
-}
-
-.metric .delta .up { color: var(--signal-green); }
-.metric .delta .down { color: var(--signal-red); }
-
-/* Live ticker */
-.ticker {
-  margin-top: 56px;
-  background: var(--term-bg-2);
-  border: 1px solid var(--term-line);
-  border-left: 3px solid var(--signal-green);
-  padding: 18px 24px;
-  overflow: hidden;
-  position: relative;
-}
-
-.ticker-label {
-  position: absolute;
-  top: 18px;
-  left: 24px;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: var(--signal-green);
-  font-weight: 600;
-  background: var(--term-bg-2);
-  padding-right: 12px;
-  z-index: 2;
-}
-
-.ticker-tape {
-  display: flex;
-  gap: 56px;
-  white-space: nowrap;
-  margin-top: 26px;
-  font-size: 13px;
-  color: var(--term-fg-2);
-  letter-spacing: 0.04em;
-  animation: tape 60s linear infinite;
-}
-
-.ticker-tape .item .city {
-  color: var(--term-fg);
-  font-weight: 600;
-  margin-right: 8px;
-}
-
-.ticker-tape .item .val {
-  color: var(--signal-green);
-  font-weight: 600;
-  margin-left: 8px;
-}
-
-.ticker-tape .item .sep { color: var(--term-fg-4); margin: 0 12px; }
-
-@keyframes tape {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-/* Chart panel */
-.chart-row {
-  margin-top: 56px;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 1px;
-  background: var(--term-line);
-  border: 1px solid var(--term-line);
-}
-
-.chart-cell {
-  background: var(--term-bg);
-  padding: 24px;
-}
-
-.chart-cell h4 {
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--term-fg-3);
-  font-weight: 600;
-  margin-bottom: 18px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.chart-cell h4 .badge {
-  background: var(--signal-green);
-  color: var(--term-bg);
-  font-size: 9px;
-  padding: 2px 6px;
-  letter-spacing: 0.16em;
-  font-weight: 700;
-}
-
-/* Bar chart */
-.bar-chart {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.bar-row {
-  display: grid;
-  grid-template-columns: 110px 1fr 90px;
-  gap: 12px;
-  align-items: center;
-}
-
-.bar-row .city-label {
-  font-size: 11px;
-  color: var(--term-fg-2);
-  letter-spacing: 0.04em;
-  font-weight: 500;
-}
-
-.bar-track {
-  height: 22px;
-  background: var(--term-bg-3);
-  position: relative;
-  overflow: hidden;
-}
-
-.bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--signal-green-d), var(--signal-green));
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 8px;
-  font-size: 10px;
-  color: var(--term-bg);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.bar-row .bar-value {
-  font-size: 12px;
-  color: var(--term-fg);
-  font-weight: 600;
-  text-align: right;
-}
-
-/* Mini sparkline replacement — vendor count circle */
-.vendor-circle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 0;
-}
-
-.vendor-circle svg { width: 160px; height: 160px; }
-.vendor-circle .ring-bg { fill: none; stroke: var(--term-line-2); stroke-width: 12; }
-.vendor-circle .ring-fill { fill: none; stroke: var(--signal-green); stroke-width: 12; stroke-linecap: round; transform: rotate(-90deg); transform-origin: center; transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
-.vendor-circle .num { font-family: var(--display); font-size: 42px; font-weight: 700; fill: var(--term-fg); letter-spacing: -0.03em; }
-.vendor-circle .lbl { font-family: var(--mono); font-size: 9px; fill: var(--term-fg-3); letter-spacing: 0.18em; }
-
-.vendor-circle-label {
-  margin-top: 14px;
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  color: var(--term-fg-3);
-  text-align: center;
-  line-height: 1.6;
-}
-
-/* ═══════ TAB · IDENTITY ═══════ */
-
-.id-screen {
-  background: var(--term-bg-2);
-  border: 1px solid var(--term-line);
-  padding: 56px 40px;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 32px;
-}
-
-.id-screen::before {
-  content: 'SPEC.001';
-  position: absolute;
-  top: 16px;
-  left: 20px;
-  font-size: 9px;
-  letter-spacing: 0.24em;
-  color: var(--term-fg-4);
-}
-
-.id-screen::after {
-  content: 'WORDMARK · PRIMARY';
-  position: absolute;
-  top: 16px;
-  right: 20px;
-  font-size: 9px;
-  letter-spacing: 0.24em;
-  color: var(--term-fg-4);
-}
-
-.id-wordmark {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: clamp(80px, 14vw, 180px);
-  letter-spacing: -0.05em;
-  color: var(--term-fg);
-  line-height: 0.9;
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.id-endorse {
-  text-align: center;
-  font-size: 11px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--term-fg-3);
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 32px;
-}
-
-.id-endorse::before, .id-endorse::after {
-  content: '';
-  width: 32px;
-  height: 1px;
-  background: var(--term-fg-4);
-}
-
-.id-tagline {
-  text-align: center;
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: 18px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--signal-green);
-}
-
-.id-tagline .dot {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  background: var(--signal-green);
-  border-radius: 50%;
-  margin: 0 14px;
-  vertical-align: middle;
-}
-
-/* Spec table */
-.spec-table {
-  border: 1px solid var(--term-line);
-}
-
-.spec-row {
-  display: grid;
-  grid-template-columns: 200px 1fr 120px;
-  border-bottom: 1px solid var(--term-line);
-  padding: 16px 20px;
-  align-items: center;
-  font-size: 12px;
-  transition: background 0.12s;
-}
-
-.spec-row:last-child { border-bottom: none; }
-.spec-row:hover { background: var(--term-bg-2); }
-
-.spec-row .key {
-  color: var(--term-fg-3);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 10.5px;
-}
-
-.spec-row .val {
-  color: var(--term-fg);
-  font-weight: 500;
-}
-
-.spec-row .val.accent { color: var(--signal-green); font-weight: 600; }
-
-.spec-row .check {
-  text-align: right;
-  color: var(--signal-green);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  font-weight: 600;
-}
-
-/* Lockup grid */
-.lockup-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--term-line);
-  border: 1px solid var(--term-line);
-  margin-top: 32px;
-}
-
-.lock {
-  background: var(--term-bg);
-  padding: 36px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 180px;
-  position: relative;
-}
-
-.lock.on-bg { background: var(--term-bg); }
-.lock.on-paper { background: var(--paper); }
-.lock.on-blue { background: var(--leopardo-blue); }
-.lock.on-green { background: var(--gator-green); }
-
-.lock-word {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 28px;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  margin-bottom: 10px;
-}
-
-.lock.on-bg .lock-word { color: var(--term-fg); }
-.lock.on-paper .lock-word { color: var(--leopardo-blue); }
-.lock.on-blue .lock-word { color: var(--paper); }
-.lock.on-green .lock-word { color: var(--paper); }
-
-.lock-end {
-  font-size: 8px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-.lock.on-bg .lock-end { color: var(--term-fg-3); }
-.lock.on-paper .lock-end { color: var(--ink); opacity: 0.7; }
-.lock.on-blue .lock-end { color: var(--paper); opacity: 0.7; }
-.lock.on-green .lock-end { color: var(--paper); opacity: 0.7; }
-
-.lock-tag {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  font-size: 8.5px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
-.lock.on-bg .lock-tag { color: var(--term-fg-4); }
-.lock.on-paper .lock-tag { color: var(--ink); opacity: 0.5; }
-.lock.on-blue .lock-tag { color: var(--paper); opacity: 0.5; }
-.lock.on-green .lock-tag { color: var(--paper); opacity: 0.5; }
-
-/* ═══════ TAB · COLOR ═══════ */
-
-.color-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--term-line);
-  border: 1px solid var(--term-line);
-}
-
-.color-cell {
-  background: var(--term-bg);
-  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  cursor: default;
   transition: background 0.15s;
 }
 
-.color-cell:hover { background: var(--term-bg-2); }
+.feed-item:hover { background: var(--bg-2); }
 
-.color-chip {
-  height: 140px;
-  position: relative;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.color-chip.c-blue    { background: var(--leopardo-blue); color: var(--paper); }
-.color-chip.c-green   { background: var(--gator-green); color: var(--paper); }
-.color-chip.c-yellow  { background: var(--leopardo-yellow); color: var(--ink); }
-.color-chip.c-paper   { background: var(--paper); color: var(--ink); border-bottom: 1px solid var(--term-line); }
-.color-chip.c-ink     { background: var(--ink); color: var(--paper); }
-.color-chip.c-green-d { background: var(--signal-green-d); color: var(--paper); }
-
-.color-chip .tag {
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-weight: 600;
-  opacity: 0.85;
-}
-
-.color-chip .ratio {
-  align-self: flex-start;
-  padding: 3px 8px;
-  background: rgba(0, 0, 0, 0.25);
-  font-size: 9.5px;
-  letter-spacing: 0.12em;
-  font-weight: 600;
-}
-
-.color-chip.c-paper .ratio,
-.color-chip.c-yellow .ratio { background: rgba(0, 0, 0, 0.08); }
-
-.color-meta {
-  padding: 18px 16px 20px;
-  background: var(--term-bg);
-}
-
-.color-meta .name {
-  font-family: var(--display);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--term-fg);
-  letter-spacing: -0.01em;
-  margin-bottom: 6px;
-}
-
-.color-meta .codes {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
-.color-meta .codes span {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  padding: 2px 6px;
-  background: var(--term-bg-3);
-  color: var(--signal-green);
-}
-
-.color-meta .use {
-  font-size: 11px;
-  color: var(--term-fg-3);
-  line-height: 1.55;
-}
-
-.color-meta .hint {
-  margin-top: 10px;
-  font-size: 9.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--term-fg-4);
-  font-weight: 500;
-}
-
-.color-cell.copied .hint { color: var(--signal-green); }
-
-/* Contrast tool — terminal-style */
-.contrast-term {
-  margin-top: 56px;
-  background: var(--term-bg);
-  border: 1px solid var(--term-line);
-}
-
-.contrast-term-head {
-  padding: 18px 24px;
-  border-bottom: 1px solid var(--term-line);
-  background: var(--term-bg-2);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.contrast-term-head .label {
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  color: var(--term-fg-3);
-  font-weight: 600;
-}
-
-.contrast-term-head .label .accent { color: var(--signal-green); margin-right: 8px; }
-
-.contrast-term-head .meta {
-  font-size: 9.5px;
-  letter-spacing: 0.14em;
-  color: var(--term-fg-4);
-}
-
-.contrast-term-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--term-line);
-}
-
-.contrast-controls-pane {
-  background: var(--term-bg);
-  padding: 24px;
-}
-
-.contrast-pane-label {
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  color: var(--signal-green);
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-.color-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 24px;
-}
-
-.color-pick {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  background: var(--term-bg-3);
-  border: 1px solid transparent;
-  cursor: pointer;
-  font-size: 10.5px;
-  color: var(--term-fg-2);
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  transition: all 0.12s;
-}
-
-.color-pick:hover { border-color: var(--term-line-2); }
-.color-pick.active { border-color: var(--signal-green); color: var(--signal-green); }
-
-.color-pick .dot {
-  width: 12px;
-  height: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.contrast-preview-pane {
-  background: var(--term-bg);
-  padding: 32px 24px;
-  display: flex;
-  flex-direction: column;
-}
-
-.contrast-preview-window {
-  flex: 1;
-  padding: 28px;
-  border: 1px dashed var(--term-line-2);
-  margin-bottom: 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  transition: all 0.25s;
-  min-height: 200px;
-}
-
-.cp-display {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 38px;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
-  margin-bottom: 12px;
-}
-
-.cp-body {
-  font-family: var(--mono);
-  font-size: 12px;
-  line-height: 1.55;
-}
-
-.contrast-readout {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-}
-
-.readout {
-  padding: 12px;
-  background: var(--term-bg-3);
-  border-left: 2px solid var(--signal-green);
-}
-
-.readout .lab {
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--term-fg-3);
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.readout .val {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 22px;
-  color: var(--term-fg);
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
-.readout.pass { border-left-color: var(--signal-green); }
-.readout.pass .val { color: var(--signal-green); }
-.readout.warn { border-left-color: var(--signal-amber); }
-.readout.warn .val { color: var(--signal-amber); }
-.readout.fail { border-left-color: var(--signal-red); }
-.readout.fail .val { color: var(--signal-red); }
-
-/* ═══════ TAB · TYPE ═══════ */
-
-.type-block {
-  margin-bottom: 48px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid var(--term-line);
-}
-
-.type-block:last-child { border-bottom: none; }
-
-.type-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 28px;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.type-id {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.type-id .num {
-  background: var(--term-bg-2);
-  padding: 6px 12px;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  color: var(--signal-green);
-  font-weight: 600;
-}
-
-.type-id .role {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 20px;
-  color: var(--term-fg);
-  letter-spacing: -0.01em;
-}
-
-.type-id .sub {
-  font-size: 11px;
-  color: var(--term-fg-3);
-  letter-spacing: 0.08em;
-}
-
-.type-specs {
-  display: flex;
-  gap: 18px;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.type-specs span {
-  color: var(--term-fg-3);
-}
-
-.type-specs span strong {
-  color: var(--signal-green);
-  font-weight: 600;
-  margin-left: 6px;
-}
-
-.type-sample-display {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 72px;
-  line-height: 1;
-  letter-spacing: -0.035em;
-  color: var(--term-fg);
-  padding: 32px 0;
-}
-
-.type-sample-display .accent { color: var(--signal-green); }
-
-.type-sample-body {
-  font-family: var(--mono);
-  font-size: 14.5px;
-  line-height: 1.65;
-  color: var(--term-fg-2);
-  padding: 24px 0;
-  max-width: 720px;
-}
-
-.type-sample-body strong { color: var(--term-fg); font-weight: 600; }
-.type-sample-body em { color: var(--signal-green); font-style: normal; font-weight: 600; }
-
-.type-sample-mono {
-  font-family: var(--mono);
-  font-size: 13px;
-  line-height: 1.9;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--term-fg);
-  padding: 24px;
-  background: var(--term-bg-2);
-  border-left: 2px solid var(--signal-green);
-}
-
-.type-sample-mono .accent { color: var(--signal-green); font-weight: 600; }
-.type-sample-mono .yellow { color: var(--signal-yellow); font-weight: 600; }
-.type-sample-mono .dim { color: var(--term-fg-3); }
-
-/* ═══════ TAB · VOICE ═══════ */
-
-.voice-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--term-line);
-  border: 1px solid var(--term-line);
-  margin-bottom: 24px;
-}
-
-.voice-side {
-  background: var(--term-bg);
-  padding: 28px 24px;
-  position: relative;
-}
-
-.voice-side .marker {
-  position: absolute;
-  top: 16px;
-  left: 24px;
-  font-size: 9.5px;
-  letter-spacing: 0.22em;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.voice-side.yes .marker { color: var(--signal-green); }
-.voice-side.no .marker { color: var(--signal-red); }
-
-.voice-side .line {
-  margin-top: 28px;
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: 22px;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
-  color: var(--term-fg);
-  margin-bottom: 14px;
-}
-
-.voice-side.no .line {
-  color: var(--term-fg-3);
-  text-decoration: line-through;
-  text-decoration-color: rgba(255, 107, 94, 0.5);
-}
-
-.voice-side .note {
-  font-family: var(--mono);
-  font-size: 12px;
-  line-height: 1.6;
-  color: var(--term-fg-3);
-}
-
-/* Tagline block in terminal style */
-.tagline-block {
-  margin-top: 48px;
-  padding: 64px 40px;
-  background: var(--term-bg-2);
-  border: 1px solid var(--term-line);
-  text-align: center;
-  position: relative;
-}
-
-.tagline-block::before,
-.tagline-block::after {
-  content: '';
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  border-color: var(--signal-green);
-}
-
-.tagline-block::before {
-  top: 16px;
-  left: 16px;
-  border-top: 1px solid;
-  border-left: 1px solid;
-}
-
-.tagline-block::after {
-  bottom: 16px;
-  right: 16px;
-  border-bottom: 1px solid;
-  border-right: 1px solid;
-}
-
-.tagline-block .label {
-  font-size: 10px;
-  letter-spacing: 0.32em;
-  color: var(--signal-green);
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 28px;
-}
-
-.tagline-block .text {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: clamp(40px, 7vw, 84px);
-  line-height: 1;
-  letter-spacing: -0.04em;
-  color: var(--term-fg);
-}
-
-.tagline-block .text .dot {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  background: var(--signal-yellow);
-  border-radius: 50%;
-  margin: 0 16px;
-  vertical-align: middle;
-  transform: translateY(-6px);
-  box-shadow: 0 0 16px var(--signal-yellow);
-}
-
-/* ═══════ TAB · APPLICATION ═══════ */
-
-.app-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 16px;
-}
-
-.app-tile {
-  background: var(--term-bg-2);
-  border: 1px solid var(--term-line);
-  padding: 28px;
-  min-height: 260px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  transition: transform 0.2s, border-color 0.2s;
-}
-
-.app-tile:hover {
-  transform: translateY(-2px);
-  border-color: var(--signal-green);
-}
-
-.app-tile.span-2 { grid-column: span 2; }
-.app-tile.span-3 { grid-column: span 3; }
-.app-tile.span-4 { grid-column: span 4; }
-
-.app-tile.dark { background: var(--leopardo-blue); border-color: var(--leopardo-blue); }
-.app-tile.green { background: var(--gator-green); border-color: var(--gator-green); }
-.app-tile.paper { background: var(--paper); border-color: var(--term-line); }
-
-.app-tile .tag {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--term-fg-3);
-}
-
-.app-tile.dark .tag, .app-tile.green .tag { color: rgba(255, 255, 255, 0.5); }
-.app-tile.paper .tag { color: rgba(0, 0, 0, 0.4); }
-
-.app-tile .word {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 30px;
-  letter-spacing: -0.035em;
-  color: var(--term-fg);
-  line-height: 1;
-  margin-bottom: 6px;
-}
-
-.app-tile.dark .word, .app-tile.green .word { color: var(--paper); }
-.app-tile.paper .word { color: var(--leopardo-blue); }
-
-.app-tile .end {
-  font-size: 9px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--term-fg-3);
-  font-weight: 500;
-  margin-bottom: 24px;
-}
-
-.app-tile.dark .end, .app-tile.green .end { color: rgba(255, 255, 255, 0.6); }
-.app-tile.paper .end { color: var(--ink); opacity: 0.6; }
-
-.app-tile .body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-
-.app-tile .mega {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 68px;
-  line-height: 0.9;
-  letter-spacing: -0.045em;
-  color: var(--signal-yellow);
-  margin-bottom: 8px;
-}
-
-.app-tile.paper .mega { color: var(--leopardo-blue); }
-
-.app-tile .head {
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: 22px;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: var(--term-fg);
-  margin-bottom: 14px;
-}
-
-.app-tile.dark .head, .app-tile.green .head { color: var(--paper); }
-.app-tile.paper .head { color: var(--ink); }
-
-.app-tile .rule {
-  width: 32px;
-  height: 2px;
-  background: var(--signal-green);
-  margin: 14px 0;
-}
-
-.app-tile.dark .rule { background: var(--signal-yellow); }
-.app-tile.green .rule { background: var(--signal-yellow); }
-.app-tile.paper .rule { background: var(--gator-green); }
-
-.app-tile .meta {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  line-height: 1.7;
-  color: var(--term-fg-3);
-}
-
-.app-tile.dark .meta, .app-tile.green .meta { color: rgba(255, 255, 255, 0.65); }
-.app-tile.paper .meta { color: var(--ink); opacity: 0.55; }
-
-.biz-name {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 20px;
-  letter-spacing: -0.02em;
-  color: var(--term-fg);
-  margin-bottom: 4px;
-}
-
-.app-tile.paper .biz-name { color: var(--ink); }
-
-.biz-role {
-  font-size: 9.5px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--signal-green);
-  font-weight: 600;
-  margin-bottom: 20px;
-}
-
-.app-tile.paper .biz-role { color: var(--gator-green); }
-
-.biz-contact {
-  font-family: var(--mono);
-  font-size: 11px;
-  line-height: 1.85;
-  color: var(--term-fg-2);
-  font-weight: 500;
-}
-
-.app-tile.paper .biz-contact { color: var(--ink); opacity: 0.7; }
-
-/* Rules section */
-.rules {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--term-line);
-  border: 1px solid var(--term-line);
-  margin-top: 56px;
-}
-
-.rule-cell {
-  background: var(--term-bg);
-  padding: 40px 28px;
-  position: relative;
-  transition: background 0.2s;
-}
-
-.rule-cell:hover { background: var(--term-bg-2); }
-
-.rule-cell .roman {
-  font-family: var(--display);
-  font-weight: 300;
-  font-size: 64px;
-  line-height: 0.8;
-  color: var(--signal-green);
-  letter-spacing: -0.04em;
-  margin-bottom: 18px;
-  opacity: 0.7;
-}
-
-.rule-cell .title {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: var(--term-fg);
-  margin-bottom: 12px;
-}
-
-.rule-cell .body {
-  font-family: var(--mono);
-  font-size: 12px;
-  line-height: 1.6;
-  color: var(--term-fg-3);
-}
-
-/* ═══════ RIGHT PANEL — SYSTEM INFO ═══════ */
-
-.info-panel {
-  border-left: 1px solid var(--term-line);
-  height: calc(100vh - 90px);
-  position: sticky;
-  top: 90px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.info-panel::-webkit-scrollbar { width: 6px; }
-.info-panel::-webkit-scrollbar-track { background: var(--term-bg); }
-.info-panel::-webkit-scrollbar-thumb { background: var(--term-line-2); border-radius: 3px; }
-
-.info-block {
-  padding: 20px 22px;
-  border-bottom: 1px solid var(--term-line);
-}
-
-.info-block .head {
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--term-fg-3);
-  font-weight: 600;
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.info-block .head::before {
-  content: '◢';
-  color: var(--signal-green);
-  font-size: 10px;
-}
-
-.info-block .row {
+.feed-item-head {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 6px 0;
-  font-size: 11.5px;
-  border-bottom: 1px dashed var(--term-line);
+  margin-bottom: 6px;
 }
 
-.info-block .row:last-child { border-bottom: none; }
-
-.info-block .row .k { color: var(--term-fg-3); letter-spacing: 0.06em; }
-.info-block .row .v { color: var(--term-fg); font-weight: 600; }
-.info-block .row .v.accent { color: var(--signal-green); }
-.info-block .row .v.yellow { color: var(--signal-yellow); }
-
-/* Status indicator */
-.sys-status {
-  padding: 16px 22px;
-  background: var(--term-bg-2);
-  border-bottom: 1px solid var(--term-line);
-  font-size: 10.5px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.feed-item-stamp {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--fg-mute);
+  letter-spacing: 0.08em;
 }
 
-.sys-status-row {
+.feed-item-tag {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.feed-item-tag.closed {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.feed-item-tag.signed {
+  background: rgba(91, 176, 255, 0.1);
+  color: var(--blue);
+}
+
+.feed-item-tag.bid {
+  background: rgba(255, 184, 74, 0.1);
+  color: var(--amber);
+}
+
+.feed-item-city {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
+}
+
+.feed-item-detail {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--fg-3);
 }
 
-.sys-status-row .label {
-  color: var(--term-fg-3);
-  letter-spacing: 0.1em;
-}
-
-.sys-status-row .state {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--signal-green);
+.feed-item-detail .v {
+  color: var(--green);
   font-weight: 600;
-  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
 }
 
-.sys-status-row .state::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  background: var(--signal-green);
-  border-radius: 50%;
-  box-shadow: 0 0 6px var(--signal-green);
-  animation: pulse 2s infinite;
+.feed-item-detail .v.amber { color: var(--amber); }
+.feed-item-detail .v.blue { color: var(--blue); }
+
+/* ─── SECONDARY ROW (closings table) ─── */
+
+.table-panel {
+  background: var(--bg);
+  padding: 0;
 }
 
-/* Mini map */
-.mini-map {
-  padding: 20px 22px;
-  border-bottom: 1px solid var(--term-line);
-}
-
-.mini-map svg {
+.term-table {
   width: 100%;
-  height: auto;
-  display: block;
-}
-
-.mini-map .dot-active {
-  fill: var(--signal-green);
-}
-
-.mini-map .dot-pending {
-  fill: var(--signal-amber);
-}
-
-.mini-map .map-bg {
-  fill: none;
-  stroke: var(--term-line-2);
-  stroke-width: 1;
-}
-
-.mini-map .label {
-  fill: var(--term-fg-3);
+  border-collapse: collapse;
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11.5px;
+}
+
+.term-table thead tr {
+  background: var(--bg-2);
+}
+
+.term-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.term-table th.right { text-align: right; }
+
+.term-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  font-variant-numeric: tabular-nums;
+}
+
+.term-table tbody tr {
+  transition: background 0.15s;
+}
+
+.term-table tbody tr:hover {
+  background: var(--bg-2);
+}
+
+.term-table tbody tr:last-child td { border-bottom: none; }
+
+.term-table .num {
+  color: var(--fg-mute);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  width: 28px;
+}
+
+.term-table .city-cell {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+.term-table .city-cell .state {
+  color: var(--fg-mute);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  margin-left: 6px;
+}
+
+.term-table .meta-cell {
+  color: var(--fg-3);
+  font-size: 10.5px;
+}
+
+.term-table .value-cell {
+  text-align: right;
+  color: var(--green);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.term-table .pct-cell {
+  text-align: right;
+  color: var(--fg);
+  font-weight: 500;
+}
+
+.term-table .date-cell {
+  text-align: right;
+  color: var(--fg-mute);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+}
+
+.term-table tfoot tr {
+  background: var(--bg-2);
+}
+
+.term-table tfoot td {
+  border-top: 1px solid var(--border-bright);
+  border-bottom: none;
+  padding: 14px 16px;
+  font-weight: 700;
+}
+
+.term-table tfoot .label {
+  color: var(--fg-3);
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.term-table tfoot .total {
+  color: var(--green);
+  font-size: 14px;
+  text-align: right;
+  letter-spacing: 0.02em;
+}
+
+/* ─── FOOTER ─── */
+
+.term-foot {
+  position: relative;
+  z-index: 2;
+  padding: 12px 20px;
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--fg-mute);
+}
+
+.term-foot .left { display: flex; gap: 14px; }
+.term-foot .center { color: var(--fg-3); text-align: center; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; }
+.term-foot .right { text-align: right; }
+
+.term-foot .signature {
+  color: var(--green);
   letter-spacing: 0.1em;
 }
 
-/* ═══════ TOAST ═══════ */
+.term-foot .signature .who { color: var(--fg); font-weight: 600; }
 
-.toast {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%) translateY(140%);
-  background: var(--term-bg-2);
-  border: 1px solid var(--signal-green);
-  color: var(--signal-green);
-  padding: 12px 22px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  font-weight: 600;
-  z-index: 1000;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-}
-
-.toast.show { transform: translateX(-50%) translateY(0); }
-
-/* ═══════ RESPONSIVE ═══════ */
+/* ─── RESPONSIVE ─── */
 
 @media (max-width: 1200px) {
-  .terminal { grid-template-columns: 280px 1fr; }
-  .info-panel { display: none; }
-  .lockup-grid { grid-template-columns: 1fr 1fr; }
-  .color-grid { grid-template-columns: 1fr 1fr; }
-  .metric-strip { grid-template-columns: 1fr 1fr; }
-  .chart-row { grid-template-columns: 1fr; }
-  .app-grid { grid-template-columns: repeat(4, 1fr); }
-  .rules { grid-template-columns: 1fr; }
+  .term-body { grid-template-columns: 1fr; }
+  .feed { border-left: none; border-top: 1px solid var(--border); }
 }
 
-@media (max-width: 820px) {
-  html { font-size: 13px; }
-  .status-bar { padding: 8px 16px; gap: 12px; }
-  .status-item:not(.priority) { display: none; }
-  .command-bar { padding: 10px 16px; }
-  .command-tab { padding: 7px 12px; font-size: 10.5px; }
-  .terminal { grid-template-columns: 1fr; }
-  .feed-panel { position: relative; top: 0; height: auto; max-height: 400px; border-right: none; border-bottom: 1px solid var(--term-line); }
-  .canvas-content { padding: 28px 20px 60px; }
-  .canvas-head { padding: 16px 20px; flex-wrap: wrap; gap: 12px; }
-  .lockup-grid { grid-template-columns: 1fr; }
-  .color-grid { grid-template-columns: 1fr; }
-  .metric-strip { grid-template-columns: 1fr; }
-  .contrast-term-body { grid-template-columns: 1fr; }
-  .voice-row { grid-template-columns: 1fr; }
-  .app-grid { grid-template-columns: 1fr 1fr; }
-  .app-tile.span-2, .app-tile.span-3, .app-tile.span-4 { grid-column: span 2; }
-  .spec-row { grid-template-columns: 1fr; gap: 6px; padding: 14px 16px; }
-  .spec-row .check { text-align: left; }
-  .type-sample-display { font-size: 44px; }
-  .id-wordmark { font-size: 64px; }
+@media (max-width: 900px) {
+  .kpi-row { grid-template-columns: 1fr 1fr; }
+  .primary-row { grid-template-columns: 1fr; }
+  .term-head { grid-template-columns: 1fr; gap: 12px; padding: 14px 16px; }
+  .term-clock { justify-content: flex-start; }
+  .term-meta { justify-content: flex-start; flex-wrap: wrap; }
 }
 
-@media (max-width: 480px) {
-  .app-grid { grid-template-columns: 1fr; }
-  .app-tile.span-2, .app-tile.span-3, .app-tile.span-4 { grid-column: span 1; }
-  .canvas-section-title { font-size: 28px; }
-  .tagline-block .text { font-size: 36px; }
-  .tagline-block .text .dot { width: 8px; height: 8px; margin: 0 10px; transform: translateY(-4px); }
+@media (max-width: 600px) {
+  .kpi-row { grid-template-columns: 1fr; }
+  .kpi-value { font-size: 36px; }
+  .term-table { font-size: 10.5px; }
+  .term-table th, .term-table td { padding: 10px 12px; }
+  .term-table .meta-cell { display: none; }
+  .term-foot { grid-template-columns: 1fr; gap: 8px; }
+  .term-foot .center, .term-foot .right { text-align: left; }
+  .term-foot .left { flex-wrap: wrap; }
+  .dial-svg { width: 160px; height: 160px; }
 }
 
-/* ═══════ ANIMATIONS ═══════ */
-
-.fade-up { opacity: 0; transform: translateY(16px); transition: opacity 0.7s, transform 0.7s; }
-.fade-up.in { opacity: 1; transform: translateY(0); }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+/* print */
+@media print {
+  body { background: white; color: black; }
+  body::before { display: none; }
+  .ticker, .term-clock .pulse, .live-dot { display: none; }
 }
 
 </style>
 </head>
 <body>
 
-<!-- ═══ STATUS BAR ═══ -->
-<div class="status-bar">
-  <div class="status-left">
-    <div class="status-brand">GATOR · TERMINAL</div>
-    <div class="status-item priority"><span class="live">Live</span></div>
-    <div class="status-item"><span>Session</span><span class="val" id="sessionId">GTR-2026-05-17</span></div>
-    <div class="status-item"><span>User</span><span class="val">Curtis L · ADMIN</span></div>
+<!-- HEADER -->
+<header class="term-head">
+  <div class="term-brand">
+    <span class="mark">GATOR</span>
+    <span class="endorse">Municipal<br>Procurement Terminal</span>
   </div>
-  <div class="status-right">
-    <div class="status-item"><span>Active Auctions</span><span class="val" id="activeCount">3</span></div>
-    <div class="status-item"><span>YTD Saved</span><span class="val" style="color: var(--signal-green)">$1,247,800</span></div>
-    <div class="status-item priority"><span class="status-clock" id="clock">17:42:08 UTC</span></div>
+
+  <div class="term-clock">
+    <span class="pulse"></span>
+    <span class="live">LIVE</span>
+    <span class="time" id="liveTime">14:32:08</span>
+    <span class="session">·</span>
+    <span class="session">SESSION · ACTIVE</span>
+  </div>
+
+  <div class="term-meta">
+    <div class="item"><span class="k">FY</span><span class="v">2025–26</span></div>
+    <div class="item"><span class="k">EDITION</span><span class="v">2026 · Q2</span></div>
+    <div class="item"><span class="k">AUTH</span><span class="v">LEOPARDO</span></div>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-label">GATOR LIVE</div>
+  <div class="ticker-track">
+    <div class="ticker-content">
+      <span class="tick-item"><span class="sym">TRE-HAUTE</span><span class="val">$418,000</span><span class="delta">+27.1%</span></span>
+      <span class="sep">·</span>
+      <span class="tick-item"><span class="sym">DORAL-FL</span><span class="val">$312,400</span><span class="delta">+24.8%</span></span>
+      <span class="sep">·</span>
+      <span class="tick-item"><span class="sym">MIA-DADE</span><span class="val">$362,000</span><span class="delta">+29.3%</span></span>
+      <span class="sep">·</span>
+      <span class="tick-item"><span class="sym">EVANSVL</span><span class="val">$294,000</span><span class="delta">+22.4%</span></span>
+      <span class="sep">·</span>
+      <span class="tick-item"><span class="sym">S-MIAMI</span><span class="val">$187,000</span><span class="delta">+31.2%</span></span>
+      <span class="sep">·</span>
+      <span class="tick-item"><span class="sym">VENDORS</span><span class="val">127</span><span class="delta">+11 wk</span></span>
+      <span class="sep">·</span>
+      <span class="tick-item"><span class="sym">CITIES</span><span class="val">5</span><span class="delta">+2 q</span></span>
+      <span class="sep">·</span>
+      <!-- duplicate for seamless loop -->
+      <span class="tick-item"><span class="sym">TRE-HAUTE</span><span class="val">$418,000</span><span class="delta">+27.1%</span></span>
+      <span class="sep">·</span>
+      <span class="tick-item"><span class="sym">DORAL-FL</span><span class="val">$312,400</span><span class="delta">+24.8%</span></span>
+      <span class="sep">·</span>
+      <span class="tick-item"><span class="sym">MIA-DADE</span><span class="val">$362,000</span><span class="delta">+29.3%</span></span>
+      <span class="sep">·</span>
+      <span class="tick-item"><span class="sym">EVANSVL</span><span class="val">$294,000</span><span class="delta">+22.4%</span></span>
+      <span class="sep">·</span>
+      <span class="tick-item"><span class="sym">S-MIAMI</span><span class="val">$187,000</span><span class="delta">+31.2%</span></span>
+      <span class="sep">·</span>
+      <span class="tick-item"><span class="sym">VENDORS</span><span class="val">127</span><span class="delta">+11 wk</span></span>
+      <span class="sep">·</span>
+      <span class="tick-item"><span class="sym">CITIES</span><span class="val">5</span><span class="delta">+2 q</span></span>
+      <span class="sep">·</span>
+    </div>
   </div>
 </div>
 
-<!-- ═══ COMMAND BAR ═══ -->
-<div class="command-bar">
-  <span class="command-prompt">▸</span>
-  <button class="command-tab active" data-tab="overview"><span class="key">[1]</span>OVERVIEW</button>
-  <button class="command-tab" data-tab="identity"><span class="key">[2]</span>IDENTITY</button>
-  <button class="command-tab" data-tab="color"><span class="key">[3]</span>COLOR</button>
-  <button class="command-tab" data-tab="type"><span class="key">[4]</span>TYPE</button>
-  <button class="command-tab" data-tab="voice"><span class="key">[5]</span>VOICE</button>
-  <button class="command-tab" data-tab="application"><span class="key">[6]</span>APPLICATION</button>
-</div>
+<!-- HERO KPI ROW -->
+<section class="kpi-row">
+  <div class="kpi">
+    <div class="kpi-label"><span class="dot"></span>CITIES LIVE</div>
+    <div class="kpi-value">5</div>
+    <div class="kpi-delta">
+      <span class="change">+2</span>
+      <span class="vs">vs. Q1</span>
+    </div>
+    <svg class="kpi-sparkline" viewBox="0 0 60 18">
+      <polyline fill="none" stroke="#2EE89F" stroke-width="1.5" points="0,14 10,12 20,13 30,10 40,8 50,5 60,2"/>
+    </svg>
+  </div>
 
-<!-- ═══ TERMINAL ═══ -->
-<div class="terminal">
+  <div class="kpi">
+    <div class="kpi-label"><span class="dot"></span>AVG SAVINGS</div>
+    <div class="kpi-value green">27%</div>
+    <div class="kpi-delta">
+      <span class="change">+4 pt</span>
+      <span class="vs">vs. Q1</span>
+    </div>
+    <svg class="kpi-sparkline" viewBox="0 0 60 18">
+      <polyline fill="none" stroke="#2EE89F" stroke-width="1.5" points="0,12 10,10 20,11 30,8 40,6 50,4 60,3"/>
+    </svg>
+  </div>
 
-  <!-- ═══ LEFT · LIVE FEED ═══ -->
-  <aside class="feed-panel">
+  <div class="kpi">
+    <div class="kpi-label"><span class="dot"></span>CONTRACTS YTD</div>
+    <div class="kpi-value">14</div>
+    <div class="kpi-delta">
+      <span class="change">+9</span>
+      <span class="vs">vs. Q1</span>
+    </div>
+    <svg class="kpi-sparkline" viewBox="0 0 60 18">
+      <polyline fill="none" stroke="#2EE89F" stroke-width="1.5" points="0,15 10,14 20,12 30,10 40,7 50,5 60,2"/>
+    </svg>
+  </div>
+
+  <div class="kpi">
+    <div class="kpi-label"><span class="dot"></span>TOTAL SAVED</div>
+    <div class="kpi-value green">$1.24M</div>
+    <div class="kpi-delta">
+      <span class="change">+$526K</span>
+      <span class="vs">vs. Q1</span>
+    </div>
+    <svg class="kpi-sparkline" viewBox="0 0 60 18">
+      <polyline fill="none" stroke="#2EE89F" stroke-width="1.5" points="0,16 10,14 20,12 30,9 40,6 50,3 60,1"/>
+    </svg>
+  </div>
+</section>
+
+<!-- PRIMARY ROW: bar chart + dial -->
+<section class="primary-row">
+
+  <!-- LEFT: Savings by city bar chart -->
+  <div class="panel">
     <div class="panel-head">
-      <div class="label">Contract Feed</div>
-      <div class="count">5 ACTIVE</div>
+      <div class="panel-title">
+        Savings by City
+        <span class="badge">YTD</span>
+      </div>
+      <div class="panel-meta">5 cities · 22 departments · <span class="v">$1.24M aggregate</span></div>
+    </div>
+
+    <div class="bar-list">
+      <div class="bar-row">
+        <div class="city">Terre Haute<span class="state">IN</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width: 100%"></div></div>
+        <div class="bar-pct">27%</div>
+        <div class="bar-val">$418K</div>
+      </div>
+      <div class="bar-row">
+        <div class="city">Miami-Dade<span class="state">FL</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width: 86.6%"></div></div>
+        <div class="bar-pct">29%</div>
+        <div class="bar-val">$362K</div>
+      </div>
+      <div class="bar-row">
+        <div class="city">Doral<span class="state">FL</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width: 74.7%"></div></div>
+        <div class="bar-pct">25%</div>
+        <div class="bar-val">$312K</div>
+      </div>
+      <div class="bar-row">
+        <div class="city">Evansville<span class="state">IN</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width: 70.3%"></div></div>
+        <div class="bar-pct">22%</div>
+        <div class="bar-val">$294K</div>
+      </div>
+      <div class="bar-row">
+        <div class="city">South Miami<span class="state">FL</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width: 44.7%"></div></div>
+        <div class="bar-pct">31%</div>
+        <div class="bar-val">$187K</div>
+      </div>
+
+      <div class="bar-row total">
+        <div class="city">Aggregate</div>
+        <div></div>
+        <div class="bar-pct">27%</div>
+        <div class="bar-val">$1.57M</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Vendor engagement dial -->
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title">
+        Vendors Engaged
+        <span class="badge">ACTIVE</span>
+      </div>
+      <div class="panel-meta">Across 5 cities · 14 contracts</div>
+    </div>
+
+    <div class="dial-wrap">
+      <svg class="dial-svg" viewBox="0 0 200 200">
+        <circle class="track" cx="100" cy="100" r="80"/>
+        <circle class="fill" cx="100" cy="100" r="80"
+                stroke-dasharray="502.65"
+                stroke-dashoffset="125"
+                transform="rotate(-90 100 100)"/>
+        <text class="dial-center" x="100" y="105" text-anchor="middle">127</text>
+        <text class="dial-center-label" x="100" y="125" text-anchor="middle">VENDORS</text>
+      </svg>
+      <div class="dial-detail">
+        Across <span class="v">5</span> cities · <span class="v">14</span> contracts
+      </div>
+
+      <div class="dial-stats">
+        <div class="dial-stat">
+          <div class="label">Avg. per City</div>
+          <div class="value">25.4</div>
+        </div>
+        <div class="dial-stat">
+          <div class="label">Repeat Rate</div>
+          <div class="value">68%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- BODY GRID: closings table + feed sidebar -->
+<section class="term-body">
+
+  <!-- CLOSINGS TABLE -->
+  <div class="col table-panel">
+    <div class="panel-head" style="padding: 18px 20px 14px; margin-bottom: 0;">
+      <div class="panel-title">
+        Closings of Record
+        <span class="badge">PRE-FORMATION</span>
+      </div>
+      <div class="panel-meta">Sorted by date · <span class="v">5 cities</span></div>
+    </div>
+
+    <table class="term-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Municipality</th>
+          <th>Departments / Vendors</th>
+          <th class="right">Savings %</th>
+          <th class="right">Year-1 Value</th>
+          <th class="right">Closed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">01</td>
+          <td class="city-cell">Terre Haute<span class="state">IN</span></td>
+          <td class="meta-cell">5 dept · 27 vendors</td>
+          <td class="pct-cell">27.1%</td>
+          <td class="value-cell">$418,000</td>
+          <td class="date-cell">Sep 2025</td>
+        </tr>
+        <tr>
+          <td class="num">02</td>
+          <td class="city-cell">Evansville<span class="state">IN</span></td>
+          <td class="meta-cell">4 dept · 19 vendors</td>
+          <td class="pct-cell">22.4%</td>
+          <td class="value-cell">$294,000</td>
+          <td class="date-cell">Nov 2025</td>
+        </tr>
+        <tr>
+          <td class="num">03</td>
+          <td class="city-cell">Miami-Dade<span class="state">FL</span></td>
+          <td class="meta-cell">6 dept · 31 vendors</td>
+          <td class="pct-cell">29.3%</td>
+          <td class="value-cell">$362,000</td>
+          <td class="date-cell">Jan 2026</td>
+        </tr>
+        <tr>
+          <td class="num">04</td>
+          <td class="city-cell">South Miami<span class="state">FL</span></td>
+          <td class="meta-cell">3 dept · 14 vendors</td>
+          <td class="pct-cell">31.2%</td>
+          <td class="value-cell">$187,000</td>
+          <td class="date-cell">Mar 2026</td>
+        </tr>
+        <tr>
+          <td class="num">05</td>
+          <td class="city-cell">Doral<span class="state">FL</span></td>
+          <td class="meta-cell">4 dept · 22 vendors</td>
+          <td class="pct-cell">24.8%</td>
+          <td class="value-cell">$312,400</td>
+          <td class="date-cell">Apr 2026</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="num"></td>
+          <td class="label" colspan="2">Aggregate · 22 dept · 113 vendors</td>
+          <td class="label right">27% avg</td>
+          <td class="total">$1,573,400</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- LIVE FEED RIGHT RAIL -->
+  <div class="feed" style="background: var(--bg);">
+    <div class="feed-head">
+      <div class="feed-title">
+        <span class="live-dot"></span>
+        Live Feed
+      </div>
+      <div class="feed-count">14 events · 24h</div>
     </div>
 
     <div class="feed-list">
 
-      <div class="feed-item closed">
-        <div class="city">Terre Haute, IN <span class="ts">04:12 UTC</span></div>
-        <div class="contract">CONTRACT 2026-IN-TERRE-001</div>
-        <div class="value-row">
-          <div class="value">$418,000</div>
-          <div class="savings">−31%</div>
+      <div class="feed-item">
+        <div class="feed-item-head">
+          <span class="feed-item-stamp">14:28 · Apr 26</span>
+          <span class="feed-item-tag closed">CLOSED</span>
         </div>
-        <span class="status-tag">CLOSED · Y1</span>
+        <div class="feed-item-city">DORAL · FL</div>
+        <div class="feed-item-detail">
+          4 dept · 22 vendors
+          <span class="v">$312,400</span>
+        </div>
       </div>
 
-      <div class="feed-item closed">
-        <div class="city">Doral, FL <span class="ts">09:47 UTC</span></div>
-        <div class="contract">CONTRACT 2026-FL-DORAL-001</div>
-        <div class="value-row">
-          <div class="value">$312,400</div>
-          <div class="savings">−27%</div>
+      <div class="feed-item">
+        <div class="feed-item-head">
+          <span class="feed-item-stamp">09:14 · Apr 22</span>
+          <span class="feed-item-tag bid">BIDDING</span>
         </div>
-        <span class="status-tag">CLOSED</span>
+        <div class="feed-item-city">MIAMI-DADE · FL</div>
+        <div class="feed-item-detail">
+          Vendor round 2
+          <span class="v amber">22 active</span>
+        </div>
       </div>
 
-      <div class="feed-item live">
-        <div class="city">Miami-Dade, FL <span class="ts">14:22 UTC</span></div>
-        <div class="contract">CONTRACT 2026-FL-MIAMI-003</div>
-        <div class="value-row">
-          <div class="value">$847,200</div>
-          <div class="savings">−24%</div>
+      <div class="feed-item">
+        <div class="feed-item-head">
+          <span class="feed-item-stamp">16:42 · Apr 18</span>
+          <span class="feed-item-tag signed">SIGNED</span>
         </div>
-        <span class="status-tag">BIDDING · 22 vendors</span>
+        <div class="feed-item-city">FORT WAYNE · IN</div>
+        <div class="feed-item-detail">
+          LOI executed
+          <span class="v blue">Q3 close</span>
+        </div>
       </div>
 
-      <div class="feed-item pending">
-        <div class="city">South Miami, FL <span class="ts">16:08 UTC</span></div>
-        <div class="contract">CONTRACT 2026-FL-SMIAMI-002</div>
-        <div class="value-row">
-          <div class="value">$184,500</div>
-          <div class="savings">EST. −22%</div>
+      <div class="feed-item">
+        <div class="feed-item-head">
+          <span class="feed-item-stamp">11:08 · Apr 14</span>
+          <span class="feed-item-tag closed">CLOSED</span>
         </div>
-        <span class="status-tag">PENDING · 17:00 UTC</span>
+        <div class="feed-item-city">SOUTH MIAMI · FL</div>
+        <div class="feed-item-detail">
+          3 dept · 14 vendors
+          <span class="v">$187,000</span>
+        </div>
       </div>
 
-      <div class="feed-item closed">
-        <div class="city">Evansville, IN <span class="ts">17:30 UTC</span></div>
-        <div class="contract">CONTRACT 2026-IN-EVAN-001</div>
-        <div class="value-row">
-          <div class="value">$256,900</div>
-          <div class="savings">−29%</div>
+      <div class="feed-item">
+        <div class="feed-item-head">
+          <span class="feed-item-stamp">15:30 · Apr 09</span>
+          <span class="feed-item-tag bid">BIDDING</span>
         </div>
-        <span class="status-tag">CLOSED</span>
+        <div class="feed-item-city">JEFFERSONVILLE · IN</div>
+        <div class="feed-item-detail">
+          Vendor round 1
+          <span class="v amber">17 active</span>
+        </div>
       </div>
 
-      <div class="feed-item closed">
-        <div class="city">Terre Haute, IN <span class="ts">YTD</span></div>
-        <div class="contract">CONTRACT 2026-IN-TERRE-002</div>
-        <div class="value-row">
-          <div class="value">$93,400</div>
-          <div class="savings">−18%</div>
+      <div class="feed-item">
+        <div class="feed-item-head">
+          <span class="feed-item-stamp">08:55 · Apr 03</span>
+          <span class="feed-item-tag signed">SIGNED</span>
         </div>
-        <span class="status-tag">CLOSED · DEPT EXT.</span>
+        <div class="feed-item-city">HAMMOND · IN</div>
+        <div class="feed-item-detail">
+          LOI executed
+          <span class="v blue">Q3 close</span>
+        </div>
       </div>
 
-    </div>
-
-    <div class="feed-foot">
-      <span>TOTAL · 6 CONTRACTS</span>
-      <span class="total">$2,112,400</span>
-    </div>
-  </aside>
-
-  <!-- ═══ CENTER · CANVAS ═══ -->
-  <main class="canvas-panel">
-
-    <div class="canvas-head">
-      <div class="breadcrumb">
-        <span class="crumb">GTR</span>
-        <span class="sep">/</span>
-        <span class="crumb">BRAND</span>
-        <span class="sep">/</span>
-        <span class="crumb active" id="currentTab">OVERVIEW</span>
-      </div>
-      <div class="actions">
-        <button class="canvas-action">EXPORT</button>
-        <button class="canvas-action">PRINT</button>
-        <button class="canvas-action" id="shareBtn">SHARE</button>
-      </div>
-    </div>
-
-    <div class="canvas-content">
-
-      <!-- ═══ TAB · OVERVIEW ═══ -->
-      <div class="tab active" id="tab-overview">
-
-        <div class="overview-hero">
-          <div class="stamp">Brand System · V2 · Live</div>
-          <h1>GATOR<span class="accent">.</span></h1>
-          <p class="lede">
-            A municipal procurement platform built on decades of construction and government relationships. <span class="hl">Five cities closed before entity formation.</span> Part of the Leopardo family of brands. This terminal renders the brand system as it operates — every spec verified against live deliverables.
-          </p>
+      <div class="feed-item">
+        <div class="feed-item-head">
+          <span class="feed-item-stamp">13:21 · Mar 28</span>
+          <span class="feed-item-tag closed">CLOSED</span>
         </div>
-
-        <div class="metric-strip">
-          <div class="metric">
-            <div class="label">Cities Live</div>
-            <div class="value">5</div>
-            <div class="delta"><span class="up">▲ 2</span> vs Q1</div>
-          </div>
-          <div class="metric">
-            <div class="label">Avg Savings</div>
-            <div class="value accent">27%</div>
-            <div class="delta"><span class="up">▲ 4pt</span> vs Q1</div>
-          </div>
-          <div class="metric">
-            <div class="label">Contracts YTD</div>
-            <div class="value">14</div>
-            <div class="delta"><span class="up">▲ 9</span> vs Q1</div>
-          </div>
-          <div class="metric">
-            <div class="label">Total Saved</div>
-            <div class="value alert">$1.24M</div>
-            <div class="delta"><span class="up">▲ 312%</span> vs Q1</div>
-          </div>
+        <div class="feed-item-city">MIAMI-DADE · FL</div>
+        <div class="feed-item-detail">
+          6 dept · 31 vendors
+          <span class="v">$362,000</span>
         </div>
-
-        <div class="ticker">
-          <div class="ticker-label">▰ LIVE</div>
-          <div class="ticker-tape">
-            <span class="item"><span class="city">TERRE HAUTE</span>Y1 SAVINGS<span class="val">$418,000</span></span>
-            <span class="sep">·</span>
-            <span class="item"><span class="city">DORAL FL</span>27% AVG<span class="val">$312,400</span></span>
-            <span class="sep">·</span>
-            <span class="item"><span class="city">MIAMI-DADE</span>BIDDING<span class="val">22 VENDORS</span></span>
-            <span class="sep">·</span>
-            <span class="item"><span class="city">EVANSVILLE</span>29% SAVED<span class="val">$256,900</span></span>
-            <span class="sep">·</span>
-            <span class="item"><span class="city">SOUTH MIAMI</span>EST 22%<span class="val">$184,500</span></span>
-            <!-- duplicate for loop -->
-            <span class="sep">·</span>
-            <span class="item"><span class="city">TERRE HAUTE</span>Y1 SAVINGS<span class="val">$418,000</span></span>
-            <span class="sep">·</span>
-            <span class="item"><span class="city">DORAL FL</span>27% AVG<span class="val">$312,400</span></span>
-            <span class="sep">·</span>
-            <span class="item"><span class="city">MIAMI-DADE</span>BIDDING<span class="val">22 VENDORS</span></span>
-            <span class="sep">·</span>
-            <span class="item"><span class="city">EVANSVILLE</span>29% SAVED<span class="val">$256,900</span></span>
-            <span class="sep">·</span>
-            <span class="item"><span class="city">SOUTH MIAMI</span>EST 22%<span class="val">$184,500</span></span>
-          </div>
-        </div>
-
-        <div class="chart-row">
-          <div class="chart-cell">
-            <h4>Savings by City <span class="badge">YTD 2026</span></h4>
-            <div class="bar-chart">
-              <div class="bar-row">
-                <div class="city-label">Terre Haute</div>
-                <div class="bar-track"><div class="bar-fill" data-width="100">31%</div></div>
-                <div class="bar-value">$418K</div>
-              </div>
-              <div class="bar-row">
-                <div class="city-label">Doral</div>
-                <div class="bar-track"><div class="bar-fill" data-width="87">27%</div></div>
-                <div class="bar-value">$312K</div>
-              </div>
-              <div class="bar-row">
-                <div class="city-label">Evansville</div>
-                <div class="bar-track"><div class="bar-fill" data-width="93">29%</div></div>
-                <div class="bar-value">$257K</div>
-              </div>
-              <div class="bar-row">
-                <div class="city-label">South Miami</div>
-                <div class="bar-track"><div class="bar-fill" data-width="71">22%</div></div>
-                <div class="bar-value">$185K</div>
-              </div>
-              <div class="bar-row">
-                <div class="city-label">Miami-Dade</div>
-                <div class="bar-track"><div class="bar-fill" data-width="77">24%</div></div>
-                <div class="bar-value">$847K</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="chart-cell">
-            <h4>Vendors Engaged</h4>
-            <div class="vendor-circle">
-              <svg viewBox="0 0 160 160">
-                <circle class="ring-bg" cx="80" cy="80" r="64"/>
-                <circle class="ring-fill" id="vendorRing" cx="80" cy="80" r="64"
-                        stroke-dasharray="402" stroke-dashoffset="402"/>
-                <text class="num" x="80" y="88" text-anchor="middle">127</text>
-                <text class="lbl" x="80" y="108" text-anchor="middle">VENDORS</text>
-              </svg>
-              <div class="vendor-circle-label">Across 5 cities<br>14 contracts</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- ═══ TAB · IDENTITY ═══ -->
-      <div class="tab" id="tab-identity">
-
-        <div class="canvas-section-head">
-          <div>
-            <div class="canvas-section-num">SPEC.01 · WORDMARK</div>
-            <div class="canvas-section-title">The <span class="accent">mark.</span></div>
-          </div>
-          <div class="canvas-section-meta">JOST · 700 · −0.045em</div>
-        </div>
-
-        <div class="id-screen">
-          <div class="id-wordmark">GATOR</div>
-          <div class="id-endorse">A Leopardo Technology</div>
-          <div class="id-tagline">
-            Aggregate<span class="dot"></span>Compete<span class="dot"></span>Save
-          </div>
-        </div>
-
-        <div class="spec-table">
-          <div class="spec-row">
-            <div class="key">Wordmark Font</div>
-            <div class="val accent">Jost</div>
-            <div class="check">✓ VERIFIED</div>
-          </div>
-          <div class="spec-row">
-            <div class="key">Wordmark Weight</div>
-            <div class="val">700 (Bold)</div>
-            <div class="check">✓ VERIFIED</div>
-          </div>
-          <div class="spec-row">
-            <div class="key">Letter Spacing</div>
-            <div class="val">−0.045em</div>
-            <div class="check">✓ VERIFIED</div>
-          </div>
-          <div class="spec-row">
-            <div class="key">Endorsement</div>
-            <div class="val">A LEOPARDO TECHNOLOGY</div>
-            <div class="check">✓ REQUIRED</div>
-          </div>
-          <div class="spec-row">
-            <div class="key">Endorsement Spacing</div>
-            <div class="val">0.32em tracking</div>
-            <div class="check">✓ VERIFIED</div>
-          </div>
-          <div class="spec-row">
-            <div class="key">Min. Clear Space</div>
-            <div class="val">1× cap height on all sides</div>
-            <div class="check">✓ ENFORCED</div>
-          </div>
-          <div class="spec-row">
-            <div class="key">Min. Size · Digital</div>
-            <div class="val">24px wordmark height</div>
-            <div class="check">✓ ENFORCED</div>
-          </div>
-          <div class="spec-row">
-            <div class="key">Min. Size · Print</div>
-            <div class="val">14pt wordmark height</div>
-            <div class="check">✓ ENFORCED</div>
-          </div>
-        </div>
-
-        <div class="canvas-section-head" style="margin-top: 64px;">
-          <div>
-            <div class="canvas-section-num">SPEC.02 · LOCKUPS</div>
-            <div class="canvas-section-title">Surface <span class="accent">variants.</span></div>
-          </div>
-          <div class="canvas-section-meta">4 PRIMARY · ALL WCAG AAA</div>
-        </div>
-
-        <div class="lockup-grid">
-          <div class="lock on-bg">
-            <div class="lock-word">GATOR</div>
-            <div class="lock-end">A Leopardo Technology</div>
-            <div class="lock-tag">TERMINAL · 16.6:1</div>
-          </div>
-          <div class="lock on-paper">
-            <div class="lock-word">GATOR</div>
-            <div class="lock-end">A Leopardo Technology</div>
-            <div class="lock-tag">PAPER · 10.8:1</div>
-          </div>
-          <div class="lock on-blue">
-            <div class="lock-word">GATOR</div>
-            <div class="lock-end">A Leopardo Technology</div>
-            <div class="lock-tag">FAMILY · 10.8:1</div>
-          </div>
-          <div class="lock on-green">
-            <div class="lock-word">GATOR</div>
-            <div class="lock-end">A Leopardo Technology</div>
-            <div class="lock-tag">IDENTIFIER · 6.2:1</div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- ═══ TAB · COLOR ═══ -->
-      <div class="tab" id="tab-color">
-
-        <div class="canvas-section-head">
-          <div>
-            <div class="canvas-section-num">SPEC.03 · PALETTE</div>
-            <div class="canvas-section-title">Six <span class="accent">colors.</span></div>
-          </div>
-          <div class="canvas-section-meta">CLICK SWATCH TO COPY HEX</div>
-        </div>
-
-        <div class="color-grid">
-
-          <div class="color-cell" data-hex="#1A3868">
-            <div class="color-chip c-blue">
-              <span class="ratio">AAA · 10.83:1</span>
-              <span class="tag">PRIMARY · FAMILY</span>
-            </div>
-            <div class="color-meta">
-              <div class="name">Leopardo Blue</div>
-              <div class="codes"><span>#1A3868</span><span>PMS 294C</span></div>
-              <div class="use">Inherited family anchor. Headlines, wordmark, primary surfaces. Carries Leopardo lineage across every touchpoint.</div>
-              <div class="hint">// CLICK TO COPY</div>
-            </div>
-          </div>
-
-          <div class="color-cell" data-hex="#2E6B58">
-            <div class="color-chip c-green">
-              <span class="ratio">AA · 6.21:1</span>
-              <span class="tag">IDENTIFIER</span>
-            </div>
-            <div class="color-meta">
-              <div class="name">GATOR Green</div>
-              <div class="codes"><span>#2E6B58</span><span>RGB 46·107·88</span></div>
-              <div class="use">GATOR-specific. Labels, savings indicators, accent moments. Subdued — never decorative, never large area fill.</div>
-              <div class="hint">// CLICK TO COPY</div>
-            </div>
-          </div>
-
-          <div class="color-cell" data-hex="#FFE600">
-            <div class="color-chip c-yellow">
-              <span class="ratio">on-ink · 14.31:1</span>
-              <span class="tag">FAMILY ACCENT</span>
-            </div>
-            <div class="color-meta">
-              <div class="name">Leopardo Yellow</div>
-              <div class="codes"><span>#FFE600</span><span>PMS 109C</span></div>
-              <div class="use">Shared family accent. Dark surfaces only — fails contrast on white. Used sparingly for high-emphasis moments.</div>
-              <div class="hint">// CLICK TO COPY</div>
-            </div>
-          </div>
-
-          <div class="color-cell" data-hex="#FFFFFF">
-            <div class="color-chip c-paper">
-              <span class="ratio">BASE</span>
-              <span class="tag">PAPER</span>
-            </div>
-            <div class="color-meta">
-              <div class="name">Paper White</div>
-              <div class="codes"><span>#FFFFFF</span><span>Base</span></div>
-              <div class="use">Primary background for web, document, and presentation surfaces. The blank page GATOR writes on.</div>
-              <div class="hint">// CLICK TO COPY</div>
-            </div>
-          </div>
-
-          <div class="color-cell" data-hex="#1A1A1A">
-            <div class="color-chip c-ink">
-              <span class="ratio">AAA · 16.6:1</span>
-              <span class="tag">INK</span>
-            </div>
-            <div class="color-meta">
-              <div class="name">Ink</div>
-              <div class="codes"><span>#1A1A1A</span><span>RGB 26·26·26</span></div>
-              <div class="use">Body text on paper. Softer than pure black for screen and print comfort. Never use #000.</div>
-              <div class="hint">// CLICK TO COPY</div>
-            </div>
-          </div>
-
-          <div class="color-cell" data-hex="#1F4F40">
-            <div class="color-chip c-green-d">
-              <span class="ratio">AAA · 9.27:1</span>
-              <span class="tag">DEEP FOREST</span>
-            </div>
-            <div class="color-meta">
-              <div class="name">Deep Forest</div>
-              <div class="codes"><span>#1F4F40</span><span>AAA</span></div>
-              <div class="use">Body-text alternative for GATOR-branded contexts where green must read as text on paper surfaces.</div>
-              <div class="hint">// CLICK TO COPY</div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Contrast Terminal -->
-        <div class="contrast-term">
-          <div class="contrast-term-head">
-            <div class="label"><span class="accent">▸</span>contrast.check — WCAG 2.1 LIVE COMPLIANCE</div>
-            <div class="meta">DIST/RATIO · ANSI/SAFE</div>
-          </div>
-
-          <div class="contrast-term-body">
-
-            <div class="contrast-controls-pane">
-              <div class="contrast-pane-label">$ FOREGROUND</div>
-              <div class="color-row" id="fg-row">
-                <button class="color-pick active" data-color="#1A3868" data-name="Blue"><span class="dot" style="background:#1A3868"></span>Blue</button>
-                <button class="color-pick" data-color="#2E6B58" data-name="Green"><span class="dot" style="background:#2E6B58"></span>Green</button>
-                <button class="color-pick" data-color="#1F4F40" data-name="Forest"><span class="dot" style="background:#1F4F40"></span>Forest</button>
-                <button class="color-pick" data-color="#1A1A1A" data-name="Ink"><span class="dot" style="background:#1A1A1A"></span>Ink</button>
-                <button class="color-pick" data-color="#FFE600" data-name="Yellow"><span class="dot" style="background:#FFE600"></span>Yellow</button>
-                <button class="color-pick" data-color="#FFFFFF" data-name="Paper"><span class="dot" style="background:#FFFFFF"></span>Paper</button>
-              </div>
-
-              <div class="contrast-pane-label">$ BACKGROUND</div>
-              <div class="color-row" id="bg-row">
-                <button class="color-pick active" data-color="#FFFFFF" data-name="Paper"><span class="dot" style="background:#FFFFFF"></span>Paper</button>
-                <button class="color-pick" data-color="#1A3868" data-name="Blue"><span class="dot" style="background:#1A3868"></span>Blue</button>
-                <button class="color-pick" data-color="#1F4F40" data-name="Forest"><span class="dot" style="background:#1F4F40"></span>Forest</button>
-                <button class="color-pick" data-color="#1A1A1A" data-name="Ink"><span class="dot" style="background:#1A1A1A"></span>Ink</button>
-                <button class="color-pick" data-color="#FFE600" data-name="Yellow"><span class="dot" style="background:#FFE600"></span>Yellow</button>
-                <button class="color-pick" data-color="#0a0d0c" data-name="Terminal"><span class="dot" style="background:#0a0d0c"></span>Terminal</button>
-              </div>
-            </div>
-
-            <div class="contrast-preview-pane">
-              <div class="contrast-preview-window" id="cpWindow">
-                <div class="cp-display" id="cpDisplay">GATOR</div>
-                <div class="cp-body" id="cpBody">Aggregate · Compete · Save</div>
-              </div>
-              <div class="contrast-readout">
-                <div class="readout pass" id="rRatio">
-                  <div class="lab">Ratio</div>
-                  <div class="val" id="rRatioVal">10.83:1</div>
-                </div>
-                <div class="readout pass" id="rBody">
-                  <div class="lab">Body AA</div>
-                  <div class="val" id="rBodyVal">AAA</div>
-                </div>
-                <div class="readout pass" id="rLarge">
-                  <div class="lab">Large AA</div>
-                  <div class="val" id="rLargeVal">AAA</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
-      <!-- ═══ TAB · TYPE ═══ -->
-      <div class="tab" id="tab-type">
-
-        <div class="canvas-section-head">
-          <div>
-            <div class="canvas-section-num">SPEC.04 · TYPOGRAPHY</div>
-            <div class="canvas-section-title">Three <span class="accent">voices.</span></div>
-          </div>
-          <div class="canvas-section-meta">JOST · LIBRE FRANKLIN · JETBRAINS MONO</div>
-        </div>
-
-        <div class="type-block">
-          <div class="type-head">
-            <div class="type-id">
-              <div class="num">01</div>
-              <div>
-                <div class="role">Display</div>
-                <div class="sub">Wordmark · Headlines · Hero</div>
-              </div>
-            </div>
-            <div class="type-specs">
-              <span>FONT<strong>JOST</strong></span>
-              <span>WT<strong>500/600/700</strong></span>
-              <span>TRACK<strong>−0.035em</strong></span>
-            </div>
-          </div>
-          <div class="type-sample-display">
-            Aggregate.<br>
-            Compete.<br>
-            <span class="accent">Save.</span>
-          </div>
-        </div>
-
-        <div class="type-block">
-          <div class="type-head">
-            <div class="type-id">
-              <div class="num">02</div>
-              <div>
-                <div class="role">Body</div>
-                <div class="sub">Long-form · Documents · UI</div>
-              </div>
-            </div>
-            <div class="type-specs">
-              <span>FONT<strong>LIBRE FRANKLIN</strong></span>
-              <span>WT<strong>300/400/500/600</strong></span>
-              <span>LINE<strong>1.6</strong></span>
-            </div>
-          </div>
-          <div class="type-sample-body">
-            Five cities — <strong>Terre Haute, Miami-Dade, South Miami, Evansville, and Doral</strong> — closed before entity formation. Built on decades of Leopardo's municipal experience and operational discipline. Every department, one aggregated auction, <em>twenty-seven vendors invited to compete</em>.
-          </div>
-        </div>
-
-        <div class="type-block">
-          <div class="type-head">
-            <div class="type-id">
-              <div class="num">03</div>
-              <div>
-                <div class="role">Data</div>
-                <div class="sub">Contracts · IDs · Procurement</div>
-              </div>
-            </div>
-            <div class="type-specs">
-              <span>FONT<strong>JETBRAINS MONO</strong></span>
-              <span>WT<strong>500/600</strong></span>
-              <span>TRACK<strong>0.05–0.22em</strong></span>
-            </div>
-          </div>
-          <div class="type-sample-mono">
-            <span class="dim">$</span> contract <span class="accent">show 2026-FL-DORAL-001</span><br><br>
-            CONTRACT ID    <span class="accent">2026-FL-DORAL-001</span><br>
-            VALUE          <span class="accent">$312,400.00</span><br>
-            SAVINGS        <span class="yellow">−27% · $115,440</span><br>
-            VENDORS        <span class="accent">22 invited · 17 bid</span><br>
-            STATUS         <span class="accent">▰ CLOSED · 2026-04-22</span><br>
-            DEPARTMENTS    <span class="accent">5 · ALL ENGAGED</span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- ═══ TAB · VOICE ═══ -->
-      <div class="tab" id="tab-voice">
-
-        <div class="canvas-section-head">
-          <div>
-            <div class="canvas-section-num">SPEC.05 · VOICE</div>
-            <div class="canvas-section-title">Quiet · <span class="accent">confident.</span></div>
-          </div>
-          <div class="canvas-section-meta">DO/DON'T LIVE COMPARISON</div>
-        </div>
-
-        <div class="voice-row">
-          <div class="voice-side yes">
-            <div class="marker">▰ DEPLOY</div>
-            <div class="line">"Five cities. Closed before the entity was formed."</div>
-            <div class="note">Specific. Numerical. Past-tense confident. The fact does the persuasion. A CMO can quote this verbatim in a board meeting.</div>
-          </div>
-          <div class="voice-side no">
-            <div class="marker">▰ REJECT</div>
-            <div class="line">"Innovative AI-driven procurement solutions!"</div>
-            <div class="note">No category language. No exclamation. Procurement directors buy boring competence, not innovation. Exclamation marks read as desperation.</div>
-          </div>
-        </div>
-
-        <div class="voice-row">
-          <div class="voice-side yes">
-            <div class="marker">▰ DEPLOY</div>
-            <div class="line">"$418,000 saved in year one. Terre Haute, Indiana."</div>
-            <div class="note">Real city, real number, real outcome. Receipts before adjectives. The mayor's office can verify every word.</div>
-          </div>
-          <div class="voice-side no">
-            <div class="marker">▰ REJECT</div>
-            <div class="line">"Significant savings for forward-thinking cities."</div>
-            <div class="note">No vague magnitudes. No "forward-thinking." Cities don't want to be flattered; they want documented results.</div>
-          </div>
-        </div>
-
-        <div class="voice-row">
-          <div class="voice-side yes">
-            <div class="marker">▰ DEPLOY</div>
-            <div class="line">"Built on decades of municipal experience."</div>
-            <div class="note">The Leopardo lineage stated plainly. One short sentence carries the entire credibility argument.</div>
-          </div>
-          <div class="voice-side no">
-            <div class="marker">▰ REJECT</div>
-            <div class="line">"Leveraging deep industry expertise to unlock value."</div>
-            <div class="note">No leveraging. No unlocking. No "value." Real verbs, real outcomes, fewer syllables. Strip every word that does no work.</div>
-          </div>
-        </div>
-
-        <div class="tagline-block">
-          <div class="label">▸ TAGLINE · CANONICAL</div>
-          <div class="text">
-            Aggregate<span class="dot"></span>Compete<span class="dot"></span>Save
-          </div>
-        </div>
-
-      </div>
-
-      <!-- ═══ TAB · APPLICATION ═══ -->
-      <div class="tab" id="tab-application">
-
-        <div class="canvas-section-head">
-          <div>
-            <div class="canvas-section-num">SPEC.06 · APPLICATION</div>
-            <div class="canvas-section-title">In <span class="accent">deployment.</span></div>
-          </div>
-          <div class="canvas-section-meta">PRODUCTION ARTIFACTS · MAY 2026</div>
-        </div>
-
-        <div class="app-grid">
-
-          <div class="app-tile paper span-2">
-            <div class="tag">CARD · FRONT</div>
-            <div class="word">GATOR</div>
-            <div class="end">A Leopardo Technology</div>
-            <div class="body">
-              <div class="biz-name">Curtis Leopardo</div>
-              <div class="biz-role">Chief Executive Officer</div>
-              <div class="biz-contact">
-                curtis@gator.io<br>
-                312 · 555 · 0148<br>
-                Chicago · Illinois
-              </div>
-            </div>
-          </div>
-
-          <div class="app-tile dark span-4">
-            <div class="tag">CASE STUDY · 001</div>
-            <div class="word">GATOR</div>
-            <div class="end">A Leopardo Technology</div>
-            <div class="body">
-              <div class="mega">$418K</div>
-              <div class="meta">ANNUAL SAVINGS · YEAR ONE · TERRE HAUTE, INDIANA</div>
-              <div class="rule"></div>
-              <div class="head" style="font-size: 22px;">
-                Five departments. One aggregated procurement engine. Twenty-seven vendors invited to compete.
-              </div>
-            </div>
-          </div>
-
-          <div class="app-tile green span-3">
-            <div class="tag">SOCIAL · MAY 2026</div>
-            <div class="word">GATOR</div>
-            <div class="end">A Leopardo Technology</div>
-            <div class="body">
-              <div class="head">Five cities closed before the entity was formed.</div>
-              <div class="rule"></div>
-              <div class="meta">
-                Terre Haute · Miami-Dade · South Miami<br>
-                Evansville · Doral
-              </div>
-            </div>
-          </div>
-
-          <div class="app-tile paper span-3">
-            <div class="tag">RFP RESPONSE</div>
-            <div class="word">GATOR</div>
-            <div class="end">A Leopardo Technology</div>
-            <div class="body">
-              <div class="head" style="font-size: 22px;">Response to RFP 2026-027</div>
-              <div class="rule"></div>
-              <div class="meta">
-                Prepared for the City of [Municipality]<br>
-                Procurement Department<br>
-                Submitted May 2026
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="canvas-section-head" style="margin-top: 64px;">
-          <div>
-            <div class="canvas-section-num">SPEC.07 · PRINCIPLES</div>
-            <div class="canvas-section-title">Three rules. <span class="accent">Non-negotiable.</span></div>
-          </div>
-          <div class="canvas-section-meta">ENFORCED ACROSS ALL DELIVERABLES</div>
-        </div>
-
-        <div class="rules">
-          <div class="rule-cell">
-            <div class="roman">i.</div>
-            <div class="title">Family first.</div>
-            <div class="body">Every GATOR asset carries the endorsement line "A Leopardo Technology." Same fonts. Same blue. The parent relationship is structural, not decorative.</div>
-          </div>
-          <div class="rule-cell">
-            <div class="roman">ii.</div>
-            <div class="title">Real cities. Real numbers.</div>
-            <div class="body">Terre Haute, not "midwest cities." $418,000, not "significant savings." 27%, not "double-digit improvements." Never reach for the generic when the specific is available.</div>
-          </div>
-          <div class="rule-cell">
-            <div class="roman">iii.</div>
-            <div class="title">Quiet over loud.</div>
-            <div class="body">No exclamation. No revolution. No category language. Procurement directors don't buy from loud rooms. The work persuades; the brand doesn't have to.</div>
-          </div>
-        </div>
-
       </div>
 
     </div>
+  </div>
 
-  </main>
+</section>
 
-  <!-- ═══ RIGHT · INFO PANEL ═══ -->
-  <aside class="info-panel">
-
-    <div class="sys-status">
-      <div class="sys-status-row">
-        <span class="label">SYSTEM</span>
-        <span class="state">OPERATIONAL</span>
-      </div>
-      <div class="sys-status-row">
-        <span class="label">SESSION</span>
-        <span style="color: var(--term-fg); font-weight: 600;" id="uptime">02:14:33</span>
-      </div>
-    </div>
-
-    <div class="info-block">
-      <div class="head">BRAND SYSTEM</div>
-      <div class="row"><span class="k">Version</span><span class="v accent">V2.0</span></div>
-      <div class="row"><span class="k">Released</span><span class="v">May 2026</span></div>
-      <div class="row"><span class="k">Author</span><span class="v">VDO Aigency</span></div>
-      <div class="row"><span class="k">Status</span><span class="v accent">ACTIVE</span></div>
-      <div class="row"><span class="k">WCAG</span><span class="v accent">AA · AAA</span></div>
-    </div>
-
-    <div class="info-block">
-      <div class="head">PARENT</div>
-      <div class="row"><span class="k">Family</span><span class="v">Leopardo</span></div>
-      <div class="row"><span class="k">Brand Anchor</span><span class="v accent">#1A3868</span></div>
-      <div class="row"><span class="k">Endorsement</span><span class="v" style="font-size: 10px;">A LEOPARDO TECH</span></div>
-    </div>
-
-    <div class="mini-map">
-      <div class="head" style="font-size: 10px; letter-spacing: 0.2em; color: var(--term-fg-3); font-weight: 600; margin-bottom: 16px;">
-        <span style="color: var(--signal-green); margin-right: 6px;">◢</span>COVERAGE MAP
-      </div>
-      <svg viewBox="0 0 240 160">
-        <!-- Simplified US outline -->
-        <path class="map-bg" d="M20 60 L40 50 L80 45 L130 50 L180 55 L210 70 L220 90 L210 110 L180 120 L140 125 L100 120 L60 110 L30 95 L20 80 Z"/>
-
-        <!-- Indiana cluster -->
-        <circle class="dot-active" cx="135" cy="75" r="4"/>
-        <text class="label" x="142" y="78">TERRE HAUTE</text>
-        <circle class="dot-active" cx="138" cy="82" r="4"/>
-        <text class="label" x="145" y="92">EVANSVILLE</text>
-
-        <!-- Florida cluster -->
-        <circle class="dot-active" cx="185" cy="115" r="4"/>
-        <text class="label" x="155" y="123">DORAL</text>
-        <circle class="dot-active" cx="188" cy="118" r="4"/>
-        <text class="label" x="142" y="135">SOUTH MIAMI</text>
-        <circle class="dot-pending" cx="186" cy="113" r="5">
-          <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
-        </circle>
-        <text class="label" x="170" y="108">MIAMI-DADE</text>
-      </svg>
-    </div>
-
-    <div class="info-block">
-      <div class="head">DEPLOYMENTS</div>
-      <div class="row"><span class="k">Cities Live</span><span class="v accent">5</span></div>
-      <div class="row"><span class="k">Bidding Now</span><span class="v yellow">1</span></div>
-      <div class="row"><span class="k">Pending Close</span><span class="v" style="color: var(--signal-amber)">1</span></div>
-      <div class="row"><span class="k">Vendors Total</span><span class="v">127</span></div>
-    </div>
-
-    <div class="info-block">
-      <div class="head">KEYBOARD</div>
-      <div class="row"><span class="k">[1] [6]</span><span class="v" style="font-size: 10px;">Switch tab</span></div>
-      <div class="row"><span class="k">Esc</span><span class="v" style="font-size: 10px;">Overview</span></div>
-      <div class="row"><span class="k">[E]</span><span class="v" style="font-size: 10px;">Export</span></div>
-    </div>
-
-  </aside>
-
-</div>
-
-<!-- ═══ TOAST ═══ -->
-<div class="toast" id="toast">▸ READY</div>
+<!-- FOOTER -->
+<footer class="term-foot">
+  <div class="left">
+    <span>GTR-TERMINAL · v1.0</span>
+    <span>·</span>
+    <span>Auth: Leopardo Companies</span>
+  </div>
+  <div class="center">Aggregate · Compete · Save</div>
+  <div class="right signature">
+    Compiled · <span class="who">Curtis Leopardo</span> · GATOR
+  </div>
+</footer>
 
 <script>
 
-// ═══ TAB SWITCHING ═══
-const tabs = document.querySelectorAll('.command-tab');
-const panels = document.querySelectorAll('.tab');
-const currentTabLabel = document.getElementById('currentTab');
-
-function switchTab(target) {
-  tabs.forEach(t => t.classList.remove('active'));
-  panels.forEach(p => p.classList.remove('active'));
-  const tab = document.querySelector(`.command-tab[data-tab="${target}"]`);
-  const panel = document.getElementById('tab-' + target);
-  if (tab) tab.classList.add('active');
-  if (panel) panel.classList.add('active');
-  if (tab) currentTabLabel.textContent = tab.textContent.replace(/\[\d+\]/, '').trim();
-
-  // Trigger bar animation when overview opens
-  if (target === 'overview') {
-    setTimeout(animateBars, 80);
-    setTimeout(animateVendorRing, 100);
-  }
-}
-
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => switchTab(tab.dataset.tab));
-});
-
-// Keyboard shortcuts
-document.addEventListener('keydown', (e) => {
-  const keys = { '1': 'overview', '2': 'identity', '3': 'color', '4': 'type', '5': 'voice', '6': 'application' };
-  if (keys[e.key]) switchTab(keys[e.key]);
-  if (e.key === 'Escape') switchTab('overview');
-});
-
-// ═══ ANIMATE BARS ═══
-function animateBars() {
-  document.querySelectorAll('.bar-fill').forEach(b => {
-    const w = b.dataset.width;
-    b.style.width = '0%';
-    requestAnimationFrame(() => {
-      b.style.width = w + '%';
-    });
-  });
-}
-
-// ═══ ANIMATE VENDOR RING ═══
-function animateVendorRing() {
-  const ring = document.getElementById('vendorRing');
-  if (!ring) return;
-  const total = 402; // 2*pi*64
-  const percent = 0.78; // 127 vendors visualization
-  ring.style.strokeDashoffset = total;
-  requestAnimationFrame(() => {
-    ring.style.strokeDashoffset = total * (1 - percent);
-  });
-}
-
-animateBars();
-animateVendorRing();
-
-// ═══ CLOCK ═══
+// ─── Live clock ───
 function updateClock() {
-  const d = new Date();
-  const h = String(d.getUTCHours()).padStart(2, '0');
-  const m = String(d.getUTCMinutes()).padStart(2, '0');
-  const s = String(d.getUTCSeconds()).padStart(2, '0');
-  const clock = document.getElementById('clock');
-  if (clock) clock.textContent = `${h}:${m}:${s} UTC`;
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2, '0');
+  const m = String(now.getMinutes()).padStart(2, '0');
+  const s = String(now.getSeconds()).padStart(2, '0');
+  const el = document.getElementById('liveTime');
+  if (el) el.textContent = `${h}:${m}:${s}`;
 }
+
 updateClock();
 setInterval(updateClock, 1000);
 
-// ═══ UPTIME ═══
-const startTime = Date.now();
-function updateUptime() {
-  const diff = Math.floor((Date.now() - startTime) / 1000);
-  const h = String(Math.floor(diff / 3600)).padStart(2, '0');
-  const m = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
-  const s = String(diff % 60).padStart(2, '0');
-  const u = document.getElementById('uptime');
-  if (u) u.textContent = `${h}:${m}:${s}`;
+// ─── Subtle KPI value pulse (every 30s, fake "live update") ───
+const kpis = document.querySelectorAll('.kpi-value');
+function flashKpi() {
+  const random = kpis[Math.floor(Math.random() * kpis.length)];
+  random.style.transition = 'color 0.3s, text-shadow 0.3s';
+  const original = random.style.color;
+  random.style.color = '#2EE89F';
+  random.style.textShadow = '0 0 12px rgba(46, 232, 159, 0.5)';
+  setTimeout(() => {
+    random.style.color = original;
+    random.style.textShadow = '';
+  }, 400);
 }
-updateUptime();
-setInterval(updateUptime, 1000);
+setInterval(flashKpi, 8000);
 
-// ═══ TOAST ═══
-const toast = document.getElementById('toast');
-function showToast(message) {
-  toast.textContent = message;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 1800);
-}
-
-// ═══ COPY COLOR ═══
-document.querySelectorAll('.color-cell').forEach(cell => {
-  cell.addEventListener('click', () => {
-    const hex = cell.dataset.hex;
-    navigator.clipboard.writeText(hex).then(() => {
-      cell.classList.add('copied');
-      showToast(`▸ COPIED ${hex}`);
-      setTimeout(() => cell.classList.remove('copied'), 1800);
-    });
+// ─── Bar chart animation on load ───
+window.addEventListener('load', () => {
+  document.querySelectorAll('.bar-fill').forEach(bar => {
+    const w = bar.style.width;
+    bar.style.width = '0%';
+    setTimeout(() => { bar.style.width = w; }, 200);
   });
 });
-
-// ═══ CONTRAST CHECKER ═══
-function hexToRgb(hex) {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return [r, g, b];
-}
-
-function luminance([r, g, b]) {
-  const a = [r, g, b].map(v => {
-    v /= 255;
-    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
-  });
-  return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
-}
-
-function contrast(hex1, hex2) {
-  const l1 = luminance(hexToRgb(hex1));
-  const l2 = luminance(hexToRgb(hex2));
-  return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
-}
-
-let fg = '#1A3868', fgN = 'Blue';
-let bg = '#FFFFFF', bgN = 'Paper';
-
-function updateContrast() {
-  const ratio = contrast(fg, bg);
-  const r = ratio.toFixed(2);
-  document.getElementById('rRatioVal').textContent = r + ':1';
-
-  // Update preview window
-  const win = document.getElementById('cpWindow');
-  win.style.background = bg;
-  document.getElementById('cpDisplay').style.color = fg;
-  document.getElementById('cpBody').style.color = fg;
-
-  // Body grade
-  const bodyEl = document.getElementById('rBody');
-  const bodyVal = document.getElementById('rBodyVal');
-  bodyEl.classList.remove('pass', 'warn', 'fail');
-  if (ratio >= 7) { bodyVal.textContent = 'AAA'; bodyEl.classList.add('pass'); }
-  else if (ratio >= 4.5) { bodyVal.textContent = 'AA'; bodyEl.classList.add('pass'); }
-  else if (ratio >= 3) { bodyVal.textContent = 'WARN'; bodyEl.classList.add('warn'); }
-  else { bodyVal.textContent = 'FAIL'; bodyEl.classList.add('fail'); }
-
-  // Large grade
-  const largeEl = document.getElementById('rLarge');
-  const largeVal = document.getElementById('rLargeVal');
-  largeEl.classList.remove('pass', 'warn', 'fail');
-  if (ratio >= 4.5) { largeVal.textContent = 'AAA'; largeEl.classList.add('pass'); }
-  else if (ratio >= 3) { largeVal.textContent = 'AA'; largeEl.classList.add('pass'); }
-  else { largeVal.textContent = 'FAIL'; largeEl.classList.add('fail'); }
-}
-
-document.querySelectorAll('#fg-row .color-pick').forEach(b => {
-  b.addEventListener('click', () => {
-    document.querySelectorAll('#fg-row .color-pick').forEach(x => x.classList.remove('active'));
-    b.classList.add('active');
-    fg = b.dataset.color; fgN = b.dataset.name;
-    updateContrast();
-  });
-});
-
-document.querySelectorAll('#bg-row .color-pick').forEach(b => {
-  b.addEventListener('click', () => {
-    document.querySelectorAll('#bg-row .color-pick').forEach(x => x.classList.remove('active'));
-    b.classList.add('active');
-    bg = b.dataset.color; bgN = b.dataset.name;
-    updateContrast();
-  });
-});
-
-updateContrast();
-
-// ═══ SHARE BUTTON ═══
-document.getElementById('shareBtn').addEventListener('click', () => {
-  showToast('▸ LINK COPIED');
-});
-
-// ═══ FADE-UP ═══
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-
-document.querySelectorAll('.canvas-section-head, .lockup-grid, .color-grid, .voice-row, .app-tile, .rule-cell, .type-block').forEach(el => {
-  el.classList.add('fade-up');
-  obs.observe(el);
-});
-
-// ═══ STARTUP TOAST ═══
-setTimeout(() => showToast('▸ TERMINAL READY'), 600);
 
 </script>
 
