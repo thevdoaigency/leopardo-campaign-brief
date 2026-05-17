@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GATOR — Brand Identity Concept</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Libre+Franklin:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --leopardo-blue: #1A3868;
+            --leopardo-blue-dark: #112548;
+            --leopardo-red: #ED1C24;
+            --leopardo-yellow: #FFE600;
+            --gator-green: #2E6B58;
+            --gator-green-light: #4A8B75;
+            --white: #FFFFFF;
+            --paper: #FAFAF8;
+            --ink: #1A1A1A;
+            --slate: #4A4A4A;
+            --silver: #9A9A9A;
+            --line: #E5E5E0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--white);
+            color: var(--ink);
+            font-family: 'Libre Franklin', -apple-system, sans-serif;
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .doc-header {
+            margin-bottom: 5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .leopardo-family-mark {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.75rem;
+            color: var(--silver);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+        }
+
+        .leopardo-family-mark::before {
+            content: '';
+            display: inline-block;
+            width: 28px;
+            height: 2px;
+            background: var(--leopardo-blue);
+        }
+
+        .doc-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.72rem;
+            color: var(--gator-green);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .doc-title {
+            font-family: 'Jost', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--leopardo-blue);
+            margin-bottom: 0.75rem;
+            line-height: 1;
+        }
+
+        .doc-subtitle {
+            color: var(--slate);
+            font-size: 1.05rem;
+            max-width: 60ch;
+            line-height: 1.55;
+        }
+
+        section { margin-bottom: 5rem; }
+
+        .section-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.7rem;
+            color: var(--gator-green);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        h2 {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--leopardo-blue);
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.01em;
+        }
+
+        p {
+            color: var(--slate);
+            margin-bottom: 1rem;
+            max-width: 65ch;
+        }
+
+        .logo-showcase {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            padding: 5rem 3rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .logo-primary {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-wordmark {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 5.5rem;
+            letter-spacing: -0.02em;
+            color: var(--leopardo-blue);
+            line-height: 1;
+        }
+
+        .logo-endorsement {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.7rem;
+            color: var(--slate);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-weight: 400;
+            margin-top: 0.5rem;
+        }
+
+        .logo-endorsement strong {
+            color: var(--leopardo-blue);
+            font-weight: 600;
+        }
+
+        .logo-tagline-bar {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--line);
+            font-family: 'Jost', sans-serif;
+            font-size: 0.9rem;
+            color: var(--gator-green);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .logo-variations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .logo-variant {
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            border: 1px solid var(--line);
+        }
+
+        .logo-variant.white-bg { background: var(--white); }
+        .logo-variant.paper-bg { background: var(--paper); }
+        .logo-variant.blue-bg { background: var(--leopardo-blue); }
+        .logo-variant.green-bg { background: var(--gator-green); }
+
+        .variant-wordmark {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            letter-spacing: -0.02em;
+            line-height: 1;
+        }
+
+        .white-bg .variant-wordmark,
+        .paper-bg .variant-wordmark { color: var(--leopardo-blue); }
+        .blue-bg .variant-wordmark { color: var(--white); }
+        .green-bg .variant-wordmark { color: var(--white); }
+
+        .variant-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        .white-bg .variant-label,
+        .paper-bg .variant-label { color: var(--silver); }
+        .blue-bg .variant-label { color: rgba(255, 255, 255, 0.7); }
+        .green-bg .variant-label { color: rgba(255, 255, 255, 0.8); }
+
+        .palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .color-card {
+            border: 1px solid var(--line);
+            overflow: hidden;
+            background: var(--white);
+        }
+
+        .color-swatch {
+            height: 140px;
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem 1.25rem;
+        }
+
+        .color-name {
+            font-family: 'Jost', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .color-meta { padding: 1rem 1.25rem; }
+
+        .color-meta-row {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.78rem;
+            color: var(--silver);
+            margin-bottom: 0.25rem;
+        }
+
+        .color-meta-row span:last-child {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        .color-usage {
+            font-size: 0.78rem;
+            color: var(--slate);
+            margin-top: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .type-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .type-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            padding: 2rem 2.5rem;
+        }
+
+        .type-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.7rem;
+            color: var(--gator-green);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .type-sample-jost {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            letter-spacing: -0.02em;
+            color: var(--leopardo-blue);
+            line-height: 1;
+            margin-bottom: 0.75rem;
+        }
+
+        .type-sample-franklin {
+            font-family: 'Libre Franklin', sans-serif;
+            font-weight: 400;
+            font-size: 1.15rem;
+            color: var(--ink);
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+            max-width: 60ch;
+        }
+
+        .type-sample-data {
+            font-family: 'Libre Franklin', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--gator-green);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .type-spec {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.78rem;
+            color: var(--silver);
+        }
+
+        .tagline-primary {
+            background: var(--leopardo-blue);
+            color: var(--white);
+            padding: 3rem 3rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .tagline-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gator-green);
+        }
+
+        .tagline-primary-text {
+            font-family: 'Jost', sans-serif;
+            font-size: 2.75rem;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+        }
+
+        .tagline-list {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .tagline-alt {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 1.05rem;
+            color: var(--ink);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tagline-alt:last-child { border-bottom: none; }
+
+        .tagline-alt-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.7rem;
+            color: var(--gator-green);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-weight: 500;
+        }
+
+        .voice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .voice-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            padding: 1.75rem;
+            border-top: 3px solid var(--leopardo-blue);
+        }
+
+        .voice-attribute {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+
+        .voice-desc {
+            font-size: 0.9rem;
+            color: var(--slate);
+            line-height: 1.6;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .app-mock {
+            background: var(--white);
+            border: 1px solid var(--line);
+            padding: 2.5rem;
+            min-height: 220px;
+        }
+
+        .app-mock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .app-mock-wordmark {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.02em;
+            color: var(--leopardo-blue);
+        }
+
+        .app-mock-endorsement {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.6rem;
+            color: var(--silver);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        .app-mock-meta {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.7rem;
+            color: var(--silver);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+        }
+
+        .app-mock-body {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.95rem;
+            color: var(--slate);
+            line-height: 1.55;
+            max-width: 90%;
+            margin-top: 1.5rem;
+        }
+
+        .app-mock-stat {
+            font-family: 'Jost', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--leopardo-blue);
+            margin-top: 1rem;
+            letter-spacing: -0.02em;
+            line-height: 1;
+        }
+
+        .app-mock-stat-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.7rem;
+            color: var(--gator-green);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-weight: 500;
+        }
+
+        .app-mock.blue {
+            background: var(--leopardo-blue);
+            border-color: var(--leopardo-blue);
+            color: var(--white);
+        }
+
+        .blue .app-mock-wordmark { color: var(--white); }
+        .blue .app-mock-endorsement { color: rgba(255, 255, 255, 0.6); }
+        .blue .app-mock-meta { color: rgba(255, 255, 255, 0.6); }
+        .blue .app-mock-body { color: rgba(255, 255, 255, 0.85); }
+        .blue .app-mock-stat { color: var(--white); }
+        .blue .app-mock-stat-label { color: var(--leopardo-yellow); }
+
+        .business-card {
+            background: var(--white);
+            color: var(--ink);
+            aspect-ratio: 1.75 / 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 200px;
+            border: 1px solid var(--line);
+            border-top: 4px solid var(--leopardo-blue);
+        }
+
+        .business-card-name {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 0.25rem;
+        }
+
+        .business-card-title {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.7rem;
+            color: var(--gator-green);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+        }
+
+        .business-card-contact {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.78rem;
+            color: var(--slate);
+            line-height: 1.6;
+        }
+
+        .business-card-wordmark {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.02em;
+            color: var(--leopardo-blue);
+        }
+
+        .business-card-endorsement {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.55rem;
+            color: var(--silver);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        footer {
+            margin-top: 5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--line);
+            color: var(--silver);
+            font-size: 0.85rem;
+            font-family: 'Libre Franklin', sans-serif;
+            text-align: center;
+        }
+
+        @media (max-width: 640px) {
+            .logo-wordmark { font-size: 3.5rem; }
+            .tagline-primary-text { font-size: 1.75rem; }
+            .doc-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <header class="doc-header">
+            <div class="leopardo-family-mark">A Leopardo Technology</div>
+            <div class="doc-label">Brand Identity Concept · v2 · May 2026</div>
+            <h1 class="doc-title">GATOR</h1>
+            <p class="doc-subtitle">A municipal procurement platform built on decades of construction and government relationships. Part of the Leopardo family of brands.</p>
+        </header>
+
+        <section>
+            <div class="section-label">01 · Identity</div>
+            <h2>Logo</h2>
+            <p>GATOR shares the Leopardo family typography — Jost wordmark, Libre Franklin body — so mayors and city managers moving between Leopardo Construction, Leopardo Efficiency, and GATOR feel a continuous brand experience. The wordmark sits with an endorsement line that anchors the technology to its parent.</p>
+
+            <div class="logo-showcase">
+                <div class="logo-primary">
+                    <div class="logo-wordmark">GATOR</div>
+                    <div class="logo-endorsement">A <strong>Leopardo</strong> Technology</div>
+                    <div class="logo-tagline-bar">Aggregate · Compete · Save</div>
+                </div>
+            </div>
+
+            <div class="logo-variations">
+                <div class="logo-variant white-bg">
+                    <div class="variant-wordmark">GATOR</div>
+                    <div class="variant-label">Primary · White</div>
+                </div>
+                <div class="logo-variant paper-bg">
+                    <div class="variant-wordmark">GATOR</div>
+                    <div class="variant-label">Document · Paper</div>
+                </div>
+                <div class="logo-variant blue-bg">
+                    <div class="variant-wordmark">GATOR</div>
+                    <div class="variant-label">Reversed · Blue</div>
+                </div>
+                <div class="logo-variant green-bg">
+                    <div class="variant-wordmark">GATOR</div>
+                    <div class="variant-label">Accent · Green</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-label">02 · Color</div>
+            <h2>Palette</h2>
+            <p>The palette inherits Leopardo Blue as the primary anchor, so GATOR sits comfortably alongside Leopardo Construction and Leopardo Efficiency. A subdued forest green identifies GATOR specifically — efficiency, savings, the procurement engine. Leopardo Yellow remains available as a family-shared accent for highlights and emphasis.</p>
+
+            <div class="palette">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #1A3868;">
+                        <div class="color-name" style="color: #FFFFFF;">Leopardo Blue</div>
+                    </div>
+                    <div class="color-meta">
+                        <div class="color-meta-row"><span>HEX</span><span>#1A3868</span></div>
+                        <div class="color-meta-row"><span>PANTONE</span><span>294 C</span></div>
+                        <div class="color-usage">Primary brand color. Inherited from the Leopardo family. Headlines, wordmark, primary surfaces.</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #2E6B58;">
+                        <div class="color-name" style="color: #FFFFFF;">GATOR Green</div>
+                    </div>
+                    <div class="color-meta">
+                        <div class="color-meta-row"><span>HEX</span><span>#2E6B58</span></div>
+                        <div class="color-meta-row"><span>RGB</span><span>46 / 107 / 88</span></div>
+                        <div class="color-usage">GATOR identifier. Labels, accents, savings indicators. Subdued, never decorative.</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #FFE600;">
+                        <div class="color-name" style="color: #1A3868;">Leopardo Yellow</div>
+                    </div>
+                    <div class="color-meta">
+                        <div class="color-meta-row"><span>HEX</span><span>#FFE600</span></div>
+                        <div class="color-meta-row"><span>PANTONE</span><span>109 C</span></div>
+                        <div class="color-usage">Shared family accent. Use sparingly for high-emphasis moments only.</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #FFFFFF; border-bottom: 1px solid #E5E5E0;">
+                        <div class="color-name" style="color: #1A1A1A;">White</div>
+                    </div>
+                    <div class="color-meta">
+                        <div class="color-meta-row"><span>HEX</span><span>#FFFFFF</span></div>
+                        <div class="color-meta-row"><span>RGB</span><span>255 / 255 / 255</span></div>
+                        <div class="color-usage">Primary background. All web, document, and presentation surfaces default here.</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #1A1A1A;">
+                        <div class="color-name" style="color: #FFFFFF;">Ink</div>
+                    </div>
+                    <div class="color-meta">
+                        <div class="color-meta-row"><span>HEX</span><span>#1A1A1A</span></div>
+                        <div class="color-meta-row"><span>RGB</span><span>26 / 26 / 26</span></div>
+                        <div class="color-usage">Primary body text on white surfaces. Never pure black — softer for screen and print.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-label">03 · Typography</div>
+            <h2>Type System</h2>
+            <p>Jost for display and headlines — geometric, professional, and already in use across Leopardo Efficiency. Libre Franklin for body and long-form documents — reads cleanly in RFP responses, contracts, and procurement documents. Numerical data uses Libre Franklin in uppercase tracking for emphasis.</p>
+
+            <div class="type-grid">
+                <div class="type-card">
+                    <div class="type-label">Display · Headlines · Wordmark</div>
+                    <div class="type-sample-jost">Aggregate. Compete. Save.</div>
+                    <div class="type-spec">Jost · 500 / 600 / 700 · Letterspacing -0.02em</div>
+                </div>
+
+                <div class="type-card">
+                    <div class="type-label">Body · Long-form · Documents</div>
+                    <div class="type-sample-franklin">Five cities — Terre Haute, Miami-Dade, South Miami, Evansville, and Doral — closed before entity formation. Built on decades of Leopardo's municipal experience.</div>
+                    <div class="type-spec">Libre Franklin · 300 / 400 / 500 / 600 · Line-height 1.6</div>
+                </div>
+
+                <div class="type-card">
+                    <div class="type-label">Data · Contracts · Procurement IDs</div>
+                    <div class="type-sample-data">Contract 2026-FL-Doral-001 · $312,400 · 27% Savings</div>
+                    <div class="type-spec">Libre Franklin · 500 · Tracking 0.05em · Uppercase</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-label">04 · Voice</div>
+            <h2>Tagline</h2>
+            <p>Three beats. Names the actual mechanic. No metaphors required. A procurement director or finance manager understands what GATOR does the first time they read it.</p>
+
+            <div class="tagline-primary">
+                <div class="tagline-primary-text">Aggregate. Compete. Save.</div>
+            </div>
+
+            <div class="tagline-list">
+                <div class="tagline-alt">
+                    <span>Every department. One auction.</span>
+                    <span class="tagline-alt-label">Direct</span>
+                </div>
+                <div class="tagline-alt">
+                    <span>Built on decades of municipal experience.</span>
+                    <span class="tagline-alt-label">Family Anchor</span>
+                </div>
+                <div class="tagline-alt">
+                    <span>The procurement engine for modern government.</span>
+                    <span class="tagline-alt-label">Positioning</span>
+                </div>
+                <div class="tagline-alt">
+                    <span>Government efficiency at scale.</span>
+                    <span class="tagline-alt-label">Broad</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-label">05 · Tone</div>
+            <h2>Voice Attributes</h2>
+            <p>GATOR sounds like a senior partner inside a construction firm who has spent thirty years working with municipalities — not a startup engineer. It carries the weight of Leopardo's relationships into every word.</p>
+
+            <div class="voice-grid">
+                <div class="voice-card">
+                    <div class="voice-attribute">Established</div>
+                    <div class="voice-desc">Anchored in decades of municipal and construction experience. GATOR is not a new technology built by people learning government — it is a tool built by people who already know.</div>
+                </div>
+                <div class="voice-card">
+                    <div class="voice-attribute">Specific</div>
+                    <div class="voice-desc">Real city names. Real contract values. Real savings percentages. No generic claims, no vague promises.</div>
+                </div>
+                <div class="voice-card">
+                    <div class="voice-attribute">Direct</div>
+                    <div class="voice-desc">Lead with what the platform does and what it returns. No preamble. No buzzwords.</div>
+                </div>
+                <div class="voice-card">
+                    <div class="voice-attribute">Quiet</div>
+                    <div class="voice-desc">No exclamation. No hype. Procurement directors and finance managers don't buy from loud rooms.</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-label">06 · Application</div>
+            <h2>In Use</h2>
+            <p>Real-world artifacts: business card, case study card, social card, RFP cover. Each one signals GATOR is part of the Leopardo family — same fonts, same blue, same professional weight.</p>
+
+            <div class="apps-grid">
+                <div class="business-card">
+                    <div>
+                        <div class="business-card-wordmark">GATOR</div>
+                        <div class="business-card-endorsement">A Leopardo Technology</div>
+                    </div>
+                    <div>
+                        <div class="business-card-name">Curtis Leopardo</div>
+                        <div class="business-card-title">Chief Executive Officer</div>
+                        <div class="business-card-contact" style="margin-top: 0.75rem;">
+                            curtis@gator.io<br/>
+                            312 555 0148
+                        </div>
+                    </div>
+                </div>
+
+                <div class="app-mock">
+                    <div class="app-mock-header">
+                        <div>
+                            <div class="app-mock-wordmark">GATOR</div>
+                            <div class="app-mock-endorsement">A Leopardo Technology</div>
+                        </div>
+                        <div class="app-mock-meta">Case Study · 001</div>
+                    </div>
+                    <div class="app-mock-stat-label">Terre Haute, Indiana</div>
+                    <div class="app-mock-stat">$418,000</div>
+                    <div class="app-mock-stat-label">Annual savings · Year One</div>
+                    <div class="app-mock-body">Five departments, one aggregated procurement engine, twenty-seven vendors invited to compete.</div>
+                </div>
+
+                <div class="app-mock blue">
+                    <div class="app-mock-header">
+                        <div>
+                            <div class="app-mock-wordmark">GATOR</div>
+                            <div class="app-mock-endorsement">A Leopardo Technology</div>
+                        </div>
+                        <div class="app-mock-meta">May 2026</div>
+                    </div>
+                    <div style="font-family: 'Jost', sans-serif; font-size: 1.6rem; font-weight: 600; color: #FFFFFF; letter-spacing: -0.01em; line-height: 1.2; margin-top: 1rem;">Five cities closed before the entity was formed.</div>
+                    <div class="app-mock-body" style="margin-top: 1.25rem;">Terre Haute. Miami-Dade. South Miami. Evansville. Doral.</div>
+                </div>
+
+                <div class="app-mock">
+                    <div class="app-mock-meta" style="margin-bottom: 2rem;">Response to RFP · 2026-027</div>
+                    <div class="app-mock-wordmark" style="font-size: 2.75rem;">GATOR</div>
+                    <div class="app-mock-endorsement">A Leopardo Technology</div>
+                    <div class="app-mock-body" style="margin-top: 2.5rem;">
+                        Prepared for the City of [Municipality]<br/>
+                        Procurement Department<br/>
+                        Submitted May 2026
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>GATOR brand concept · part of the Leopardo family of brands · prepared by VDO Aigency · May 2026</p>
+        </footer>
+
+    </div>
+</body>
+</html>
