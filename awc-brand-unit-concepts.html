@@ -265,6 +265,115 @@
             margin-bottom: 0;
         }
 
+        /* Path Section Headers */
+        .path-section {
+            margin-top: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .path-header {
+            background: var(--paper);
+            border-left: 4px solid var(--leopardo-blue);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .path-eyebrow {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.72rem;
+            color: var(--gator-green);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .path-title {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.85rem;
+            font-weight: 600;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            max-width: 24ch;
+        }
+
+        .path-summary {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 1rem;
+            color: var(--slate);
+            line-height: 1.65;
+            max-width: 64ch;
+        }
+
+        /* Path B specifics */
+        .path-b-content {
+            margin-top: 2rem;
+        }
+
+        .path-b-block {
+            margin-bottom: 2.5rem;
+        }
+
+        .path-b-block h3 {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.01em;
+            margin-bottom: 0.75rem;
+        }
+
+        .path-b-block p {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 1rem;
+            color: var(--ink);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            max-width: 65ch;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .team-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            padding: 1.5rem;
+            border-top: 3px solid var(--gator-green);
+        }
+
+        .team-role {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.01em;
+            margin-bottom: 0.4rem;
+        }
+
+        .team-name {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.72rem;
+            color: var(--gator-green);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .team-desc {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.9rem;
+            color: var(--slate);
+            line-height: 1.55;
+        }
+
         /* Footer */
         footer {
             margin-top: 5rem;
@@ -292,22 +401,38 @@
         <!-- Header -->
         <header class="doc-header">
             <div class="doc-eyebrow">Alexander West Capital</div>
-            <div class="doc-label">Concept Memo · Naming Options · May 2026</div>
-            <h1 class="doc-title">A Centralized Brand &amp; Content Unit for the Portfolio</h1>
-            <p class="doc-subtitle">Three naming and positioning concepts for the family-office-wide brand and content function. Each names the same underlying machine. The difference is what it signals to the market and to the portfolio companies.</p>
+            <div class="doc-label">Concept Memo · Two Paths Forward · May 2026</div>
+            <h1 class="doc-title">Two Ways to Scale the Content Operation</h1>
+            <p class="doc-subtitle">A choice between building a centralized brand and content unit for the entire portfolio, or focusing the existing team behind GATOR while it scales. Each path describes a different shape for the same operators. Each one earns its own positioning.</p>
         </header>
 
         <!-- Intro -->
         <section class="intro">
             <p>
-                The Leopardo Efficiency content pipeline — field footage, executive ideas, project updates, social outreach, AI-assisted workflows — works. The next move is to install the same machine across every Alexander West entity, including GATOR.
+                The Leopardo Efficiency content pipeline — field footage, executive ideas, project updates, social outreach, AI-assisted workflows — works. There are two reasonable ways to scale what it proved.
             </p>
             <p>
-                One unit. One voice system. One repeatable production process. Each operating company stays distinct, but the storytelling, the proof capture, and the distribution run on shared infrastructure.
+                <strong style="color: var(--ink); font-weight: 500;">Path A</strong> builds a centralized brand and content unit across the entire Alexander West portfolio, with GATOR as one of several entities served.
             </p>
             <p>
-                What follows are three ways to name and frame that unit. Each implies a slightly different identity. Each one earns its own positioning.
+                <strong style="color: var(--ink); font-weight: 500;">Path B</strong> concentrates the existing team behind GATOR specifically while it scales, leaves Leopardo Efficiency on a light retainer, and revisits the portfolio-wide unit at a later stage.
             </p>
+            <p>
+                Both paths use the same operators. Both are real. The choice is about timing and concentration of effort.
+            </p>
+        </section>
+
+        <!-- =================================
+             PATH A: Centralized Portfolio Unit
+             ================================= -->
+        <section class="path-section">
+            <div class="path-header">
+                <div class="path-eyebrow">Path A</div>
+                <h2 class="path-title">Centralized Portfolio Brand &amp; Content Unit</h2>
+                <p class="path-summary">One team. One voice system. One repeatable production process. Each operating company stays distinct, but storytelling, proof capture, and distribution run on shared infrastructure across the entire portfolio.</p>
+            </div>
+
+            <p style="color: var(--slate); font-size: 0.95rem; max-width: 65ch; margin-bottom: 0.5rem;">Three ways to name and frame the unit. Each one earns its own positioning.</p>
         </section>
 
         <!-- CONCEPT 01 -->
@@ -385,18 +510,120 @@
             </div>
         </section>
 
-        <!-- Summary -->
+        <!-- Path A trade-off note -->
         <section class="summary">
-            <div class="summary-label">A note on the three</div>
+            <div class="summary-label">A note on the three names within Path A</div>
             <div class="summary-title">Same machine. Three different doors.</div>
             <p>
-                All three describe the same underlying unit: one centralized team running content, brand, and storytelling across every Alexander West entity, with GATOR as a portfolio member. The differences are positioning.
+                All three options under Path A describe the same underlying unit: one centralized team running content, brand, and storytelling across every Alexander West entity, with GATOR as a portfolio member. The differences are positioning.
             </p>
             <p>
                 <strong style="color: var(--white);">Brand Studio</strong> sells the craft. <strong style="color: var(--white);">Content Infrastructure</strong> sells the leverage. <strong style="color: var(--white);">Brand Operations</strong> sells the lineage.
             </p>
             <p>
-                The right choice depends on the audience the family office wants to address most often — recruits, investors, or operating partners. Worth a short conversation before committing.
+                The right choice depends on the audience the family office wants to address most often — recruits, investors, or operating partners.
+            </p>
+        </section>
+
+        <!-- =================================
+             PATH B: GATOR-First Concentration
+             ================================= -->
+        <section class="path-section" style="margin-top: 5rem;">
+            <div class="path-header">
+                <div class="path-eyebrow">Path B</div>
+                <h2 class="path-title">Go All In On GATOR Now</h2>
+                <p class="path-summary">The Leopardo Efficiency campaign proved the system works. GATOR is closing faster than any portfolio company has scaled before. Path B concentrates the existing team behind GATOR specifically — Brandon, Raj, Umut, and contract editors — while the family-office-wide unit waits for a later stage.</p>
+            </div>
+
+            <div class="path-b-content">
+
+                <div class="path-b-block">
+                    <h3>The premise</h3>
+                    <p>
+                        Five cities closed before entity formation. A senior sales hire from a major ERP competitor. A Series A conversation that is closer than 12 months out. GATOR is the fastest-scaling thing in the portfolio, and its sales engine will generate more demand for branded content, sales enablement, and customer-facing material than any other entity in the next 18 months.
+                    </p>
+                    <p>
+                        Rather than spread the existing team thin across every Alexander West company, point it at the entity that needs it most. The portfolio-wide unit becomes a Phase Two conversation once GATOR has cleared its first inflection point.
+                    </p>
+                </div>
+
+                <div class="path-b-block">
+                    <h3>What happens to Leopardo Efficiency</h3>
+                    <p>
+                        Leopardo Efficiency stays on a light retainer. The pipeline that was built there continues running — installs get captured, project updates get produced, executive content keeps flowing — but at a maintenance cadence rather than a full sprint. The campaign has already produced the proof that justifies the next phase. It does not need to keep accelerating to do that job.
+                    </p>
+                </div>
+
+                <div class="path-b-block">
+                    <h3>What the GATOR-focused team produces</h3>
+                    <p>
+                        Everything the GATOR sales engine needs to land and keep customers as the closes accelerate:
+                    </p>
+                    <ul style="list-style: none; padding-left: 0; margin: 1rem 0 0; max-width: 65ch;">
+                        <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.6rem; color: var(--ink); line-height: 1.65;"><span style="position: absolute; left: 0; color: var(--gator-green); font-weight: 600;">—</span>Sales decks, RFP response templates, one-pagers per use case</li>
+                        <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.6rem; color: var(--ink); line-height: 1.65;"><span style="position: absolute; left: 0; color: var(--gator-green); font-weight: 600;">—</span>Case study production using real footage from closed municipalities</li>
+                        <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.6rem; color: var(--ink); line-height: 1.65;"><span style="position: absolute; left: 0; color: var(--gator-green); font-weight: 600;">—</span>Customer onboarding playbooks and training assets</li>
+                        <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.6rem; color: var(--ink); line-height: 1.65;"><span style="position: absolute; left: 0; color: var(--gator-green); font-weight: 600;">—</span>Demo videos, conference materials, podcast and webinar prep</li>
+                        <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.6rem; color: var(--ink); line-height: 1.65;"><span style="position: absolute; left: 0; color: var(--gator-green); font-weight: 600;">—</span>Brand consistency across leadership in every public moment</li>
+                        <li style="position: relative; padding-left: 1.5rem; margin-bottom: 0.6rem; color: var(--ink); line-height: 1.65;"><span style="position: absolute; left: 0; color: var(--gator-green); font-weight: 600;">—</span>Internal workflow automation supporting the sales handoff and reporting</li>
+                    </ul>
+                </div>
+
+                <div class="path-b-block">
+                    <h3>The team</h3>
+                    <p>
+                        The same operators who built the Leopardo Efficiency campaign, now pointed at one entity instead of many.
+                    </p>
+
+                    <div class="team-grid">
+                        <div class="team-card">
+                            <div class="team-name">Strategy &amp; Voice</div>
+                            <div class="team-role">Brandon</div>
+                            <div class="team-desc">Brand direction, voice system, campaign architecture, sales enablement strategy, content calendar.</div>
+                        </div>
+                        <div class="team-card">
+                            <div class="team-name">Media Pipeline</div>
+                            <div class="team-role">Raj</div>
+                            <div class="team-desc">Production management, media ingest and organization, footage library, editor coordination.</div>
+                        </div>
+                        <div class="team-card">
+                            <div class="team-name">Technical &amp; Automation</div>
+                            <div class="team-role">Umut</div>
+                            <div class="team-desc">Internal tooling, workflow automation, AI-assisted production infrastructure, semantic search.</div>
+                        </div>
+                        <div class="team-card">
+                            <div class="team-name">Execution</div>
+                            <div class="team-role">Contract Editors</div>
+                            <div class="team-desc">Scalable production capacity for case studies, demo videos, social cuts, and recurring content.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="path-b-block">
+                    <h3>What this preserves</h3>
+                    <p>
+                        Speed. Focus. A team that already knows how to work together. The Leopardo Efficiency campaign demonstrated the model — Path B doesn't reinvent the model, it just points it at GATOR specifically.
+                    </p>
+                    <p>
+                        The portfolio-wide unit (Path A) becomes a natural next phase once GATOR has cleared Series A and the system has produced one more proof point. Building it now risks diluting the team's attention exactly when GATOR needs it most.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Final comparison summary -->
+        <section class="summary" style="margin-top: 4rem;">
+            <div class="summary-label">A note on choosing between the two paths</div>
+            <div class="summary-title">Both paths use the same operators.</div>
+            <p>
+                <strong style="color: var(--white);">Path A</strong> builds the family-office-wide content function now. It produces leverage across the entire portfolio and creates a defensible operating asset that compounds.
+            </p>
+            <p>
+                <strong style="color: var(--white);">Path B</strong> concentrates that same team behind GATOR specifically while it scales. It accepts a temporary trade-off — slower portfolio coverage in exchange for maximum focus where the growth is.
+            </p>
+            <p>
+                Path A is the right move if the family office wants the unit positioned as a portfolio asset from the start. Path B is the right move if GATOR's velocity makes concentration the more valuable use of the same operators. Either way, the team is built. The only question is what it points at first.
             </p>
         </section>
 
