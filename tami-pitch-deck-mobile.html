@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GATOR — A Proposal for Sales Support, Written for Tami</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Libre+Franklin:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --leopardo-blue: #1A3868;
+            --leopardo-blue-dark: #112548;
+            --leopardo-yellow: #FFE600;
+            --gator-green: #2E6B58;
+            --gator-green-light: #4A8B75;
+            --white: #FFFFFF;
+            --paper: #FAFAF8;
+            --ink: #1A1A1A;
+            --slate: #4A4A4A;
+            --silver: #9A9A9A;
+            --line: #E5E5E0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            background: #E5E5E0;
+            font-family: 'Libre Franklin', -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .deck-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Each slide is a 3:2 page when printed - friendlier to PDF/letter than 16:9 */
+        .slide {
+            background: var(--white);
+            width: 100%;
+            aspect-ratio: 3 / 2;
+            margin-bottom: 1.5rem;
+            padding: 3rem 4rem 6rem 4rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .slide.dark {
+            background: var(--leopardo-blue);
+            color: var(--white);
+        }
+
+        /* Slide header with number + label */
+        .slide-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-weight: 500;
+        }
+
+        .slide-meta-left {
+            color: var(--gator-green);
+        }
+
+        .dark .slide-meta-left {
+            color: var(--leopardo-yellow);
+        }
+
+        .slide-meta-right {
+            color: var(--silver);
+        }
+
+        .dark .slide-meta-right {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .gator-mark {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: -0.02em;
+            color: var(--leopardo-blue);
+        }
+
+        .dark .gator-mark {
+            color: var(--white);
+        }
+
+        .gator-mark-endorsement {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.55rem;
+            color: var(--silver);
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            margin-top: 0.1rem;
+            font-weight: 400;
+        }
+
+        .dark .gator-mark-endorsement {
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Body content */
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            color: var(--leopardo-blue);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+        }
+
+        .dark h1 { color: var(--white); }
+
+        h2 {
+            font-family: 'Jost', sans-serif;
+            font-weight: 600;
+            color: var(--leopardo-blue);
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+        }
+
+        .dark h2 { color: var(--white); }
+
+        p {
+            font-family: 'Libre Franklin', sans-serif;
+            color: var(--slate);
+            line-height: 1.6;
+        }
+
+        .dark p {
+            color: rgba(255,255,255,0.85);
+        }
+
+        /* ====== SLIDE 01: COVER ====== */
+        .cover-tag {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.75rem;
+            color: var(--leopardo-yellow);
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .cover-headline {
+            font-size: 3.8rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            max-width: 18ch;
+            margin-bottom: 2rem;
+        }
+
+        .cover-headline em {
+            font-style: normal;
+            color: var(--leopardo-yellow);
+        }
+
+        .cover-sub {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 50ch;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .cover-footer {
+            margin-top: auto;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-weight: 500;
+        }
+
+        /* ====== SLIDE 02: WEEK BREAKDOWN ====== */
+        .week-title {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            max-width: 22ch;
+        }
+
+        .week-sub {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.95rem;
+            color: var(--silver);
+            margin-bottom: 1.5rem;
+            max-width: 55ch;
+        }
+
+        .week-table {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+
+        .week-row {
+            display: contents;
+        }
+
+        .week-row > div {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--line);
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 1rem;
+            color: var(--ink);
+        }
+
+        .week-row > div:last-child {
+            text-align: right;
+            font-family: 'Jost', sans-serif;
+            font-weight: 600;
+            color: var(--gator-green);
+            font-size: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .week-row.total > div {
+            border-bottom: none;
+            border-top: 2px solid var(--leopardo-blue);
+            padding-top: 0.95rem;
+            font-family: 'Jost', sans-serif;
+            font-weight: 600;
+            color: var(--leopardo-blue);
+            font-size: 1.1rem;
+        }
+
+        .week-row.total > div:last-child {
+            color: var(--leopardo-blue);
+            font-size: 1.3rem;
+        }
+
+        .week-punchline {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.01em;
+            line-height: 1.35;
+            max-width: 48ch;
+            padding-left: 1.25rem;
+            border-left: 3px solid var(--gator-green);
+        }
+
+        /* ====== SLIDE 03: TYLER COMPARISON ====== */
+        .compare-title {
+            font-size: 2.1rem;
+            margin-bottom: 1.75rem;
+            max-width: 22ch;
+        }
+
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .compare-col-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.7rem;
+            color: var(--gator-green);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+        }
+
+        .compare-col-title {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--leopardo-blue);
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .stack-block {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            padding: 0.75rem 1.1rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.92rem;
+            color: var(--ink);
+            border-left: 3px solid var(--leopardo-blue);
+        }
+
+        .stack-block.empty {
+            border-left-color: var(--silver);
+            color: var(--silver);
+            background: var(--white);
+        }
+
+        .compare-bottom {
+            margin-top: 1.5rem;
+            font-family: 'Jost', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.01em;
+            line-height: 1.4;
+            max-width: 60ch;
+            padding-left: 1.25rem;
+            border-left: 3px solid var(--gator-green);
+        }
+
+        /* ====== SLIDE 04: ANOTHER REP MATH ====== */
+        .rep-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            max-width: 24ch;
+        }
+
+        .rep-intro {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 1rem;
+            color: var(--slate);
+            margin-bottom: 1.75rem;
+            max-width: 60ch;
+            line-height: 1.6;
+        }
+
+        .rep-reasons {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .rep-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            padding: 1.25rem;
+            border-top: 3px solid var(--gator-green);
+        }
+
+        .rep-card-num {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.75rem;
+            color: var(--gator-green);
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+
+        .rep-card-title {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .rep-card-desc {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.85rem;
+            color: var(--slate);
+            line-height: 1.55;
+        }
+
+        .rep-bottom {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.01em;
+            line-height: 1.4;
+            max-width: 64ch;
+            padding-left: 1.25rem;
+            border-left: 3px solid var(--gator-green);
+        }
+
+        /* ====== SLIDE 05: DELIVERABLES ====== */
+        .deliv-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            max-width: 26ch;
+        }
+
+        .deliv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem 2rem;
+            flex: 1;
+            align-content: start;
+        }
+
+        .deliv-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .deliv-item-mark {
+            color: var(--gator-green);
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-top: 0.15rem;
+            min-width: 1rem;
+        }
+
+        .deliv-item-text {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.92rem;
+            color: var(--ink);
+            line-height: 1.5;
+        }
+
+        .deliv-item-text strong {
+            font-family: 'Jost', sans-serif;
+            font-weight: 600;
+            color: var(--leopardo-blue);
+            font-size: 0.95rem;
+            letter-spacing: -0.01em;
+        }
+
+        /* ====== SLIDE 06: RFP SAMPLE ====== */
+        .rfp-title {
+            font-size: 1.9rem;
+            margin-bottom: 0.5rem;
+            max-width: 30ch;
+        }
+
+        .rfp-sub {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.9rem;
+            color: var(--silver);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .rfp-doc {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            padding: 1.75rem 2rem;
+            flex: 1;
+            overflow: hidden;
+            font-family: 'Libre Franklin', sans-serif;
+        }
+
+        .rfp-doc-header {
+            border-bottom: 2px solid var(--leopardo-blue);
+            padding-bottom: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .rfp-doc-meta {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.62rem;
+            color: var(--silver);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }
+
+        .rfp-doc-title {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.01em;
+            margin-bottom: 0.2rem;
+        }
+
+        .rfp-doc-subtitle {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--slate);
+        }
+
+        .rfp-doc-h {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--gator-green);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-top: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .rfp-doc-body {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.78rem;
+            color: var(--ink);
+            line-height: 1.55;
+            margin-bottom: 0.6rem;
+        }
+
+        .rfp-doc-body strong {
+            color: var(--leopardo-blue);
+            font-weight: 600;
+        }
+
+        .rfp-doc-list {
+            list-style: none;
+            padding-left: 0;
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.76rem;
+            color: var(--ink);
+            line-height: 1.6;
+        }
+
+        .rfp-doc-list li {
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.2rem;
+        }
+
+        .rfp-doc-list li::before {
+            content: '·';
+            position: absolute;
+            left: 0;
+            color: var(--gator-green);
+            font-weight: 700;
+        }
+
+        /* ====== SLIDE 07: ALIGNMENT ====== */
+        .align-title {
+            font-size: 2.4rem;
+            margin-bottom: 1.5rem;
+            max-width: 24ch;
+        }
+
+        .align-body {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 1rem;
+            color: var(--slate);
+            line-height: 1.65;
+            margin-bottom: 1.75rem;
+            max-width: 58ch;
+        }
+
+        .align-quote {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.55rem;
+            font-weight: 500;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+            max-width: 52ch;
+            padding-left: 1.5rem;
+            border-left: 4px solid var(--gator-green);
+        }
+
+        /* ====== SLIDE 08: 30/60/90 ====== */
+        .plan-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.75rem;
+            max-width: 22ch;
+        }
+
+        .plan-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.25rem;
+            flex: 1;
+        }
+
+        .plan-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plan-col-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 0.2rem;
+        }
+
+        .plan-col-sub {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.68rem;
+            color: var(--gator-green);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-weight: 500;
+            margin-bottom: 1.1rem;
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .plan-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .plan-list li {
+            padding: 0.5rem 0;
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.88rem;
+            color: var(--ink);
+            line-height: 1.5;
+            position: relative;
+            padding-left: 1rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .plan-list li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--gator-green);
+            font-weight: 600;
+        }
+
+        /* ====== SLIDE 09: MATH ====== */
+        .math-title {
+            font-size: 2.4rem;
+            margin-bottom: 1.5rem;
+            max-width: 24ch;
+        }
+
+        .math-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex: 1;
+            align-content: center;
+        }
+
+        .math-stat {
+            text-align: left;
+        }
+
+        .math-stat-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.7rem;
+            color: var(--gator-green);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+        }
+
+        .math-stat-number {
+            font-family: 'Jost', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 0.6rem;
+        }
+
+        .math-stat-desc {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.88rem;
+            color: var(--slate);
+            line-height: 1.5;
+            max-width: 32ch;
+        }
+
+        .math-bottom {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.01em;
+            line-height: 1.4;
+            max-width: 64ch;
+            padding-left: 1.25rem;
+            border-left: 3px solid var(--gator-green);
+        }
+
+        /* ====== SLIDE 10: THE ASK ====== */
+        .ask-headline {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            max-width: 22ch;
+            margin-bottom: 2rem;
+        }
+
+        .ask-headline em {
+            font-style: normal;
+            color: var(--leopardo-yellow);
+        }
+
+        .ask-body {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.6;
+            max-width: 50ch;
+            margin-bottom: 1.5rem;
+        }
+
+        .ask-contact {
+            margin-top: auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.7;
+        }
+
+        .ask-contact-name {
+            font-family: 'Jost', sans-serif;
+            font-weight: 600;
+            color: var(--white);
+            font-size: 0.95rem;
+            letter-spacing: -0.01em;
+        }
+
+        /* Print styles - turn each slide into a PDF page */
+        @media print {
+            html, body {
+                background: white;
+            }
+
+            .deck-wrap {
+                padding: 0;
+                max-width: none;
+            }
+
+            .slide {
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+                page-break-inside: avoid;
+                width: 100vw;
+                height: 100vh;
+                aspect-ratio: unset;
+            }
+
+            .slide:last-child {
+                page-break-after: auto;
+            }
+        }
+
+        @page {
+            size: 11in 7.33in;
+            margin: 0;
+        }
+
+        /* ============================
+           MOBILE OPTIMIZATION
+           Abandon aspect ratio, stack grids, scale fonts
+           ============================ */
+        @media (max-width: 768px) {
+
+            html, body {
+                background: var(--paper);
+            }
+
+            .deck-wrap {
+                padding: 0.75rem;
+                max-width: none;
+            }
+
+            /* Slides become natural-height cards */
+            .slide {
+                aspect-ratio: unset;
+                min-height: auto;
+                padding: 2rem 1.5rem 2.5rem;
+                margin-bottom: 0.75rem;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            }
+
+            /* Header meta */
+            .slide-meta {
+                margin-bottom: 1.25rem;
+                font-size: 0.6rem;
+                letter-spacing: 0.15em;
+            }
+
+            .gator-mark {
+                font-size: 0.82rem;
+            }
+
+            .gator-mark-endorsement {
+                font-size: 0.48rem;
+                letter-spacing: 0.18em;
+            }
+
+            /* Universal type scaling */
+            h1 { font-size: 1.5rem !important; }
+            h2 { font-size: 1.3rem !important; }
+
+            /* SLIDE 01: Cover */
+            .cover-tag {
+                font-size: 0.62rem;
+                letter-spacing: 0.18em;
+                margin-bottom: 1rem;
+            }
+
+            .cover-headline {
+                font-size: 1.85rem;
+                line-height: 1.1;
+                max-width: 100%;
+                margin-bottom: 1.25rem;
+            }
+
+            .cover-sub {
+                font-size: 0.85rem;
+                line-height: 1.55;
+            }
+
+            .cover-footer {
+                margin-top: 2rem;
+                padding-top: 1.25rem;
+                font-size: 0.6rem;
+                border-top: 1px solid rgba(255,255,255,0.15);
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            /* SLIDE 02: Week breakdown */
+            .week-title {
+                font-size: 1.5rem !important;
+                margin-bottom: 0.4rem;
+            }
+
+            .week-sub {
+                font-size: 0.82rem;
+                margin-bottom: 1rem;
+            }
+
+            .week-table {
+                margin-bottom: 1.25rem;
+                max-width: 100%;
+            }
+
+            .week-row > div {
+                padding: 0.55rem 0;
+                font-size: 0.85rem;
+            }
+
+            .week-row > div:last-child {
+                font-size: 0.85rem;
+            }
+
+            .week-row.total > div {
+                padding-top: 0.7rem;
+                font-size: 0.95rem;
+            }
+
+            .week-row.total > div:last-child {
+                font-size: 1.15rem;
+            }
+
+            .week-punchline {
+                font-size: 1rem;
+                padding-left: 0.85rem;
+                line-height: 1.4;
+            }
+
+            /* SLIDE 03: Tyler comparison */
+            .compare-title {
+                font-size: 1.5rem !important;
+                margin-bottom: 1.25rem;
+            }
+
+            .compare-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .compare-col-label {
+                font-size: 0.62rem;
+            }
+
+            .compare-col-title {
+                font-size: 1rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .stack-block {
+                padding: 0.6rem 0.85rem;
+                font-size: 0.82rem;
+                margin-bottom: 0.35rem;
+            }
+
+            .compare-bottom {
+                margin-top: 1.25rem;
+                font-size: 0.92rem;
+                padding-left: 0.85rem;
+                line-height: 1.45;
+            }
+
+            /* SLIDE 04: Another rep math */
+            .rep-title {
+                font-size: 1.5rem !important;
+                margin-bottom: 1rem;
+            }
+
+            .rep-intro {
+                font-size: 0.85rem;
+                margin-bottom: 1.25rem;
+                line-height: 1.55;
+            }
+
+            .rep-reasons {
+                grid-template-columns: 1fr;
+                gap: 0.85rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .rep-card {
+                padding: 1rem 1.1rem;
+            }
+
+            .rep-card-num {
+                font-size: 0.62rem;
+            }
+
+            .rep-card-title {
+                font-size: 0.95rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .rep-card-desc {
+                font-size: 0.8rem;
+            }
+
+            .rep-bottom {
+                font-size: 0.95rem;
+                padding-left: 0.85rem;
+                line-height: 1.45;
+            }
+
+            /* SLIDE 05: Deliverables */
+            .deliv-title {
+                font-size: 1.5rem !important;
+                margin-bottom: 1.25rem;
+            }
+
+            .deliv-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .deliv-item {
+                padding: 0.6rem 0;
+                gap: 0.7rem;
+            }
+
+            .deliv-item-mark {
+                font-size: 0.78rem;
+            }
+
+            .deliv-item-text {
+                font-size: 0.83rem;
+                line-height: 1.5;
+            }
+
+            .deliv-item-text strong {
+                font-size: 0.88rem;
+            }
+
+            /* SLIDE 06: RFP sample */
+            .rfp-title {
+                font-size: 1.4rem !important;
+                margin-bottom: 0.3rem;
+            }
+
+            .rfp-sub {
+                font-size: 0.78rem;
+                margin-bottom: 1rem;
+            }
+
+            .rfp-doc {
+                padding: 1.25rem 1.25rem;
+            }
+
+            .rfp-doc-header {
+                padding-bottom: 0.7rem;
+                margin-bottom: 0.85rem;
+            }
+
+            .rfp-doc-meta {
+                font-size: 0.55rem;
+            }
+
+            .rfp-doc-title {
+                font-size: 0.95rem;
+            }
+
+            .rfp-doc-subtitle {
+                font-size: 0.78rem;
+            }
+
+            .rfp-doc-h {
+                font-size: 0.72rem;
+                margin-top: 0.75rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .rfp-doc-body {
+                font-size: 0.74rem;
+                line-height: 1.55;
+                margin-bottom: 0.5rem;
+            }
+
+            .rfp-doc-list {
+                font-size: 0.72rem;
+            }
+
+            /* SLIDE 07: Alignment */
+            .align-title {
+                font-size: 1.55rem !important;
+                margin-bottom: 1.25rem;
+            }
+
+            .align-body {
+                font-size: 0.88rem;
+                margin-bottom: 1.25rem;
+                line-height: 1.6;
+            }
+
+            .align-quote {
+                font-size: 1.15rem;
+                padding-left: 1rem;
+                line-height: 1.35;
+                border-left-width: 3px;
+            }
+
+            /* SLIDE 08: 30/60/90 */
+            .plan-title {
+                font-size: 1.5rem !important;
+                margin-bottom: 1.25rem;
+            }
+
+            .plan-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+
+            .plan-col-label {
+                font-size: 1.75rem;
+            }
+
+            .plan-col-sub {
+                font-size: 0.6rem;
+                margin-bottom: 0.85rem;
+                padding-bottom: 0.7rem;
+            }
+
+            .plan-list li {
+                font-size: 0.82rem;
+                padding: 0.4rem 0 0.4rem 1rem;
+            }
+
+            /* SLIDE 09: Math */
+            .math-title {
+                font-size: 1.5rem !important;
+                margin-bottom: 1.25rem;
+            }
+
+            .math-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .math-stat-label {
+                font-size: 0.62rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .math-stat-number {
+                font-size: 2.5rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .math-stat-desc {
+                font-size: 0.82rem;
+            }
+
+            .math-bottom {
+                font-size: 0.95rem;
+                padding-left: 0.85rem;
+                line-height: 1.5;
+            }
+
+            /* SLIDE 10: The Ask */
+            .ask-headline {
+                font-size: 1.85rem;
+                line-height: 1.15;
+                max-width: 100%;
+                margin-bottom: 1.25rem;
+            }
+
+            .ask-body {
+                font-size: 0.88rem;
+                line-height: 1.6;
+                margin-bottom: 1rem;
+            }
+
+            .ask-contact {
+                margin-top: 1.5rem;
+                padding-top: 1.25rem;
+                font-size: 0.78rem;
+            }
+
+            .ask-contact-name {
+                font-size: 0.88rem;
+            }
+        }
+
+        /* Small phones */
+        @media (max-width: 380px) {
+            .deck-wrap {
+                padding: 0.5rem;
+            }
+
+            .slide {
+                padding: 1.5rem 1.25rem 2rem;
+            }
+
+            h1 { font-size: 1.35rem !important; }
+            .cover-headline { font-size: 1.65rem; }
+            .ask-headline { font-size: 1.65rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="deck-wrap">
+
+        <!-- ========== SLIDE 01: COVER ========== -->
+        <div class="slide dark">
+            <div class="slide-meta">
+                <div class="slide-meta-left">A Proposal · For Tami</div>
+                <div>
+                    <div class="gator-mark">GATOR</div>
+                    <div class="gator-mark-endorsement">A Leopardo Technology</div>
+                </div>
+            </div>
+            <div class="slide-body">
+                <div class="cover-tag">Sales Support Function · GATOR</div>
+                <div class="cover-headline">Another rep splits your territory.<br/><em>The right support extends your reach.</em></div>
+                <div class="cover-sub">A short proposal for what brand and operational support could look like behind you at GATOR. Written specifically for the person who would benefit from it most.</div>
+            </div>
+            <div class="cover-footer">
+                <div>Prepared by Brandon Cole · VDO Aigency</div>
+                <div>01 / 10</div>
+            </div>
+        </div>
+
+        <!-- ========== SLIDE 02: WEEK BREAKDOWN ========== -->
+        <div class="slide">
+            <div class="slide-meta">
+                <div class="slide-meta-left">02 · The Senior AE Time Math</div>
+                <div>
+                    <div class="gator-mark">GATOR</div>
+                    <div class="gator-mark-endorsement">A Leopardo Technology</div>
+                </div>
+            </div>
+            <div class="slide-body">
+                <h1 class="week-title">A senior AE's week, without support</h1>
+                <p class="week-sub">A typical week in a government software sales motion — the hours that disappear before any selling happens.</p>
+
+                <div class="week-table">
+                    <div class="week-row"><div>RFP responses</div><div>8–12 hrs</div></div>
+                    <div class="week-row"><div>Demo decks &amp; updates</div><div>4–6 hrs</div></div>
+                    <div class="week-row"><div>Case studies &amp; reference handling</div><div>3–5 hrs</div></div>
+                    <div class="week-row"><div>Conference &amp; event materials</div><div>2–4 hrs</div></div>
+                    <div class="week-row"><div>Customer onboarding follow-up</div><div>4–6 hrs</div></div>
+                    <div class="week-row"><div>LinkedIn &amp; outbound content</div><div>2–3 hrs</div></div>
+                    <div class="week-row total"><div>Hours not selling</div><div>25–35</div></div>
+                </div>
+
+                <div class="week-punchline">That's most of a work week spent producing the things that should already exist.</div>
+            </div>
+        </div>
+
+        <!-- ========== SLIDE 03: TYLER COMPARISON ========== -->
+        <div class="slide">
+            <div class="slide-meta">
+                <div class="slide-meta-left">03 · The Stack Comparison</div>
+                <div>
+                    <div class="gator-mark">GATOR</div>
+                    <div class="gator-mark-endorsement">A Leopardo Technology</div>
+                </div>
+            </div>
+            <div class="slide-body">
+                <h1 class="compare-title">You closed at Tyler with a full team behind you.</h1>
+
+                <div class="compare-grid">
+                    <div>
+                        <div class="compare-col-label">At Tyler</div>
+                        <div class="compare-col-title">The support stack you had</div>
+                        <div class="stack-block">Marketing &amp; brand team</div>
+                        <div class="stack-block">Sales engineering</div>
+                        <div class="stack-block">Demo specialists</div>
+                        <div class="stack-block">Customer success</div>
+                        <div class="stack-block">Event &amp; conference team</div>
+                        <div class="stack-block">RFP response writers</div>
+                    </div>
+                    <div>
+                        <div class="compare-col-label">At GATOR Today</div>
+                        <div class="compare-col-title">The support stack you have</div>
+                        <div class="stack-block">You</div>
+                        <div class="stack-block empty">—</div>
+                        <div class="stack-block empty">—</div>
+                        <div class="stack-block empty">—</div>
+                        <div class="stack-block empty">—</div>
+                        <div class="stack-block empty">—</div>
+                    </div>
+                </div>
+
+                <div class="compare-bottom">The question is whether you'll close at GATOR without one — or whether the gap is the bottleneck the GATOR team hasn't named yet.</div>
+            </div>
+        </div>
+
+        <!-- ========== SLIDE 04: ANOTHER REP MATH ========== -->
+        <div class="slide">
+            <div class="slide-meta">
+                <div class="slide-meta-left">04 · The Cost of Another Rep</div>
+                <div>
+                    <div class="gator-mark">GATOR</div>
+                    <div class="gator-mark-endorsement">A Leopardo Technology</div>
+                </div>
+            </div>
+            <div class="slide-body">
+                <h1 class="rep-title">Another rep is the right answer — at a later stage.</h1>
+                <p class="rep-intro">Right now, the bottleneck isn't how many reps. It's what's behind each rep. Adding a second salesperson doesn't fix it, and adds three new costs.</p>
+
+                <div class="rep-reasons">
+                    <div class="rep-card">
+                        <div class="rep-card-num">Reason 01</div>
+                        <div class="rep-card-title">Territory Split</div>
+                        <div class="rep-card-desc">A second rep takes accounts you would have closed. Florida, Georgia, and South Carolina are your relationships. Splitting them halves the leverage of the network you already built.</div>
+                    </div>
+                    <div class="rep-card">
+                        <div class="rep-card-num">Reason 02</div>
+                        <div class="rep-card-title">Duplicated Overhead</div>
+                        <div class="rep-card-desc">They build the same decks, the same RFP responses, the same case studies you build. Twice the wasted hours. Twice the inconsistency in what gets sent to procurement directors.</div>
+                    </div>
+                    <div class="rep-card">
+                        <div class="rep-card-num">Reason 03</div>
+                        <div class="rep-card-title">No Leverage Compounding</div>
+                        <div class="rep-card-desc">A rep produces sales. A support function produces sales <em>and</em> assets that work forever. One case study sells the next ten cities. One RFP template wins back hundreds of hours.</div>
+                    </div>
+                </div>
+
+                <div class="rep-bottom">A second rep is linear. Support behind one rep is exponential.</div>
+            </div>
+        </div>
+
+        <!-- ========== SLIDE 05: DELIVERABLES ========== -->
+        <div class="slide">
+            <div class="slide-meta">
+                <div class="slide-meta-left">05 · What I Produce</div>
+                <div>
+                    <div class="gator-mark">GATOR</div>
+                    <div class="gator-mark-endorsement">A Leopardo Technology</div>
+                </div>
+            </div>
+            <div class="slide-body">
+                <h1 class="deliv-title">What I produce — so you stop having to.</h1>
+
+                <div class="deliv-grid">
+                    <div class="deliv-item">
+                        <div class="deliv-item-mark">01</div>
+                        <div class="deliv-item-text"><strong>Master Sales Deck</strong><br/>Modular, updated quarterly, customizable per vertical or pitch.</div>
+                    </div>
+                    <div class="deliv-item">
+                        <div class="deliv-item-mark">02</div>
+                        <div class="deliv-item-text"><strong>RFP Response Template</strong><br/>Plus custom-written responses for each live pursuit.</div>
+                    </div>
+                    <div class="deliv-item">
+                        <div class="deliv-item-mark">03</div>
+                        <div class="deliv-item-text"><strong>Case Study Production</strong><br/>Real footage from closed municipalities. Real testimonials. Real numbers.</div>
+                    </div>
+                    <div class="deliv-item">
+                        <div class="deliv-item-mark">04</div>
+                        <div class="deliv-item-text"><strong>Demo Videos</strong><br/>Product walk-throughs and customer outcome stories, send-before/leave-behind.</div>
+                    </div>
+                    <div class="deliv-item">
+                        <div class="deliv-item-mark">05</div>
+                        <div class="deliv-item-text"><strong>One-Pagers by Use Case</strong><br/>Supplies aggregation, health procurement, fleet, IT — drop-in collateral.</div>
+                    </div>
+                    <div class="deliv-item">
+                        <div class="deliv-item-mark">06</div>
+                        <div class="deliv-item-text"><strong>Conference &amp; Event Materials</strong><br/>Booth design, banners, leave-behinds, prep documents.</div>
+                    </div>
+                    <div class="deliv-item">
+                        <div class="deliv-item-mark">07</div>
+                        <div class="deliv-item-text"><strong>LinkedIn Content for You</strong><br/>Drafted, ready, on a 2-post-per-week cadence. Builds your executive presence.</div>
+                    </div>
+                    <div class="deliv-item">
+                        <div class="deliv-item-mark">08</div>
+                        <div class="deliv-item-text"><strong>Customer Onboarding Playbooks</strong><br/>Preserves the referrals. Keeps cities talking favorably to other cities.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== SLIDE 06: RFP SAMPLE ========== -->
+        <div class="slide">
+            <div class="slide-meta">
+                <div class="slide-meta-left">06 · Sample Deliverable</div>
+                <div>
+                    <div class="gator-mark">GATOR</div>
+                    <div class="gator-mark-endorsement">A Leopardo Technology</div>
+                </div>
+            </div>
+            <div class="slide-body">
+                <h1 class="rfp-title">RFP response opening — a real sample.</h1>
+                <div class="rfp-sub">What lands in your inbox the morning after a pursuit is qualified. You add the municipality-specific details. Everything else is already done.</div>
+
+                <div class="rfp-doc">
+                    <div class="rfp-doc-header">
+                        <div class="rfp-doc-meta">Response to RFP · 2026 · Procurement Management Platform</div>
+                        <div class="rfp-doc-title">GATOR &mdash; A Leopardo Technology</div>
+                        <div class="rfp-doc-subtitle">Submitted to the City of [Municipality] · Procurement Department</div>
+                    </div>
+
+                    <div class="rfp-doc-h">Executive Summary</div>
+                    <p class="rfp-doc-body">The City of [Municipality] has identified a common but expensive condition: forty-plus departments procuring independently, with no aggregated leverage, no centralized vendor competition, and an estimated <strong>20–35 percent premium</strong> on procurement spend relative to consolidated purchasing models.</p>
+                    <p class="rfp-doc-body"><strong>GATOR was built to eliminate that premium.</strong> The platform aggregates departmental orders across a municipality and submits the combined volume to a blind reverse auction with qualified vendors. Average procurement savings across our first five deployments: <strong>27 percent in year one.</strong></p>
+
+                    <div class="rfp-doc-h">About GATOR</div>
+                    <p class="rfp-doc-body">GATOR is the procurement technology platform of the Leopardo family of companies — Leopardo Construction (1977) and Leopardo Efficiency (energy savings performance contracts for municipal governments since 2008). The platform was built by operators who have spent decades inside municipal procurement environments as contractors, consultants, and service providers.</p>
+
+                    <div class="rfp-doc-h">Confirmed Customers · May 2026</div>
+                    <ul class="rfp-doc-list">
+                        <li>Terre Haute, Indiana</li>
+                        <li>Miami-Dade County, Florida</li>
+                        <li>South Miami, Florida</li>
+                        <li>City of Evansville, Indiana</li>
+                        <li>City of Doral, Florida</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== SLIDE 07: ALIGNMENT ========== -->
+        <div class="slide">
+            <div class="slide-meta">
+                <div class="slide-meta-left">07 · Why We're On the Same Side</div>
+                <div>
+                    <div class="gator-mark">GATOR</div>
+                    <div class="gator-mark-endorsement">A Leopardo Technology</div>
+                </div>
+            </div>
+            <div class="slide-body">
+                <h1 class="align-title">I don't take commission.</h1>
+                <p class="align-body">My compensation is salary plus equity. Not deal-tied. That structure exists for a reason: it means my incentive is to make you close more, not to compete with you for credit on the closes you already have.</p>
+                <p class="align-body">When your quota goes up, my equity gets more valuable. When your customers stay, my case studies have more weight. When your conference looks polished, the next ten meetings come easier.</p>
+
+                <div class="align-quote">My salary doesn't move when you close. My equity does. We're on the same side of the table.</div>
+            </div>
+        </div>
+
+        <!-- ========== SLIDE 08: 30/60/90 ========== -->
+        <div class="slide">
+            <div class="slide-meta">
+                <div class="slide-meta-left">08 · The First 90 Days</div>
+                <div>
+                    <div class="gator-mark">GATOR</div>
+                    <div class="gator-mark-endorsement">A Leopardo Technology</div>
+                </div>
+            </div>
+            <div class="slide-body">
+                <h1 class="plan-title">First 30, 60, 90 days.</h1>
+
+                <div class="plan-grid">
+                    <div class="plan-col">
+                        <div class="plan-col-label">30</div>
+                        <div class="plan-col-sub">Days · Foundation</div>
+                        <ul class="plan-list">
+                            <li>Master sales deck v1</li>
+                            <li>RFP response template, modular</li>
+                            <li>First case study from a closed city</li>
+                            <li>GATOR brand book deployed</li>
+                        </ul>
+                    </div>
+                    <div class="plan-col">
+                        <div class="plan-col-label">60</div>
+                        <div class="plan-col-sub">Days · Depth</div>
+                        <ul class="plan-list">
+                            <li>Two more case studies, on-site footage</li>
+                            <li>Demo video library — three walk-throughs</li>
+                            <li>Customer onboarding playbook v1</li>
+                            <li>One-pagers per use case</li>
+                        </ul>
+                    </div>
+                    <div class="plan-col">
+                        <div class="plan-col-label">90</div>
+                        <div class="plan-col-sub">Days · Scale</div>
+                        <ul class="plan-list">
+                            <li>Full sales enablement library</li>
+                            <li>Conference &amp; event materials ready</li>
+                            <li>Your LinkedIn on a 2-post-per-week cadence</li>
+                            <li>Workflow automation supporting sales handoff</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== SLIDE 09: MATH ========== -->
+        <div class="slide">
+            <div class="slide-meta">
+                <div class="slide-meta-left">09 · The Math, Conservatively</div>
+                <div>
+                    <div class="gator-mark">GATOR</div>
+                    <div class="gator-mark-endorsement">A Leopardo Technology</div>
+                </div>
+            </div>
+            <div class="slide-body">
+                <h1 class="math-title">A fractional rep, without splitting your territory.</h1>
+
+                <div class="math-grid">
+                    <div class="math-stat">
+                        <div class="math-stat-label">Hours Reclaimed</div>
+                        <div class="math-stat-number">25–35</div>
+                        <div class="math-stat-desc">Weekly hours currently spent producing what should already exist. Returned to selling.</div>
+                    </div>
+                    <div class="math-stat">
+                        <div class="math-stat-label">Effective Capacity Added</div>
+                        <div class="math-stat-number">0.6x</div>
+                        <div class="math-stat-desc">Equivalent of adding more than half of a sales rep — without territory split, without commission dilution, without duplicated overhead.</div>
+                    </div>
+                </div>
+
+                <div class="math-bottom">If support work currently consumes a quarter of your selling time, getting that time back is the equivalent of adding a fractional rep to the team — except this one builds assets that compound.</div>
+            </div>
+        </div>
+
+        <!-- ========== SLIDE 10: THE ASK ========== -->
+        <div class="slide dark">
+            <div class="slide-meta">
+                <div class="slide-meta-left">10 · The Ask</div>
+                <div>
+                    <div class="gator-mark">GATOR</div>
+                    <div class="gator-mark-endorsement">A Leopardo Technology</div>
+                </div>
+            </div>
+            <div class="slide-body">
+                <div class="cover-tag">If this is what you'd want behind you—</div>
+                <div class="ask-headline">I'd like you to <em>say so</em> to the GATOR team.</div>
+                <p class="ask-body">You're the only person at GATOR with both the operational authority and the sales credibility to name what an enterprise gov-software motion actually needs. If you say it, it lands differently than if I say it.</p>
+                <p class="ask-body">Twelve minutes of reading. One sentence to the GATOR team. That's the entire ask.</p>
+
+                <div class="ask-contact">
+                    <div class="ask-contact-name">Brandon Cole</div>
+                    <div>Executive Producer · VDO Aigency</div>
+                    <div>brandon@thevdoaigency.com</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
