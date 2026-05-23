@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centralized Brand & Content Unit — Three Concepts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Libre+Franklin:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --leopardo-blue: #1A3868;
+            --leopardo-blue-dark: #112548;
+            --leopardo-yellow: #FFE600;
+            --gator-green: #2E6B58;
+            --white: #FFFFFF;
+            --paper: #FAFAF8;
+            --ink: #1A1A1A;
+            --slate: #4A4A4A;
+            --silver: #9A9A9A;
+            --line: #E5E5E0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--white);
+            color: var(--ink);
+            font-family: 'Libre Franklin', -apple-system, sans-serif;
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Header */
+        .doc-header {
+            margin-bottom: 5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .doc-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.75rem;
+            color: var(--silver);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+        }
+
+        .doc-eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 28px;
+            height: 2px;
+            background: var(--leopardo-blue);
+        }
+
+        .doc-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.72rem;
+            color: var(--gator-green);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .doc-title {
+            font-family: 'Jost', sans-serif;
+            font-size: 2.75rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--leopardo-blue);
+            margin-bottom: 0.75rem;
+            line-height: 1.05;
+            max-width: 22ch;
+        }
+
+        .doc-subtitle {
+            color: var(--slate);
+            font-size: 1.05rem;
+            max-width: 62ch;
+            line-height: 1.6;
+        }
+
+        /* Intro */
+        .intro {
+            margin-bottom: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .intro p {
+            color: var(--slate);
+            font-size: 1rem;
+            max-width: 65ch;
+            margin-bottom: 1rem;
+        }
+
+        /* Concept card */
+        .concept {
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .concept:last-of-type {
+            border-bottom: none;
+            padding-bottom: 2rem;
+        }
+
+        .concept-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .concept-number {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.85rem;
+            color: var(--gator-green);
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            min-width: 80px;
+            padding-top: 0.5rem;
+        }
+
+        .concept-name {
+            font-family: 'Jost', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+            flex: 1;
+        }
+
+        .concept-body {
+            padding-left: calc(80px + 1.5rem);
+        }
+
+        .concept-tagline-block {
+            background: var(--paper);
+            border-left: 3px solid var(--gator-green);
+            padding: 1.5rem 1.75rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .concept-tagline-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.7rem;
+            color: var(--gator-green);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }
+
+        .concept-tagline-text {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--leopardo-blue);
+            letter-spacing: -0.01em;
+            line-height: 1.25;
+        }
+
+        .concept-descriptor {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 1rem;
+            color: var(--ink);
+            line-height: 1.7;
+            margin-bottom: 1.75rem;
+            max-width: 64ch;
+        }
+
+        .concept-positioning {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            padding: 1.5rem 1.75rem;
+            margin-top: 1rem;
+        }
+
+        .concept-positioning-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.68rem;
+            color: var(--silver);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+        }
+
+        .concept-positioning-text {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.93rem;
+            color: var(--slate);
+            line-height: 1.6;
+        }
+
+        .concept-positioning-text strong {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        /* Comparison summary */
+        .summary {
+            background: var(--leopardo-blue);
+            color: var(--white);
+            padding: 3rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .summary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gator-green);
+        }
+
+        .summary-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .summary-title {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.01em;
+        }
+
+        .summary p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1rem;
+            line-height: 1.65;
+            max-width: 62ch;
+            margin-bottom: 1rem;
+        }
+
+        .summary p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--line);
+            color: var(--silver);
+            font-size: 0.85rem;
+            font-family: 'Libre Franklin', sans-serif;
+            text-align: center;
+        }
+
+        @media (max-width: 720px) {
+            .doc-title { font-size: 2rem; }
+            .concept-name { font-size: 1.6rem; }
+            .concept-header { flex-direction: column; gap: 0.5rem; }
+            .concept-body { padding-left: 0; }
+            .concept-number { min-width: auto; padding-top: 0; }
+            .concept-tagline-text { font-size: 1.15rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <header class="doc-header">
+            <div class="doc-eyebrow">Alexander West Capital</div>
+            <div class="doc-label">Concept Memo · Naming Options · May 2026</div>
+            <h1 class="doc-title">A Centralized Brand &amp; Content Unit for the Portfolio</h1>
+            <p class="doc-subtitle">Three naming and positioning concepts for the family-office-wide brand and content function. Each names the same underlying machine. The difference is what it signals to the market and to the portfolio companies.</p>
+        </header>
+
+        <!-- Intro -->
+        <section class="intro">
+            <p>
+                The Leopardo Efficiency content pipeline — field footage, executive ideas, project updates, social outreach, AI-assisted workflows — works. The next move is to install the same machine across every Alexander West entity, including GATOR.
+            </p>
+            <p>
+                One unit. One voice system. One repeatable production process. Each operating company stays distinct, but the storytelling, the proof capture, and the distribution run on shared infrastructure.
+            </p>
+            <p>
+                What follows are three ways to name and frame that unit. Each implies a slightly different identity. Each one earns its own positioning.
+            </p>
+        </section>
+
+        <!-- CONCEPT 01 -->
+        <section class="concept">
+            <div class="concept-header">
+                <div class="concept-number">Concept 01</div>
+                <div class="concept-name">Alexander West Brand Studio</div>
+            </div>
+            <div class="concept-body">
+                <div class="concept-tagline-block">
+                    <div class="concept-tagline-label">Tagline</div>
+                    <div class="concept-tagline-text">Turning operating activity into market-facing proof.</div>
+                </div>
+
+                <p class="concept-descriptor">
+                    Alexander West Brand Studio is the centralized content and brand unit for the family office. Leopardo Efficiency was the proving ground: field footage, project updates, executive ideas, LinkedIn outreach, and AI-assisted workflows became a repeatable content pipeline. The Brand Studio installs that same machine across the portfolio — producing case studies, executive thought leadership, social content, sales assets, and recruiting material from the work the companies are already doing.
+                </p>
+
+                <div class="concept-positioning">
+                    <div class="concept-positioning-label">Where this lands</div>
+                    <div class="concept-positioning-text">
+                        <strong>Brand Studio</strong> reads as creative-forward. It positions the unit as a craft shop with the family office's name on the door. Useful for recruiting talent and for external attribution when work gets credited. The "studio" framing implies output quality and a roster of operators rather than a back-office function.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONCEPT 02 -->
+        <section class="concept">
+            <div class="concept-header">
+                <div class="concept-number">Concept 02</div>
+                <div class="concept-name">Alexander West Content Infrastructure</div>
+            </div>
+            <div class="concept-body">
+                <div class="concept-tagline-block">
+                    <div class="concept-tagline-label">Tagline</div>
+                    <div class="concept-tagline-text">A portfolio-wide system for capturing, shaping, and distributing proof.</div>
+                </div>
+
+                <p class="concept-descriptor">
+                    Alexander West Content Infrastructure is the operating system behind the family office's media, messaging, and brand output. Eddie captures structured proof in the field. Raj manages the media pipeline. Brandon shapes the strategy, voice, campaigns, and tools. Umut and freelance editors add scalable execution. The result is a central machine that turns installs, wins, leadership thinking, and company activity into consistent branded content across every Alexander West entity.
+                </p>
+
+                <div class="concept-positioning">
+                    <div class="concept-positioning-label">Where this lands</div>
+                    <div class="concept-positioning-text">
+                        <strong>Content Infrastructure</strong> reads as systems-forward. It positions the unit the way LPs and partners want to hear it described — a defensible operating asset that compounds across the portfolio. Less about craft, more about leverage. Useful internally when justifying headcount and budget. Probably the strongest framing for an investor or board audience.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONCEPT 03 -->
+        <section class="concept">
+            <div class="concept-header">
+                <div class="concept-number">Concept 03</div>
+                <div class="concept-name">Leopardo Brand Operations</div>
+            </div>
+            <div class="concept-body">
+                <div class="concept-tagline-block">
+                    <div class="concept-tagline-label">Tagline</div>
+                    <div class="concept-tagline-text">From field work to brand equity.</div>
+                </div>
+
+                <p class="concept-descriptor">
+                    Leopardo Brand Operations is the centralized brand and content command unit built from the Leopardo Efficiency pilot. It takes raw company activity — construction installs, executive insight, client wins, project updates, and field footage — and turns it into polished, consistent, sales-ready content. The goal is not more posting. The goal is to build a repeatable portfolio-wide system that makes every Leopardo-owned company easier to understand, easier to trust, and easier to sell.
+                </p>
+
+                <div class="concept-positioning">
+                    <div class="concept-positioning-label">Where this lands</div>
+                    <div class="concept-positioning-text">
+                        <strong>Brand Operations</strong> reads as construction-native. It leans into the Leopardo name as the carrier of trust and treats brand as an operating discipline, not a marketing function. The strongest framing if the unit's center of gravity stays inside Leopardo Construction and Leopardo Efficiency. The weakest if the family office wants the unit to feel separate from the construction parent.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section class="summary">
+            <div class="summary-label">A note on the three</div>
+            <div class="summary-title">Same machine. Three different doors.</div>
+            <p>
+                All three describe the same underlying unit: one centralized team running content, brand, and storytelling across every Alexander West entity, with GATOR as a portfolio member. The differences are positioning.
+            </p>
+            <p>
+                <strong style="color: var(--white);">Brand Studio</strong> sells the craft. <strong style="color: var(--white);">Content Infrastructure</strong> sells the leverage. <strong style="color: var(--white);">Brand Operations</strong> sells the lineage.
+            </p>
+            <p>
+                The right choice depends on the audience the family office wants to address most often — recruits, investors, or operating partners. Worth a short conversation before committing.
+            </p>
+        </section>
+
+        <footer>
+            <p>Concept memo · prepared for Curtis Leopardo · part of the Leopardo family of brands · May 2026</p>
+        </footer>
+
+    </div>
+</body>
+</html>
