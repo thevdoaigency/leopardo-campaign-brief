@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leopardo Efficiency — A 50-person team, run by one</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1A3868;
+    --blue-tint:#E4E9F1;
+    --yellow:#FFE600;
+    --ink:#23262B;
+    --muted:#5C6470;
+    --line:#D8DEE8;
+    --page:#FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:"Libre Franklin",system-ui,sans-serif;
+    color:var(--ink);
+    background:#EEF1F5;
+    line-height:1.55;
+    padding:32px 16px;
+  }
+  .sheet{
+    max-width:940px;margin:0 auto;background:var(--page);
+    padding:44px 48px 36px;border-radius:6px;
+    box-shadow:0 1px 4px rgba(26,56,104,.10);
+  }
+  .eyebrow{
+    font-family:"Jost",sans-serif;font-weight:600;font-size:12px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--blue);
+  }
+  h1{
+    font-family:"Jost",sans-serif;font-weight:600;color:var(--blue);
+    font-size:33px;line-height:1.12;margin-top:8px;letter-spacing:-.01em;
+  }
+  h1 .y{box-shadow:inset 0 -.42em 0 var(--yellow)}
+  .rule{height:4px;width:64px;background:var(--yellow);margin:16px 0 18px;border-radius:2px}
+  .lede{font-size:15px;color:var(--ink);max-width:760px}
+  .lede strong{font-weight:600;color:var(--blue)}
+
+  .layer{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 0}
+  .layer .lc{
+    flex:1;min-width:220px;background:var(--blue);color:#fff;
+    border-radius:8px;padding:14px 16px;
+  }
+  .lc .k{font-family:"Jost",sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--yellow);opacity:.95}
+  .lc .n{font-family:"Jost",sans-serif;font-weight:500;font-size:17px;margin-top:3px}
+  .lc .d{font-size:12.5px;color:#C9D4E6;margin-top:1px}
+
+  .director{
+    text-align:center;font-size:13px;color:var(--muted);
+    margin:14px 0 6px;font-family:"Libre Franklin",sans-serif;
+  }
+  .director b{color:var(--blue);font-weight:600}
+
+  .countbar{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin:10px 0 18px}
+  .countbar .big{font-family:"Jost",sans-serif;font-weight:600;font-size:20px;color:var(--blue)}
+  .countbar .sub{font-size:13px;color:var(--muted)}
+  .countbar .lg{font-size:12.5px;color:var(--blue);font-weight:500}
+  .star{color:#C9A400}
+
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .card{border:1px solid var(--line);border-radius:8px;padding:12px 13px;background:#fff}
+  .card .ch{display:flex;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:8px}
+  .card .ct{font-family:"Jost",sans-serif;font-weight:500;font-size:13.5px;color:var(--blue);line-height:1.15}
+  .card .cp{font-family:"Jost",sans-serif;font-size:11px;color:var(--muted);background:var(--blue-tint);border-radius:20px;padding:1px 7px;flex:none}
+  .role{display:flex;gap:7px;align-items:flex-start;font-size:12.5px;color:var(--muted);line-height:1.5;padding:1px 0}
+  .role .dot{color:#B7C0CE;line-height:1.5;flex:none}
+  .role.live{color:var(--ink);font-weight:600}
+  .role.live .dot{color:#C9A400}
+
+  .foot{margin-top:22px;border-top:1px solid var(--line);padding-top:11px;font-family:"Jost",sans-serif;font-size:12px;color:var(--muted);letter-spacing:.02em}
+
+  @media (max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}h1{font-size:27px}.sheet{padding:30px 22px}}
+  @media print{
+    body{background:#fff;padding:0}
+    .sheet{box-shadow:none;max-width:none;padding:24px 26px;border-radius:0}
+    .card,.lc{break-inside:avoid}
+    h1{font-size:28px}
+  }
+</style>
+</head>
+<body>
+  <main class="sheet">
+    <div class="eyebrow">Leopardo Efficiency</div>
+    <h1>A 50-person marketing &amp; growth team.<br><span class="y">Run by one human.</span></h1>
+    <div class="rule"></div>
+
+    <p class="lede">
+      Leopardo Efficiency gets its own full marketing and growth department — <strong>fifty specialist roles</strong>, from a CMO to a municipal sales analyst, built and run as a single system.
+      Every week the team meets, examines Rob's goals from every angle, and produces a ranked list of the highest-impact moves — and the top of that stack lands on his desk each Monday.
+      Fifty people's worth of thinking and the output of a world-class agency, operated by <strong>one human conductor</strong> for less than the cost of a single hire.
+    </p>
+
+    <div class="layer">
+      <div class="lc">
+        <div class="k">The human · sets the goals</div>
+        <div class="n">Rob Vollrath — President</div>
+        <div class="d">Reads the Monday board report</div>
+      </div>
+      <div class="lc">
+        <div class="k">The conductor · runs it all</div>
+        <div class="n">One human</div>
+        <div class="d">Trains, QA's, and answers for it</div>
+      </div>
+    </div>
+
+    <div class="director">↓ &nbsp;One <b>Managing Director</b> agent sets the agenda, grades every recommendation, and reports up</div>
+
+    <div class="countbar">
+      <span class="big">50 synthetic seats</span>
+      <span class="sub">8 departments · meet weekly</span>
+      <span class="lg"><span class="star">★</span> runs live in the demo</span>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="ch"><span class="ct">Office of the Director</span><span class="cp">4</span></div>
+        <div class="role"><span class="dot">•</span>Managing Director</div>
+        <div class="role"><span class="dot">•</span>Chief of Staff</div>
+        <div class="role"><span class="dot">•</span>Strategy Analyst</div>
+        <div class="role"><span class="dot">•</span>Master Knowledge Agent</div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><span class="ct">Marketing &amp; Brand</span><span class="cp">7</span></div>
+        <div class="role live"><span class="dot">★</span>Chief Marketing Officer</div>
+        <div class="role"><span class="dot">•</span>Brand Manager</div>
+        <div class="role"><span class="dot">•</span>Content Lead</div>
+        <div class="role live"><span class="dot">★</span>SEO &amp; Long-Tail Strategist</div>
+        <div class="role"><span class="dot">•</span>YouTube Channel Producer</div>
+        <div class="role"><span class="dot">•</span>Graphic Design Lead</div>
+        <div class="role"><span class="dot">•</span>Email &amp; Nurture Specialist</div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><span class="ct">Demand Gen &amp; Municipal Sales</span><span class="cp">7</span></div>
+        <div class="role"><span class="dot">•</span>Demand Gen Director</div>
+        <div class="role"><span class="dot">•</span>Municipal BD — Ohio</div>
+        <div class="role"><span class="dot">•</span>Municipal BD — Indiana</div>
+        <div class="role"><span class="dot">•</span>Municipal BD — Florida</div>
+        <div class="role"><span class="dot">•</span>LinkedIn Outreach Specialist</div>
+        <div class="role live"><span class="dot">★</span>ICMA-CM Targeting Analyst</div>
+        <div class="role"><span class="dot">•</span>SDR / Appointment Setter</div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><span class="ct">Sales Intelligence &amp; RevOps</span><span class="cp">6</span></div>
+        <div class="role"><span class="dot">•</span>RevOps Director</div>
+        <div class="role live"><span class="dot">★</span>Pipeline &amp; CRM Analyst</div>
+        <div class="role"><span class="dot">•</span>Lead Scoring Analyst</div>
+        <div class="role"><span class="dot">•</span>Data Enrichment Specialist</div>
+        <div class="role"><span class="dot">•</span>Attribution Analyst</div>
+        <div class="role"><span class="dot">•</span>Forecast Analyst</div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><span class="ct">ESPC Solutions &amp; Proposals</span><span class="cp">7</span></div>
+        <div class="role"><span class="dot">•</span>Solutions Engineer</div>
+        <div class="role live"><span class="dot">★</span>Energy Audit Analyst</div>
+        <div class="role"><span class="dot">•</span>Savings &amp; ROI Modeler</div>
+        <div class="role"><span class="dot">•</span>Measurement &amp; Verification Analyst</div>
+        <div class="role"><span class="dot">•</span>Proposal Writer</div>
+        <div class="role"><span class="dot">•</span>RFP &amp; Bid Specialist</div>
+        <div class="role"><span class="dot">•</span>Deferred-Maintenance Audit Lead</div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><span class="ct">Accounts &amp; Delivery</span><span class="cp">6</span></div>
+        <div class="role"><span class="dot">•</span>Account Director</div>
+        <div class="role"><span class="dot">•</span>Implementation Coordinator</div>
+        <div class="role"><span class="dot">•</span>Customer Success Manager</div>
+        <div class="role"><span class="dot">•</span>Renewals Manager</div>
+        <div class="role"><span class="dot">•</span>Case Study Producer</div>
+        <div class="role"><span class="dot">•</span>Reference &amp; Testimonial Manager</div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><span class="ct">Finance &amp; Insight</span><span class="cp">6</span></div>
+        <div class="role"><span class="dot">•</span>FP&amp;A Analyst</div>
+        <div class="role"><span class="dot">•</span>Pricing Analyst</div>
+        <div class="role"><span class="dot">•</span>Reporting &amp; Dashboard Analyst</div>
+        <div class="role"><span class="dot">•</span>Market &amp; Policy Analyst</div>
+        <div class="role"><span class="dot">•</span>Competitive Intelligence Analyst</div>
+        <div class="role live"><span class="dot">★</span>Recommendation Grader</div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><span class="ct">Comms &amp; Partnerships</span><span class="cp">7</span></div>
+        <div class="role"><span class="dot">•</span>PR &amp; Comms Lead</div>
+        <div class="role"><span class="dot">•</span>Partnerships — Utilities &amp; ESCOs</div>
+        <div class="role"><span class="dot">•</span>Associations Liaison (IMMA / ICMA)</div>
+        <div class="role"><span class="dot">•</span>Events &amp; Webinar Producer</div>
+        <div class="role"><span class="dot">•</span>Thought-Leadership Writer</div>
+        <div class="role"><span class="dot">•</span>Social Media Manager</div>
+        <div class="role"><span class="dot">•</span>Award &amp; Recognition Coordinator</div>
+      </div>
+
+    </div>
+
+    <div class="foot">The VDO Aigency · June 2026 — illustrative; final org built from Rob's input</div>
+  </main>
+</body>
+</html>
