@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leopardo Efficiency — Weekly Report · Week of June 22, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1a3967; --yellow:#fee600; --black:#0b0b0b;
+    --cream:#ede9e3; --gray:#908b86;
+    --ink:#1c2330; --muted:#5d6675; --line:#dcdfe5; --paper:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Libre Franklin",system-ui,sans-serif;color:var(--ink);background:#e7e9ed;line-height:1.55;padding:28px 14px 44px}
+  .sheet{max-width:920px;margin:0 auto;background:var(--paper);border-radius:6px;box-shadow:0 1px 4px rgba(26,57,103,.12);overflow:hidden}
+  .pad{padding:40px 46px}
+
+  .masthead{background:var(--navy);color:#fff;padding:26px 46px}
+  .masthead .ey{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow)}
+  .masthead h1{font-size:27px;font-weight:800;margin-top:4px;letter-spacing:-.01em}
+  .masthead .meta{font-size:13px;color:#c4d0e2;margin-top:6px}
+  .masthead .meta b{color:#fff;font-weight:600}
+
+  .lede{font-size:15px;color:var(--ink);border-left:3px solid var(--yellow);padding-left:14px;margin-bottom:6px}
+
+  .sec{margin-top:34px}
+  .sec h2{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);display:flex;align-items:center;gap:10px}
+  .sec h2 .no{background:var(--yellow);color:var(--black);font-size:12px;font-weight:800;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none}
+  .sec .rule{height:2px;background:var(--cream);margin:10px 0 16px}
+
+  .sentence{font-size:15px;color:var(--ink);margin-bottom:14px}
+  .btnlink{display:inline-block;font-size:13px;font-weight:600;color:var(--navy);text-decoration:none;border:1px solid var(--navy);border-radius:6px;padding:7px 13px}
+
+  .leads{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+  .lead{border:1px solid var(--line);border-radius:9px;padding:13px 14px;background:#fbfbfc}
+  .lead .tagrow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px}
+  .pill{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:20px}
+  .pill.espc{background:#e9eef6;color:var(--navy)}
+  .pill.proc{background:var(--yellow);color:var(--black)}
+  .pill.warm{background:#fff3d6;color:#8a6d00}
+  .lead .ln{font-size:14.5px;font-weight:700;color:var(--ink);line-height:1.25}
+  .lead .loc{font-size:12px;color:var(--muted);margin:2px 0 7px}
+  .lead .wy{font-size:12.5px;color:#3a414e;line-height:1.45}
+
+  .yt{display:flex;gap:16px;align-items:flex-start;background:var(--black);color:#fff;border-radius:10px;padding:18px 20px;flex-wrap:wrap}
+  .yt .play{width:46px;height:46px;border-radius:10px;background:var(--yellow);color:var(--black);display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
+  .yt .ytc{flex:1;min-width:240px}
+  .yt h3{font-size:16px;font-weight:700}
+  .yt p{font-size:13.5px;color:#cfd3da;margin-top:4px}
+  .yt a{display:inline-block;margin-top:10px;font-size:13px;font-weight:600;color:var(--black);background:var(--yellow);border-radius:6px;padding:7px 13px;text-decoration:none}
+
+  .pro{border:1px solid var(--line);border-radius:11px;padding:16px 18px;margin-top:14px}
+  .pro.top{border-color:var(--navy);border-width:1.5px}
+  .pro .top-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .pro .name{font-size:17px;font-weight:700;color:var(--ink)}
+  .pro .name .st{font-size:12px;font-weight:600;color:var(--muted);margin-left:7px}
+  .pro .title{font-size:13px;color:var(--muted);margin-top:2px}
+  .score{flex:none;text-align:center;background:var(--navy);color:#fff;border-radius:9px;padding:6px 11px;min-width:58px}
+  .pro.top .score{background:var(--yellow);color:var(--black)}
+  .score .n{font-size:20px;font-weight:800;line-height:1}
+  .score .l{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+  .pro .bio{font-size:13px;color:#3a414e;line-height:1.5;margin-top:9px}
+  .pro .row{margin-top:9px;font-size:13.5px;color:#3a414e;line-height:1.5}
+  .pro .row b{color:var(--navy);font-weight:700}
+  .pro .lk{display:inline-block;margin-top:10px;font-size:12.5px;font-weight:600;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--yellow)}
+
+  .msg{margin-top:13px;background:#f4f6f9;border-left:3px solid var(--navy);border-radius:0 8px 8px 0;padding:13px 15px}
+  .msg .mh{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);margin-bottom:8px}
+  .msg .mb{font-size:13px;color:#2a2f3a;line-height:1.62;white-space:pre-line}
+  .msg .vid{color:var(--gray);font-style:italic}
+
+  .insight{background:var(--cream);border-radius:10px;padding:15px 18px;margin-top:20px;font-size:14px;color:var(--ink)}
+  .insight b{color:var(--navy)}
+
+  .foot{border-top:1px solid var(--line);padding:16px 46px;font-size:12px;color:var(--gray);font-weight:600;letter-spacing:.02em}
+
+  @media(max-width:720px){.pad{padding:28px 22px}.masthead{padding:22px}.leads{grid-template-columns:1fr}.foot{padding:14px 22px}.masthead h1{font-size:23px}}
+  @media print{body{background:#fff;padding:0}.sheet{box-shadow:none;border-radius:0}.pro,.lead,.yt,.msg{break-inside:avoid}}
+</style>
+</head>
+<body>
+  <div class="sheet">
+
+    <div class="masthead">
+      <div class="ey">Leopardo Efficiency · Report 01</div>
+      <h1>Weekly Report</h1>
+      <div class="meta">Week of <b>June 22, 2026</b> &nbsp;·&nbsp; Prepared for <b>Rob Vollrath</b></div>
+    </div>
+
+    <div class="pad">
+
+      <p class="lede">Three items this week: a new opportunity-intake system now running, the Leopardo Efficiency YouTube channel live, and the top three contacts ready for Curtis to message on LinkedIn — with draft messages for your review.</p>
+
+      <div class="sec">
+        <h2><span class="no">1</span> Opportunity Intake — now live</h2>
+        <div class="rule"></div>
+        <p class="sentence">A new monday.com board where an automated research agent scans government bid portals, state energy programs, and local-government news across Ohio, Indiana, and Florida, then logs qualified ESPC and Procurement opportunities — so prospects come to us instead of being hand-built.</p>
+        <a class="btnlink" href="https://thevdoaigency.monday.com/boards/18418779203">Open the Intake board →</a>
+
+        <div class="leads">
+          <div class="lead">
+            <div class="tagrow"><span class="pill espc">ESPC</span><span class="pill warm">Warm</span></div>
+            <div class="ln">Shaker Heights, OH</div>
+            <div class="loc">Cuyahoga County · Trigger</div>
+            <div class="wy">$32K efficiency grant earmarked through the city's aggregation contract; energy program managed via adviser Aspen Energy. Entry point for an ESPC conversation.</div>
+          </div>
+          <div class="lead">
+            <div class="tagrow"><span class="pill proc">Procurement</span><span class="pill warm">Warm</span></div>
+            <div class="ln">Indianapolis, IN</div>
+            <div class="loc">Marion County · Trigger</div>
+            <div class="wy">~$43M 2026 budget gap from state property-tax cuts; departments told to trim ~4% and "do more with less." A budget-distress opening for Procurement Solutions.</div>
+          </div>
+          <div class="lead">
+            <div class="tagrow"><span class="pill espc">ESPC</span><span class="pill warm">Warm</span></div>
+            <div class="ln">Bloomington, IN</div>
+            <div class="loc">Monroe County · Trigger</div>
+            <div class="wy">~$508K secured to overhaul a city facility's mechanical systems and add solar + storage. A city already investing in efficiency.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <h2><span class="no">2</span> YouTube channel — launched</h2>
+        <div class="rule"></div>
+        <div class="yt">
+          <div class="play">▶</div>
+          <div class="ytc">
+            <h3>Leopardo Efficiency on YouTube</h3>
+            <p>The channel is live — built as a top-of-funnel and proof library. It gives prospects a place to see how the model works (energy savings covering the full project cost) before a first conversation, and gives the LinkedIn outreach a credible, branded destination to link to.</p>
+            <a href="https://www.youtube.com/@LeopardoEfficiency">Visit the channel →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <h2><span class="no">3</span> Top 3 to message this week — from Curtis's LinkedIn</h2>
+        <div class="rule"></div>
+
+        <div class="pro top">
+          <div class="top-row">
+            <div>
+              <div class="name">David Wilkinson <span class="st">Indiana</span></div>
+              <div class="title">ICMA-CM · MSM, Public Administration · Past: City Manager, South Whitley</div>
+            </div>
+            <div class="score"><div class="n">135</div><div class="l">Score</div></div>
+          </div>
+          <div class="bio">25+ years in municipal finance and leadership; a certified City Manager (ICMA-CM) who has run cities across Indiana and the Midwest. His credential is the strongest response predictor in the data, and he's a genuine peer to other city managers.</div>
+          <div class="row"><b>Why:</b> ICMA-CM credential (the 43% acceptance baseline) + City Manager background + a fresh prospect.</div>
+          <div class="row"><b>Play:</b> High-confidence cold reach. Peer-to-peer, credential recognition, operational-efficiency angle, low-pressure video ask.</div>
+          <a class="lk" href="https://www.linkedin.com/in/davidwilkinson651/">linkedin.com/in/davidwilkinson651</a>
+          <div class="msg">
+            <div class="mh">✎ Draft message — for your review</div>
+            <div class="mb">David — thanks for accepting. I saw your ICMA-CM credential and your background in municipal operations, and wanted to send you a quick clip.
+
+We just closed a project in South Euclid — five city-owned buildings modernized in one structure. Energy savings underwrote 100% of the cost. No new tax, no new debt service, zero burden on the operating budget.
+
+Given your experience leading operational efficiency across Indiana municipalities, I'm curious how the model reads from your seat. We're seeing a lot of interest from CMOs and city managers with your profile — people who've actually run cities and understand what works.
+
+Quick clip here: https://drive.google.com/file/d/1vTwLAt05pjkvmU7An6fWV7hGv8OJLMz1/view
+
+Appreciate your time. — Curtis</div>
+          </div>
+        </div>
+
+        <div class="pro">
+          <div class="top-row">
+            <div>
+              <div class="name">Tim Reidy <span class="st">Ohio</span></div>
+              <div class="title">Managing Director, Public Finance · Raymond James &amp; Associates</div>
+            </div>
+            <div class="score"><div class="n">120</div><div class="l">Score</div></div>
+          </div>
+          <div class="bio">A municipal advisory specialist at Raymond James working with city administrators and finance directors across Ohio on capital structures for deferred maintenance and infrastructure. Sits at the intersection of city operations and capital markets — a trusted advisor and a bridge to multiple municipalities.</div>
+          <div class="row"><b>Why:</b> Already connected, advisory/finance role, Ohio — a warm-up after the connection.</div>
+          <div class="row"><b>Play:</b> Personalized follow-up video. A financial advisor touching multiple cities — a lateral-reach play.</div>
+          <a class="lk" href="https://www.linkedin.com/in/tim-reidy-892134245/">linkedin.com/in/tim-reidy-892134245</a>
+          <div class="msg">
+            <div class="mh">✎ Draft message — for your review</div>
+            <div class="mb">Tim — I sent you a connection request a few weeks back and appreciate the accept. Wanted to follow up with something specific.
+
+We've been working with municipalities across Ohio on infrastructure financing — particularly around deferred maintenance where cash-flow constraints are the real limiting factor, not the buildings themselves.
+
+You're in the middle of that conversation at Raymond James. You see the constraints firsthand. We've structured a model that flips the equation: instead of "where does the city find $5M for this building," it becomes "this building funds its own modernization."
+
+Quick overview: https://drive.google.com/file/d/1vTwLAt05pjkvmU7An6fWV7hGv8OJLMz1/view
+
+Curious if this lands on your radar with any of your municipal clients. No pressure — just thought you'd find it interesting given where you sit in the equation.
+
+— Curtis</div>
+          </div>
+        </div>
+
+        <div class="pro">
+          <div class="top-row">
+            <div>
+              <div class="name">Darren L. Andrews Jr. <span class="st">Ohio</span></div>
+              <div class="title">Director of Finance &amp; Investments · City of Dayton</div>
+            </div>
+            <div class="score"><div class="n">120</div><div class="l">Score</div></div>
+          </div>
+          <div class="bio">Oversees financial strategy, capital planning, and investments for one of Ohio's largest cities, with authority over procurement decisions and the capital structures that fund operations. Managing a sizable deferred-maintenance portfolio — exactly the profile most receptive to a procurement-funded modernization model.</div>
+          <div class="row"><b>Why:</b> Already connected, advisory/finance role, Ohio — same warm-up logic.</div>
+          <div class="row"><b>Play:</b> Follow-up sequence with an investment/finance angle on Procurement Solutions; references Dayton specifically.</div>
+          <a class="lk" href="https://www.linkedin.com/in/darren-l-andrews-jr-326355396/">linkedin.com/in/darren-l-andrews-jr-326355396</a>
+          <div class="msg">
+            <div class="mh">✎ Draft message — for your review</div>
+            <div class="mb">Darren — thanks for connecting. I know you're managing Dayton's capital strategy across a significant portfolio, and I wanted to send you something we're seeing work well.
+
+We've been working on infrastructure funding models for municipalities managing deferred maintenance — specifically how to structure modernization so the energy savings cover the cost. No new appropriations, no new tax questions, no operating budget hit.
+
+South Euclid is a good recent example: five buildings, one financing structure, energy savings cover the entire cost. City gets modernized infrastructure; taxpayers get nothing new.
+
+Given Dayton's footprint and the portfolio challenges you're managing, this might be worth a quick look: https://drive.google.com/file/d/1vTwLAt05pjkvmU7An6fWV7hGv8OJLMz1/view
+
+If it's interesting, happy to connect on specifics. If not, no worries — just wanted to make sure you'd seen it.
+
+— Curtis</div>
+          </div>
+        </div>
+
+        <div class="insight">
+          <b>Key insight:</b> David Wilkinson is the fresh ICMA-CM prospect — highest-confidence cold reach per the 43% acceptance data. Reidy and Andrews are warm-up plays for already-connected advisory types in Ohio.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="foot">The VDO Aigency · June 2026</div>
+  </div>
+</body>
+</html>
