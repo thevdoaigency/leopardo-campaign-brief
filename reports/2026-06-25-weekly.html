@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leopardo Efficiency — Weekly Report · Week of June 25, 2026</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f5f5f3;
+      color: #1a1a1a;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .wrapper { max-width: 720px; margin: 0 auto; }
+
+    /* Header */
+    .report-header {
+      background: #1a1a1a;
+      color: #fff;
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .report-header .brand {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 0.5rem;
+    }
+    .report-header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .report-header .lede {
+      font-size: 0.95rem;
+      color: #ccc;
+      line-height: 1.7;
+    }
+
+    /* Sections */
+    .section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #e8e8e8;
+    }
+    .section-number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 0.4rem;
+    }
+    .section h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: #1a1a1a;
+    }
+
+    /* Intake cards */
+    .intake-card {
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .intake-card:last-child { margin-bottom: 0; }
+    .intake-meta {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+    .badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+    .badge-espc { background: #e8f4e8; color: #2d7a2d; }
+    .badge-procurement { background: #e8eef8; color: #2d4a9a; }
+    .badge-electrical { background: #fef3e2; color: #a0620a; }
+    .badge-warm { background: #fff8e1; color: #b07a00; }
+    .badge-hot { background: #fde8e8; color: #9a2d2d; }
+    .badge-trigger { background: #f0f0f0; color: #555; }
+    .badge-rfp { background: #f3e8fe; color: #6a2da0; }
+    .intake-location {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #444;
+    }
+    .intake-body { font-size: 0.875rem; color: #555; line-height: 1.6; }
+
+    /* Prospect cards */
+    .prospect-card {
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .prospect-card:last-child { margin-bottom: 0; }
+    .prospect-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+      gap: 1rem;
+    }
+    .prospect-name { font-size: 1rem; font-weight: 700; color: #1a1a1a; }
+    .prospect-state {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: #1a1a1a;
+      color: #fff;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .prospect-title { font-size: 0.82rem; color: #666; margin-bottom: 0.75rem; }
+    .prospect-why {
+      font-size: 0.82rem;
+      color: #444;
+      line-height: 1.65;
+      margin-bottom: 0.75rem;
+    }
+    .prospect-why strong { color: #1a1a1a; }
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .score-label { font-size: 0.7rem; color: #999; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+    .score-value { font-size: 1.1rem; font-weight: 800; color: #1a1a1a; }
+
+    /* Draft message */
+    .draft-toggle {
+      background: #f9f9f9;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 0.6rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #555;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0;
+      width: 100%;
+      text-align: left;
+    }
+    .draft-toggle::before { content: "✎"; }
+    .draft-body {
+      background: #f9f9f9;
+      border: 1px solid #e0e0e0;
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      padding: 1rem;
+      font-size: 0.82rem;
+      color: #333;
+      line-height: 1.75;
+      white-space: pre-wrap;
+      font-family: inherit;
+      display: block;
+    }
+
+    /* Links */
+    a { color: #2d5be3; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .cta-link {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #2d5be3;
+      margin-top: 0.5rem;
+    }
+
+    /* Flag / callout */
+    .callout {
+      background: #fff8e1;
+      border-left: 3px solid #f0b429;
+      border-radius: 0 6px 6px 0;
+      padding: 0.75rem 1rem;
+      font-size: 0.82rem;
+      color: #555;
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
+    .callout strong { color: #1a1a1a; }
+
+    /* Angela section */
+    .angela-intro {
+      font-size: 0.9rem;
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 540px) { .two-col { grid-template-columns: 1fr; } }
+    .approach-card {
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .approach-title { font-size: 0.8rem; font-weight: 700; color: #1a1a1a; margin-bottom: 0.4rem; }
+    .approach-body { font-size: 0.8rem; color: #666; line-height: 1.6; }
+
+    /* Footer */
+    .report-footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #aaa;
+      padding: 1rem 0 2rem;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="report-header">
+    <div class="brand">Leopardo Efficiency · Weekly Report</div>
+    <h1>Week of June 25, 2026</h1>
+    <p class="lede">Four items this week: Angela Abernathy's outreach strategy defined ahead of today's call, the top five Florida GATOR prospects ready for Rob's review, three Grand Con Electric opportunities posted to the intake board, and the outreach queue ready for Curtis with messages drafted.</p>
+  </div>
+
+  <!-- Section 1: Angela -->
+  <div class="section">
+    <div class="section-number">1</div>
+    <h2>Angela Abernathy — Outreach Strategy</h2>
+    <p class="angela-intro">Angela joined as Growth Manager this week with 7,000+ LinkedIn connections across public sector. The strategic question is how to activate that network without burning it. Three principles for today's call:</p>
+    <div class="two-col">
+      <div class="approach-card">
+        <div class="approach-title">Filter first, broadcast second</div>
+        <div class="approach-body">Run Angela's 7K connections through the ICMA-CM filter for IL, IN, and OH. That's the 43% acceptance cohort — roughly 200–300 names who are the actual decision-makers. Start there, not with a general post blast.</div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-title">One-sentence test on every post</div>
+        <div class="approach-body">Rob's standard: "If a city manager can't repeat back to a colleague what we do in one or two sentences, we haven't done our job." Every piece Angela publishes needs a single repeatable line a CM could say to their CFO.</div>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Gate check required before any personalized outreach.</strong> Angela is new and doesn't know the history. William Poe, Joe Mahoney, Peter Altman, Trevor Elkins, and Hialeah are all active engagements. Before any personalized message goes from Angela's account, it runs through the Monday board gate list. No exceptions.
+    </div>
+  </div>
+
+  <!-- Section 2: Florida GATOR Top 5 -->
+  <div class="section">
+    <div class="section-number">2</div>
+    <h2>Florida GATOR — Top 5 for Rob's Review</h2>
+
+    <div class="prospect-card">
+      <div class="prospect-header">
+        <div class="prospect-name">Vernon Hargray</div>
+        <div class="prospect-state">FL</div>
+      </div>
+      <div class="prospect-title">City Manager · City of Miramar (Pop. 147,600)</div>
+      <div class="prospect-why">
+        <strong>Verified current.</strong> 40+ years in public administration. 3-year contract approved by city commission. Miramar's scale makes a GATOR win here a flagship reference account for all of South Florida. A professional CM running a large city — this is the room where deals get made.
+      </div>
+      <a class="cta-link" href="https://www.linkedin.com/in/vernon-hargray-a6214168" target="_blank">linkedin.com/in/vernon-hargray →</a>
+    </div>
+
+    <div class="prospect-card">
+      <div class="prospect-header">
+        <div class="prospect-name">Veronica Miller, AICP, CPM, FRA-RA, ICMA-CM</div>
+        <div class="prospect-state">FL</div>
+      </div>
+      <div class="prospect-title">City Manager · City of St. Cloud (Pop. 72,245)</div>
+      <div class="prospect-why">
+        <strong>Quintuple-credentialed.</strong> CPM (Certified Purchasing Manager) means she IS the GATOR buyer persona — procurement expertise is built in, not incidental. Jeffrey Cooper (St. Cloud Finance Director) is already on the board. Two decision-makers in the same city, both in Curtis's network — coordinated play, not a cold shot.
+      </div>
+    </div>
+
+    <div class="prospect-card">
+      <div class="prospect-header">
+        <div class="prospect-name">Cale Curtis, MBA, ICMA-CM, FRA-RA</div>
+        <div class="prospect-state">FL</div>
+      </div>
+      <div class="prospect-title">City Manager · City of Margate (Pop. 61,671)</div>
+      <div class="prospect-why">
+        <strong>Quad-credentialed. Easy opener.</strong> MBA + ICMA-CM means he understands both the financial structure and management theory. Margate is squarely in the GATOR sweet spot. Anthony Caggiano (Margate Mayor) is already on the board — two angles into the same city. Same last name as Curtis Leopardo: natural conversation starter.
+      </div>
+    </div>
+
+    <div class="prospect-card">
+      <div class="prospect-header">
+        <div class="prospect-name">Norton Bonaparte</div>
+        <div class="prospect-state">FL</div>
+      </div>
+      <div class="prospect-title">City Manager · City of Sanford (Pop. 67,000)</div>
+      <div class="prospect-why">
+        <strong>2nd-degree connection via Reginald Burney.</strong> Sanford is a high-growth city in the Orlando metro experiencing rapid development pressure — exactly the conditions that create procurement complexity. Bonaparte is an experienced, non-interim administrator who can move on a proposal.
+      </div>
+    </div>
+
+    <div class="prospect-card">
+      <div class="prospect-header">
+        <div class="prospect-name">Mike Steigerwald, AICP, ICMA-CM</div>
+        <div class="prospect-state">FL</div>
+      </div>
+      <div class="prospect-title">City Manager · City of Kissimmee (Pop. 87,500)</div>
+      <div class="prospect-why">
+        <strong>Largest clean opportunity on the list.</strong> Tourism-adjacent cities run complex procurement operations — seasonal vendors, event contracts, multi-facility maintenance. AICP credential = infrastructure-first thinking. ICMA-CM = the 43% acceptance signal. No gate conflict.
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Flag:</strong> Karen M. Brooks (Coconut Creek) — previously #1 priority — announced an unexpected retirement. Hold all outreach until her successor is confirmed.
+    </div>
+  </div>
+
+  <!-- Section 3: Intake — Grand Con Electric -->
+  <div class="section">
+    <div class="section-number">3</div>
+    <h2>Opportunity Intake — Grand Con Electric (Chicago)</h2>
+    <p style="font-size:0.875rem; color:#555; margin-bottom:1rem;">Three new opportunities posted to the intake board for Grand Con Electric, the AWC sister electrical contractor. Leopardo Construction's existing institutional relationships are the warm intro pathway for all three.</p>
+
+    <div class="intake-card">
+      <div class="intake-meta">
+        <span class="badge badge-rfp">RFP</span>
+        <span class="badge badge-hot">Hot</span>
+        <span class="intake-location">City of Chicago / O'Hare International Airport · IL</span>
+      </div>
+      <div class="intake-body">
+        <strong>O'Hare 21 CMAR Program — Electrical Subcontractor Packages.</strong> $8.6B airport modernization with continuous electrical sub packages bid through active CMARs (Walsh, Turner, AECOM Hunt). Highest-volume source of public electrical work in greater Chicago right now. Grand Con should register at ord21.com and contact each CMAR to get on sub-bid lists. West Taxiway Development (Spec 1327949) is one active live package.
+      </div>
+      <a class="cta-link" href="https://ord21.com" target="_blank">ord21.com →</a>
+    </div>
+
+    <div class="intake-card">
+      <div class="intake-meta">
+        <span class="badge badge-trigger">Trigger</span>
+        <span class="badge badge-warm">Warm</span>
+        <span class="intake-location">Chicago Public Schools · IL</span>
+      </div>
+      <div class="intake-body">
+        <strong>CPS Electrical Maintenance & Capital Improvement Contracts.</strong> 600+ buildings across Chicago with ongoing electrical maintenance, lighting retrofits, and capital work. CPS prequalifies electrical contractors annually. AWC/Leopardo relationships create a warm intro to CPS procurement. Confirm whether Leopardo has existing CPS contacts to leverage for Grand Con introduction.
+      </div>
+      <a class="cta-link" href="https://www.cpsbid.com" target="_blank">cpsbid.com →</a>
+    </div>
+
+    <div class="intake-card">
+      <div class="intake-meta">
+        <span class="badge badge-trigger">Trigger</span>
+        <span class="badge badge-warm">Warm</span>
+        <span class="intake-location">Cook County · IL</span>
+      </div>
+      <div class="intake-body">
+        <strong>Cook County Capital Improvement Program — Justice & Health Facilities.</strong> Jail (Division 11), Stroger Hospital, courthouse infrastructure — ongoing electrical renovation and upgrades across one of the largest county-level capital programs in the US. Cook County prequalifies trade contractors and has active MBE/WBE programs. Leopardo Construction's Cook County relationships are the fastest door opener.
+      </div>
+      <a class="cta-link" href="https://www.cookcountyil.gov" target="_blank">cookcountyil.gov →</a>
+    </div>
+
+    <a class="cta-link" href="https://thevdoaigency.monday.com/boards/18418779203" target="_blank">Open the Intake board →</a>
+  </div>
+
+  <!-- Section 4: Curtis Outreach Queue -->
+  <div class="section">
+    <div class="section-number">4</div>
+    <h2>Curtis Outreach Queue — Messages Ready</h2>
+    <p style="font-size:0.875rem; color:#555; margin-bottom:1rem;">These three are the highest-confidence prospects in the current pipeline with messages drafted and ready to send. David Wilkinson is the priority — fresh ICMA-CM prospect, highest-confidence cold reach.</p>
+
+    <div class="prospect-card">
+      <div class="prospect-header">
+        <div class="prospect-name">David Wilkinson</div>
+        <div class="prospect-state">IN</div>
+      </div>
+      <div class="prospect-title">ICMA-CM · MSM, Public Administration · Past City Manager, South Whitley, IN</div>
+      <div class="score-row">
+        <span class="score-label">Score</span>
+        <span class="score-value">135</span>
+      </div>
+      <div class="prospect-why">
+        <strong>Why:</strong> ICMA-CM credential (43% acceptance baseline) + city manager background + fresh prospect. Highest-confidence cold reach in the current queue. 25+ years in municipal finance and leadership — a genuine peer to other city managers.
+      </div>
+      <div class="draft-toggle">Draft message — for your review</div>
+      <div class="draft-body">David — thanks for accepting. I saw your ICMA-CM credential and your background in municipal operations, and wanted to send you a quick clip.
+
+We just closed a project in South Euclid — five city-owned buildings modernized in one structure. Energy savings underwrote 100% of the cost. No new tax, no new debt service, zero burden on the operating budget.
+
+Given your experience leading operational efficiency across Indiana municipalities, I'm curious how the model reads from your seat.
+
+Quick clip here: https://drive.google.com/file/d/1vTwLAt05pjkvmU7An6fWV7hGv8OJLMz1/view
+
+Appreciate your time. — Curtis</div>
+    </div>
+
+    <div class="prospect-card">
+      <div class="prospect-header">
+        <div class="prospect-name">Tim Reidy</div>
+        <div class="prospect-state">OH</div>
+      </div>
+      <div class="prospect-title">Managing Director, Public Finance · Raymond James & Associates</div>
+      <div class="score-row">
+        <span class="score-label">Score</span>
+        <span class="score-value">120</span>
+      </div>
+      <div class="prospect-why">
+        <strong>Why:</strong> Already connected. Municipal advisor at Raymond James touching multiple Ohio cities on capital structures. Sits at the intersection of city operations and capital markets — a lateral-reach play into multiple municipalities simultaneously.
+      </div>
+      <div class="draft-toggle">Draft message — for your review</div>
+      <div class="draft-body">Tim — I sent you a connection request a few weeks back and appreciate the accept. Wanted to follow up with something specific.
+
+We've been working with municipalities across Ohio on infrastructure financing — particularly around deferred maintenance where cash-flow constraints are the real limiting factor, not the buildings themselves.
+
+You're in the middle of that conversation at Raymond James. We've structured a model that flips the equation: instead of "where does the city find $5M for this building," it becomes "this building funds its own modernization."
+
+Quick overview: https://drive.google.com/file/d/1vTwLAt05pjkvmU7An6fWV7hGv8OJLMz1/view
+
+Curious if this lands on your radar with any of your municipal clients. No pressure — just thought you'd find it interesting given where you sit in the equation.
+
+— Curtis</div>
+    </div>
+
+    <div class="prospect-card">
+      <div class="prospect-header">
+        <div class="prospect-name">Darren L. Andrews Jr.</div>
+        <div class="prospect-state">OH</div>
+      </div>
+      <div class="prospect-title">Director of Finance & Investments · City of Dayton</div>
+      <div class="score-row">
+        <span class="score-label">Score</span>
+        <span class="score-value">120</span>
+      </div>
+      <div class="prospect-why">
+        <strong>Why:</strong> Already connected. Oversees capital planning and investments for one of Ohio's largest cities. Managing a significant deferred-maintenance portfolio — exactly the profile most receptive to a procurement-funded modernization pitch.
+      </div>
+      <div class="draft-toggle">Draft message — for your review</div>
+      <div class="draft-body">Darren — thanks for connecting. I know you're managing Dayton's capital strategy across a significant portfolio, and I wanted to send you something we're seeing work well.
+
+We've been working on infrastructure funding models for municipalities managing deferred maintenance — specifically how to structure modernization so the energy savings cover the cost. No new appropriations, no new tax questions, no operating budget hit.
+
+South Euclid is a good recent example: five buildings, one financing structure, energy savings cover the entire cost. City gets modernized infrastructure; taxpayers get nothing new.
+
+Given Dayton's footprint and the portfolio challenges you're managing, this might be worth a quick look: https://drive.google.com/file/d/1vTwLAt05pjkvmU7An6fWV7hGv8OJLMz1/view
+
+If it's interesting, happy to connect on specifics. If not, no worries — just wanted to make sure you'd seen it.
+
+— Curtis</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="report-footer">
+    Leopardo Efficiency · VDO Aigency · Week of June 25, 2026
+  </div>
+
+</div>
+</body>
+</html>
