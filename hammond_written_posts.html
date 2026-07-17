@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hammond, Indiana — 16 Written Posts</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --gold: #e8b84b;
+  --gold-dim: rgba(232,184,75,0.12);
+  --black: #0b0b0b;
+  --surface: #141414;
+  --surface2: #1c1c1c;
+  --surface3: #222222;
+  --cream: #ede9e3;
+  --muted: #6a6560;
+  --border: rgba(255,255,255,0.06);
+
+  --ready: #2a7a4b;
+  --ready-bg: rgba(42,122,75,0.12);
+  --ready-text: #5cba88;
+
+  --graphic: #7a5a1a;
+  --graphic-bg: rgba(232,184,75,0.1);
+  --graphic-text: #e8b84b;
+
+  --vo: #1a4a7a;
+  --vo-bg: rgba(80,140,220,0.1);
+  --vo-text: #7aadee;
+
+  --clone: #5a1a7a;
+  --clone-bg: rgba(160,80,220,0.1);
+  --clone-text: #bb88ee;
+
+  --scratch: #7a2a1a;
+  --scratch-bg: rgba(220,100,80,0.1);
+  --scratch-text: #ee9988;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 32px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--cream);
+}
+
+.header-title span { color: var(--gold); }
+
+.header-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* ── STATS BAR ── */
+.stats-bar {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+
+.stat-pill {
+  background: var(--surface2);
+  padding: 8px 14px;
+  flex: 1;
+  text-align: center;
+}
+
+.stat-pill .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+}
+
+.stat-pill .lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── LEGEND ── */
+.legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ── FILTERS ── */
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.filter-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-right: 2px;
+}
+
+.filter-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.15s;
+  letter-spacing: 0.05em;
+}
+
+.filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+.filter-btn.active { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); }
+
+/* ── MAIN TABLE AREA ── */
+.main {
+  padding: 0 32px 48px;
+}
+
+/* ── WEEK BLOCK ── */
+.week-block {
+  margin-top: 32px;
+}
+
+.week-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 12px 0 10px;
+  border-bottom: 1px solid rgba(232,184,75,0.2);
+  margin-bottom: 2px;
+  position: sticky;
+  top: 220px;
+  background: var(--black);
+  z-index: 10;
+}
+
+.week-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--gold);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.week-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.week-phase {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.week-count {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* ── POST ROW ── */
+.post-row {
+  display: grid;
+  grid-template-columns: 48px 90px 110px 120px 90px 1fr 140px 100px;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  min-height: 52px;
+  transition: background 0.1s;
+}
+
+.post-row:hover { background: var(--surface2); }
+.post-row.hidden { display: none; }
+
+.post-row .cell {
+  padding: 10px 12px;
+  display: flex;
+  align-items: flex-start;
+  border-right: 1px solid var(--border);
+}
+
+.post-row .cell:last-child { border-right: none; }
+
+/* Column header row */
+.col-headers {
+  display: grid;
+  grid-template-columns: 48px 90px 110px 120px 90px 1fr 140px 100px;
+  gap: 0;
+  background: var(--surface2);
+  border-bottom: 2px solid rgba(232,184,75,0.2);
+  position: sticky;
+  top: 180px;
+  z-index: 9;
+}
+
+.col-header {
+  padding: 8px 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-right: 1px solid var(--border);
+}
+
+.col-header:last-child { border-right: none; }
+
+/* Cell contents */
+.post-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.day-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--cream);
+}
+
+/* Platform badges */
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 2px;
+  border: 1px solid;
+}
+
+.p-li-company { color: #70a0ff; border-color: rgba(112,160,255,0.25); background: rgba(112,160,255,0.07); }
+.p-li-curtis  { color: #ff9f70; border-color: rgba(255,159,112,0.25); background: rgba(255,159,112,0.07); }
+.p-li-rob     { color: #70d0ff; border-color: rgba(112,208,255,0.25); background: rgba(112,208,255,0.07); }
+.p-ig         { color: #ff70c8; border-color: rgba(255,112,200,0.25); background: rgba(255,112,200,0.07); }
+.p-yt         { color: #ff7070; border-color: rgba(255,112,112,0.25); background: rgba(255,112,112,0.07); }
+
+/* Type badges */
+.type-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 2px 7px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.t-result    { color: #5cba88; background: rgba(42,122,75,0.15); }
+.t-mechanism { color: #7aadee; background: rgba(80,140,220,0.12); }
+.t-pov       { color: #e8b84b; background: rgba(232,184,75,0.1); }
+.t-education { color: #bb88ee; background: rgba(160,80,220,0.1); }
+.t-clip      { color: #ee9988; background: rgba(220,100,80,0.1); }
+
+/* Asset ID */
+.asset-id {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Post content */
+.post-content {}
+
+.post-hook {
+  font-size: 12px;
+  color: var(--cream);
+  line-height: 1.45;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+
+.post-note {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* Production status */
+.prod-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  border: 1px solid;
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.s-ready    { color: var(--ready-text);  background: var(--ready-bg);  border-color: rgba(42,122,75,0.3); }
+.s-graphic  { color: var(--graphic-text); background: var(--graphic-bg); border-color: rgba(232,184,75,0.25); }
+.s-vo       { color: var(--vo-text);     background: var(--vo-bg);     border-color: rgba(80,140,220,0.25); }
+.s-clone    { color: var(--clone-text);  background: var(--clone-bg);  border-color: rgba(160,80,220,0.25); }
+.s-scratch  { color: var(--scratch-text); background: var(--scratch-bg); border-color: rgba(220,100,80,0.25); }
+
+/* Monday status */
+.monday-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 3px 8px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* ── NO RESULTS ── */
+.no-results {
+  text-align: center;
+  padding: 60px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  display: none;
+}
+
+/* ── MONDAY COLUMN REF ── */
+.monday-ref {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 28px 32px;
+  margin-top: 40px;
+}
+
+.monday-ref h3 {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.monday-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+.monday-col {
+  background: var(--surface2);
+  padding: 14px 16px;
+}
+
+.mcol-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.mcol-type {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+
+
+/* ── COPY DECK ── */
+.deck { padding: 0 32px 64px; max-width: 1080px; margin: 0 auto; }
+.wk {
+  margin-top: 40px;
+  border-top: 1px solid rgba(232,184,75,0.2);
+  padding-top: 14px;
+}
+.wk-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 6px; }
+.wk-num { font-family:'Playfair Display',serif; font-size:28px; color:var(--gold); opacity:.3; line-height:1; }
+.wk-title { font-family:'DM Mono',monospace; font-size:11px; color:var(--gold); letter-spacing:.2em; text-transform:uppercase; }
+.wk-reel { margin-left:auto; font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); }
+.wk-reel b { color:var(--cream); font-weight:400; }
+
+.post-card { background: var(--surface); border:1px solid var(--border); margin-top:14px; }
+.pc-head {
+  display:flex; align-items:center; gap:10px;
+  padding:10px 16px; background:var(--surface2);
+  border-bottom:1px solid var(--border);
+}
+.pc-title { font-size:12px; color:var(--cream); font-weight:400; }
+.pc-meta { margin-left:auto; display:flex; align-items:center; gap:10px; }
+.wc { font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:.1em; }
+.copy-btn {
+  font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.12em;
+  background:transparent; color:var(--muted); border:1px solid var(--border);
+  padding:4px 10px; border-radius:2px; cursor:pointer; transition:all .15s;
+}
+.copy-btn:hover { border-color:var(--gold); color:var(--gold); }
+.copy-btn.done { border-color:var(--ready); color:var(--ready-text); }
+.pc-body { padding:18px 20px; }
+.pc-body p { font-size:13.5px; line-height:1.62; color:var(--cream); margin-bottom:11px; font-weight:300; }
+.pc-body p:last-child { margin-bottom:0; }
+.pc-body p.lead { color:var(--cream); font-weight:400; }
+.pc-body p.beat { color:var(--gold); font-weight:400; }
+.pc-note {
+  border-top:1px solid var(--border); padding:10px 20px;
+  font-size:11px; color:var(--muted); font-style:italic; line-height:1.5;
+}
+.pc-note b { color:var(--scratch-text); font-style:normal; font-weight:500; }
+.intro {
+  background:var(--surface); border-left:2px solid var(--gold);
+  border-top:1px solid var(--border); border-right:1px solid var(--border); border-bottom:1px solid var(--border);
+  padding:18px 22px; margin-top:28px;
+}
+.intro p { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:8px; }
+.intro p:last-child { margin-bottom:0; }
+.intro b { color:var(--cream); font-weight:400; }
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="header-title">Hammond, Indiana — <span>16 Written Posts</span></div>
+    <div class="header-meta">
+      8 Curtis · 8 Company Page · 8 weeks<br>
+      Companion to the Hammond Asset Map<br>
+      Leopardo Efficiency · VDO Aigency
+    </div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-pill"><span class="num">16</span><span class="lbl">Written Posts</span></div>
+    <div class="stat-pill"><span class="num">8</span><span class="lbl">Curtis · LI-CL</span></div>
+    <div class="stat-pill"><span class="num">8</span><span class="lbl">Company · LI-CO</span></div>
+    <div class="stat-pill"><span class="num">8</span><span class="lbl">Weeks</span></div>
+  </div>
+</div>
+
+<div class="deck">
+  <div class="intro">
+    <p><b>Cadence per week:</b> reel Monday → company education post Wednesday → Curtis POV post Friday. The reel does the proof, the company post does the mechanism, Curtis does the argument. Nobody repeats anybody.</p>
+    <p><b>Curtis's voice:</b> first person, opinionated, no hedging, no hashtags. He is not selling in seven of these eight. He's making a case. The ask only appears in Week 8.</p>
+    <p><b>Gold lines</b> are the pull-quote beats — the line that has to land if nothing else does. They're also the natural graphic card if you want to pair any post with a static.</p>
+  </div>
+
+<div class="wk">
+  <div class="wk-head">
+    <div class="wk-num">01</div>
+    <div class="wk-title">Week 1 — The Headline / What Hammond Did</div>
+    <div class="wk-reel">REEL THIS WEEK: <b>R1 · Mayor McDermott — &#x27;Cheaper. Cleaner. Nicer.&#x27; · LI-CO</b></div>
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-company">LI-CO</span>
+      <span class="day-badge">Wed</span>
+      <span class="pc-title">Leopardo Efficiency — Company Page</span>
+      <div class="pc-meta">
+        <span class="wc">175 WORDS</span>
+        <button class="copy-btn" data-copy="Most cities fix infrastructure the way you&#x27;d eat an elephant. One bite. One budget cycle. One line item that survives the council meeting.
+
+Hammond, Indiana ate the whole thing.
+
+76 new vehicles.
+4,800 city-owned streetlights converted to LED.
+HVAC replaced in 13 buildings.
+119 high-mileage vehicles converted to run on propane.
+
+All of it at once. All of it under one contract.
+
+Here&#x27;s the part that breaks people&#x27;s brains: Hammond didn&#x27;t raise taxes to do it. They didn&#x27;t issue a bond. They didn&#x27;t touch the general fund.
+
+The project is structured so the savings it generates cover the debt payment on the work itself. The city writes no check.
+
+Mayor Thomas McDermott put it in three words: &quot;Cheaper. Cleaner. Nicer.&quot;
+
+Over the next eight weeks we&#x27;re going to walk through exactly how this was built — the four phases, the guarantee, the fleet conversion, and the number at the center of it that we still have to say slowly for people to believe.
+
+Because Hammond didn&#x27;t just avoid a cost.
+
+They created a revenue stream.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p>Most cities fix infrastructure the way you&#x27;d eat an elephant. One bite. One budget cycle. One line item that survives the council meeting.</p>
+<p class="beat">Hammond, Indiana ate the whole thing.</p>
+<p>76 new vehicles.<br>4,800 city-owned streetlights converted to LED.<br>HVAC replaced in 13 buildings.<br>119 high-mileage vehicles converted to run on propane.</p>
+<p>All of it at once. All of it under one contract.</p>
+<p>Here&#x27;s the part that breaks people&#x27;s brains: Hammond didn&#x27;t raise taxes to do it. They didn&#x27;t issue a bond. They didn&#x27;t touch the general fund.</p>
+<p>The project is structured so the savings it generates cover the debt payment on the work itself. The city writes no check.</p>
+<p>Mayor Thomas McDermott put it in three words: &quot;Cheaper. Cleaner. Nicer.&quot;</p>
+<p>Over the next eight weeks we&#x27;re going to walk through exactly how this was built — the four phases, the guarantee, the fleet conversion, and the number at the center of it that we still have to say slowly for people to believe.</p>
+<p>Because Hammond didn&#x27;t just avoid a cost.</p>
+<p class="beat">They created a revenue stream.</p>
+    </div>
+    
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-curtis">LI-CL</span>
+      <span class="day-badge">Fri</span>
+      <span class="pc-title">Curtis Leopardo — Personal</span>
+      <div class="pc-meta">
+        <span class="wc">153 WORDS</span>
+        <button class="copy-btn" data-copy="Most cities fix one thing at a time.
+
+It&#x27;s the responsible-sounding choice. Do the roof this year. The boiler next year. The fleet when something finally dies in a parking lot in February.
+
+It&#x27;s also the reason the list never gets shorter.
+
+Here&#x27;s what nobody says out loud: fixing one thing at a time is the most expensive way to fix anything. You pay mobilization four times. You pay engineering four times. And the savings from any single project are never big enough to pay for the project — so you&#x27;re always asking for money you don&#x27;t have.
+
+Hammond, Indiana did four scopes at once. Buildings. Streetlights. Propane. Fleet.
+
+Not because they&#x27;re reckless.
+
+Because that&#x27;s the only scale at which the math flips — where the savings get large enough to fund the work itself.
+
+Going big wasn&#x27;t the risk.
+
+Going small, one year at a time, forever — that was the risk.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p class="lead">Most cities fix one thing at a time.</p>
+<p>It&#x27;s the responsible-sounding choice. Do the roof this year. The boiler next year. The fleet when something finally dies in a parking lot in February.</p>
+<p class="beat">It&#x27;s also the reason the list never gets shorter.</p>
+<p>Here&#x27;s what nobody says out loud: fixing one thing at a time is the most expensive way to fix anything. You pay mobilization four times. You pay engineering four times. And the savings from any single project are never big enough to pay for the project — so you&#x27;re always asking for money you don&#x27;t have.</p>
+<p>Hammond, Indiana did four scopes at once. Buildings. Streetlights. Propane. Fleet.</p>
+<p>Not because they&#x27;re reckless.</p>
+<p>Because that&#x27;s the only scale at which the math flips — where the savings get large enough to fund the work itself.</p>
+<p>Going big wasn&#x27;t the risk.</p>
+<p class="beat">Going small, one year at a time, forever — that was the risk.</p>
+    </div>
+    
+  </div></div>
+<div class="wk">
+  <div class="wk-head">
+    <div class="wk-num">02</div>
+    <div class="wk-title">Week 2 — The Model / What an ESPC Is</div>
+    <div class="wk-reel">REEL THIS WEEK: <b>R2 · Rob defines the ESPC + VO · LI-CO</b></div>
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-company">LI-CO</span>
+      <span class="day-badge">Wed</span>
+      <span class="pc-title">Leopardo Efficiency — Company Page</span>
+      <div class="pc-meta">
+        <span class="wc">195 WORDS</span>
+        <button class="copy-btn" data-copy="&quot;Guaranteed energy savings performance contract.&quot;
+
+Five words that sound like a procurement form and are actually the reason Hammond, Indiana has 76 new vehicles.
+
+Here&#x27;s the plain version.
+
+A normal contractor tells you what a project costs. You find the money. If the savings never show up, that&#x27;s your problem.
+
+An ESPC inverts it.
+
+We audit your buildings and your fleet. We identify what&#x27;s wasting money. Then we tell you what the upgrades will save — and we put that number in a contract with our name on it.
+
+If the savings don&#x27;t materialize, we write the check for the difference. Not you.
+
+That guarantee is what makes the financing work. A lender will fund a project against a savings stream somebody is contractually on the hook for. They won&#x27;t fund a hope.
+
+So the sequence runs: we guarantee the savings → the guarantee makes the project financeable → the financing means the city pays nothing up front → the savings cover the debt service.
+
+Rob Vollrath, who runs Leopardo Efficiency, says it in one line: we specialize in guaranteed energy savings performance contracting for local government agencies.
+
+The important word is the first one.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p class="lead">&quot;Guaranteed energy savings performance contract.&quot;</p>
+<p>Five words that sound like a procurement form and are actually the reason Hammond, Indiana has 76 new vehicles.</p>
+<p>Here&#x27;s the plain version.</p>
+<p>A normal contractor tells you what a project costs. You find the money. If the savings never show up, that&#x27;s your problem.</p>
+<p class="beat">An ESPC inverts it.</p>
+<p>We audit your buildings and your fleet. We identify what&#x27;s wasting money. Then we tell you what the upgrades will save — and we put that number in a contract with our name on it.</p>
+<p>If the savings don&#x27;t materialize, we write the check for the difference. Not you.</p>
+<p>That guarantee is what makes the financing work. A lender will fund a project against a savings stream somebody is contractually on the hook for. They won&#x27;t fund a hope.</p>
+<p>So the sequence runs: we guarantee the savings → the guarantee makes the project financeable → the financing means the city pays nothing up front → the savings cover the debt service.</p>
+<p>Rob Vollrath, who runs Leopardo Efficiency, says it in one line: we specialize in guaranteed energy savings performance contracting for local government agencies.</p>
+<p class="beat">The important word is the first one.</p>
+    </div>
+    
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-curtis">LI-CL</span>
+      <span class="day-badge">Fri</span>
+      <span class="pc-title">Curtis Leopardo — Personal</span>
+      <div class="pc-meta">
+        <span class="wc">157 WORDS</span>
+        <button class="copy-btn" data-copy="City leaders don&#x27;t distrust the numbers.
+
+They distrust the promise.
+
+I&#x27;ve sat across from enough mayors and finance directors to know the look. We present a savings projection. They nod. And behind the nod is twenty years of vendors who projected beautifully, delivered adequately, and were long gone by the time anyone checked.
+
+That instinct is correct. You should have it.
+
+Which is why I don&#x27;t ask anyone to believe our projection.
+
+I ask them to read the guarantee.
+
+A projection is a forecast. A guarantee is a liability — ours. If the savings we promised don&#x27;t show up, we pay the difference. It&#x27;s not a slide. It&#x27;s a contract clause with a dollar figure and our signature under it.
+
+We&#x27;ve never missed one. Fifty-nine projects.
+
+But &quot;we&#x27;ve never missed&quot; isn&#x27;t the argument either. The argument is what happens if we do.
+
+You get paid.
+
+Skepticism doesn&#x27;t need to be argued away. It needs to be underwritten.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p class="lead">City leaders don&#x27;t distrust the numbers.</p>
+<p class="beat">They distrust the promise.</p>
+<p>I&#x27;ve sat across from enough mayors and finance directors to know the look. We present a savings projection. They nod. And behind the nod is twenty years of vendors who projected beautifully, delivered adequately, and were long gone by the time anyone checked.</p>
+<p>That instinct is correct. You should have it.</p>
+<p>Which is why I don&#x27;t ask anyone to believe our projection.</p>
+<p>I ask them to read the guarantee.</p>
+<p>A projection is a forecast. A guarantee is a liability — ours. If the savings we promised don&#x27;t show up, we pay the difference. It&#x27;s not a slide. It&#x27;s a contract clause with a dollar figure and our signature under it.</p>
+<p>We&#x27;ve never missed one. Fifty-nine projects.</p>
+<p>But &quot;we&#x27;ve never missed&quot; isn&#x27;t the argument either. The argument is what happens if we do.</p>
+<p>You get paid.</p>
+<p class="beat">Skepticism doesn&#x27;t need to be argued away. It needs to be underwritten.</p>
+    </div>
+    
+  </div></div>
+<div class="wk">
+  <div class="wk-head">
+    <div class="wk-num">03</div>
+    <div class="wk-title">Week 3 — The Four Phases / Scope</div>
+    <div class="wk-reel">REEL THIS WEEK: <b>R3 · Jeff — four phases · IG</b></div>
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-company">LI-CO</span>
+      <span class="day-badge">Wed</span>
+      <span class="pc-title">Leopardo Efficiency — Company Page</span>
+      <div class="pc-meta">
+        <span class="wc">188 WORDS</span>
+        <button class="copy-btn" data-copy="Jeff Sauline, our project manager on Hammond, describes the job in one sentence: &quot;There&#x27;s four phases of the project. We&#x27;ve got the building work, the street lighting, the propane upgrades, and the vehicle leasing program.&quot;
+
+Four phases. One contract. Here&#x27;s why that matters more than it sounds.
+
+Any one of those scopes, standing alone, is a hard sell.
+
+Building HVAC saves real money — but slowly. Streetlights save fast and cheap, but the total is small. Fleet costs a fortune up front and the savings take years. Propane conversion is the best return of the four, and nobody funds it because it doesn&#x27;t feel urgent.
+
+Alone, each one loses the budget fight. Together, they don&#x27;t.
+
+The streetlights and propane deliver savings almost immediately. That early cash flow covers the debt service while the slower, more expensive building and fleet work matures. The fast wins carry the slow ones.
+
+That&#x27;s the whole trick. It isn&#x27;t financial engineering. It&#x27;s portfolio construction.
+
+Bundle scopes with different payback curves into one contract, and the blended return funds work that could never have funded itself.
+
+Four phases wasn&#x27;t ambition.
+
+It was the design.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p>Jeff Sauline, our project manager on Hammond, describes the job in one sentence: &quot;There&#x27;s four phases of the project. We&#x27;ve got the building work, the street lighting, the propane upgrades, and the vehicle leasing program.&quot;</p>
+<p>Four phases. One contract. Here&#x27;s why that matters more than it sounds.</p>
+<p>Any one of those scopes, standing alone, is a hard sell.</p>
+<p>Building HVAC saves real money — but slowly. Streetlights save fast and cheap, but the total is small. Fleet costs a fortune up front and the savings take years. Propane conversion is the best return of the four, and nobody funds it because it doesn&#x27;t feel urgent.</p>
+<p class="beat">Alone, each one loses the budget fight. Together, they don&#x27;t.</p>
+<p>The streetlights and propane deliver savings almost immediately. That early cash flow covers the debt service while the slower, more expensive building and fleet work matures. The fast wins carry the slow ones.</p>
+<p>That&#x27;s the whole trick. It isn&#x27;t financial engineering. It&#x27;s portfolio construction.</p>
+<p>Bundle scopes with different payback curves into one contract, and the blended return funds work that could never have funded itself.</p>
+<p>Four phases wasn&#x27;t ambition.</p>
+<p class="beat">It was the design.</p>
+    </div>
+    
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-curtis">LI-CL</span>
+      <span class="day-badge">Fri</span>
+      <span class="pc-title">Curtis Leopardo — Personal</span>
+      <div class="pc-meta">
+        <span class="wc">169 WORDS</span>
+        <button class="copy-btn" data-copy="Everyone tells you to start small.
+
+Pilot it. Prove it. Do one building, see how it goes, expand later if the council&#x27;s comfortable.
+
+I understand the instinct. I think it&#x27;s backwards.
+
+Start small and you get small savings. Small savings can&#x27;t cover the cost of the work. So the pilot needs its own funding, which means its own budget fight, which means it competes with the police contract and the road resurfacing — and it loses. Or it wins, barely, and you&#x27;ve spent your political capital proving a thing you already knew.
+
+Two years later you&#x27;re back at zero with a nicer boiler.
+
+Hammond went the other direction. Four scopes at once, city-wide. And because the scope was big enough, the savings were big enough to pay for all of it.
+
+The pilot is the risky version.
+
+It&#x27;s just risk you can&#x27;t see, because it&#x27;s spread across a decade instead of concentrated in a single vote.
+
+Small isn&#x27;t safe.
+
+Small is slow, and slow is what deferred maintenance eats.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p class="lead">Everyone tells you to start small.</p>
+<p>Pilot it. Prove it. Do one building, see how it goes, expand later if the council&#x27;s comfortable.</p>
+<p>I understand the instinct. I think it&#x27;s backwards.</p>
+<p>Start small and you get small savings. Small savings can&#x27;t cover the cost of the work. So the pilot needs its own funding, which means its own budget fight, which means it competes with the police contract and the road resurfacing — and it loses. Or it wins, barely, and you&#x27;ve spent your political capital proving a thing you already knew.</p>
+<p>Two years later you&#x27;re back at zero with a nicer boiler.</p>
+<p>Hammond went the other direction. Four scopes at once, city-wide. And because the scope was big enough, the savings were big enough to pay for all of it.</p>
+<p class="beat">The pilot is the risky version.</p>
+<p>It&#x27;s just risk you can&#x27;t see, because it&#x27;s spread across a decade instead of concentrated in a single vote.</p>
+<p>Small isn&#x27;t safe.</p>
+<p class="beat">Small is slow, and slow is what deferred maintenance eats.</p>
+    </div>
+    
+  </div></div>
+<div class="wk">
+  <div class="wk-head">
+    <div class="wk-num">04</div>
+    <div class="wk-title">Week 4 — The Money / $16M Above Debt</div>
+    <div class="wk-reel">REEL THIS WEEK: <b>R4 · Heather — $16 million · LI-CO</b></div>
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-company">LI-CO</span>
+      <span class="day-badge">Wed</span>
+      <span class="pc-title">Leopardo Efficiency — Company Page</span>
+      <div class="pc-meta">
+        <span class="wc">185 WORDS</span>
+        <button class="copy-btn" data-copy="Here is the sentence that stops every conversation about Hammond.
+
+Heather Garay is Hammond&#x27;s City Controller. Her job is to be unimpressed by projections. This is what she says about the project:
+
+It&#x27;s guaranteed to not only make back the debt payment on the improvements — but to generate an additional $16 million.
+
+Read that again. Not $16 million in savings. An additional $16 million, on top of covering the entire cost of the work.
+
+How?
+
+Three streams, running at once.
+
+Avoided cost. The energy Hammond stops buying. LED streetlights that last 23 years instead of being replaced every 3 to 5. HVAC that isn&#x27;t limping.
+
+Avoided replacement. The 119 vehicles Hammond didn&#x27;t have to buy, because the existing fleet got converted instead of retired.
+
+Fuel spread. Propane runs cheaper than unleaded. Multiply that gap across a municipal fleet, every day, for twenty years.
+
+Stack them, subtract the debt service, and the remainder isn&#x27;t zero.
+
+The remainder is $16 million the city didn&#x27;t have last year.
+
+That&#x27;s not a savings program.
+
+That&#x27;s an asset the city already owned, finally being paid for what it&#x27;s worth.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p>Here is the sentence that stops every conversation about Hammond.</p>
+<p>Heather Garay is Hammond&#x27;s City Controller. Her job is to be unimpressed by projections. This is what she says about the project:</p>
+<p>It&#x27;s guaranteed to not only make back the debt payment on the improvements — but to generate an additional $16 million.</p>
+<p class="beat">Read that again. Not $16 million in savings. An additional $16 million, on top of covering the entire cost of the work.</p>
+<p>How?</p>
+<p>Three streams, running at once.</p>
+<p>Avoided cost. The energy Hammond stops buying. LED streetlights that last 23 years instead of being replaced every 3 to 5. HVAC that isn&#x27;t limping.</p>
+<p>Avoided replacement. The 119 vehicles Hammond didn&#x27;t have to buy, because the existing fleet got converted instead of retired.</p>
+<p>Fuel spread. Propane runs cheaper than unleaded. Multiply that gap across a municipal fleet, every day, for twenty years.</p>
+<p>Stack them, subtract the debt service, and the remainder isn&#x27;t zero.</p>
+<p>The remainder is $16 million the city didn&#x27;t have last year.</p>
+<p>That&#x27;s not a savings program.</p>
+<p class="beat">That&#x27;s an asset the city already owned, finally being paid for what it&#x27;s worth.</p>
+    </div>
+    <div class="pc-note"><b>Hold until Rob signs off on the figure.</b> Confirm the $16M, the term it's measured across, and that it's net of debt service before this publishes.</div>
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-curtis">LI-CL</span>
+      <span class="day-badge">Fri</span>
+      <span class="pc-title">Curtis Leopardo — Personal</span>
+      <div class="pc-meta">
+        <span class="wc">169 WORDS</span>
+        <button class="copy-btn" data-copy="$16 million isn&#x27;t a savings number.
+
+I want to be precise about this, because the distinction is the entire point.
+
+Savings means you spent less than you would have. It&#x27;s a smaller negative. Every city has heard a savings pitch, and every city has learned to discount it by about half — because savings live in a spreadsheet and never quite arrive in the bank.
+
+Hammond&#x27;s $16 million arrives after the work is paid for.
+
+The buildings, the streetlights, the fleet, the propane systems — all of it funded, all of it built, all of the debt service covered by the project&#x27;s own performance. And then, on the other side of that, sixteen million dollars.
+
+That&#x27;s not a smaller negative.
+
+That&#x27;s a revenue stream, coming out of buildings and trucks Hammond already owned and was already paying to neglect.
+
+Every city in America is sitting on some version of this. Not because their leaders are bad at math.
+
+Because nobody ever told them the neglected asset was an asset.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p class="lead">$16 million isn&#x27;t a savings number.</p>
+<p>I want to be precise about this, because the distinction is the entire point.</p>
+<p>Savings means you spent less than you would have. It&#x27;s a smaller negative. Every city has heard a savings pitch, and every city has learned to discount it by about half — because savings live in a spreadsheet and never quite arrive in the bank.</p>
+<p class="beat">Hammond&#x27;s $16 million arrives after the work is paid for.</p>
+<p>The buildings, the streetlights, the fleet, the propane systems — all of it funded, all of it built, all of the debt service covered by the project&#x27;s own performance. And then, on the other side of that, sixteen million dollars.</p>
+<p>That&#x27;s not a smaller negative.</p>
+<p>That&#x27;s a revenue stream, coming out of buildings and trucks Hammond already owned and was already paying to neglect.</p>
+<p>Every city in America is sitting on some version of this. Not because their leaders are bad at math.</p>
+<p class="beat">Because nobody ever told them the neglected asset was an asset.</p>
+    </div>
+    <div class="pc-note"><b>Hold with the company post above.</b> Same figure, same sign-off.</div>
+  </div></div>
+<div class="wk">
+  <div class="wk-head">
+    <div class="wk-num">05</div>
+    <div class="wk-title">Week 5 — The Buildings / 23-Year Math</div>
+    <div class="wk-reel">REEL THIS WEEK: <b>R5 · Rob + Jeff — 23 yrs vs 3–5 · LI-CO</b></div>
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-company">LI-CO</span>
+      <span class="day-badge">Wed</span>
+      <span class="pc-title">Leopardo Efficiency — Company Page</span>
+      <div class="pc-meta">
+        <span class="wc">184 WORDS</span>
+        <button class="copy-btn" data-copy="Hammond replaced 4,800 streetlights.
+
+The old ones were being replaced every 3 to 5 years. The new ones will be up there for 23.
+
+Most people hear that and think: nice, better bulbs.
+
+Look at what it actually does to a budget.
+
+At a four-year cycle, 4,800 lights means roughly 1,200 replacements a year, forever. That&#x27;s a crew, a bucket truck, a work order system, traffic control, and a parts inventory — permanently staffed, permanently funded, permanently on the list.
+
+At 23 years, that line item doesn&#x27;t shrink.
+
+It disappears.
+
+For two decades, nobody in Hammond writes a streetlight replacement work order. The bucket truck goes somewhere else. The crew does something that isn&#x27;t undoing last year&#x27;s work.
+
+This is the part of lifecycle cost that never makes it into a council presentation, because the savings don&#x27;t show up in the energy line. They show up in labor, in fleet hours, in inventory, and in five capital cycles that simply never happen.
+
+The energy savings are real. They&#x27;re also the smaller half.
+
+The bigger half is all the work that no longer needs doing.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p class="lead">Hammond replaced 4,800 streetlights.</p>
+<p>The old ones were being replaced every 3 to 5 years. The new ones will be up there for 23.</p>
+<p>Most people hear that and think: nice, better bulbs.</p>
+<p>Look at what it actually does to a budget.</p>
+<p>At a four-year cycle, 4,800 lights means roughly 1,200 replacements a year, forever. That&#x27;s a crew, a bucket truck, a work order system, traffic control, and a parts inventory — permanently staffed, permanently funded, permanently on the list.</p>
+<p>At 23 years, that line item doesn&#x27;t shrink.</p>
+<p class="beat">It disappears.</p>
+<p>For two decades, nobody in Hammond writes a streetlight replacement work order. The bucket truck goes somewhere else. The crew does something that isn&#x27;t undoing last year&#x27;s work.</p>
+<p>This is the part of lifecycle cost that never makes it into a council presentation, because the savings don&#x27;t show up in the energy line. They show up in labor, in fleet hours, in inventory, and in five capital cycles that simply never happen.</p>
+<p>The energy savings are real. They&#x27;re also the smaller half.</p>
+<p class="beat">The bigger half is all the work that no longer needs doing.</p>
+    </div>
+    
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-curtis">LI-CL</span>
+      <span class="day-badge">Fri</span>
+      <span class="pc-title">Curtis Leopardo — Personal</span>
+      <div class="pc-meta">
+        <span class="wc">161 WORDS</span>
+        <button class="copy-btn" data-copy="Replacing the same streetlight every four years isn&#x27;t maintenance.
+
+It&#x27;s a subscription nobody ever signed up for.
+
+That&#x27;s what struck me about Hammond. Before this project, the city was on the hook for roughly 1,200 streetlight replacements a year. Not because anything was broken — because that&#x27;s just what those lights did. They burned out. You went back up. Forever.
+
+Nobody ever put that on a contract. Nobody ever voted on it. It sat in the budget, year after year, and everyone called it operations.
+
+The new lights last 23 years.
+
+So Hammond didn&#x27;t buy better bulbs. They cancelled a subscription they&#x27;d been paying for decades and never chose.
+
+I&#x27;d ask any city leader reading this to go find yours. Every city has a few — the recurring cost that never got decided. It just accumulated, and now it&#x27;s called &quot;how we&#x27;ve always done it.&quot;
+
+Those are the cheapest dollars you&#x27;ll ever recover.
+
+Because you&#x27;re not cutting anything.
+
+You&#x27;re just stopping.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p class="lead">Replacing the same streetlight every four years isn&#x27;t maintenance.</p>
+<p class="beat">It&#x27;s a subscription nobody ever signed up for.</p>
+<p>That&#x27;s what struck me about Hammond. Before this project, the city was on the hook for roughly 1,200 streetlight replacements a year. Not because anything was broken — because that&#x27;s just what those lights did. They burned out. You went back up. Forever.</p>
+<p>Nobody ever put that on a contract. Nobody ever voted on it. It sat in the budget, year after year, and everyone called it operations.</p>
+<p>The new lights last 23 years.</p>
+<p>So Hammond didn&#x27;t buy better bulbs. They cancelled a subscription they&#x27;d been paying for decades and never chose.</p>
+<p>I&#x27;d ask any city leader reading this to go find yours. Every city has a few — the recurring cost that never got decided. It just accumulated, and now it&#x27;s called &quot;how we&#x27;ve always done it.&quot;</p>
+<p>Those are the cheapest dollars you&#x27;ll ever recover.</p>
+<p>Because you&#x27;re not cutting anything.</p>
+<p class="beat">You&#x27;re just stopping.</p>
+    </div>
+    
+  </div></div>
+<div class="wk">
+  <div class="wk-head">
+    <div class="wk-num">06</div>
+    <div class="wk-title">Week 6 — The Fleet / 119 Vehicles</div>
+    <div class="wk-reel">REEL THIS WEEK: <b>R6 · 119 vehicles, propane · IG</b></div>
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-company">LI-CO</span>
+      <span class="day-badge">Wed</span>
+      <span class="pc-title">Leopardo Efficiency — Company Page</span>
+      <div class="pc-meta">
+        <span class="wc">204 WORDS</span>
+        <button class="copy-btn" data-copy="&quot;They can still run off of unleaded fuel — but now you have the option to run off of propane.&quot;
+
+That&#x27;s Jeff Sauline describing what happened to 119 of Hammond&#x27;s highest-mileage vehicles. And that one word — option — is why the project works.
+
+The objection we hear first, every time, is the same: what happens when the propane runs out? What if a cruiser is across town, mid-shift, and there&#x27;s nowhere to fill up?
+
+Nothing happens. It runs on unleaded.
+
+These aren&#x27;t propane vehicles. They&#x27;re bi-fuel. Both systems are live. The vehicle carries a propane tank and its original gasoline tank, and it runs on either.
+
+So the fleet never loses capability. A patrol car doesn&#x27;t get less useful. A plow doesn&#x27;t get stranded. Worst case, it runs exactly like it ran last year.
+
+Best case — which is most of the time — it runs on the cheaper fuel.
+
+That&#x27;s what made this financeable. We didn&#x27;t ask Hammond to bet on propane. We asked them to add propane as an option and take the spread whenever it&#x27;s favorable.
+
+You can&#x27;t lose a bet you never had to make.
+
+And 119 vehicles taking that spread, every day, for twenty years, is real money.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p>&quot;They can still run off of unleaded fuel — but now you have the option to run off of propane.&quot;</p>
+<p>That&#x27;s Jeff Sauline describing what happened to 119 of Hammond&#x27;s highest-mileage vehicles. And that one word — option — is why the project works.</p>
+<p>The objection we hear first, every time, is the same: what happens when the propane runs out? What if a cruiser is across town, mid-shift, and there&#x27;s nowhere to fill up?</p>
+<p class="beat">Nothing happens. It runs on unleaded.</p>
+<p>These aren&#x27;t propane vehicles. They&#x27;re bi-fuel. Both systems are live. The vehicle carries a propane tank and its original gasoline tank, and it runs on either.</p>
+<p>So the fleet never loses capability. A patrol car doesn&#x27;t get less useful. A plow doesn&#x27;t get stranded. Worst case, it runs exactly like it ran last year.</p>
+<p>Best case — which is most of the time — it runs on the cheaper fuel.</p>
+<p>That&#x27;s what made this financeable. We didn&#x27;t ask Hammond to bet on propane. We asked them to add propane as an option and take the spread whenever it&#x27;s favorable.</p>
+<p class="beat">You can&#x27;t lose a bet you never had to make.</p>
+<p>And 119 vehicles taking that spread, every day, for twenty years, is real money.</p>
+    </div>
+    
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-curtis">LI-CL</span>
+      <span class="day-badge">Fri</span>
+      <span class="pc-title">Curtis Leopardo — Personal</span>
+      <div class="pc-meta">
+        <span class="wc">182 WORDS</span>
+        <button class="copy-btn" data-copy="Fleet is the line item every city underfunds.
+
+Not out of negligence. Out of a very human logic: a truck that still starts isn&#x27;t a problem yet.
+
+So you run it another year. And another. The mileage climbs, the fuel economy drops, the repairs stack up — and none of it trips an alarm, because the truck still starts. Until the February morning it doesn&#x27;t, and now you&#x27;re buying a vehicle at whatever price the market feels like that week, out of a budget that didn&#x27;t plan for it.
+
+Hammond had 119 vehicles in that condition. High mileage, still running, quietly expensive.
+
+They didn&#x27;t replace them. They converted them.
+
+Alternative fuel systems on the existing fleet — same trucks, cheaper to run — and 76 new vehicles added on top.
+
+Here&#x27;s what I want city leaders to take from that: your worst fleet assets aren&#x27;t a cost problem waiting to happen.
+
+They&#x27;re the biggest savings opportunity you own.
+
+The truck burning the most fuel is the one with the most to recover. The condition you&#x27;ve been avoiding is the condition that pays.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p class="lead">Fleet is the line item every city underfunds.</p>
+<p>Not out of negligence. Out of a very human logic: a truck that still starts isn&#x27;t a problem yet.</p>
+<p>So you run it another year. And another. The mileage climbs, the fuel economy drops, the repairs stack up — and none of it trips an alarm, because the truck still starts. Until the February morning it doesn&#x27;t, and now you&#x27;re buying a vehicle at whatever price the market feels like that week, out of a budget that didn&#x27;t plan for it.</p>
+<p>Hammond had 119 vehicles in that condition. High mileage, still running, quietly expensive.</p>
+<p>They didn&#x27;t replace them. They converted them.</p>
+<p>Alternative fuel systems on the existing fleet — same trucks, cheaper to run — and 76 new vehicles added on top.</p>
+<p>Here&#x27;s what I want city leaders to take from that: your worst fleet assets aren&#x27;t a cost problem waiting to happen.</p>
+<p class="beat">They&#x27;re the biggest savings opportunity you own.</p>
+<p>The truck burning the most fuel is the one with the most to recover. The condition you&#x27;ve been avoiding is the condition that pays.</p>
+    </div>
+    
+  </div></div>
+<div class="wk">
+  <div class="wk-head">
+    <div class="wk-num">07</div>
+    <div class="wk-title">Week 7 — The Stakes / Legacy + Lives</div>
+    <div class="wk-reel">REEL THIS WEEK: <b>R7 · Chief Doghty — &#x27;save lives&#x27; · IG</b></div>
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-company">LI-CO</span>
+      <span class="day-badge">Wed</span>
+      <span class="pc-title">Leopardo Efficiency — Company Page</span>
+      <div class="pc-meta">
+        <span class="wc">201 WORDS</span>
+        <button class="copy-btn" data-copy="&quot;Guaranteed&quot; is the most abused word in our industry.
+
+So let&#x27;s be specific about what it means in Hammond&#x27;s contract.
+
+Heather Garay, Hammond&#x27;s City Controller: &quot;The equipment is guaranteed for 20 years for the city to use as they see fit. And I know the team, they try to be conservative with that number — and they expect those savings to be even greater.&quot;
+
+Two things are happening in that sentence.
+
+First: 20 years. Not a warranty period on a component. A performance guarantee on the savings, running two decades out.
+
+Second — and this is the part that matters — she notes that we&#x27;re conservative with the number.
+
+That&#x27;s deliberate. We are not incentivized to project the best case. We&#x27;re incentivized to project a number we will not miss, because if we miss it, we pay the difference. Optimism costs us money. So we don&#x27;t sell it.
+
+The record: 59 projects. Zero missed guarantees.
+
+But the record isn&#x27;t the argument. Any firm can have a clean record right up until the year it doesn&#x27;t.
+
+The argument is what&#x27;s written down for the year we don&#x27;t.
+
+We write the check. Not the city.
+
+That&#x27;s what the word is supposed to mean.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p class="lead">&quot;Guaranteed&quot; is the most abused word in our industry.</p>
+<p>So let&#x27;s be specific about what it means in Hammond&#x27;s contract.</p>
+<p>Heather Garay, Hammond&#x27;s City Controller: &quot;The equipment is guaranteed for 20 years for the city to use as they see fit. And I know the team, they try to be conservative with that number — and they expect those savings to be even greater.&quot;</p>
+<p>Two things are happening in that sentence.</p>
+<p>First: 20 years. Not a warranty period on a component. A performance guarantee on the savings, running two decades out.</p>
+<p>Second — and this is the part that matters — she notes that we&#x27;re conservative with the number.</p>
+<p>That&#x27;s deliberate. We are not incentivized to project the best case. We&#x27;re incentivized to project a number we will not miss, because if we miss it, we pay the difference. Optimism costs us money. So we don&#x27;t sell it.</p>
+<p>The record: 59 projects. Zero missed guarantees.</p>
+<p>But the record isn&#x27;t the argument. Any firm can have a clean record right up until the year it doesn&#x27;t.</p>
+<p>The argument is what&#x27;s written down for the year we don&#x27;t.</p>
+<p class="beat">We write the check. Not the city.</p>
+<p>That&#x27;s what the word is supposed to mean.</p>
+    </div>
+    
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-curtis">LI-CL</span>
+      <span class="day-badge">Fri</span>
+      <span class="pc-title">Curtis Leopardo — Personal</span>
+      <div class="pc-meta">
+        <span class="wc">167 WORDS</span>
+        <button class="copy-btn" data-copy="Hammond&#x27;s police chief called this a legacy moment.
+
+I sat with that phrase for a while, because it&#x27;s not how I&#x27;d have described a fleet conversion and some HVAC.
+
+Then I understood what he meant.
+
+A legacy isn&#x27;t the ribbon cutting.
+
+Nobody remembers the ribbon cutting. A legacy is the twenty years afterward, when nobody has to think about it. When the cruiser starts. When the building is warm. When the streetlight is just on, and no one is in a meeting about it.
+
+Most of what a city does gets measured by what people notice. But the best infrastructure work is the work that makes a problem stop being a topic.
+
+His line was: it&#x27;s going to save lives on the police department.
+
+He wasn&#x27;t talking about energy.
+
+He was talking about officers in vehicles that are new instead of held together, on nights that don&#x27;t go the way anyone planned.
+
+That&#x27;s the legacy. Not the savings.
+
+The savings are just how they could afford it.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p class="lead">Hammond&#x27;s police chief called this a legacy moment.</p>
+<p>I sat with that phrase for a while, because it&#x27;s not how I&#x27;d have described a fleet conversion and some HVAC.</p>
+<p>Then I understood what he meant.</p>
+<p class="beat">A legacy isn&#x27;t the ribbon cutting.</p>
+<p>Nobody remembers the ribbon cutting. A legacy is the twenty years afterward, when nobody has to think about it. When the cruiser starts. When the building is warm. When the streetlight is just on, and no one is in a meeting about it.</p>
+<p>Most of what a city does gets measured by what people notice. But the best infrastructure work is the work that makes a problem stop being a topic.</p>
+<p>His line was: it&#x27;s going to save lives on the police department.</p>
+<p>He wasn&#x27;t talking about energy.</p>
+<p>He was talking about officers in vehicles that are new instead of held together, on nights that don&#x27;t go the way anyone planned.</p>
+<p>That&#x27;s the legacy. Not the savings.</p>
+<p class="beat">The savings are just how they could afford it.</p>
+    </div>
+    
+  </div></div>
+<div class="wk">
+  <div class="wk-head">
+    <div class="wk-num">08</div>
+    <div class="wk-title">Week 8 — The Invitation / No-Brainer Close</div>
+    <div class="wk-reel">REEL THIS WEEK: <b>R8 · Heather + Curtis clone CTA · LI-CO</b></div>
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-company">LI-CO</span>
+      <span class="day-badge">Wed</span>
+      <span class="pc-title">Leopardo Efficiency — Company Page</span>
+      <div class="pc-meta">
+        <span class="wc">198 WORDS</span>
+        <button class="copy-btn" data-copy="Eight weeks on Hammond. Here&#x27;s the question it&#x27;s been building toward.
+
+Does your city qualify?
+
+You&#x27;re a strong candidate if you have:
+
+Buildings you own. Aging HVAC, original lighting, no building automation. The more deferred, the better the return — the waste is the opportunity.
+
+A fleet with mileage on it. High-mileage vehicles you keep running because replacing them isn&#x27;t in the budget. Those are the best conversion candidates, not the worst.
+
+Streetlights you own — not lease from the utility. Ownership is what makes the LED conversion yours to capture.
+
+Scale. Not size — scale. Multiple scopes, and enough total waste that the savings can carry the debt service.
+
+You&#x27;re probably not a fit if your buildings were recently modernized, your fleet is new, your streetlights belong to the utility, or the total scope is small enough that the savings can&#x27;t cover the financing. We&#x27;ll tell you that in the audit. We&#x27;d rather tell you early than build you something that doesn&#x27;t work.
+
+Notice what isn&#x27;t on the list.
+
+Capital. A bond rating. Room in the general fund.
+
+None of that determines whether you qualify.
+
+The only thing that determines it is how much you&#x27;re currently wasting.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p>Eight weeks on Hammond. Here&#x27;s the question it&#x27;s been building toward.</p>
+<p class="beat">Does your city qualify?</p>
+<p>You&#x27;re a strong candidate if you have:</p>
+<p>Buildings you own. Aging HVAC, original lighting, no building automation. The more deferred, the better the return — the waste is the opportunity.</p>
+<p>A fleet with mileage on it. High-mileage vehicles you keep running because replacing them isn&#x27;t in the budget. Those are the best conversion candidates, not the worst.</p>
+<p>Streetlights you own — not lease from the utility. Ownership is what makes the LED conversion yours to capture.</p>
+<p>Scale. Not size — scale. Multiple scopes, and enough total waste that the savings can carry the debt service.</p>
+<p>You&#x27;re probably not a fit if your buildings were recently modernized, your fleet is new, your streetlights belong to the utility, or the total scope is small enough that the savings can&#x27;t cover the financing. We&#x27;ll tell you that in the audit. We&#x27;d rather tell you early than build you something that doesn&#x27;t work.</p>
+<p>Notice what isn&#x27;t on the list.</p>
+<p>Capital. A bond rating. Room in the general fund.</p>
+<p>None of that determines whether you qualify.</p>
+<p class="beat">The only thing that determines it is how much you&#x27;re currently wasting.</p>
+    </div>
+    
+  </div>
+  <div class="post-card">
+    <div class="pc-head">
+      <span class="platform-badge p-li-curtis">LI-CL</span>
+      <span class="day-badge">Fri</span>
+      <span class="pc-title">Curtis Leopardo — Personal</span>
+      <div class="pc-meta">
+        <span class="wc">138 WORDS</span>
+        <button class="copy-btn" data-copy="Eight weeks ago I started posting about Hammond, Indiana.
+
+76 vehicles. 4,800 streetlights. 13 buildings. 119 conversions. Sixteen million dollars on the other side of the debt service.
+
+I&#x27;ve made the argument as well as I know how. So I&#x27;ll close with the simple part.
+
+If you run a city with aging buildings, an aging fleet, and no capital to fix either — I&#x27;d like a conversation.
+
+Not a pitch. A conversation.
+
+Bring your skepticism. Bring your controller. Ask us the question Hammond asked — which was some version of &quot;what&#x27;s the catch&quot; — and let us answer it in front of you.
+
+If it&#x27;s not a fit, we&#x27;ll say so. That&#x27;s a real outcome, and it costs you an hour.
+
+If it is a fit, you already own everything you need.
+
+You&#x27;re just paying to neglect it.">COPY</button>
+      </div>
+    </div>
+    <div class="pc-body">
+<p>Eight weeks ago I started posting about Hammond, Indiana.</p>
+<p>76 vehicles. 4,800 streetlights. 13 buildings. 119 conversions. Sixteen million dollars on the other side of the debt service.</p>
+<p>I&#x27;ve made the argument as well as I know how. So I&#x27;ll close with the simple part.</p>
+<p class="beat">If you run a city with aging buildings, an aging fleet, and no capital to fix either — I&#x27;d like a conversation.</p>
+<p>Not a pitch. A conversation.</p>
+<p>Bring your skepticism. Bring your controller. Ask us the question Hammond asked — which was some version of &quot;what&#x27;s the catch&quot; — and let us answer it in front of you.</p>
+<p>If it&#x27;s not a fit, we&#x27;ll say so. That&#x27;s a real outcome, and it costs you an hour.</p>
+<p>If it is a fit, you already own everything you need.</p>
+<p class="beat">You&#x27;re just paying to neglect it.</p>
+    </div>
+    
+  </div></div>
+</div>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(b => {
+    b.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(b.dataset.copy);
+      } catch (e) {
+        const t = document.createElement('textarea');
+        t.value = b.dataset.copy; document.body.appendChild(t);
+        t.select(); document.execCommand('copy'); t.remove();
+      }
+      b.textContent = 'COPIED'; b.classList.add('done');
+      setTimeout(() => { b.textContent = 'COPY'; b.classList.remove('done'); }, 1600);
+    });
+  });
+</script>
+
+</body>
+</html>

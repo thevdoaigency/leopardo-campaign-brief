@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hammond, Indiana — 8-Week Asset Map</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --gold: #e8b84b;
+  --gold-dim: rgba(232,184,75,0.12);
+  --black: #0b0b0b;
+  --surface: #141414;
+  --surface2: #1c1c1c;
+  --surface3: #222222;
+  --cream: #ede9e3;
+  --muted: #6a6560;
+  --border: rgba(255,255,255,0.06);
+
+  --ready: #2a7a4b;
+  --ready-bg: rgba(42,122,75,0.12);
+  --ready-text: #5cba88;
+
+  --graphic: #7a5a1a;
+  --graphic-bg: rgba(232,184,75,0.1);
+  --graphic-text: #e8b84b;
+
+  --vo: #1a4a7a;
+  --vo-bg: rgba(80,140,220,0.1);
+  --vo-text: #7aadee;
+
+  --clone: #5a1a7a;
+  --clone-bg: rgba(160,80,220,0.1);
+  --clone-text: #bb88ee;
+
+  --scratch: #7a2a1a;
+  --scratch-bg: rgba(220,100,80,0.1);
+  --scratch-text: #ee9988;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 32px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--cream);
+}
+
+.header-title span { color: var(--gold); }
+
+.header-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* ── STATS BAR ── */
+.stats-bar {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+
+.stat-pill {
+  background: var(--surface2);
+  padding: 8px 14px;
+  flex: 1;
+  text-align: center;
+}
+
+.stat-pill .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+}
+
+.stat-pill .lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── LEGEND ── */
+.legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ── FILTERS ── */
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.filter-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-right: 2px;
+}
+
+.filter-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.15s;
+  letter-spacing: 0.05em;
+}
+
+.filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+.filter-btn.active { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); }
+
+/* ── MAIN TABLE AREA ── */
+.main {
+  padding: 0 32px 48px;
+}
+
+/* ── WEEK BLOCK ── */
+.week-block {
+  margin-top: 32px;
+}
+
+.week-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 12px 0 10px;
+  border-bottom: 1px solid rgba(232,184,75,0.2);
+  margin-bottom: 2px;
+  position: sticky;
+  top: 220px;
+  background: var(--black);
+  z-index: 10;
+}
+
+.week-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--gold);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.week-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.week-phase {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.week-count {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* ── POST ROW ── */
+.post-row {
+  display: grid;
+  grid-template-columns: 48px 90px 110px 120px 90px 1fr 140px 100px;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  min-height: 52px;
+  transition: background 0.1s;
+}
+
+.post-row:hover { background: var(--surface2); }
+.post-row.hidden { display: none; }
+
+.post-row .cell {
+  padding: 10px 12px;
+  display: flex;
+  align-items: flex-start;
+  border-right: 1px solid var(--border);
+}
+
+.post-row .cell:last-child { border-right: none; }
+
+/* Column header row */
+.col-headers {
+  display: grid;
+  grid-template-columns: 48px 90px 110px 120px 90px 1fr 140px 100px;
+  gap: 0;
+  background: var(--surface2);
+  border-bottom: 2px solid rgba(232,184,75,0.2);
+  position: sticky;
+  top: 180px;
+  z-index: 9;
+}
+
+.col-header {
+  padding: 8px 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-right: 1px solid var(--border);
+}
+
+.col-header:last-child { border-right: none; }
+
+/* Cell contents */
+.post-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.day-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--cream);
+}
+
+/* Platform badges */
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 2px;
+  border: 1px solid;
+}
+
+.p-li-company { color: #70a0ff; border-color: rgba(112,160,255,0.25); background: rgba(112,160,255,0.07); }
+.p-li-curtis  { color: #ff9f70; border-color: rgba(255,159,112,0.25); background: rgba(255,159,112,0.07); }
+.p-li-rob     { color: #70d0ff; border-color: rgba(112,208,255,0.25); background: rgba(112,208,255,0.07); }
+.p-ig         { color: #ff70c8; border-color: rgba(255,112,200,0.25); background: rgba(255,112,200,0.07); }
+.p-yt         { color: #ff7070; border-color: rgba(255,112,112,0.25); background: rgba(255,112,112,0.07); }
+
+/* Type badges */
+.type-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 2px 7px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.t-result    { color: #5cba88; background: rgba(42,122,75,0.15); }
+.t-mechanism { color: #7aadee; background: rgba(80,140,220,0.12); }
+.t-pov       { color: #e8b84b; background: rgba(232,184,75,0.1); }
+.t-education { color: #bb88ee; background: rgba(160,80,220,0.1); }
+.t-clip      { color: #ee9988; background: rgba(220,100,80,0.1); }
+
+/* Asset ID */
+.asset-id {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Post content */
+.post-content {}
+
+.post-hook {
+  font-size: 12px;
+  color: var(--cream);
+  line-height: 1.45;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+
+.post-note {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* Production status */
+.prod-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  border: 1px solid;
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.s-ready    { color: var(--ready-text);  background: var(--ready-bg);  border-color: rgba(42,122,75,0.3); }
+.s-graphic  { color: var(--graphic-text); background: var(--graphic-bg); border-color: rgba(232,184,75,0.25); }
+.s-vo       { color: var(--vo-text);     background: var(--vo-bg);     border-color: rgba(80,140,220,0.25); }
+.s-clone    { color: var(--clone-text);  background: var(--clone-bg);  border-color: rgba(160,80,220,0.25); }
+.s-scratch  { color: var(--scratch-text); background: var(--scratch-bg); border-color: rgba(220,100,80,0.25); }
+
+/* Monday status */
+.monday-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 3px 8px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* ── NO RESULTS ── */
+.no-results {
+  text-align: center;
+  padding: 60px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  display: none;
+}
+
+/* ── MONDAY COLUMN REF ── */
+.monday-ref {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 28px 32px;
+  margin-top: 40px;
+}
+
+.monday-ref h3 {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.monday-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+.monday-col {
+  background: var(--surface2);
+  padding: 14px 16px;
+}
+
+.mcol-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.mcol-type {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+
+
+/* ── HAMMOND ADDITIONS ── */
+.t-cta { color: #ff9f70; background: rgba(255,159,112,0.12); }
+.asset-tc {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--gold);
+  opacity: 0.75;
+  display: block;
+  margin-top: 3px;
+}
+.reel-flag {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: var(--black);
+  background: var(--gold);
+  padding: 1px 5px;
+  border-radius: 2px;
+  margin-left: 6px;
+  vertical-align: 1px;
+}
+.verify {
+  color: #ee9988;
+  font-style: normal;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+}
+.source-strip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--gold);
+  padding: 16px 20px;
+  margin: 32px 0 0;
+}
+.source-strip h3 {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.tc-row {
+  display: grid;
+  grid-template-columns: 92px 190px 1fr;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+.tc-row:last-child { border-bottom: none; }
+.tc-row .tc { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gold); opacity: 0.8; }
+.tc-row .who { font-size: 11px; color: var(--cream); }
+.tc-row .said { color: var(--muted); line-height: 1.45; }
+.flag-box {
+  background: rgba(220,100,80,0.06);
+  border: 1px solid rgba(220,100,80,0.25);
+  padding: 16px 20px;
+  margin-top: 24px;
+}
+.flag-box h3 {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--scratch-text);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.flag-box ul { margin-left: 16px; }
+.flag-box li { font-size: 12px; color: var(--cream); line-height: 1.6; margin-bottom: 5px; }
+.flag-box li b { color: var(--scratch-text); font-weight: 500; }
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="header-title">Hammond, Indiana — <span>8-Week Asset Map</span></div>
+    <div class="header-meta">
+      8 reels · 16 written posts · 8 weeks<br>
+      Source: City of Hammond hero video — 1:58<br>
+      Leopardo Efficiency · VDO Aigency
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-pill"><span class="num">24</span><span class="lbl">Total Posts</span></div>
+    <div class="stat-pill"><span class="num">8</span><span class="lbl">Reels</span></div>
+    <div class="stat-pill"><span class="num">5</span><span class="lbl">LinkedIn</span></div>
+    <div class="stat-pill"><span class="num">3</span><span class="lbl">Instagram</span></div>
+    <div class="stat-pill"><span class="num">8</span><span class="lbl">Curtis Posts</span></div>
+    <div class="stat-pill"><span class="num">8</span><span class="lbl">Company Posts</span></div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--graphic-text)"></span>Graphic Upgrade</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--vo-text)"></span>VO Rewrite</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--clone-text)"></span>Voice Clone</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--scratch-text)"></span>Write From Scratch</div>
+    <div class="legend-item" style="margin-left:auto">LI-CO = Company&nbsp;&nbsp;LI-CL = Curtis&nbsp;&nbsp;IG = Instagram</div>
+  </div>
+
+  <div class="filters">
+    <div class="filter-group">
+      <span class="filter-label">Week</span>
+      <button class="filter-btn active" data-filter="week" data-val="all">ALL</button>
+      <button class="filter-btn" data-filter="week" data-val="1">1</button><button class="filter-btn" data-filter="week" data-val="2">2</button><button class="filter-btn" data-filter="week" data-val="3">3</button><button class="filter-btn" data-filter="week" data-val="4">4</button><button class="filter-btn" data-filter="week" data-val="5">5</button><button class="filter-btn" data-filter="week" data-val="6">6</button><button class="filter-btn" data-filter="week" data-val="7">7</button><button class="filter-btn" data-filter="week" data-val="8">8</button>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Channel</span>
+      <button class="filter-btn active" data-filter="channel" data-val="all">ALL</button>
+      <button class="filter-btn" data-filter="channel" data-val="li-co">LI-CO</button>
+      <button class="filter-btn" data-filter="channel" data-val="li-cl">LI-CL</button>
+      <button class="filter-btn" data-filter="channel" data-val="ig">IG</button>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Kind</span>
+      <button class="filter-btn active" data-filter="kind" data-val="all">ALL</button>
+      <button class="filter-btn" data-filter="kind" data-val="reel">REELS</button>
+      <button class="filter-btn" data-filter="kind" data-val="written">WRITTEN</button>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Status</span>
+      <button class="filter-btn active" data-filter="status" data-val="all">ALL</button>
+      <button class="filter-btn" data-filter="status" data-val="graphic">GRAPHIC</button>
+      <button class="filter-btn" data-filter="status" data-val="vo">VO REWRITE</button>
+      <button class="filter-btn" data-filter="status" data-val="clone">VOICE CLONE</button>
+      <button class="filter-btn" data-filter="status" data-val="scratch">FROM SCRATCH</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="col-headers">
+    <div class="col-header">#</div>
+    <div class="col-header">Day</div>
+    <div class="col-header">Channel</div>
+    <div class="col-header">Type</div>
+    <div class="col-header">Asset / TC</div>
+    <div class="col-header">Hook / Description</div>
+    <div class="col-header">Production</div>
+    <div class="col-header">Monday Status</div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════ WEEK 1 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="1">
+    <div class="week-header">
+      <div class="week-num">01</div>
+      <div class="week-title">Week 1</div>
+      <div class="week-phase">— The Headline / What Hammond Did</div>
+      <div class="week-count">3 posts</div>
+    </div>
+
+    <div class="post-row" data-week="1" data-channel="li-co" data-status="graphic" data-kind="reel">
+      <div class="cell"><span class="post-num">01</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-clip">Clip</span></div>
+      <div class="cell"><span class="asset-id">HAM_R1<span class="asset-tc">0:02–0:21</span></span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Mayor McDermott: &quot;We added 76 new vehicles, converted 4,800 city-owned streetlights to LED. We replaced outdated HVAC in 13 city buildings. Cheaper. Cleaner. Nicer. You&#x27;re going to save a lot of money in the city of Hammond.&quot;<span class="reel-flag">REEL</span></div>
+          <div class="post-note">Strongest cold open in the entire library — the mayor lists the whole scope in 19 seconds and lands a three-beat close. Build three stat cards on his cadence: 76 VEHICLES / 4,800 STREETLIGHTS / 13 BUILDINGS. Closer card: &quot;Cheaper. Cleaner. Nicer.&quot; No VO needed — do not touch the audio.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="1" data-channel="li-co" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">02</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">&quot;Hammond, Indiana didn&#x27;t modernize one system. They modernized four — at the same time, and the project pays for itself.&quot;</div>
+          <div class="post-note">Company page. ~200 words. Lays out the full scope cold, no sell. Sets the table for the next seven weeks.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="1" data-channel="li-cl" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">03</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-curtis">LI-CL</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Curtis: &quot;Most cities fix one thing at a time. It&#x27;s the safe move. It&#x27;s also the reason the list never gets shorter.&quot;</div>
+          <div class="post-note">Curtis personal LinkedIn. ~150 words. Establishes his POV voice for the Hammond arc. Note: Curtis is not on camera in this shoot — his presence in this campaign is written + VO only.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 2 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="2">
+    <div class="week-header">
+      <div class="week-num">02</div>
+      <div class="week-title">Week 2</div>
+      <div class="week-phase">— The Model / What an ESPC Actually Is</div>
+      <div class="week-count">3 posts</div>
+    </div>
+
+    <div class="post-row" data-week="2" data-channel="li-co" data-status="vo" data-kind="reel">
+      <div class="cell"><span class="post-num">04</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-mechanism">Mechanism</span></div>
+      <div class="cell"><span class="asset-id">HAM_R2<span class="asset-tc">0:21–0:29 + VO</span></span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Rob Vollrath: &quot;We specialize in guaranteed energy savings performance contracting for local government agencies.&quot;<span class="reel-flag">REEL</span></div>
+          <div class="post-note">Rob&#x27;s SOT is only 8 seconds — too thin to carry a reel. Front-load 10–12s of ElevenLabs professional VO over Hammond b-roll framing the problem, then cut to Rob for the definition. Target 22s. <span class="verify">VERIFY:</span> his opening phrase transcribes as &quot;Our company a part of energy&quot; — garbled. Need the correct parent-company name before scripting.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-vo">VO REWRITE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="2" data-channel="li-co" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">05</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">&quot;Guaranteed energy savings performance contract. Four words that decide whether your city can afford to fix anything this decade.&quot;</div>
+          <div class="post-note">Company page. ~200 words. Plain-language ESPC explainer for a city manager who has heard the term and never trusted it.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="2" data-channel="li-cl" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">06</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-curtis">LI-CL</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Curtis: &quot;City leaders don&#x27;t distrust the numbers. They distrust the promise. That&#x27;s a fair instinct — and it&#x27;s the whole reason the guarantee exists.&quot;</div>
+          <div class="post-note">Curtis POV. ~150 words. Meets the skepticism head-on instead of arguing past it.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 3 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="3">
+    <div class="week-header">
+      <div class="week-num">03</div>
+      <div class="week-title">Week 3</div>
+      <div class="week-phase">— The Four Phases / Scope</div>
+      <div class="week-count">3 posts</div>
+    </div>
+
+    <div class="post-row" data-week="3" data-channel="ig" data-status="graphic" data-kind="reel">
+      <div class="cell"><span class="post-num">07</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-ig">IG</span></div>
+      <div class="cell"><span class="type-badge t-mechanism">Mechanism</span></div>
+      <div class="cell"><span class="asset-id">HAM_R3<span class="asset-tc">0:29–0:38</span></span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Jeff Sauline: &quot;There&#x27;s four phases of the project. We&#x27;ve got the building work, the street lighting, the propane upgrades, and the vehicle leasing program.&quot;<span class="reel-flag">REEL</span></div>
+          <div class="post-note">Card-driven build — four phase cards land one at a time as Jeff names them. 9s SOT + ~8s card outro = 18s. Cleanest pure-visual reel in the set, which is why it goes to Instagram. Cross-post to LI-CO as a Thursday bonus if the week is light.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="3" data-channel="li-co" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">08</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">&quot;Four phases. One contract. No new taxes. Here&#x27;s how the pieces actually fit together.&quot;</div>
+          <div class="post-note">Company page. ~200 words. The structural explainer — why bundling four scopes into one contract is what makes the math work.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="3" data-channel="li-cl" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">09</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-curtis">LI-CL</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Curtis: &quot;Everyone tells you to start small. Hammond didn&#x27;t. That&#x27;s not recklessness — it&#x27;s the only way the savings get big enough to pay for the work.&quot;</div>
+          <div class="post-note">Curtis POV. ~150 words. Scope-courage angle. Reframes &#x27;ambitious&#x27; as &#x27;financially necessary.&#x27;</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 4 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="4">
+    <div class="week-header">
+      <div class="week-num">04</div>
+      <div class="week-title">Week 4</div>
+      <div class="week-phase">— The Money / $16M Above Debt Service</div>
+      <div class="week-count">3 posts</div>
+    </div>
+
+    <div class="post-row" data-week="4" data-channel="li-co" data-status="graphic" data-kind="reel">
+      <div class="cell"><span class="post-num">10</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-result">Result</span></div>
+      <div class="cell"><span class="asset-id">HAM_R4<span class="asset-tc">0:38–0:48</span></span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Heather Garay, City Controller: guaranteed to make back the debt payment on the improvements — &quot;but will generate an additional $16 million.&quot;<span class="reel-flag">REEL</span></div>
+          <div class="post-note">The biggest number in any Leopardo case study, and it is not a savings figure — it&#x27;s a revenue figure. Hero card: $16,000,000. This is the hinge of the whole campaign. VERIFY with Rob before publish: the figure, the term it&#x27;s measured over, and whether it&#x27;s net of debt service.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="4" data-channel="li-co" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">11</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">&quot;How a city infrastructure project generates $16 million instead of costing it.&quot;</div>
+          <div class="post-note">Company page. ~200 words. The skeptic-killer. Walks the debt-service-covered-by-savings mechanism, then the surplus.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="4" data-channel="li-cl" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">12</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-curtis">LI-CL</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Curtis: &quot;$16 million isn&#x27;t a savings number. It&#x27;s a revenue stream — from buildings a city already owned and was already paying to neglect.&quot;</div>
+          <div class="post-note">Curtis POV. ~150 words. His strongest post of the eight. Reframes the entire category.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 5 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="5">
+    <div class="week-header">
+      <div class="week-num">05</div>
+      <div class="week-title">Week 5</div>
+      <div class="week-phase">— The Buildings / 23-Year Math</div>
+      <div class="week-count">3 posts</div>
+    </div>
+
+    <div class="post-row" data-week="5" data-channel="li-co" data-status="graphic" data-kind="reel">
+      <div class="cell"><span class="post-num">13</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-mechanism">Mechanism</span></div>
+      <div class="cell"><span class="asset-id">HAM_R5<span class="asset-tc">0:48–1:10</span></span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Rob + Jeff: HVAC in 11 of 14 buildings, electrical and lighting in 13 of 14. &quot;The lights that we put in are going to be up there for 23 years. The lights they had previously, they were replacing every 3 to 5 years.&quot; Plus building automation — all HVAC controlled from one computer.<span class="reel-flag">REEL</span></div>
+          <div class="post-note">Two-speaker cut, 22s. Best mechanism clip in the reel set. Hero card: 23 YEARS vs 3–5 YEARS. <span class="verify">VERIFY:</span> the Rob→Jeff cut at 1:04 falls mid-sentence on the automation line — confirm who says it before the edit locks.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="5" data-channel="li-co" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">14</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">&quot;A 23-year light doesn&#x27;t just save energy. It deletes five replacement cycles from your budget — and the labor that comes with them.&quot;</div>
+          <div class="post-note">Company page. ~200 words. Lifecycle-cost education. The argument most municipal budgets never make.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="5" data-channel="li-cl" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">15</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-curtis">LI-CL</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Curtis: &quot;Replacing the same streetlight every four years isn&#x27;t maintenance. It&#x27;s a subscription nobody ever agreed to.&quot;</div>
+          <div class="post-note">Curtis POV. ~150 words. Deferred-maintenance-as-hidden-tax angle, Hammond-specific.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 6 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="6">
+    <div class="week-header">
+      <div class="week-num">06</div>
+      <div class="week-title">Week 6</div>
+      <div class="week-phase">— The Fleet / 119 Vehicles</div>
+      <div class="week-count">3 posts</div>
+    </div>
+
+    <div class="post-row" data-week="6" data-channel="ig" data-status="graphic" data-kind="reel">
+      <div class="cell"><span class="post-num">16</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-ig">IG</span></div>
+      <div class="cell"><span class="type-badge t-result">Result</span></div>
+      <div class="cell"><span class="asset-id">HAM_R6<span class="asset-tc">1:19–1:38</span></span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Rob + Jeff: 119 high-mileage vehicles fitted with alternative fuel systems. &quot;They can still run off unleaded, but now you have the option to run off propane. More efficient, cheaper.&quot;<span class="reel-flag">REEL</span></div>
+          <div class="post-note">19s two-speaker cut. The most visual sequence in the source — trucks, fueling, fleet yard. Cards: 119 VEHICLES / PROPANE + UNLEADED. Instagram lead; strong LI-CO cross-post candidate.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="6" data-channel="li-co" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">17</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">&quot;Bi-fuel conversion, explained: why Hammond&#x27;s police cruisers can run on propane or unleaded — and choose the cheaper one that day.&quot;</div>
+          <div class="post-note">Company page. ~200 words. Technical explainer, plain language. Kills the &#x27;what if propane runs out&#x27; objection up front.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="6" data-channel="li-cl" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">18</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-curtis">LI-CL</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Curtis: &quot;Fleet is the line item every city underfunds, because a truck that still starts doesn&#x27;t feel like a problem yet.&quot;</div>
+          <div class="post-note">Curtis POV. ~150 words. Fleet as the invisible liability.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 7 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="7">
+    <div class="week-header">
+      <div class="week-num">07</div>
+      <div class="week-title">Week 7</div>
+      <div class="week-phase">— The Stakes / Legacy + Lives</div>
+      <div class="week-count">3 posts</div>
+    </div>
+
+    <div class="post-row" data-week="7" data-channel="ig" data-status="graphic" data-kind="reel">
+      <div class="cell"><span class="post-num">19</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-ig">IG</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">HAM_R7<span class="asset-tc">1:38–1:49</span></span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Chief John Doghty, Hammond PD: &quot;This is a legacy moment for the city, because we&#x27;ve accomplished something that&#x27;s never been accomplished before. We have a whole new fleet of vehicles. It&#x27;s going to save lives on the police department.&quot;<span class="reel-flag">REEL</span></div>
+          <div class="post-note">The emotional peak of the entire library. 11 seconds — let it breathe. ID card at open, nothing else. Do not over-produce and do not add VO. <span class="verify">VERIFY:</span> surname spelling before this ships publicly.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-graphic">GRAPHIC UPGRADE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="7" data-channel="li-co" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">20</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-education">Education</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">&quot;&#x27;Guaranteed&#x27; is the most overused word in this industry. Here&#x27;s what it means when it&#x27;s in a contract — and what happens if we miss.&quot;</div>
+          <div class="post-note">Company page. ~200 words. Pulls Heather&#x27;s 20-year equipment guarantee line (1:10–1:19) as the anchor. Pair with the never-missed-a-guarantee record if Rob approves the claim for Hammond context.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="7" data-channel="li-cl" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">21</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-curtis">LI-CL</span></div>
+      <div class="cell"><span class="type-badge t-pov">POV</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Curtis: &quot;A legacy isn&#x27;t the ribbon cutting. It&#x27;s the twenty years after, when nobody has to think about it.&quot;</div>
+          <div class="post-note">Curtis POV. ~150 words. Sets up the Week 8 pivot without selling.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ WEEK 8 ══════════════════════════════════════ -->
+  <div class="week-block" data-week="8">
+    <div class="week-header">
+      <div class="week-num">08</div>
+      <div class="week-title">Week 8</div>
+      <div class="week-phase">— The Invitation / No-Brainer Close</div>
+      <div class="week-count">3 posts</div>
+    </div>
+
+    <div class="post-row" data-week="8" data-channel="li-co" data-status="clone" data-kind="reel">
+      <div class="cell"><span class="post-num">22</span></div>
+      <div class="cell"><span class="day-badge">Mon</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-cta">CTA</span></div>
+      <div class="cell"><span class="asset-id">HAM_R8<span class="asset-tc">1:10–1:19 + 1:49–1:58 + clone</span></span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Heather Garay: &quot;This is a no-brainer for any kind of community that&#x27;s looking to upgrade their fleet, upgrade their buildings, and find a new revenue stream out of the mix as well.&quot;<span class="reel-flag">REEL</span></div>
+          <div class="post-note">Campaign closer, ~28s. Open on Heather&#x27;s 20-year guarantee line, close on the no-brainer line. Tail with Curtis voice clone over Hammond + South Euclid b-roll for a soft CTA. This is the only place Curtis&#x27;s voice enters the Hammond narrative — he isn&#x27;t on camera in this shoot.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-clone">VOICE CLONE</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="8" data-channel="li-co" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">23</span></div>
+      <div class="cell"><span class="day-badge">Wed</span></div>
+      <div class="cell"><span class="platform-badge p-li-company">LI-CO</span></div>
+      <div class="cell"><span class="type-badge t-cta">CTA</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">&quot;Does your city qualify? A plain-language breakdown of what makes a Hammond-scale project possible — and what rules one out.&quot;</div>
+          <div class="post-note">Company page. ~200 words. Targets the decision-maker who&#x27;s followed for seven weeks and is now doing the math on their own city.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+
+    <div class="post-row" data-week="8" data-channel="li-cl" data-status="scratch" data-kind="written">
+      <div class="cell"><span class="post-num">24</span></div>
+      <div class="cell"><span class="day-badge">Fri</span></div>
+      <div class="cell"><span class="platform-badge p-li-curtis">LI-CL</span></div>
+      <div class="cell"><span class="type-badge t-cta">CTA</span></div>
+      <div class="cell"><span class="asset-id">[WRITTEN]</span></div>
+      <div class="cell">
+        <div>
+          <div class="post-hook">Curtis: &quot;If you run a city with aging buildings, an aging fleet, and no capital to fix either — I&#x27;d like a conversation. Not a pitch. A conversation.&quot;</div>
+          <div class="post-note">Curtis close. ~120 words. Warm, direct, no hard sell. The post the whole arc has been building toward.</div>
+        </div>
+      </div>
+      <div class="cell"><span class="prod-badge s-scratch">FROM SCRATCH</span></div>
+      <div class="cell"><span class="monday-badge">Not Started</span></div>
+    </div>
+  </div>
+
+
+  <div class="no-results" id="no-results" style="display:none">No posts match the selected filters.</div>
+
+  <div class="source-strip">
+    <h3>Source Timecode Map — City of Hammond hero video (1:58)</h3>
+    <div class="tc-row"><div class="tc">0:02–0:21</div><div class="who">Mayor Thomas McDermott</div><div class="said">We added 76 new vehicles, converted 4,800 city-owned streetlights to energy-efficient LED technology. We replaced outdated HVAC equipment in 13 city buildings. Cheaper. Cleaner. Nicer. You&#x27;re going to save a lot of money in the city of Hammond.</div></div>
+<div class="tc-row"><div class="tc">0:21–0:29</div><div class="who">Rob Vollrath</div><div class="said">Our company [is] a part of [—] energy. We specialize in guaranteed energy savings performance contracting for local government agencies.</div></div>
+<div class="tc-row"><div class="tc">0:29–0:38</div><div class="who">Jeff Sauline</div><div class="said">There&#x27;s four phases of the project. We&#x27;ve got the building work, the street lighting, the propane upgrades, and the vehicle leasing program.</div></div>
+<div class="tc-row"><div class="tc">0:38–0:48</div><div class="who">Heather Garay</div><div class="said">[Leopardo] has guaranteed that we will not only be able to make back our debt payment for the improvements, but will generate an additional $16 million.</div></div>
+<div class="tc-row"><div class="tc">0:48–1:04</div><div class="who">Rob Vollrath</div><div class="said">We had HVAC work in 11 of the 14 buildings. We also had electrical work and lighting upgrades in 13 of the 14 buildings. The lights that we put in are going to be up there for 23 years. The lights that they had previously, they were replacing every 3 to 5 years. We also had a building automation system —</div></div>
+<div class="tc-row"><div class="tc">1:04–1:10</div><div class="who">Jeff Sauline</div><div class="said">— which essentially means you can control all the HVAC through a computer.</div></div>
+<div class="tc-row"><div class="tc">1:10–1:19</div><div class="who">Heather Garay</div><div class="said">The equipment is guaranteed for 20 years for the city to use as they see fit. And I know the team, they try to be conservative with that number and they expect those savings to be even greater.</div></div>
+<div class="tc-row"><div class="tc">1:19–1:28</div><div class="who">Rob Vollrath</div><div class="said">We were able to identify 119 of their high, high-mileage vehicles that we put the alternative fuel system on to significantly reduce their fuel costs.</div></div>
+<div class="tc-row"><div class="tc">1:28–1:38</div><div class="who">Jeff Sauline</div><div class="said">We upgraded the vehicles to propane. They can still run off of unleaded fuel, but now you also have the option to run off of propane. Propane — more efficient, cheaper.</div></div>
+<div class="tc-row"><div class="tc">1:38–1:49</div><div class="who">Chief John Doghty</div><div class="said">This is a legacy moment for the city, because we&#x27;ve accomplished something that&#x27;s never been accomplished before. We have a whole new fleet of vehicles. It&#x27;s going to save lives on the police department.</div></div>
+<div class="tc-row"><div class="tc">1:49–1:58</div><div class="who">Heather Garay</div><div class="said">I think that this is a no-brainer for any kind of community that&#x27;s looking to upgrade their fleet, to upgrade their buildings, and find a new revenue stream out of the mix as well.</div></div>
+  </div>
+
+  <div class="flag-box">
+    <h3>Before anything ships — open items</h3>
+    <ul>
+<li><b>Speaker map is unverified.</b> The transcript's diarization returned a single "Unknown" speaker for all 346 words — your manual timecode map is the only source of truth. Four boundaries (0:38, 1:04, 1:19, 1:28) fall mid-sentence, so the exact hand-offs need a screening pass before edits lock.</li>
+<li><b>"Our company a part of energy" (0:21) is garbled.</b> Rob is naming a parent or partner entity. Need the correct name before HAM_R2 is scripted — this line is the reel's whole premise.</li>
+<li><b>Transcription errors corrected on the assumption they're ASR noise:</b> "HPC" → HVAC, "hack" → HVAC, "placing" → replacing. Confirm against the master.</li>
+<li><b>The $16M figure needs Rob's sign-off.</b> Confirm the number, the term it's measured across, and that it's net of debt service. It anchors Week 4 and gets quoted back at you in every inbound call.</li>
+<li><b>Chief's surname.</b> Transcribed as "Doghty" — confirm spelling (Doughty / Dougherty?) before HAM_R7 ships with an ID card.</li>
+<li><b>Curtis is not on camera in this shoot.</b> His only on-screen presence across the eight weeks is the voice clone tail on HAM_R8. If you want him in the visual narrative, that's a pickup shoot — otherwise his eight written posts carry him.</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+  const filters = { week: 'all', channel: 'all', status: 'all', kind: 'all' };
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filterType = btn.dataset.filter;
+      document.querySelectorAll(`[data-filter="${filterType}"]`).forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filters[filterType] = btn.dataset.val;
+      applyFilters();
+    });
+  });
+
+  function applyFilters() {
+    let visible = 0;
+    document.querySelectorAll('.post-row').forEach(row => {
+      const show = (filters.week === 'all' || row.dataset.week === filters.week)
+                && (filters.channel === 'all' || row.dataset.channel === filters.channel)
+                && (filters.status === 'all' || row.dataset.status === filters.status)
+                && (filters.kind === 'all' || row.dataset.kind === filters.kind);
+      row.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    document.querySelectorAll('.week-block').forEach(block => {
+      const hasVisible = block.querySelectorAll('.post-row:not(.hidden)').length > 0;
+      block.style.display = hasVisible ? '' : 'none';
+    });
+    document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+  }
+</script>
+
+</body>
+</html>
