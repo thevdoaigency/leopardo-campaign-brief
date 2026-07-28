@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rob Vollrath — Launch Posts · Leopardo Efficiency</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1A3868; --blue-tint:#E4E9F1; --yellow:#FFE600;
+  --ink:#23262B; --muted:#5C6470; --line:#D8DEE8; --page:#FFFFFF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Libre Franklin",system-ui,sans-serif;color:var(--ink);background:#EEF1F5;line-height:1.55;padding:32px 16px}
+.sheet{max-width:940px;margin:0 auto;background:var(--page);padding:44px 48px 36px;border-radius:6px;box-shadow:0 1px 4px rgba(26,56,104,.10)}
+.eyebrow{font-family:"Jost",sans-serif;font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
+h1{font-family:"Jost",sans-serif;font-weight:600;color:var(--blue);font-size:33px;line-height:1.12;margin-top:8px;letter-spacing:-.01em}
+h1 .y{box-shadow:inset 0 -.42em 0 var(--yellow)}
+.rule{height:4px;width:64px;background:var(--yellow);margin:16px 0 18px;border-radius:2px}
+.lede{font-size:15px;color:var(--ink);max-width:760px}
+.lede strong{font-weight:600;color:var(--blue)}
+
+/* intro play-box + hard rule as navy card */
+.play{margin:22px 0 0}
+.play p{font-size:13.5px;color:var(--ink);line-height:1.6;margin-bottom:8px;max-width:820px}
+.play p b{color:var(--blue);font-weight:600}
+.hardrule{background:var(--blue);color:#fff;border-radius:8px;padding:14px 16px;margin-top:12px;font-size:13px;line-height:1.55}
+.hardrule .k{font-family:"Jost",sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow);display:block;margin-bottom:4px}
+.hardrule b{color:var(--yellow);font-weight:600}
+
+/* arc = navy layer cards */
+.arc{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0 4px}
+.arc .lc{flex:1;min-width:200px;background:var(--blue);color:#fff;border-radius:8px;padding:13px 15px}
+.arc .lc .k{font-family:"Jost",sans-serif;font-size:16px;font-weight:600;color:var(--yellow)}
+.arc .lc .n{font-family:"Jost",sans-serif;font-weight:500;font-size:15px;margin-top:3px}
+.arc .lc .d{font-size:12px;color:#C9D4E6;margin-top:2px;line-height:1.4}
+
+/* post cards */
+.pcard{border:1px solid var(--line);border-radius:8px;background:#fff;margin-top:16px;overflow:hidden}
+.pcard.gated{border-color:#E9CE00}
+.ph{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--line);background:#FBFCFE}
+.jersey{font-family:"Jost",sans-serif;font-weight:600;font-size:22px;color:#fff;background:var(--blue);width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:6px;flex:none;border-top:3px solid var(--yellow)}
+.pt{font-family:"Jost",sans-serif;font-weight:600;font-size:15px;color:var(--blue);line-height:1.15}
+.pt .sub{font-family:"Libre Franklin",sans-serif;font-weight:400;color:var(--muted);font-size:11.5px;display:block;margin-top:2px}
+.pmeta{margin-left:auto;display:flex;align-items:center;gap:10px}
+.wc{font-family:"Jost",sans-serif;font-size:10px;color:var(--muted);letter-spacing:.08em}
+.copy-btn{font-family:"Jost",sans-serif;font-weight:500;font-size:10px;letter-spacing:.1em;background:#fff;color:var(--blue);border:1px solid var(--line);padding:6px 12px;border-radius:4px;cursor:pointer;transition:all .15s}
+.copy-btn:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.copy-btn.done{background:var(--yellow);color:var(--blue);border-color:var(--yellow)}
+.pbody{padding:18px 22px}
+.pbody p{font-size:14.5px;line-height:1.62;color:var(--ink);margin-bottom:11px}
+.pbody p:last-child{margin-bottom:0}
+.pbody p.lead{font-weight:600;color:var(--blue)}
+.pbody p.flash{font-weight:600;color:var(--blue);border-left:4px solid var(--yellow);padding-left:14px;margin-left:-2px}
+.note{border-top:1px solid var(--line);padding:11px 22px;font-size:11.5px;color:var(--muted);line-height:1.5;background:#FAFBFD}
+.note b{color:var(--ink);font-weight:600}
+.gate{border-top:1px solid var(--line);padding:12px 22px;font-size:12px;color:var(--ink);line-height:1.55;background:var(--blue-tint)}
+.gate b{color:var(--blue);font-weight:600}
+.gate .ok{color:var(--blue);font-weight:700;box-shadow:inset 0 -.4em 0 var(--yellow)}
+
+.foot{margin-top:26px;border-top:1px solid var(--line);padding-top:12px;font-family:"Jost",sans-serif;font-size:12px;color:var(--muted);letter-spacing:.02em;display:flex;gap:16px;flex-wrap:wrap}
+.foot .sq{width:11px;height:11px;background:var(--blue);border-radius:2px;display:inline-block;vertical-align:-1px;margin-right:6px}
+@media (max-width:760px){.sheet{padding:30px 22px}h1{font-size:26px}.arc .lc{min-width:100%}}
+</style></head><body>
+<div class="sheet">
+  <div class="eyebrow">Leopardo Efficiency</div>
+  <h1>Rob Vollrath — <span class="y">LinkedIn Launch Posts</span></h1>
+  <div class="rule"></div>
+  <p class="lede">Four posts to open Rob's page and stake a claim to a category — <strong>emergency responder buildings</strong>, not "energy efficiency." Each one moves him toward being the person a city calls about a firehouse.</p>
+
+  <div class="play">
+    <p><b>The voice:</b> he sells by refusing to oversell. Short flat verdicts, numbers doing the work, no adjectives, first person, no hashtags. One earned flash of heat per post — at the end, never in the middle.</p>
+    <div class="hardrule">
+      <span class="k">The one hard rule</span>
+      Rob does not publish a number ahead of his engineers. <b>120% is public and cleared.</b> The Cleveland-specific figure and the equivalency line wait for confirmation — they are their own posts, later. Breaking this rule once undoes the credibility the whole page runs on.
+    </div>
+    <div class="arc">
+      <div class="lc"><div class="k">01</div><div class="n">The Category</div><div class="d">Emergency responder buildings are their own animal</div></div>
+      <div class="lc"><div class="k">02</div><div class="n">The Proof</div><div class="d">Cleveland + the guarantee, disciplined on the number</div></div>
+      <div class="lc"><div class="k">03</div><div class="n">The Stakes</div><div class="d">Who is inside the building</div></div>
+      <div class="lc"><div class="k">04</div><div class="n">The Fire Stations</div><div class="d">The public promise he intends to pay off</div></div>
+    </div>
+  </div>
+
+  <div class="pcard">
+    <div class="ph">
+      <div class="jersey">1</div>
+      <div class="pt">The Category<span class="sub">Flag in the ground — who Rob is</span></div>
+      <div class="pmeta"><span class="wc">112 WORDS</span>
+        <button class="copy-btn" data-copy="An emergency responder station is not an office building.
+
+These are buildings that run 24 hours a day and never close. The people inside sleep there, eat there, and breathe whatever the mechanical systems are doing to the air for a third of their lives.
+
+One of the five Cleveland police stations we just finished broke ground in 1973. Three of the five had HVAC that had stopped working entirely.
+
+You can defer a lot of things in a building. The air in a room where first responders sleep between calls is not one of them.
+
+That is the work I care about. Not the square footage — who is inside it.">COPY</button></div>
+    </div>
+    <div class="pbody">
+<p class="lead">An emergency responder station is not an office building.</p>
+<p>These are buildings that run 24 hours a day and never close. The people inside sleep there, eat there, and breathe whatever the mechanical systems are doing to the air for a third of their lives.</p>
+<p>One of the five Cleveland police stations we just finished broke ground in 1973. Three of the five had HVAC that had stopped working entirely.</p>
+<p>You can defer a lot of things in a building. The air in a room where first responders sleep between calls is not one of them.</p>
+<p class="flash">That is the work I care about. Not the square footage — who is inside it.</p>
+    </div>
+    <div class="note"><b>Note:</b> Voice: flat opener, specifics do the work, ends on substance not a slogan. Every figure here is public record.</div>
+    
+  </div>
+  <div class="pcard gated">
+    <div class="ph">
+      <div class="jersey">2</div>
+      <div class="pt">The Proof<span class="sub">Cleveland, with the disciplined number</span></div>
+      <div class="pmeta"><span class="wc">134 WORDS</span>
+        <button class="copy-btn" data-copy="Cleveland asked us to overhaul five police stations. Here is what that meant.
+
+Five district stations. A $21 million investment, procured under Ohio Revised Code 717.02 — which let the city do the work without raising taxes or issuing a bond. The savings from the improvements pay for the improvements.
+
+At the kickoff, we put our company-average number on the public record: across our projects, we deliver about 120% of the savings we forecast.
+
+On Cleveland specifically, the early numbers are running higher than that. Materially higher.
+
+I am not going to publish the figure until our engineers finish confirming it. When they do, I will show you the math — not the headline, the math.
+
+That is the difference between a projection and a guarantee. We put our name on the second one.">COPY</button></div>
+    </div>
+    <div class="pbody">
+<p class="lead">Cleveland asked us to overhaul five police stations. Here is what that meant.</p>
+<p>Five district stations. A $21 million investment, procured under Ohio Revised Code 717.02 — which let the city do the work without raising taxes or issuing a bond. The savings from the improvements pay for the improvements.</p>
+<p>At the kickoff, we put our company-average number on the public record: across our projects, we deliver about 120% of the savings we forecast.</p>
+<p>On Cleveland specifically, the early numbers are running higher than that. Materially higher.</p>
+<p>I am not going to publish the figure until our engineers finish confirming it. When they do, I will show you the math — not the headline, the math.</p>
+<p class="flash">That is the difference between a projection and a guarantee. We put our name on the second one.</p>
+    </div>
+    <div class="note"><b>Note:</b> This post IS the Rob Vollrath brand — the guarantee, and the refusal to publish a number ahead of his own engineers. &#x27;Not the headline, the math&#x27; is the whole positioning.</div>
+    <div class="gate"><b>Publish gate.</b> The <span class='ok'>120%</span> company-average figure is on the public record (cited at the Cleveland kickoff) — cleared. The higher Cleveland-specific number is <b>held until engineering confirms it.</b> This post runs now without it; when the figure clears, it becomes its own follow-up.</div>
+  </div>
+  <div class="pcard">
+    <div class="ph">
+      <div class="jersey">3</div>
+      <div class="pt">The Stakes<span class="sub">Why it matters — understated</span></div>
+      <div class="pmeta"><span class="wc">110 WORDS</span>
+        <button class="copy-btn" data-copy="Three of the five Cleveland police stations had HVAC that no longer worked.
+
+Not underperforming. Not inefficient. Not working.
+
+These are buildings staffed around the clock by the people we call on the worst day of our lives — and the systems meant to keep the air breathable had simply stopped, in some cases years earlier.
+
+Nobody decided to let that happen. It happened the way deferred maintenance always happens in a public building: quietly, one budget cycle at a time, until “we’ll fix it next year” has been said fifteen times.
+
+The savings pay for the work. That is the mechanism.
+
+Who is in the building is the reason.">COPY</button></div>
+    </div>
+    <div class="pbody">
+<p class="lead">Three of the five Cleveland police stations had HVAC that no longer worked.</p>
+<p>Not underperforming. Not inefficient. Not working.</p>
+<p>These are buildings staffed around the clock by the people we call on the worst day of our lives — and the systems meant to keep the air breathable had simply stopped, in some cases years earlier.</p>
+<p>Nobody decided to let that happen. It happened the way deferred maintenance always happens in a public building: quietly, one budget cycle at a time, until “we’ll fix it next year” has been said fifteen times.</p>
+<p>The savings pay for the work. That is the mechanism.</p>
+<p class="flash">Who is in the building is the reason.</p>
+    </div>
+    <div class="note"><b>Note:</b> Restraint is what makes this land. No sentimentality — the repetition (&#x27;not working, not working&#x27;) does the emotional work, then Rob steps back to plain fact. Do not add adjectives.</div>
+    
+  </div>
+  <div class="pcard gated">
+    <div class="ph">
+      <div class="jersey">4</div>
+      <div class="pt">The Fire Stations<span class="sub">Forward flag — mission, not pipeline</span></div>
+      <div class="pmeta"><span class="wc">123 WORDS</span>
+        <button class="copy-btn" data-copy="At the Cleveland police station kickoff, a councilman said something on the record that most of the room moved right past.
+
+He said we would move on to the firehouses next.
+
+I did not move past it.
+
+Fire stations are, if anything, the harder case. Older building stock. The same round-the-clock occupancy. Air-quality and equipment demands a typical municipal building never has to consider. And the same budget math that leaves a station running on failed HVAC for years.
+
+We have now proven the model on five emergency responder buildings in one city — under a savings guarantee, at no new cost to taxpayers.
+
+The firehouses were promised on the public record. I intend to be the one who pays that promise off.">COPY</button></div>
+    </div>
+    <div class="pbody">
+<p class="lead">At the Cleveland police station kickoff, a councilman said something on the record that most of the room moved right past.</p>
+<p>He said we would move on to the firehouses next.</p>
+<p>I did not move past it.</p>
+<p>Fire stations are, if anything, the harder case. Older building stock. The same round-the-clock occupancy. Air-quality and equipment demands a typical municipal building never has to consider. And the same budget math that leaves a station running on failed HVAC for years.</p>
+<p>We have now proven the model on five emergency responder buildings in one city — under a savings guarantee, at no new cost to taxpayers.</p>
+<p class="flash">The firehouses were promised on the public record. I intend to be the one who pays that promise off.</p>
+    </div>
+    <div class="note"><b>Note:</b> Plants the fire-station authority flag WITHOUT announcing the live negotiation. Leans on the councilman&#x27;s public on-record promise as a civic fact Rob intends to fulfill. The last line is his one earned flash of heat.</div>
+    <div class="gate"><b>Do not add deal specifics.</b> No station count, no dollar range, no reference to an active negotiation. Mission post, not pipeline announcement — that distinction protects his position and his brand.</div>
+  </div>
+  <div class="foot"><span><span class="sq"></span>Leopardo Efficiency</span><span>The VDO Aigency · July 2026</span></div>
+</div>
+<script>
+  document.querySelectorAll('.copy-btn').forEach(b=>{
+    b.addEventListener('click',async()=>{
+      try{await navigator.clipboard.writeText(b.dataset.copy);}
+      catch(e){const t=document.createElement('textarea');t.value=b.dataset.copy;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();}
+      b.textContent='COPIED';b.classList.add('done');
+      setTimeout(()=>{b.textContent='COPY';b.classList.remove('done');},1600);
+    });
+  });
+</script>
+</body></html>
